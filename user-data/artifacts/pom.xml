@@ -35,7 +35,7 @@
 								<wadlOption>
 									<wadl>classpath:/schema/service/user-data-v1.xml</wadl>
 									<impl>false</impl>
-									<packagename>com.healthmedia.ws.userdata</packagename>
+									<packagename>com.healthmedia.ws.service.userdata</packagename>
 									<schemaPackagenames>
 										<schemaPackagename>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error</schemaPackagename>
 										<schemaPackagename>urn:healthmedia:schema:user-data:v1=com.healthmedia.ws.entity.userdata</schemaPackagename>

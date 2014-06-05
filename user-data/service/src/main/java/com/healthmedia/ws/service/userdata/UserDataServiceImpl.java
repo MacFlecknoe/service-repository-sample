@@ -1,10 +1,10 @@
-package com.healthmedia.service;
+package com.healthmedia.ws.service.userdata;
 
 import java.util.Date;
 
 import com.healthmedia.ws.entity.userdata.UserDataCollectionType;
 import com.healthmedia.ws.entity.userdata.UserDataType;
-import com.healthmedia.ws.userdata.UserDataService;
+import com.healthmedia.ws.service.userdata.UserDataService;
 
 public class UserDataServiceImpl implements UserDataService {
 
