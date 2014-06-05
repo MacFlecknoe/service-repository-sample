@@ -14,7 +14,7 @@
 	</grammars>
 	
 	<resources base="http://localhost:8080/">
-		<resource path="/user-data/{id}" id="userData">
+		<resource path="/user-data/{id}" id="userDataService">
 			<param type="xsd:string" style="template" name="id"/>
 			<method name="GET" id="retrieve">
 				<response status="200">
@@ -26,7 +26,7 @@
 			</method>
 			<!-- if a delete and/or update method were required these would be listed here too -->
 		</resource>
-		<resource path="/user-data/" id="userData">
+		<resource path="/user-data/" id="userDataService">
 			<method name="GET" id="search">
 				<request>
 					<!-- valid 'query' values are: 'data.name+user.id+collectionDate' -->
