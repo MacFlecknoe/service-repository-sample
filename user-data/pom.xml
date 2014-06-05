@@ -15,16 +15,10 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- dependency versions -->
-		<cxf-wadl2java-plugin.version>2.4.1</cxf-wadl2java-plugin.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
-			<dependency>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-wadl2java-plugin</artifactId>
-				<version>2.4.1</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>
