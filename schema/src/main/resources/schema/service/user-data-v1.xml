@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application 
+	xmlns="http://wadl.dev.java.net/2009/02"
+	xmlns:tns="urn:healthmedia:wadl:user-data:v1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:user-data="urn:healthmedia:schema:user-data:v1"
+	xmlns:error="urn:healthmedia:schema:common-error:v1"
+	xsi:schemaLocation="http://wadl.dev.java.net/2009/02 wadl.xsd">
+	
+	<grammars>
+		<include href="../entity/user-data-v1.xsd" />
+		<include href="../common/common-error-v1.xsd" />
+	</grammars>
+	
+	<resources base="http://localhost:8080/">
+		<resource path="/user-data/{id}" id="userData">
+			<param type="xsd:string" style="template" name="id"/>
+			<method name="GET" id="retrieve">
+				<response status="200">
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+				</response>
+				<response status="400">
+					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+				</response>
+			</method>
+			<!-- if a delete and/or update method were required these would be listed here too -->
+		</resource>
+		<resource path="/user-data/" id="userData">
+			<method name="GET" id="search">
+				<request>
+					<!-- valid 'query' values are: 'data.name+user.id+collectionDate' -->
+					<param name="query" type="xsd:string" style="query" required="false" />
+					<param name="collectionDate.start" type="xsd:dateTime" style="query" required="false" />
+					<param name="collectionDate.end" type="xsd:dateTime" style="query" required="false" />
+					<param name="data.name" type="xsd:string" style="query" required="false" />
+				</request>
+				<response status="200">
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+				</response>
+				<response status="400">
+					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+				</response>
+			</method>
+			<method name="POST" id="create">
+				<request>
+					<!--  can create one or many entity objects at once -->
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+				</request>
+				<response status="200">
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+				</response>
+				<response status="400">
+					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+				</response>
+			</method>
+		</resource>
+	</resources>
+	
+</application>

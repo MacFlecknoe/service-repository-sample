@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:healthmedia:schema:common-error:v1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="urn:healthmedia:schema:common-error:v1"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="1.0">
+
+	<xsd:complexType name="errorType">
+		<xsd:annotation>
+			<xsd:documentation>Standard Error Response</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="errorCode" type="xsd:QName" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="errorName" type="xsd:string" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="actor" type="xsd:anyURI" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="errorDetail" type="tns:detailType" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="detailType">
+		<xsd:sequence>
+			<xsd:any namespace="##any" minOccurs="0" maxOccurs="unbounded"
+				processContents="lax" />
+		</xsd:sequence>
+		<xsd:anyAttribute namespace="##any" processContents="lax" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="errorCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Error Response</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="item" type="tns:errorType" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="error" type="tns:errorType" />
+	<xsd:element name="errorCollection" type="tns:errorCollectionType" />
+	
+</xsd:schema>
