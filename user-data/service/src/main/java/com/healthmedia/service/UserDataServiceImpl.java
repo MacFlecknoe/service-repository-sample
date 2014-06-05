@@ -8,6 +8,11 @@ import com.healthmedia.ws.userdata.UserDataService;
 
 public class UserDataServiceImpl implements UserDataService {
 
+	public UserDataType retrieve(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public UserDataCollectionType search(String query,
 			Date collectionDate_start, Date collectionDate_end, String data_name) {
 		// TODO Auto-generated method stub
@@ -24,5 +29,4 @@ public class UserDataServiceImpl implements UserDataService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }
