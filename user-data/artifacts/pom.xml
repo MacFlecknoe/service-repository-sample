@@ -35,7 +35,7 @@
 								<wadlOption>
 									<wadl>classpath:/schema/service/user-data-v1.xml</wadl>
 									<impl>false</impl>
-									<packagename>com.healthmedia.ws.user-data</packagename>
+									<packagename>com.healthmedia.ws.userdata</packagename>
 								</wadlOption>
 							</wadlOptions>
 						</configuration>
