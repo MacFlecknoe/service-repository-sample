@@ -46,10 +46,20 @@
 				<request>
 					<!--  can create one or many entity objects at once -->
 					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
 				</request>
 				<response status="200">
 					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+				</response>
+				<response status="400">
+					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+				</response>
+			</method>
+			<method name="POST" id="createMultiple">
+				<request>
+					<!--  can create one or many entity objects at once -->
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+				</request>
+				<response status="200">
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
 				</response>
 				<response status="400">
@@ -58,5 +68,4 @@
 			</method>
 		</resource>
 	</resources>
-	
 </application>
