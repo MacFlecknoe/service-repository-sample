@@ -4,7 +4,7 @@
 	xmlns:tns="urn:healthmedia:wadl:user-data:v1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:user-data="urn:healthmedia:schema:user-data:v1"
+	xmlns:userData="urn:healthmedia:schema:user-data:v1"
 	xmlns:error="urn:healthmedia:schema:common-error:v1"
 	xsi:schemaLocation="http://wadl.dev.java.net/2009/02 wadl.xsd">
 	
@@ -20,7 +20,7 @@
 					<param type="xsd:string" style="template" name="id"/>
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
@@ -35,7 +35,7 @@
 					<param name="data.name" type="xsd:string" style="query" required="false" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
@@ -44,10 +44,10 @@
 			<method name="POST" id="create">
 				<request>
 					<!--  can create one or many entity objects at once -->
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user-data:userData" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
@@ -56,10 +56,10 @@
 			<method name="POST" id="createMultiple">
 				<request>
 					<!--  can create one or many entity objects at once -->
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user-data:userDataCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
