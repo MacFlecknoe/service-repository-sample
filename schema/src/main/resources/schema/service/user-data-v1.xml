@@ -28,11 +28,12 @@
 			</method>
 			<method name="GET" id="search">
 				<request>
-					<!-- valid 'query' values are: 'data.name+user.id+collectionDate' -->
+					<!-- valid 'query' values are: 'data.name+user.id+updateDate' -->
 					<param name="query" type="xsd:string" style="query" required="false" />
-					<param name="collectionDate.start" type="xsd:dateTime" style="query" required="false" />
-					<param name="collectionDate.end" type="xsd:dateTime" style="query" required="false" />
+					<param name="updateDate.start" type="xsd:dateTime" style="query" required="false" />
+					<param name="updateDate.end" type="xsd:dateTime" style="query" required="false" />
 					<param name="data.name" type="xsd:string" style="query" required="false" />
+					<param name="user.id" type="xsd:string" style="query" required="false" />
 				</request>
 				<response status="200">
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
