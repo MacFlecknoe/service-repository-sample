@@ -23,12 +23,12 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+					<representation mediaType="c" element="error:errorCollection" />
 				</response>
 			</method>
 			<method name="GET" id="search">
 				<request>
-					<!-- valid 'query' values are: 'data.name+user.id+updateDate' -->
+					<!-- valid 'query' values are: 'data.name+user.id+updateDate.range' -->
 					<param name="query" type="xsd:string" style="query" required="false" />
 					<param name="updateDate.start" type="xsd:dateTime" style="query" required="false" />
 					<param name="updateDate.end" type="xsd:dateTime" style="query" required="false" />
