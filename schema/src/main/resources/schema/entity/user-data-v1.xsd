@@ -47,7 +47,7 @@
 	
 	<xsd:complexType name="dataDefinitionType">
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType"/>
+			<xsd:extension base="common:entityType"/> 
 		</xsd:complexContent>
 	</xsd:complexType>
 	

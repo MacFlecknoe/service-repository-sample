@@ -33,7 +33,7 @@
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 							<wadlOptions>
 								<wadlOption>
-									<wadl>classpath:/schema/service/user-data-v1.xml</wadl>
+									<wadl>classpath:/schema/service/user-data-v1.wadl</wadl>
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.userdata</packagename>
 									<schemaPackagenames>
@@ -53,6 +53,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
