@@ -13,7 +13,7 @@
 		<include href="../common/common-error-v1.xsd" />
 	</grammars>
 	
-	<resources base="http://localhost:8080/">
+	<resources base="http://localhost:8080">
 		<resource path="/user-data/{id}" id="userDataService">
 			<method name="GET" id="retrieve">
 				<request>
@@ -23,7 +23,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
-					<representation mediaType="c" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
 				</response>
 			</method>
 			<method name="GET" id="search">
