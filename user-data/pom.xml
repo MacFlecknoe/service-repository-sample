@@ -12,12 +12,10 @@
 		<module>artifacts</module>
 		<module>service</module>
 	</modules>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!-- dependency versions -->
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 		</dependencies>

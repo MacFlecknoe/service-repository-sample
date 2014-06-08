@@ -14,18 +14,20 @@
 	</grammars>
 	
 	<resources base="http://localhost:8080">
-		<resource path="/user-data/{id}" id="userDataService">
-			<method name="GET" id="retrieve">
-				<request>
-					<param type="xsd:string" style="template" name="id"/>
-				</request>
-				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
-				</response>
-				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
-				</response>
-			</method>
+		<resource path="/user-data/" id="userDataService">
+			<resource path="{id}">
+				<method name="GET" id="retrieve">
+					<request>
+						<param type="xsd:string" style="template" name="id"/>
+					</request>
+					<response status="200">
+						<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
+					</response>
+					<response status="400">
+						<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+					</response>
+				</method>
+			</resource>
 			<method name="GET" id="search">
 				<request>
 					<!-- valid 'query' values are: 'data.name+user.id+updateDate.range' -->

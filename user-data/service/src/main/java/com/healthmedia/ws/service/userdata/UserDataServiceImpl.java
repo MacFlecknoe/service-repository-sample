@@ -31,5 +31,4 @@ public class UserDataServiceImpl implements UserDataService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

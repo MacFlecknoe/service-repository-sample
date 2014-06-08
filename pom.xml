@@ -13,6 +13,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
 		<cxf.version>3.0.0</cxf.version>
+		<springframework.version>4.0.5.RELEASE</springframework.version>
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 		<maven-source-plugin.version>2.1.1</maven-source-plugin.version>
 	</properties>
@@ -22,6 +23,31 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-rs-client</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${springframework.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
