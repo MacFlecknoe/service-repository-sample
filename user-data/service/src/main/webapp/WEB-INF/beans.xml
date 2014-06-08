@@ -26,6 +26,8 @@
 		<value>application/vnd.com.healthmedia.user-data+xml;version=1.0</value>
 	</util:list>
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
+		<property name="unmarshallAsJaxbElement" value="true"/>
+		<property name="marshallAsJaxbElement" value="true" />
 		<property name="produceMediaTypes" ref="xmlTypes"/>
 		<property name="consumeMediaTypes" ref="xmlTypes"/>
 	</bean>
@@ -36,6 +38,9 @@
 		<value>application/vnd.com.healthmedia.user-data+json;version=1.0</value>
 	</util:list>
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+		<property name="unmarshallAsJaxbElement" value="true"/>
+		<property name="marshallAsJaxbElement" value="true" />
+		<property name="ignoreNamespaces" value="true"/>
 		<property name="produceMediaTypes" ref="jsonTypes"/>
 		<property name="consumeMediaTypes" ref="jsonTypes"/>
 	</bean>
