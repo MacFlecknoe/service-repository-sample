@@ -22,7 +22,65 @@ import com.healthmedia.ws.service.userdata.v1.UserDataService;
  */
 public class UserDataServiceImpl implements UserDataService {
 
-	private UserDataType retrieve(String id) {
+	@Override
+	public UserDataCollectionType findByQueryJson(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+		return findByQuery(query, updateDate_start, updateDate_end, data_name, user_id);
+	}
+
+	@Override
+	public UserDataType createJson(UserDataType userdatatype) {
+		return create(userdatatype);
+	}
+
+	@Override
+	public UserDataCollectionType createCollectionJson(UserDataCollectionType userdatacollectiontype) {
+		return createCollection(userdatacollectiontype);
+	}
+
+	@Override
+	public UserDataCollectionType findByQueryXml(String query,Date updateDate_start, Date updateDate_end, String data_name,String user_id) {
+		return findByQuery(query, updateDate_start, updateDate_end, data_name, user_id);
+	}
+
+	@Override
+	public UserDataType createXml(UserDataType userdatatype) {
+		return create(userdatatype);
+	}
+
+	@Override
+	public UserDataCollectionType createCollectionXml(UserDataCollectionType userdatacollectiontype) {
+		return createCollection(userdatacollectiontype);
+	}
+
+	@Override
+	public UserDataType findByIdJson(String id) {
+		return findById(id);
+	}
+
+	@Override
+	public UserDataType findByIdXml(String id) {
+		return findById(id);
+	}
+	
+	private UserDataType create(UserDataType userdatatype) {
+		
+		try {
+			Date current = new Date();
+			
+			GregorianCalendar currentDate = new GregorianCalendar();
+			currentDate.setTime(current);
+			
+			userdatatype.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			userdatatype.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			
+			return userdatatype;
+		
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private UserDataType findById(String id) {
 		
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
@@ -60,35 +118,17 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 	}
 
-	private UserDataCollectionType search(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+	private UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
 		UserDataCollectionType collection = new UserDataCollectionType();
 		
-		collection.getUserData().add(this.retrieve("342a"));
-		collection.getUserData().add(this.retrieve("34234a"));
+		collection.getUserData().add(this.findById("342a"));
+		collection.getUserData().add(this.findById("34234a"));
 		
 		return collection;
 	}
 
-	private UserDataType create(UserDataType userdatatype) {
-		
-		try {
-			Date current = new Date();
-			
-			GregorianCalendar currentDate = new GregorianCalendar();
-			currentDate.setTime(current);
-			
-			userdatatype.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
-			userdatatype.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
-			
-			return userdatatype;
-		
-		} catch (DatatypeConfigurationException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private UserDataCollectionType createMultiple(UserDataCollectionType userdatacollectiontype) {
+	private UserDataCollectionType createCollection(UserDataCollectionType userdatacollectiontype) {
 		
 		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
 		
@@ -96,45 +136,5 @@ public class UserDataServiceImpl implements UserDataService {
 			create(userData);
 		}
 		return userdatacollectiontype;
-	}
-
-	@Override
-	public UserDataCollectionType searchJson(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
-		return search(query, updateDate_start, updateDate_end, data_name, user_id);
-	}
-
-	@Override
-	public UserDataType createJson(UserDataType userdatatype) {
-		return create(userdatatype);
-	}
-
-	@Override
-	public UserDataCollectionType createMultipleJson(UserDataCollectionType userdatacollectiontype) {
-		return createMultiple(userdatacollectiontype);
-	}
-
-	@Override
-	public UserDataCollectionType searchXml(String query,Date updateDate_start, Date updateDate_end, String data_name,String user_id) {
-		return search(query, updateDate_start, updateDate_end, data_name, user_id);
-	}
-
-	@Override
-	public UserDataType createXml(UserDataType userdatatype) {
-		return create(userdatatype);
-	}
-
-	@Override
-	public UserDataCollectionType createMultipleXml(UserDataCollectionType userdatacollectiontype) {
-		return createMultiple(userdatacollectiontype);
-	}
-
-	@Override
-	public UserDataType retrieveJson(String id) {
-		return retrieve(id);
-	}
-
-	@Override
-	public UserDataType retrieveXml(String id) {
-		return retrieve(id);
 	}
 }

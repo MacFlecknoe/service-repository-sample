@@ -16,7 +16,7 @@
 	<resources base="http://localhost:8080">
 		<resource path="/user-data/" id="userDataService">
 			<resource path="{id}">
-				<method name="GET" id="retrieveJson">
+				<method name="GET" id="findByIdJson">
 					<request>
 						<param type="xsd:string" style="template" name="id"/>
 					</request>
@@ -28,7 +28,7 @@
 					</response>
 				</method>
 			</resource>
-			<method name="GET" id="searchJson">
+			<method name="GET" id="findByQueryJson">
 				<request>
 					<!-- valid 'query' values are: 'data.name+user.id+updateDate.range' -->
 					<param name="query" type="xsd:string" style="query" required="false" />
@@ -56,7 +56,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
 				</response>
 			</method>
-			<method name="POST" id="createMultipleJson">
+			<method name="POST" id="createCollectionJson">
 				<request>
 					<!--  can create one or many entity objects at once -->
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
@@ -69,7 +69,7 @@
 				</response>
 			</method>
 			<resource path="{id}">
-				<method name="GET" id="retrieveXml">
+				<method name="GET" id="findByIdXml">
 					<request>
 						<param type="xsd:string" style="template" name="id"/>
 					</request>
@@ -81,7 +81,7 @@
 					</response>
 				</method>
 			</resource>
-			<method name="GET" id="searchXml">
+			<method name="GET" id="findByQueryXml">
 				<request>
 					<!-- valid 'query' values are: 'data.name+user.id+updateDate.range' -->
 					<param name="query" type="xsd:string" style="query" required="false" />
@@ -109,7 +109,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.error-collection+xml;version=1.0" element="error:errorCollection" />
 				</response>
 			</method>
-			<method name="POST" id="createMultipleXml">
+			<method name="POST" id="createCollectionXml">
 				<request>
 					<!--  can create one or many entity objects at once -->
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection" />
