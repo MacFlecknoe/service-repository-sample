@@ -22,8 +22,8 @@ import com.healthmedia.ws.service.userdata.v1.UserDataService;
  */
 public class UserDataServiceImpl implements UserDataService {
 
-	@Override
-	public UserDataType retrieve(String id) {
+	private UserDataType retrieve(String id) {
+		
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
 			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
@@ -60,8 +60,7 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 	}
 
-	@Override
-	public UserDataCollectionType search(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+	private UserDataCollectionType search(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
 		UserDataCollectionType collection = new UserDataCollectionType();
 		
@@ -71,8 +70,8 @@ public class UserDataServiceImpl implements UserDataService {
 		return collection;
 	}
 
-	@Override
-	public UserDataType create(UserDataType userdatatype) {
+	private UserDataType create(UserDataType userdatatype) {
+		
 		try {
 			Date current = new Date();
 			
@@ -89,8 +88,7 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 	}
 
-	@Override
-	public UserDataCollectionType createMultiple(UserDataCollectionType userdatacollectiontype) {
+	private UserDataCollectionType createMultiple(UserDataCollectionType userdatacollectiontype) {
 		
 		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
 		
@@ -98,5 +96,45 @@ public class UserDataServiceImpl implements UserDataService {
 			create(userData);
 		}
 		return userdatacollectiontype;
+	}
+
+	@Override
+	public UserDataCollectionType searchJson(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+		return search(query, updateDate_start, updateDate_end, data_name, user_id);
+	}
+
+	@Override
+	public UserDataType createJson(UserDataType userdatatype) {
+		return create(userdatatype);
+	}
+
+	@Override
+	public UserDataCollectionType createMultipleJson(UserDataCollectionType userdatacollectiontype) {
+		return createMultiple(userdatacollectiontype);
+	}
+
+	@Override
+	public UserDataCollectionType searchXml(String query,Date updateDate_start, Date updateDate_end, String data_name,String user_id) {
+		return search(query, updateDate_start, updateDate_end, data_name, user_id);
+	}
+
+	@Override
+	public UserDataType createXml(UserDataType userdatatype) {
+		return create(userdatatype);
+	}
+
+	@Override
+	public UserDataCollectionType createMultipleXml(UserDataCollectionType userdatacollectiontype) {
+		return createMultiple(userdatacollectiontype);
+	}
+
+	@Override
+	public UserDataType retrieveJson(String id) {
+		return retrieve(id);
+	}
+
+	@Override
+	public UserDataType retrieveXml(String id) {
+		return retrieve(id);
 	}
 }
