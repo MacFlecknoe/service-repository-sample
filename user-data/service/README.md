@@ -3,7 +3,10 @@ user-data-service
 
 Example implementation of service interface generated from wadl. Can be deployed into vanilla Tomcat server.
 
+Some custom mapping of the marshalling provider needed to be done in order for this to work properly.
 
-curl -X GET -H "Accept: application/vnd.com.healthmedia.user-data+json;version=1.0" http://localhost:8080/user-data-service/user-data/11
-
-returns JAXBException occurred : unable to marshal type "com.healthmedia.ws.entity.userdata.v1.UserDataType" as an element because it is missing an @XmlRootElement annotation.
+ 	1. The custom media types need to be mapped to the default xml and json providers 
+ 	2. The DTO elements needed to be configured to be treated at XMLElements rather than RootElements
+ 	3. The JSON provider need to be configured to ignore namespaces (this opens up the api up to naming collisions and so should be mapped to shorter names instead)
+ 	
+ See beans.xml for details.
