@@ -37,11 +37,11 @@
 								<wadlOption>
 									<wadl>classpath:/schema/service/user-data-v1.wadl</wadl>
 									<impl>false</impl>
-									<packagename>com.healthmedia.ws.service.userdata</packagename>
+									<packagename>com.healthmedia.ws.service.userdata.v1</packagename>
 									<schemaPackagenames>
-										<schemaPackagename>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error</schemaPackagename>
-										<schemaPackagename>urn:healthmedia:schema:user-data:v1=com.healthmedia.ws.entity.userdata</schemaPackagename>
-										<schemaPackagename>urn:healthmedia:schema:common:v1=com.healthmedia.ws.common</schemaPackagename>
+										<schemaPackagename>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error.v1</schemaPackagename>
+										<schemaPackagename>urn:healthmedia:schema:user-data:v1=com.healthmedia.ws.entity.userdata.v1</schemaPackagename>
+										<schemaPackagename>urn:healthmedia:schema:common:v1=com.healthmedia.ws.common.v1</schemaPackagename>
 									</schemaPackagenames>
 								</wadlOption>
 							</wadlOptions>
