@@ -8,6 +8,7 @@
 	
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
 	<jaxrs:server id="services" address="/">
 		<jaxrs:serviceBeans>
 			<ref bean="userDataServiceImpl" />
@@ -19,9 +20,6 @@
 	</jaxrs:server>
 	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.userdata.v1.UserDataServiceImpl" />
 	<util:list id="xmlTypes">
-		<value>application/xml</value>
-		<value>text/xml</value>
-		<value>application/*+xml</value>
 		<value>application/vnd.com.healthmedia.user-data-collection+xml;version=1.0</value>
 		<value>application/vnd.com.healthmedia.user-data+xml;version=1.0</value>
 	</util:list>
@@ -32,8 +30,6 @@
 		<property name="consumeMediaTypes" ref="xmlTypes"/>
 	</bean>
 	<util:list id="jsonTypes">
-		<value>application/json</value>
-		<value>application/*+json</value>
 		<value>application/vnd.com.healthmedia.user-data-collection+json;version=1.0</value>
 		<value>application/vnd.com.healthmedia.user-data+json;version=1.0</value>
 	</util:list>
