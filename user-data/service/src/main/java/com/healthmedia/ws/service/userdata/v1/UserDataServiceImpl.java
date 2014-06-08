@@ -2,6 +2,7 @@ package com.healthmedia.ws.service.userdata.v1;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -13,6 +14,12 @@ import com.healthmedia.ws.entity.userdata.v1.UserDataType;
 import com.healthmedia.ws.entity.userdata.v1.UserType;
 import com.healthmedia.ws.service.userdata.v1.UserDataService;
 
+/**
+ * Mock service created to demonstrate setup of future REST based web services.
+ * 
+ * @author mlamber7
+ *
+ */
 public class UserDataServiceImpl implements UserDataService {
 
 	@Override
@@ -22,10 +29,10 @@ public class UserDataServiceImpl implements UserDataService {
 			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
 			
 			GregorianCalendar updateDate = new GregorianCalendar();
-			collectionDate.set(2008, GregorianCalendar.NOVEMBER, 20);
+			updateDate.set(2008, GregorianCalendar.NOVEMBER, 20);
 			
 			GregorianCalendar createDate = new GregorianCalendar();
-			collectionDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
+			createDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
 			
 			DataSourceType dataSource = new DataSourceType();
 			dataSource.setId("453ba2");
@@ -55,19 +62,41 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public UserDataCollectionType search(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		UserDataCollectionType collection = new UserDataCollectionType();
+		
+		collection.getUserData().add(this.retrieve("342a"));
+		collection.getUserData().add(this.retrieve("34234a"));
+		
+		return collection;
 	}
 
 	@Override
 	public UserDataType create(UserDataType userdatatype) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			Date current = new Date();
+			
+			GregorianCalendar currentDate = new GregorianCalendar();
+			currentDate.setTime(current);
+			
+			userdatatype.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			userdatatype.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			
+			return userdatatype;
+		
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 	@Override
 	public UserDataCollectionType createMultiple(UserDataCollectionType userdatacollectiontype) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
+		
+		for(UserDataType userData : userDataTypes) {
+			create(userData);
+		}
+		return userdatacollectiontype;
 	}
 }
