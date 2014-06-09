@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="user-data-v1" resourceRoot="" soapui-version="5.0.0" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.actions.iface.tools.soapui.TestRunnerAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Environment" value="Default"/>
+  <con:entry key="Global Properties" value=""/>
+  <con:entry key="TestSuite" value="user-data-v1 TestSuite"/>
+  <con:entry key="Password" value=""/>
+  <con:entry key="TestRunner Path" value=""/>
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="Ignore Errors" value="false"/>
+  <con:entry key="Host:Port" value=""/>
+  <con:entry key="user-settings.xml Password" value=""/>
+  <con:entry key="WSS Password Type" value=""/>
+  <con:entry key="Save Project" value="false"/>
+  <con:entry key="Enable UI" value="false"/>
+  <con:entry key="System Properties" value=""/>
+  <con:entry key="Domain" value=""/>
+  <con:entry key="Coverage Report" value="false"/>
+  <con:entry key="Export JUnit Results" value="false"/>
+  <con:entry key="Open Report" value="false"/>
+  <con:entry key="Project Properties" value=""/>
+  <con:entry key="Export All" value="false"/>
+  <con:entry key="Project Password" value=""/>
+  <con:entry key="Report Format(s)" value=""/>
+  <con:entry key="TestCase" value="&lt;all>"/>
+  <con:entry key="Print Report" value="false"/>
+  <con:entry key="Username" value=""/>
+  <con:entry key="Root Folder" value=""/>
+  <con:entry key="Save After" value="false"/>
+  <con:entry key="Add Settings" value="false"/>
+  <con:entry key="Endpoint" value=""/>
+  <con:entry key="Select Report Type" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:interface xsi:type="con:RestService" wadlVersion="http://wadl.dev.java.net/2009/02" name="user-data-v1" type="rest" basePath="" definitionUrl="file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/service/user-data-v1.wadl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/service/user-data-v1.wadl"><con:part><con:url>file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/service/user-data-v1.wadl</con:url><con:content><![CDATA[<application xsi:schemaLocation="http://wadl.dev.java.net/2009/02 wadl.xsd" xmlns="http://wadl.dev.java.net/2009/02" xmlns:tns="urn:healthmedia:wadl:user-data:v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:userData="urn:healthmedia:schema:user-data:v1" xmlns:error="urn:healthmedia:schema:common-error:v1">
+  <grammars>
+    <include href="../entity/user-data-v1.xsd"/>
+    <include href="../common/common-error-v1.xsd"/>
+  </grammars>
+  <resources base="http://localhost:8080">
+    <resource path="/user-data/" id="userDataService">
+      <resource path="{id}">
+        <method name="GET" id="findById">
+          <request>
+            <param type="xsd:string" style="template" name="id"/>
+          </request>
+          <response status="200">
+            <representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData"/>
+            <representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="userData:userData"/>
+          </response>
+          <response status="400">
+            <representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error"/>
+            <representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error"/>
+          </response>
+        </method>
+      </resource>
+      <method name="GET" id="findByQuery">
+        <request>
+          <!--valid 'query' values are: 'data.name+user.id+updateDate.range'-->
+          <param name="query" type="xsd:string" style="query" required="false"/>
+          <param name="updateDate.start" type="xsd:dateTime" style="query" required="false"/>
+          <param name="updateDate.end" type="xsd:dateTime" style="query" required="false"/>
+          <param name="data.name" type="xsd:string" style="query" required="false"/>
+          <param name="user.id" type="xsd:string" style="query" required="false"/>
+        </request>
+        <response status="200">
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection"/>
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection"/>
+        </response>
+        <response status="400">
+          <representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error"/>
+          <representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error"/>
+        </response>
+      </method>
+      <method name="POST" id="create">
+        <request>
+          <!--can create one or many entity objects at once-->
+          <representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData"/>
+          <representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="userData:userData"/>
+        </request>
+        <response status="200">
+          <representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData"/>
+          <representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="userData:userData"/>
+        </response>
+        <response status="400">
+          <representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error"/>
+        </response>
+      </method>
+      <method name="POST" id="createCollection">
+        <request>
+          <!--can create one or many entity objects at once-->
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection"/>
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection"/>
+        </request>
+        <response status="200">
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection"/>
+          <representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection"/>
+        </response>
+        <response status="400">
+          <representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error"/>
+          <representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error"/>
+        </response>
+      </method>
+    </resource>
+  </resources>
+</application>]]></con:content><con:type>http://wadl.dev.java.net/2009/02</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/entity/user-data-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:user-data:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:healthmedia:schema:user-data:v1" xmlns:common="urn:healthmedia:schema:common:v1">
+  <xsd:import namespace="urn:healthmedia:schema:common:v1" schemaLocation="../common/common-v1.xsd"/>
+  <xsd:complexType name="userDataType">
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType">
+        <xsd:sequence>
+          <xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="dataSource" type="tns:dataSourceType" minOccurs="0" maxOccurs="1"/>
+          <xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dataType">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="name" type="common:textType" minOccurs="0" maxOccurs="1"/>
+        <xsd:element name="dataDefinition" type="tns:dataSourceType" minOccurs="0" maxOccurs="1"/>
+      </xsd:choice>
+      <xsd:element name="value" type="common:textType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="dataSourceType">
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="userType">
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dataDefinitionType">
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="userDataCollectionType">
+    <xsd:annotation>
+      <xsd:documentation>Collection of User Metrics</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="userData" type="tns:userDataType"/>
+  <xsd:element name="userDataCollection" type="tns:userDataCollectionType"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/common/common-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:common:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:tns="urn:healthmedia:schema:common:v1">
+  <xsd:import namespace="http://www.w3.org/2005/Atom" schemaLocation="../external/atom.xsd"/>
+  <xsd:simpleType name="textType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|([A-Za-z0-9\s._%'-/:#]*)"/>
+      <xsd:maxLength value="200"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="alphaNumericType">
+    <xsd:restriction base="xsd:string">
+      <xsd:pattern value="|([A-Za-z0-9]*)"/>
+      <xsd:maxLength value="200"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="positiveIntegerType">
+    <xsd:restriction base="xsd:integer">
+      <xsd:minInclusive value="0"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="entityType" abstract="true">
+    <xsd:sequence>
+      <xsd:element name="id" type="tns:textType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="link" type="atom:linkType"/>
+      <xsd:element name="createDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="updateDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="version" type="tns:positiveIntegerType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="extension" type="tns:extensionType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="atom:commonAttributes"/>
+  </xsd:complexType>
+  <xsd:attributeGroup name="commonAttributes">
+    <xsd:anyAttribute namespace="##other"/>
+  </xsd:attributeGroup>
+  <xsd:complexType name="extensionType">
+    <xsd:sequence>
+      <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:anyAttribute namespace="##other"/>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/external/atom.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.w3.org/2005/Atom" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>This version of the Atom schema is based on version 1.0 of the format specifications,
+			found here http://www.atomenabled.org/developers/syndication/atom-format-spec.php.</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>An Atom document may have two root elements, feed and entry, as defined in section 2.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="feed" type="atom:feedType"/>
+  <xs:element name="entry" type="atom:entryType"/>
+  <xs:complexType name="textType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom text construct is defined in section 3.1 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="text"/>
+          <xs:enumeration value="html"/>
+          <xs:enumeration value="xhtml"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="personType">
+    <xs:annotation>
+      <xs:documentation>The Atom person construct is defined in section 3.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="uri" type="atom:uriType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="email" type="atom:emailType" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:simpleType name="emailType">
+    <xs:annotation>
+      <xs:documentation>Schema definition for an email address.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:pattern value="\w+@(\w+\.)+\w+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="feedType">
+    <xs:annotation>
+      <xs:documentation>The Atom feed construct is defined in section 4.1.1 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="3" maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="generator" type="atom:generatorType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="icon" type="atom:iconType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="id" type="atom:idType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="logo" type="atom:logoType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="subtitle" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="entry" type="atom:entryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="entryType">
+    <xs:annotation>
+      <xs:documentation>The Atom entry construct is defined in section 4.1.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="content" type="atom:contentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="id" type="atom:idType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="published" type="atom:dateTimeType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="source" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="summary" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="1" maxOccurs="1"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="contentType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom content construct is defined in section 4.1.3 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="src" type="xs:anyURI"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="categoryType">
+    <xs:annotation>
+      <xs:documentation>The Atom cagegory construct is defined in section 4.2.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="term" type="xs:string" use="required"/>
+    <xs:attribute name="scheme" type="xs:anyURI" use="optional"/>
+    <xs:attribute name="label" type="xs:string" use="optional"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="generatorType">
+    <xs:annotation>
+      <xs:documentation>The Atom generator element is defined in section 4.2.4 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="uri" use="optional" type="xs:anyURI"/>
+        <xs:attribute name="version" use="optional" type="xs:string"/>
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="iconType">
+    <xs:annotation>
+      <xs:documentation>The Atom icon construct is defined in section 4.2.5 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="idType">
+    <xs:annotation>
+      <xs:documentation>The Atom id construct is defined in section 4.2.6 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="linkType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom link construct is defined in section 3.4 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="href" use="required" type="xs:anyURI"/>
+    <xs:attribute name="rel" type="xs:string" use="optional"/>
+    <xs:attribute name="type" use="optional" type="xs:string"/>
+    <xs:attribute name="hreflang" use="optional" type="xs:NMTOKEN"/>
+    <xs:attribute name="title" use="optional" type="xs:string"/>
+    <xs:attribute name="length" use="optional" type="xs:positiveInteger"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="logoType">
+    <xs:annotation>
+      <xs:documentation>The Atom logo construct is defined in section 4.2.8 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="sourceType">
+    <xs:annotation>
+      <xs:documentation>The Atom source construct is defined in section 4.2.11 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="generator" type="atom:generatorType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="icon" type="atom:iconType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="id" type="atom:idType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="logo" type="atom:logoType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="subtitle" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="uriType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="dateTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:attributeGroup name="commonAttributes">
+    <xs:anyAttribute namespace="##other"/>
+  </xs:attributeGroup>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/Schema/service-repository/schema/src/main/resources/schema/common/common-error-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:common-error:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:healthmedia:schema:common-error:v1">
+  <xsd:complexType name="errorType">
+    <xsd:annotation>
+      <xsd:documentation>Standard Error Response. Errors may contain collections of other errors.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="code" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+      <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="actor" type="xsd:anyURI" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="detail" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="error" type="tns:errorType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:anyAttribute namespace="##any" processContents="lax"/>
+  </xsd:complexType>
+  <xsd:element name="error" type="tns:errorType"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080</con:endpoint><con:endpoint>http://ubuntu:8080/</con:endpoint></con:endpoints><con:resource name="/user-data/" path="/user-data"><con:settings/><con:parameters/><con:resource name="{id}" path="{id}"><con:settings/><con:parameters/><con:method name="GET - findById" method="GET"><con:settings/><con:parameters><con:parameter><con:name>id</con:name><con:value>11</con:value><con:style>TEMPLATE</con:style><con:default>11</con:default></con:parameter></con:parameters><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+json;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+xml;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+json;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+xml;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:request name="Valid Request" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="application/vnd.com.healthmedia.user-data+json;version=1.0" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/11</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:method name="GET - findByQuery" method="GET"><con:settings/><con:parameters><con:parameter><con:name>query</con:name><con:value>data.name+user.id+updateDate.range</con:value><con:style>QUERY</con:style><con:default>data.name+user.id+updateDate.range</con:default></con:parameter><con:parameter><con:name>updateDate.start</con:name><con:value/><con:style>QUERY</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:dateTime</con:type><con:default/></con:parameter><con:parameter><con:name>updateDate.end</con:name><con:value xsi:nil="true"/><con:style>QUERY</con:style><con:type xmlns:xs="http://www.w3.org/2001/XMLSchema">xs:dateTime</con:type><con:default xsi:nil="true"/></con:parameter><con:parameter><con:name>data.name</con:name><con:value>WeightPounds</con:value><con:style>QUERY</con:style><con:default>WeightPounds</con:default></con:parameter><con:parameter><con:name>user.id</con:name><con:value>14</con:value><con:style>QUERY</con:style><con:default>14</con:default></con:parameter></con:parameters><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+json;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+xml;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+json;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+xml;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:request name="Find By User, Data, UpdateDate" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="${#Project#user-data-collection-json}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="updateDate.start" value="2008-01-01T00:00:00"/>
+  <con:entry key="updateDate.end" value="2008-12-20T00:00:00"/>
+</con:parameters></con:request></con:method><con:method name="POST - create" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+json;version=1.0</con:mediaType><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="REQUEST" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+xml;version=1.0</con:mediaType><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+json;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data+xml;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userData</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+json;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:request name="Request 1" mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" postQueryString="false"><con:settings/><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method><con:method name="POST - createCollection" method="POST"><con:settings/><con:parameters/><con:representation type="REQUEST" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+json;version=1.0</con:mediaType><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="REQUEST" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+xml;version=1.0</con:mediaType><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+json;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="RESPONSE" id=""><con:mediaType>application/vnd.com.healthmedia.user-data-collection+xml;version=1.0</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:user-data:v1">urn:userDataCollection</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+json;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:representation type="FAULT" id=""><con:mediaType>application/vnd.com.healthmedia.error+xml;version=1.0</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:urn="urn:healthmedia:schema:common-error:v1">urn:error</con:element><con:description xsi:nil="true"/></con:representation><con:request name="Request 1" mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0"><con:settings/><con:endpoint>http://localhost:8080</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite name="user-data-v1 TestSuite"><con:description>TestSuite generated for REST Service [user-data-v1]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="/user-data/ TestCase" searchProperties="true" id="9631508e-f052-4523-a075-70553c8d9878"><con:description>TestCase generated for REST Resource [/user-data/] located at [/user-data]</con:description><con:settings/><con:testStep type="restrequest" name="Valid Request"><con:settings/><con:config service="user-data-v1" resourcePath="/user-data" methodName="GET - findByQuery" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Valid Request" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="${#Project#user-data-collection-json}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/</con:originalUri><con:assertion type="XPath Match" name="Verify Date Range Start"><con:configuration><path>declare namespace ns1='http://localhost/user-data/';
+declare namespace xs="http://www.w3.org/2001/XMLSchema";
+
+boolean(count(/ns1:Response/ns1:userData/ns1:e[xs:dateTime(ns1:updateDate)> xs:dateTime('2008-01-01T00:00:00')]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="Verify Date Range End"><con:configuration><path>declare namespace ns1='http://localhost/user-data/';
+declare namespace xs="http://www.w3.org/2001/XMLSchema";
+
+boolean(count(/ns1:Response/ns1:userData/ns1:e[xs:dateTime(ns1:updateDate)&lt; xs:dateTime('2008-12-20T00:00:00')]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="updateDate.start" value="2008-01-01T00:00:00"/>
+  <con:entry key="updateDate.end" value="2008-12-20T00:00:00"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Valid XML Request"><con:settings/><con:config service="user-data-v1" resourcePath="/user-data" methodName="GET - findByQuery" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Valid XML Request" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="${#Project#user-data-collection-xml}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/</con:originalUri><con:assertion type="XPath Match" name="Verify Date Range Start"><con:configuration><path>declare namespace ns2='urn:healthmedia:schema:user-data:v1';
+declare namespace ns3='urn:healthmedia:schema:common:v1';
+
+boolean(count(/userDataCollection/ns2:userData[xs:dateTime(ns3:updateDate)> xs:dateTime('2008-01-01T00:00:00')]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="XPath Match" name="Verify Date Range End"><con:configuration><path>declare namespace ns2='urn:healthmedia:schema:user-data:v1';
+declare namespace ns3='urn:healthmedia:schema:common:v1';
+
+boolean(count(/userDataCollection/ns2:userData[xs:dateTime(ns3:updateDate)&lt; xs:dateTime('2008-12-20T00:00:00')]))</path><content>true</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="updateDate.start" value="2008-01-01T00:00:00"/>
+  <con:entry key="updateDate.end" value="2008-12-20T00:00:00"/>
+</con:parameters></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="{id} TestCase" searchProperties="true" id="115d6998-6d76-409c-9ac5-fb3c60bd89a1"><con:description>TestCase generated for REST Resource [{id}] located at [/user-data/{id}]</con:description><con:settings/><con:testStep type="restrequest" name="Valid Request"><con:settings/><con:config service="user-data-v1" resourcePath="/user-data/{id}" methodName="GET - findById" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Valid Request" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="${#Project#user-data-json}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/11</con:originalUri><con:assertion type="XPath Match" name="Match Id"><con:configuration><path>declare namespace ns1='http://localhost/user-data/11';
+
+/ns1:Response/ns1:id</path><content>11</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" name="Match ContentType"><con:configuration><scriptText>def contentTypeHeader = messageExchange.responseHeaders["Content-Type"];
+
+def expectedValue = context.expand('${#Project#user-data-json}')
+
+assert contentTypeHeader.contains(expectedValue)
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:testStep type="restrequest" name="Valid XML Request"><con:settings/><con:config service="user-data-v1" resourcePath="/user-data/{id}" methodName="GET - findById" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Valid XML Request" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Accept" value="${#Project#user-data-xml}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:endpoint>http://localhost:8080/services</con:endpoint><con:request/><con:originalUri>http://localhost/user-data/11</con:originalUri><con:assertion type="XPath Match" name="Match Id"><con:configuration><path>declare namespace ns2='urn:healthmedia:schema:user-data:v1';
+declare namespace ns3='urn:healthmedia:schema:common:v1';
+
+/userData/ns3:id</path><content>11</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" name="Match ContentType"><con:configuration><scriptText>def contentTypeHeader = messageExchange.responseHeaders["Content-Type"];
+
+def expectedValue = context.expand('${#Project#user-data-xml}')
+
+assert contentTypeHeader.contains(expectedValue)
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:restMockService port="8080" path="/services" host="ubuntu" name="user-data-v1 mock service" docroot=""><con:settings/><con:properties/><con:restMockAction name="/user-data/" method="GET" resourcePath="/user-data"><con:settings/><con:defaultResponse xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>def requestPath = mockRequest.getPath()
+def acceptHeader = mockRequest.getRequestHeaders().get("Accept")
+def queryString = mockRequest.getRequest().getQueryString();
+
+def userDataJsonMediaType = context.expand('${#Project#user-data-json}')
+def userDataXmlMediaType = context.expand('${#Project#user-data-xml}')
+def userDataCollectionJsonMediaType = context.expand('${#Project#user-data-collection-json}')
+def userDataCollectionXmlMediaType = context.expand('${#Project#user-data-collection-xml}')
+
+if(acceptHeader.contains(userDataJsonMediaType)) {
+	if(requestPath.contains("11")) {
+		return "Find By ID JSON"
+	}
+	return "Not Found"
+    
+}
+if(acceptHeader.contains(userDataXmlMediaType)) {
+	if(requestPath.contains("11")) {
+		return "Find By ID XML"
+	}
+	return "Not Found"
+    
+}
+if(acceptHeader.contains(userDataCollectionJsonMediaType)) {
+
+	log.info queryString
+	if(queryString.contains("query=data.name%2Buser.id%2BupdateDate.range")) {
+		return "Find By Query JSON"
+	}
+	return "Bad Query"
+}
+if(acceptHeader.contains(userDataCollectionXmlMediaType)) {
+
+	log.info queryString
+	if(queryString.contains("query=data.name%2Buser.id%2BupdateDate.range")) {
+		return "Find By Query XML"
+	}
+	return "Bad Query"
+}
+
+</con:dispatchPath><con:response name="Find By ID JSON" httpResponseStatus="200" mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0"><con:settings/><con:responseContent>{
+    "id": 11,
+    "createDate": "2008-09-20T09:55:32.662-04:00",
+    "updateDate": "2008-11-20T09:55:32.662-05:00",
+    "collectionDate": "2010-01-20T09:55:32.662-05:00",
+    "data": {
+        "name": "WeightPounds",
+        "value": 134
+    },
+    "dataSource": {
+        "id": "46611"
+    },
+    "user": {
+        "id": "14"
+    }
+}</con:responseContent></con:response><con:response name="Find By Query JSON" httpResponseStatus="200" mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0"><con:settings/><con:responseContent>{
+    "userData": [
+        {
+            "id": "11",
+            "createDate": "2008-09-20T09:55:41.812-04:00",
+            "updateDate": "2008-11-20T09:55:41.812-05:00",
+            "collectionDate": "2010-01-20T09:55:41.812-05:00",
+            "data": {
+                "name": "WeightPounds",
+                "value": 144
+            },
+            "dataSource": {
+                "id": "32211"
+            },
+            "user": {
+                "id": "14"
+            }
+        },
+        {
+            "id": "12",
+            "createDate": "2008-09-20T09:55:41.812-04:00",
+            "updateDate": "2008-11-20T09:55:41.812-05:00",
+            "collectionDate": "2010-01-20T09:55:41.812-05:00",
+            "data": {
+                "name": "WeightPounds",
+                "value": 134
+            },
+            "dataSource": {
+                "id": "46611"
+            },
+            "user": {
+                "id": "14"
+            }
+        }
+    ]
+}</con:responseContent></con:response><con:response name="Not Found" httpResponseStatus="404"><con:settings/><con:responseContent/></con:response><con:response name="Bad Query" httpResponseStatus="400" mediaType="application/vnd.com.healthmedia.error+json;version=1.0"><con:settings/><con:responseContent>{
+    "code": "INVALID_QUERY",
+    "name": "Invalid Query"
+}</con:responseContent></con:response><con:response name="Find By ID XML" httpResponseStatus="200" mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0 "><con:settings/><con:responseContent><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<userData xmlns:ns2="urn:healthmedia:schema:user-data:v1" xmlns:ns3="urn:healthmedia:schema:common:v1">
+   <ns3:id>11</ns3:id>
+   <ns3:createDate>2008-09-20T09:55:32.662-04:00</ns3:createDate>
+   <ns3:updateDate>2008-11-20T09:55:32.662-05:00</ns3:updateDate>
+   <ns2:collectionDate>2010-01-20T09:55:32.662-05:00</ns2:collectionDate>
+   <ns2:data>
+      <ns2:name>WeightPounds</ns2:name>
+      <ns2:value>134</ns2:value>
+   </ns2:data>
+   <ns2:dataSource>
+      <ns3:id>46611</ns3:id>
+   </ns2:dataSource>
+   <ns2:user>
+      <ns3:id>14</ns3:id>
+   </ns2:user>
+</userData>]]></con:responseContent></con:response><con:response name="Find By Query XML" httpResponseStatus="200"><con:settings/><con:responseContent><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<userDataCollection xmlns:ns2="urn:healthmedia:schema:user-data:v1" xmlns:ns3="urn:healthmedia:schema:common:v1">
+   <ns2:userData>
+      <ns3:id>11</ns3:id>
+      <ns3:createDate>2008-09-20T13:50:25.770-04:00</ns3:createDate>
+      <ns3:updateDate>2008-11-20T13:50:25.770-05:00</ns3:updateDate>
+      <ns2:collectionDate>2010-01-20T13:50:25.770-05:00</ns2:collectionDate>
+      <ns2:data>
+         <ns2:name>WeightPounds</ns2:name>
+         <ns2:value>144</ns2:value>
+      </ns2:data>
+      <ns2:dataSource>
+         <ns3:id>32211</ns3:id>
+      </ns2:dataSource>
+      <ns2:user>
+         <ns3:id>14</ns3:id>
+      </ns2:user>
+   </ns2:userData>
+   <ns2:userData>
+      <ns3:id>12</ns3:id>
+      <ns3:createDate>2008-09-20T09:55:41.812-04:00</ns3:createDate>
+      <ns3:updateDate>2008-11-20T09:55:41.812-05:00</ns3:updateDate>
+      <ns2:collectionDate>2010-01-20T09:55:41.812-05:00</ns2:collectionDate>
+      <ns2:data>
+         <ns2:name>WeightPounds</ns2:name>
+         <ns2:value>134</ns2:value>
+      </ns2:data>
+      <ns2:dataSource>
+         <ns3:id>46611</ns3:id>
+      </ns2:dataSource>
+      <ns2:user>
+         <ns3:id>14</ns3:id>
+      </ns2:user>
+   </ns2:userData>
+</userDataCollection>]]></con:responseContent></con:response></con:restMockAction><con:restMockAction name="/user-data/" method="POST" resourcePath="/user-data/"><con:settings/><con:defaultResponse xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>/*
+// Examples showing how to match based on path, query param and header
+// Match based on path
+def requestPath = mockRequest.getPath()
+log.info "Path: "+ requestPath
+
+if( requestPath.contains("json") )
+{
+    // return the name of the response you want to dispatch
+    return "JSON Response"
+}
+
+
+// Match based on query parameter
+def queryString = mockRequest.getRequest().getQueryString()
+log.info "QueryString: " + queryString
+
+if( queryString.contains("stockholm") )
+{
+    // return the name of the response you want to dispatch
+    return "Response Stockholm"
+}
+else if( queryString.contains("london") )
+{
+    // return the name of the response you want to dispatch
+    return "Response London"
+}
+
+
+// Match based on header
+def acceptEncodingHeadeList = mockRequest.getRequestHeaders().get("Accept-Encoding")
+log.info "AcceptEncodig Header List: " + acceptEncodingHeadeList
+
+if( acceptEncodingHeadeList.contains("gzip,deflate") )
+{
+    // return the name of the response you want to dispatch
+    return "GZiped Response"
+}
+
+*/
+</con:dispatchPath><con:response name="Response 1" httpResponseStatus="200"><con:settings/></con:response></con:restMockAction><con:restMockAction name="/user-data/" method="POST" resourcePath="/user-data/"><con:settings/><con:defaultResponse>Response 1</con:defaultResponse><con:dispatchStyle>SEQUENCE</con:dispatchStyle><con:dispatchPath>/*
+// Examples showing how to match based on path, query param and header
+// Match based on path
+def requestPath = mockRequest.getPath()
+log.info "Path: "+ requestPath
+
+if( requestPath.contains("json") )
+{
+    // return the name of the response you want to dispatch
+    return "JSON Response"
+}
+
+
+// Match based on query parameter
+def queryString = mockRequest.getRequest().getQueryString()
+log.info "QueryString: " + queryString
+
+if( queryString.contains("stockholm") )
+{
+    // return the name of the response you want to dispatch
+    return "Response Stockholm"
+}
+else if( queryString.contains("london") )
+{
+    // return the name of the response you want to dispatch
+    return "Response London"
+}
+
+
+// Match based on header
+def acceptEncodingHeadeList = mockRequest.getRequestHeaders().get("Accept-Encoding")
+log.info "AcceptEncodig Header List: " + acceptEncodingHeadeList
+
+if( acceptEncodingHeadeList.contains("gzip,deflate") )
+{
+    // return the name of the response you want to dispatch
+    return "GZiped Response"
+}
+
+*/
+</con:dispatchPath><con:response name="Response 1" httpResponseStatus="200"><con:settings/></con:response></con:restMockAction></con:restMockService><con:properties><con:property><con:name>user-data-collection-json</con:name><con:value>application/vnd.com.healthmedia.user-data-collection+json;version=1.0</con:value></con:property><con:property><con:name>user-data-collection-xml</con:name><con:value>application/vnd.com.healthmedia.user-data-collection+xml;version=1.0</con:value></con:property><con:property><con:name>user-data-json</con:name><con:value>application/vnd.com.healthmedia.user-data+json;version=1.0</con:value></con:property><con:property><con:name>user-data-xml</con:name><con:value>application/vnd.com.healthmedia.user-data+xml;version=1.0</con:value></con:property></con:properties><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
