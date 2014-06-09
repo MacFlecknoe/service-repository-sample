@@ -19,6 +19,6 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		error.setCode("INVALID_QUERY");
 		error.setName("Invalid Query");
 		
-		return Response.status(Response.Status.BAD_REQUEST).entity(error).type(super.getMediaType()).build();
+		return Response.status(Response.Status.BAD_REQUEST).entity(error).type(this.getMediaType()).build();
 	}
 }
