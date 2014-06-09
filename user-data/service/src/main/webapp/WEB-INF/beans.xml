@@ -38,6 +38,6 @@
 		<entry key="com.healthmedia.ws.entity.userdata.v1.UserDataCollectionType" value="userDataCollection"/>
 		<entry key="com.healthmedia.ws.common.error.v1.ErrorType" value="error"/>
 	</util:map>
-	
+	<!-- example exception mapping -->
 	<bean id="invalidQueryExceptionMapper" class="com.healthmedia.ws.common.error.v1.InvalidQueryExceptionMapper" />
 </beans>
