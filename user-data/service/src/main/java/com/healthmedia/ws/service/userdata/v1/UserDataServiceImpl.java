@@ -22,48 +22,9 @@ import com.healthmedia.ws.service.userdata.v1.UserDataService;
  *
  */
 public class UserDataServiceImpl implements UserDataService {
-
-	@Override
-	public UserDataCollectionType findByQueryJson(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
-		return findByQuery(query, updateDate_start, updateDate_end, data_name, user_id);
-	}
-
-	@Override
-	public UserDataType createJson(UserDataType userdatatype) {
-		return create(userdatatype);
-	}
-
-	@Override
-	public UserDataCollectionType createCollectionJson(UserDataCollectionType userdatacollectiontype) {
-		return createCollection(userdatacollectiontype);
-	}
-
-	@Override
-	public UserDataCollectionType findByQueryXml(String query,Date updateDate_start, Date updateDate_end, String data_name,String user_id) {
-		return findByQuery(query, updateDate_start, updateDate_end, data_name, user_id);
-	}
-
-	@Override
-	public UserDataType createXml(UserDataType userdatatype) {
-		return create(userdatatype);
-	}
-
-	@Override
-	public UserDataCollectionType createCollectionXml(UserDataCollectionType userdatacollectiontype) {
-		return createCollection(userdatacollectiontype);
-	}
-
-	@Override
-	public UserDataType findByIdJson(String id) {
-		return findById(id);
-	}
-
-	@Override
-	public UserDataType findByIdXml(String id) {
-		return findById(id);
-	}
 	
-	private UserDataType create(UserDataType userdatatype) {
+	@Override
+	public UserDataType create(UserDataType userdatatype) {
 		
 		try {
 			Date current = new Date();
@@ -81,7 +42,8 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 	}
 	
-	private UserDataType findById(String id) {
+	@Override
+	public UserDataType findById(String id) {
 		
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
@@ -119,7 +81,8 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 	}
 
-	private UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+	@Override
+	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
 		if(query == null || query.equals("bad_query")) {
 			throw new InvalidQueryException(query);
@@ -132,7 +95,8 @@ public class UserDataServiceImpl implements UserDataService {
 		return collection;
 	}
 
-	private UserDataCollectionType createCollection(UserDataCollectionType userdatacollectiontype) {
+	@Override
+	public UserDataCollectionType createCollection(UserDataCollectionType userdatacollectiontype) {
 		
 		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
 		
