@@ -7,28 +7,18 @@
 
 	<xsd:complexType name="errorType">
 		<xsd:annotation>
-			<xsd:documentation>Standard Error Response</xsd:documentation>
+			<xsd:documentation>Standard Error Response. Errors may contain collections of other errors.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="code" type="xsd:string" minOccurs="1" maxOccurs="1" />
 			<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" />
 			<xsd:element name="actor" type="xsd:anyURI" minOccurs="0" maxOccurs="1" />
 			<xsd:element name="detail" type="xsd:string" minOccurs="0" maxOccurs="1" />
-		</xsd:sequence>
-		<xsd:anyAttribute namespace="##any" processContents="lax" />
-	</xsd:complexType>
-	
-	<xsd:complexType name="errorCollectionType">
-		<xsd:annotation>
-			<xsd:documentation>Collection of Error Response</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="item" type="tns:errorType" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="error" type="tns:errorType" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:anyAttribute namespace="##any" processContents="lax" />
 	</xsd:complexType>
 	
 	<xsd:element name="error" type="tns:errorType" />
-	<xsd:element name="errorCollection" type="tns:errorCollectionType" />
 	
 </xsd:schema>

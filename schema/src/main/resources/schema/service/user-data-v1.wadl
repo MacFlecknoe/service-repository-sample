@@ -24,7 +24,7 @@
 						<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 					</response>
 					<response status="400">
-						<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+						<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
 					</response>
 				</method>
 			</resource>
@@ -41,7 +41,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="createJson">
@@ -53,7 +53,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="createCollectionJson">
@@ -65,7 +65,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+json;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<resource path="{id}">
@@ -77,7 +77,7 @@
 						<representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="userData:userData" />
 					</response>
 					<response status="400">
-						<representation mediaType="application/vnd.com.healthmedia.error-collection+xml;version=1.0" element="error:errorCollection" />
+						<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
 					</response>
 				</method>
 			</resource>
@@ -94,7 +94,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+xml;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="createXml">
@@ -106,7 +106,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="userData:userData" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+xml;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="createCollectionXml">
@@ -118,7 +118,7 @@
 					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="userData:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error-collection+xml;version=1.0" element="error:errorCollection" />
+					<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
 				</response>
 			</method>
 		</resource>
