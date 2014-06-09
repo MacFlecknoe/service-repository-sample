@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import com.healthmedia.ws.common.error.v1.InvalidQueryException;
 import com.healthmedia.ws.entity.userdata.v1.DataSourceType;
 import com.healthmedia.ws.entity.userdata.v1.DataType;
 import com.healthmedia.ws.entity.userdata.v1.UserDataCollectionType;
@@ -120,6 +121,9 @@ public class UserDataServiceImpl implements UserDataService {
 
 	private UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
+		if(query == null || query.equals("bad_query")) {
+			throw new InvalidQueryException(query);
+		}
 		UserDataCollectionType collection = new UserDataCollectionType();
 		
 		collection.getUserData().add(this.findById("342a"));
