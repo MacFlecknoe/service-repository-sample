@@ -18,7 +18,6 @@
 			<plugin>
 				<groupId>com.smartbear.soapui</groupId>
 				<artifactId>soapui-maven-plugin</artifactId>
-				<version>4.6.1</version>
 				<configuration>
 					<projectFile>${basedir}/src/test/resources/soapui/user-data-v1-soapui-project.xml</projectFile>
 					<projectProperties>

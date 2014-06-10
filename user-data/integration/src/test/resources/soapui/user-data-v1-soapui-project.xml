@@ -550,7 +550,7 @@ if(acceptHeader.contains(userDataCollectionXmlMediaType)) {
    <ns2:user>
       <ns3:id>14</ns3:id>
    </ns2:user>
-</userData>]]></con:responseContent></con:response><con:response name="Find By Query XML" httpResponseStatus="200"><con:settings/><con:responseContent><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+</userData>]]></con:responseContent></con:response><con:response name="Find By Query XML" httpResponseStatus="200" mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0"><con:settings/><con:responseContent><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <userDataCollection xmlns:ns2="urn:healthmedia:schema:user-data:v1" xmlns:ns3="urn:healthmedia:schema:common:v1">
    <ns2:userData>
       <ns3:id>11</ns3:id>
