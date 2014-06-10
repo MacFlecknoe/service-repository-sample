@@ -9,4 +9,4 @@ Some custom mapping of the marshalling provider needed to be done in order for t
  	2. The JSON provider needed to be configured to ignore namespaces (this opens up the api up to naming collisions and so should be mapped to shorter names instead)
  	3. The root wrapper element for returned json needs to be dropped as its superfluous.
  	 
- See beans.xml for details.
+ See https://github.com/MacFlecknoe/service-repository-sample/blob/master/user-data/service/src/main/webapp/WEB-INF/beans.xml for details.
