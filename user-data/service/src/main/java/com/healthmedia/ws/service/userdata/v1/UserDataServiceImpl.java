@@ -8,11 +8,11 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
 import com.healthmedia.ws.common.error.v1.InvalidQueryException;
-import com.healthmedia.ws.entity.userdata.v1.DataSourceType;
-import com.healthmedia.ws.entity.userdata.v1.DataType;
-import com.healthmedia.ws.entity.userdata.v1.UserDataCollectionType;
-import com.healthmedia.ws.entity.userdata.v1.UserDataType;
-import com.healthmedia.ws.entity.userdata.v1.UserType;
+import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
+import com.healthmedia.ws.entity.user.v1.DataType;
+import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
+import com.healthmedia.ws.entity.user.v1.UserDataType;
+import com.healthmedia.ws.entity.user.v1.UserType;
 import com.healthmedia.ws.service.userdata.v1.UserDataService;
 
 /**

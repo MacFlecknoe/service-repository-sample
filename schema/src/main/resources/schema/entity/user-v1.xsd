@@ -1,22 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="urn:healthmedia:schema:user-data:v1"
+<xsd:schema targetNamespace="urn:healthmedia:schema:user:v1"
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:tns="urn:healthmedia:schema:user-data:v1" 
+		xmlns:tns="urn:healthmedia:schema:user:v1" 
 		xmlns:common="urn:healthmedia:schema:common:v1"
+		xmlns:dataSource="urn:healthmedia:schema:data-source:v1"
 		elementFormDefault="qualified" attributeFormDefault="unqualified"
 		version="1.0">
 		
 	<xsd:import 
 		namespace="urn:healthmedia:schema:common:v1" 
 		schemaLocation="../common/common-v1.xsd" />
+
+	<xsd:import 
+		namespace="urn:healthmedia:schema:data-source:v1" 
+		schemaLocation="../entity/data-source-v1.xsd" />
+
+			
+	<xsd:complexType name="userType">
+		<xsd:annotation>
+			<xsd:documentation>Represents End User</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="common:entityType">
+				<xsd:sequence>
+					<xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="userCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Users</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="userData" type="tns:userType" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
 	
 	<xsd:complexType name="userDataType">
+		<xsd:annotation>
+			<xsd:documentation>Represents Key/Value Attribute assigned to a User</xsd:documentation>
+		</xsd:annotation>
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
 					<xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
 					<xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1" />
-					<xsd:element name="dataSource" type="tns:dataSourceType" minOccurs="0" maxOccurs="1" />
+					<xsd:element name="dataSource" type="dataSource:dataSourceType" minOccurs="0" maxOccurs="1" />
 					<xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1" />
 				</xsd:sequence>
 			</xsd:extension>
@@ -27,25 +58,16 @@
 		<xsd:sequence>
 			<xsd:choice>
 				<xsd:element name="name" type="common:textType" minOccurs="0" maxOccurs="1" />
-				<xsd:element name="dataDefinition" type="tns:dataSourceType" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="dataDefinition" type="tns:dataDefinitionType" minOccurs="0" maxOccurs="1" />
 			</xsd:choice>
 		 	<xsd:element name="value" type="common:textType" minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="dataSourceType">
-		<xsd:complexContent>
-			<xsd:extension base="common:entityType"/>
-		</xsd:complexContent>
-	</xsd:complexType>
-	
-	<xsd:complexType name="userType">
-		<xsd:complexContent>
-			<xsd:extension base="common:entityType"/>
-		</xsd:complexContent>
-	</xsd:complexType>
-	
 	<xsd:complexType name="dataDefinitionType">
+		<xsd:annotation>
+			<xsd:documentation>Represents a User Data Attribute Name</xsd:documentation>
+		</xsd:annotation>
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType"/> 
 		</xsd:complexContent>
@@ -62,5 +84,8 @@
 	
 	<xsd:element name="userData" type="tns:userDataType" />
 	<xsd:element name="userDataCollection" type="tns:userDataCollectionType" />
+	
+	<xsd:element name="user" type="tns:userType" />
+	<xsd:element name="userCollection" type="tns:userCollectionType" />
 	
 </xsd:schema>

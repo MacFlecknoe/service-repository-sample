@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="urn:healthmedia:schema:data-source:v1"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+		xmlns:tns="urn:healthmedia:schema:data-source:v1" 
+		xmlns:common="urn:healthmedia:schema:common:v1"
+		elementFormDefault="qualified" attributeFormDefault="unqualified"
+		version="1.0">
+		
+	<xsd:import 
+		namespace="urn:healthmedia:schema:common:v1" 
+		schemaLocation="../common/common-v1.xsd" />
+	
+	<xsd:complexType name="dataSourceType">
+		<xsd:complexContent>
+			<xsd:extension base="common:entityType"/> 
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="dataSourceCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Data Sources</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="dataSource" type="tns:dataSourceType" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:element name="dataSource" type="tns:dataSourceType" />
+	<xsd:element name="dataSourceCollection" type="tns:dataSourceCollectionType" />
+	
+</xsd:schema>

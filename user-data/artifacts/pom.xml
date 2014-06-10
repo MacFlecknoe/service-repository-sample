@@ -39,8 +39,9 @@
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.userdata.v1</packagename>
 									<schemaPackagenames>
+										<schemaPackagename>urn:healthmedia:schema:data-source:v1=com.healthmedia.ws.entity.dataSouce.v1</schemaPackagename>
 										<schemaPackagename>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error.v1</schemaPackagename>
-										<schemaPackagename>urn:healthmedia:schema:user-data:v1=com.healthmedia.ws.entity.userdata.v1</schemaPackagename>
+										<schemaPackagename>urn:healthmedia:schema:user:v1=com.healthmedia.ws.entity.user.v1</schemaPackagename>
 										<schemaPackagename>urn:healthmedia:schema:common:v1=com.healthmedia.ws.common.v1</schemaPackagename>
 									</schemaPackagenames>
 								</wadlOption>

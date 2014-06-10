@@ -6,3 +6,5 @@ target/
 *.log
 *.txt
 RemoteSystemsTempFiles/
+/target
+/target
