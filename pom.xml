@@ -126,5 +126,10 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
+	<pluginRepositories>
+		<pluginRepository>
+			<id>smartbear-sweden-plugin-repository</id>
+			<url>http://www.soapui.org/repository/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 </project>
