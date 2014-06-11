@@ -21,12 +21,12 @@
 						<param type="xsd:string" style="template" name="id"/>
 					</request>
 					<response status="200">
-						<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user:userData" />
-						<representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="user:userData" />
+						<representation mediaType="application/vnd.healthmedia.user-data+json;version=1.0" element="user:userData" />
+						<representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData" />
 					</response>
 					<response status="400">
-						<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
-						<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
+						<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
+						<representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error" />
 					</response>
 				</method>
 			</resource>
@@ -40,41 +40,41 @@
 					<param name="user.id" type="xsd:string" style="query" required="false" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
-					<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
+					<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
+					<representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="create">
 				<request>
 					<!--  can create one or many entity objects at once -->
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user:userData" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="user:userData" />
+					<representation mediaType="application/vnd.healthmedia.user-data+json;version=1.0" element="user:userData" />
+					<representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data+json;version=1.0" element="user:userData" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data+xml;version=1.0" element="user:userData" />
+					<representation mediaType="application/vnd.healthmedia.user-data+json;version=1.0" element="user:userData" />
+					<representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
+					<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
 				</response>
 			</method>
 			<method name="POST" id="createCollection">
 				<request>
 					<!--  can create one or many entity objects at once -->
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.com.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
 				</response>
 				<response status="400">
-					<representation mediaType="application/vnd.com.healthmedia.error+json;version=1.0" element="error:error" />
-					<representation mediaType="application/vnd.com.healthmedia.error+xml;version=1.0" element="error:error" />
+					<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
+					<representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error" />
 				</response>
 			</method>
 		</resource>
