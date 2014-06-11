@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema targetNamespace="urn:healthmedia:schema:common-error:v1"
-	xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:tns="urn:healthmedia:schema:common-error:v1"
-	elementFormDefault="qualified" attributeFormDefault="unqualified"
-	version="1.0">
+	xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="urn:healthmedia:schema:common-error:v1" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" version="1.0">
 
-	<xsd:import 
-		namespace="http://www.w3.org/2003/05/soap-envelope" 
+	<xsd:import namespace="http://www.w3.org/2003/05/soap-envelope"
 		schemaLocation="../external/soap-envelope-v1.xsd" />
-		
+
 	<!-- re-purpose soap 1.2 fault for use within REST service -->
-	<xsd:element name="error" type="soap:Fault" />
+	<xsd:element name="fault" type="soap:Fault" />
 
 </xsd:schema>
