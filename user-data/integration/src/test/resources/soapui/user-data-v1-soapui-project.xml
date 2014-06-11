@@ -46,8 +46,8 @@
             <representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData"/>
           </response>
           <response status="400">
-            <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error"/>
-            <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error"/>
+            <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:fault"/>
+            <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:fault"/>
           </response>
         </method>
       </resource>
@@ -65,8 +65,8 @@
           <representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection"/>
         </response>
         <response status="400">
-          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error"/>
-          <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error"/>
+          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:fault"/>
+          <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:fault"/>
         </response>
       </method>
       <method name="POST" id="create">
@@ -80,7 +80,7 @@
           <representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData"/>
         </response>
         <response status="400">
-          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error"/>
+          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:fault"/>
         </response>
       </method>
       <method name="POST" id="createCollection">
@@ -94,8 +94,8 @@
           <representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection"/>
         </response>
         <response status="400">
-          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error"/>
-          <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error"/>
+          <representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:fault"/>
+          <representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:fault"/>
         </response>
       </method>
     </resource>
