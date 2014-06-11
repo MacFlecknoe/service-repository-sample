@@ -35,8 +35,9 @@
 	see http://hirenscafe.blogspot.com/2008/04/jaxbxmlrootelement.html
 	-->
 	<util:map id="myElementClassMap">
-		<entry key="com.healthmedia.ws.entity.userdata.v1.UserDataType" value="userData"/>
-		<entry key="com.healthmedia.ws.entity.userdata.v1.UserDataCollectionType" value="userDataCollection"/>
+		<entry key="org.w3.soap.envelop.v1.Fault" value="error" />
+		<entry key="com.healthmedia.ws.entity.user.v1.UserDataType" value="userData"/>
+		<entry key="com.healthmedia.ws.entity.user.v1.UserDataCollectionType" value="userDataCollection"/>
 		<entry key="com.healthmedia.ws.common.error.v1.ErrorType" value="error"/>
 	</util:map>
 	<!-- example exception mapping -->

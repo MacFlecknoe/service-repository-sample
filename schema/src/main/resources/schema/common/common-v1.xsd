@@ -8,7 +8,7 @@
 
 	<xsd:import 
 		namespace="http://www.w3.org/2005/Atom" 
-		schemaLocation="../external/atom.xsd" />
+		schemaLocation="../external/atom-v1.xsd" />
 
 	<xsd:simpleType name="textType">
 		<xsd:restriction base="xsd:string">

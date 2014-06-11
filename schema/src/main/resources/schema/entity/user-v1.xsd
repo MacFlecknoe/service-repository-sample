@@ -23,6 +23,8 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
+					<xsd:element name="firstName" type="xsd:string" />
+					<xsd:element name="lastName" type="xsd:string" />
 					<xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded" />
 				</xsd:sequence>
 			</xsd:extension>
