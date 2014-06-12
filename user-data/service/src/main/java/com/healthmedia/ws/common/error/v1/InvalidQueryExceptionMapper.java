@@ -5,14 +5,6 @@ import java.util.Locale;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.namespace.QName;
-
-import org.w3.soap.envelop.v1.Detail;
-import org.w3.soap.envelop.v1.Fault;
-import org.w3.soap.envelop.v1.Faultcode;
-import org.w3.soap.envelop.v1.Faultreason;
-import org.w3.soap.envelop.v1.Reasontext;
-import org.w3.soap.envelop.v1.Subcode;
 
 /**
  * Example exception mapper. Maps to a SOAP fault object defined in our xsd.
@@ -24,41 +16,39 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 	@Override
 	public Response toResponse(InvalidQueryException exception) {
 
-		Fault error = new Fault();
+		FaultType fault = new FaultType();
+		
+		FaultCodeType faultCode = new FaultCodeType();
 		//
-		// the client has created the problem
+		// responsible party or root cause
 		//
-		Faultcode code = new Faultcode();
-		code.setValue(new QName("", "Sender"));
+		faultCode.setValue(FaultCodeEnum.SENDER);
 		//
-		// this is the actual error
+		// general category of the error
 		//
-		Subcode subcode = new Subcode();
-		subcode.setValue(new QName("", "BadArguments"));
-		code.setSubcode(subcode);
-
-		error.setCode(code);
+		SubCodeType subCode = new SubCodeType();
+		subCode.setValue("BadArguments");
+		faultCode.setSubcode(subCode);
+		
+		fault.setCode(faultCode);
 		//
-		// description of issue in human readable text
+		// description of the error in multiple languages
 		//
-		Faultreason reason = new Faultreason();
-		Reasontext text = new Reasontext();
-		text.setValue("Invalid Query Parameter");
+		FaultReasonType reason = new FaultReasonType();
+		I18NTextType text = new I18NTextType();
 		text.setLang(Locale.US.getLanguage());
-
+		text.setValue("Invalid Query Parameter");
 		reason.getText().add(text);
-
-		error.setReason(reason);
+		fault.setReason(reason);
 		//
 		// application specific error message
 		//
-		Detail detail = new Detail();
+		DetailType detail = new DetailType();
 		detail.getAny().add(new InvalidParameterType("query", exception.getQuery()));
 		detail.getAny().add(new InvalidParameterType("query", exception.getQuery()));
-		
-		error.setDetail(detail);
+		fault.setDetail(detail);
 
-		return Response.status(Response.Status.BAD_REQUEST).entity(error).type(this.getMediaType()).build();
+		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}
 
 	@XmlRootElement(name="invalidParameter")
