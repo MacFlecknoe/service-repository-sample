@@ -6,6 +6,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.healthmedia.ws.common.v1.I18NTextType;
+
 /**
  * Example exception mapper. Maps to a SOAP fault object defined in our xsd.
  * 
@@ -28,7 +30,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		//
 		SubCodeType subCode = new SubCodeType();
 		subCode.setValue("BadArguments");
-		faultCode.setSubcode(subCode);
+		faultCode.setSubCode(subCode);
 		
 		fault.setCode(faultCode);
 		//

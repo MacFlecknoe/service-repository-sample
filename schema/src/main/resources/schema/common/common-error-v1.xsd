@@ -44,11 +44,11 @@
 
 	<xsd:simpleType name="faultCodeEnum">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="dataEncodingUnknown" />
-			<xsd:enumeration value="mustUnderstand" />
-			<xsd:enumeration value="receiver" />
-			<xsd:enumeration value="sender" />
-			<xsd:enumeration value="versionMismatch" />
+			<xsd:enumeration value="DataEncodingUnknown" />
+			<xsd:enumeration value="MustUnderstand" />
+			<xsd:enumeration value="Receiver" />
+			<xsd:enumeration value="Sender" />
+			<xsd:enumeration value="VersionMismatch" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
