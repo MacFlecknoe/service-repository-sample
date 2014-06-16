@@ -23,20 +23,31 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
-					<xsd:element name="firstName" type="xsd:string" />
-					<xsd:element name="lastName" type="xsd:string" />
-					<xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded" />
+					<xsd:element name="firstName" type="xsd:string" minOccurs="0"  maxOccurs="1" />
+					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" />
+					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" />
+					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" />
+					<xsd:element name="userData" type="tns:userDataType" minOccurs="0" maxOccurs="unbounded" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
+
+	<xsd:simpleType name="genderEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Male" />
+			<xsd:enumeration value="Female" />
+			<xsd:enumeration value="Transgender" />
+			<xsd:enumeration value="Other" />
+		</xsd:restriction>
+	</xsd:simpleType>
 	
 	<xsd:complexType name="userCollectionType">
 		<xsd:annotation>
 			<xsd:documentation>Collection of Users</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="userData" type="tns:userType" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="userData" type="tns:userType" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	

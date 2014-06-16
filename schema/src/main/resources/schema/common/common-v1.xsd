@@ -36,7 +36,7 @@
 	<xsd:complexType name="entityType" abstract="true">
 		<xsd:sequence>
 			<xsd:element name="id" type="tns:textType" minOccurs="0" maxOccurs="1" />
-			<xsd:element name="link" type="atom:linkType"/>
+			<xsd:element name="link" type="atom:linkType"  minOccurs="0"  maxOccurs="1" />
 			<xsd:element name="createDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" />
 			<xsd:element name="updateDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
 			<xsd:element name="version" type="tns:positiveIntegerType" minOccurs="0" maxOccurs="1" />
@@ -58,9 +58,9 @@
 	
 	<xsd:complexType name="i18nTextType">
 		<xsd:sequence>
-			<xsd:element name="value" type="xsd:string" />
+			<xsd:element name="language" type="xsd:language" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" />
 		</xsd:sequence>
-		<xsd:attribute ref="xml:lang" use="required" />
 	</xsd:complexType>
 	
 </xsd:schema>

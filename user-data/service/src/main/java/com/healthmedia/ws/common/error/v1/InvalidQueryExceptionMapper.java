@@ -38,7 +38,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		//
 		FaultReasonType reason = new FaultReasonType();
 		I18NTextType text = new I18NTextType();
-		text.setLang(Locale.US.getLanguage());
+		text.setLanguage(Locale.US.getLanguage());
 		text.setValue("Invalid Query Parameter");
 		reason.getText().add(text);
 		fault.setReason(reason);
