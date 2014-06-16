@@ -105,9 +105,4 @@ public class UserDataServiceImpl implements UserDataService {
 		}
 		return userdatacollectiontype;
 	}
-
-	@Override
-	public UserDataCollectionType findByQueryv2(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
-		return findByQuery(query, updateDate_start, updateDate_end, data_name, user_id);
-	}
 }
