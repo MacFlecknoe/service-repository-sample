@@ -42,7 +42,7 @@
 			<xsd:element name="version" type="tns:positiveIntegerType" minOccurs="0" maxOccurs="1" />
 			<xsd:element name="extension" type="tns:extensionType" minOccurs="0" maxOccurs="1" />
 		</xsd:sequence>
-		<xsd:attributeGroup ref="atom:commonAttributes"/>
+		<xsd:attributeGroup ref="tns:commonAttributes"/>
 	</xsd:complexType>
 	
 	<xsd:attributeGroup name="commonAttributes">
@@ -53,7 +53,7 @@
 		<xsd:sequence>			 
 			<xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
-		<xsd:anyAttribute namespace="##other" />
+		<xsd:attributeGroup ref="tns:commonAttributes"/>
 	</xsd:complexType> 
 	
 	<xsd:complexType name="i18nTextType">
