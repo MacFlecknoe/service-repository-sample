@@ -21,8 +21,6 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 	
-	<bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
-	
 	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.userdata.v1.UserDataServiceImpl" />
 	
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
