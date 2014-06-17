@@ -14,8 +14,7 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<!--  <ref bean="invalidQueryExceptionMapper"/> -->
-			<!-- <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> -->
+			<ref bean="invalidQueryExceptionMapper"/>
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
 		</jaxrs:providers>
