@@ -36,7 +36,7 @@ public class UserDataServiceImpl implements UserDataService {
 			
 			userData.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
 			userData.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
-			
+			userData.setDataSource(userdatatype.getDataSource());
 			userData.setId("12");
 			
 			return userData;

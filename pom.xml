@@ -32,6 +32,7 @@
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 				<version>${cxf.version}</version>
 				<exclusions>
+					<!-- 
 					<exclusion>
 						<groupId>com.sun.xml.bind</groupId>
 						<artifactId>jaxb-impl</artifactId>
@@ -40,6 +41,7 @@
 						<groupId>org.codehaus.woodstox</groupId>
 						<artifactId>stax2-api</artifactId>
 					</exclusion>
+					-->
 				</exclusions>
 			</dependency>
 			<dependency>
