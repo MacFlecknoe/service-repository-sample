@@ -29,13 +29,17 @@ public class UserDataServiceImpl implements UserDataService {
 		try {
 			Date current = new Date();
 			
+			UserDataType userData = new UserDataType();
+			
 			GregorianCalendar currentDate = new GregorianCalendar();
 			currentDate.setTime(current);
 			
-			userdatatype.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
-			userdatatype.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			userData.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			userData.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
 			
-			return userdatatype;
+			userData.setId("12");
+			
+			return userData;
 		
 		} catch (DatatypeConfigurationException e) {
 			throw new RuntimeException(e);

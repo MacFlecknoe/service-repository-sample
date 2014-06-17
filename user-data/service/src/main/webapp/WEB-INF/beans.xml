@@ -14,11 +14,14 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<ref bean="invalidQueryExceptionMapper"/>
+			<!--  <ref bean="invalidQueryExceptionMapper"/> -->
+			<!-- <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" /> -->
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
+	
+	<bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider" />
 	
 	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.userdata.v1.UserDataServiceImpl" />
 	
@@ -30,6 +33,8 @@
 	</bean>
 	
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+		<!-- support unmarshalling of elements without a root wrapper. supports dropRootElement -->
+		<property name="supportUnwrapped" value="true"/>
 		<property name="singleJaxbContext" value="true"/>
 		<property name="useSingleContextForPackages" value="true"/>
 		<property name="extraClass" ref="extraClasses" />
