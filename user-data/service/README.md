@@ -13,7 +13,8 @@ Some custom mapping of the marshalling provider needed to be done in order for t
 
 
 Generated REST interface:
-<code>
+
+```
 /**
  * Created by Apache CXF WadlToJava code generator
 **/
@@ -54,4 +55,4 @@ public interface UserDataService {
     UserDataType findById(@PathParam("id") String id);
 
 }
-</code>
+```
