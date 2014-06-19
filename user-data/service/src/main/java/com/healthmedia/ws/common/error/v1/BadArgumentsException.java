@@ -6,6 +6,8 @@ import java.util.Collection;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class BadArgumentsException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +30,18 @@ public class BadArgumentsException extends RuntimeException {
 		return errors;
 	}
 	
-	// TODO override getMessage
+	@Override
+	public String getMessage() {
+		return toString();
+	}
+	
+	@Override
+	public String toString() {
+		ToStringBuilder sb = new ToStringBuilder(this);
+		sb.append("errors", getErrorMessages());
+		return sb.toString();
+	}
+	
 	@XmlRootElement(name="badArgument")
 	public static class BadArgumentError {
 		
@@ -52,6 +65,14 @@ public class BadArgumentsException extends RuntimeException {
 
 		public String getValue() {
 			return value;
+		}
+		
+		@Override
+		public String toString() {
+			ToStringBuilder sb = new ToStringBuilder(this);
+			sb.append("name", getName());
+			sb.append("value", getValue());
+			return sb.toString();
 		}
 	}
 }

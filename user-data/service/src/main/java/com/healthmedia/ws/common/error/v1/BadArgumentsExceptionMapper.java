@@ -40,7 +40,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
-		text.setValue(exception.getMessage());
+		text.setValue("Invalid arguments were passed to service.");
 		reason.getText().add(text);
 		
 		fault.setReason(reason);

@@ -9,6 +9,8 @@ import java.util.Locale;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import org.apache.log4j.Logger;
+
 import com.healthmedia.ws.common.error.v1.BadArgumentsException;
 import com.healthmedia.ws.common.error.v1.GenericErrorException;
 import com.healthmedia.ws.common.error.v1.GenericErrorException.ErrorMessage;
@@ -26,6 +28,8 @@ import com.healthmedia.ws.service.userdata.v1.UserDataService;
  *
  */
 public class UserDataServiceImpl implements UserDataService {
+	
+	private static Logger LOGGER = Logger.getLogger(UserDataServiceImpl.class);
 	
 	@Override
 	public UserDataType create(UserDataType userdatatype) {
