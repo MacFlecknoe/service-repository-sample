@@ -11,9 +11,9 @@ import javax.xml.datatype.DatatypeFactory;
 
 import org.apache.log4j.Logger;
 
-import com.healthmedia.ws.common.error.v1.BadArgumentsException;
-import com.healthmedia.ws.common.error.v1.GenericErrorException;
-import com.healthmedia.ws.common.error.v1.GenericErrorException.ErrorMessage;
+import com.healthmedia.ws.common.error.BadArgumentsException;
+import com.healthmedia.ws.common.error.GenericErrorException;
+import com.healthmedia.ws.common.error.GenericErrorException.ErrorMessage;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
 import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;

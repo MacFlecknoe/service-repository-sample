@@ -1,4 +1,4 @@
-package com.healthmedia.ws.common.error.v1;
+package com.healthmedia.ws.common.error;
 
 public enum ApplicationErrorCode {
 

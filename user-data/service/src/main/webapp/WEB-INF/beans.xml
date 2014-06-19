@@ -64,7 +64,7 @@
 	
 	<!-- include extra classes in jaxb context -->
 	<util:list id="extraClasses">
-		<value>com.healthmedia.ws.common.error.v1.BadArgumentsException$BadArgumentError</value>
+		<value>com.healthmedia.ws.common.error.BadArgumentsException$BadArgumentError</value>
 	</util:list>
 	
 	<!-- example exception mapping -->

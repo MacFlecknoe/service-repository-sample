@@ -2,6 +2,7 @@ package com.healthmedia.ws.common.error.v1;
 
 import javax.ws.rs.core.Response;
 
+import com.healthmedia.ws.common.error.GenericErrorException;
 import com.healthmedia.ws.common.v1.I18NTextType;
 
 public class GenericErrorExceptionMapper extends AbstractErrorV1ExceptionMapper<GenericErrorException> {

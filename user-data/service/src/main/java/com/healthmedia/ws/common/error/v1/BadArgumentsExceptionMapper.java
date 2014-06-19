@@ -5,7 +5,9 @@ import java.util.Locale;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-import com.healthmedia.ws.common.error.v1.BadArgumentsException.BadArgumentError;
+import com.healthmedia.ws.common.error.ApplicationErrorCode;
+import com.healthmedia.ws.common.error.BadArgumentsException;
+import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
 import com.healthmedia.ws.common.v1.I18NTextType;
 
 /**
@@ -40,7 +42,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
-		text.setValue("Invalid arguments were passed to service.");
+		text.setValue("invalid arguments passed to service");
 		reason.getText().add(text);
 		
 		fault.setReason(reason);

@@ -6,6 +6,7 @@ import javax.ws.rs.core.Response;
 
 import org.apache.log4j.Logger;
 
+import com.healthmedia.ws.common.error.ApplicationErrorCode;
 import com.healthmedia.ws.common.v1.I18NTextType;
 
 public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Throwable> {
