@@ -57,6 +57,7 @@
 	see http://hirenscafe.blogspot.com/2008/04/jaxbxmlrootelement.html
 	-->
 	<util:map id="myElementClassMap">
+		<entry key="com.healthmedia.ws.entity.user.v1.EntityType" value="entity"/>
 		<entry key="com.healthmedia.ws.entity.user.v1.UserDataType" value="userData"/>
 		<entry key="com.healthmedia.ws.entity.user.v1.UserDataCollectionType" value="userDataCollection"/>
 		<entry key="com.healthmedia.ws.common.error.v1.FaultType" value="fault"/>
