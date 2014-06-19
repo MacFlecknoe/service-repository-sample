@@ -32,6 +32,10 @@
 		<property name="jaxbElementClassMap" ref="rootElementClassMap"/>
 	</bean>
 	
+	<!-- 
+		For common configuration parameters 
+		@see http://cxf.apache.org/docs/jax-rs-data-bindings.html#JAX-RSDataBindings-CommonJAXBandJSONconfiguration 
+	-->
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
 		<property name="singleJaxbContext" value="true"/>
 		<property name="useSingleContextForPackages" value="true"/>
