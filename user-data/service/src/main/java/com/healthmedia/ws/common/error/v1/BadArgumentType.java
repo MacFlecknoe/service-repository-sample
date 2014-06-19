@@ -2,17 +2,17 @@ package com.healthmedia.ws.common.error.v1;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="parameter")
-public class ParameterType {
+@XmlRootElement(name="badArgument")
+public class BadArgumentType {
 
 	protected String name;
 	protected String value;
 	
-	public ParameterType() {
+	public BadArgumentType() {
 		// empty
 	}
 	
-	public ParameterType(String name, String value) {
+	public BadArgumentType(String name, String value) {
 		this.name = name;
 		this.value = value;
 	}

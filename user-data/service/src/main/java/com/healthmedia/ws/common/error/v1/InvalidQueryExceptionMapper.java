@@ -47,7 +47,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// application specific error message
 		//
 		DetailType detail = new DetailType();
-		detail.getAny().add(new ParameterType("query", exception.getQuery()));
+		detail.getAny().add(new BadArgumentType("query", exception.getQuery()));
 		fault.setDetail(detail);
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
