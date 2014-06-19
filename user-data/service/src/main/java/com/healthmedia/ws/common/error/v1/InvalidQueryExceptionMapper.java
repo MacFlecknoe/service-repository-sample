@@ -39,7 +39,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
-		text.setValue(new StringBuilder().append("Invalid Query: ").append(exception.getQuery()).toString());
+		text.setValue(exception.getMessage());
 		reason.getText().add(text);
 		
 		fault.setReason(reason);
