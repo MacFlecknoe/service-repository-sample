@@ -33,7 +33,6 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	@Override
 	public UserDataType create(UserDataType userdatatype) {
-		
 		try {
 			Date current = new Date();
 			
@@ -56,7 +55,6 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	@Override
 	public UserDataType findById(String id) {
-		
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
 			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);

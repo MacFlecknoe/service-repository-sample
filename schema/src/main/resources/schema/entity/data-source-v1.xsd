@@ -12,7 +12,11 @@
 	
 	<xsd:complexType name="dataSourceType">
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType"/> 
+			<xsd:extension base="common:entityType"> 
+				<xsd:sequence>
+					<xsd:element name="name" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	
