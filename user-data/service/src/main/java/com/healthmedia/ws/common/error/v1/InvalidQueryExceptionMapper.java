@@ -4,7 +4,6 @@ import java.util.Locale;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import com.healthmedia.ws.common.v1.I18NTextType;
 
@@ -29,7 +28,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// general category of the error
 		//
 		SubCodeType subCode = new SubCodeType();
-		subCode.setValue("BadArguments");
+		subCode.setValue("BadArguments"); // this should be an approved enum
 		faultCode.setSubCode(subCode);
 		
 		fault.setCode(faultCode);
@@ -40,7 +39,7 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
-		text.setValue("Invalid Query Parameter");
+		text.setValue(new StringBuilder().append("Invalid Query: ").append(exception.getQuery()).toString());
 		reason.getText().add(text);
 		
 		fault.setReason(reason);
@@ -48,43 +47,9 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// application specific error message
 		//
 		DetailType detail = new DetailType();
-		detail.getAny().add(new InvalidParameterType("query", exception.getQuery()));
-		detail.getAny().add(new InvalidParameterType("query", exception.getQuery()));
+		detail.getAny().add(new ParameterType("query", exception.getQuery()));
 		fault.setDetail(detail);
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
-	}
-
-	@XmlRootElement(name="invalidParameter")
-	public static class InvalidParameterType {
-
-		protected String name;
-		protected String value;
-		
-		public InvalidParameterType() {
-			// empty
-		}
-		
-		public InvalidParameterType(String name, String value) {
-			this.name = name;
-			this.value = value;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String value) {
-			this.name = value;
-		}
-
-		public String getValue() {
-			return value;
-		}
-
-		public void setValue(String value) {
-			this.value = value;
-		}
-
 	}
 }

@@ -64,7 +64,7 @@
 	
 	<!-- include extra classes in jaxb context -->
 	<util:list id="extraClasses">
-		<value>com.healthmedia.ws.common.error.v1.InvalidQueryExceptionMapper$InvalidParameterType</value>
+		<value>com.healthmedia.ws.common.error.v1.ParameterType</value>
 	</util:list>
 	
 	<!-- example exception mapping -->
