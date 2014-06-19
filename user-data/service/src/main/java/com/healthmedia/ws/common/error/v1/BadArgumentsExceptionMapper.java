@@ -5,6 +5,7 @@ import java.util.Locale;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
+import com.healthmedia.ws.common.error.v1.BadArgumentsException.BadArgumentError;
 import com.healthmedia.ws.common.v1.I18NTextType;
 
 /**
@@ -12,10 +13,10 @@ import com.healthmedia.ws.common.v1.I18NTextType;
  * 
  */
 @Provider
-public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<InvalidQueryException> {
+public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<BadArgumentsException> {
 
 	@Override
-	public Response toResponse(InvalidQueryException exception) {
+	public Response toResponse(BadArgumentsException exception) {
 
 		FaultType fault = new FaultType();
 		
@@ -47,7 +48,9 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// application specific error message
 		//
 		DetailType detail = new DetailType();
-		detail.getAny().add(new BadArgumentType("query", exception.getQuery()));
+		for(BadArgumentError error : exception.getErrorMessages()) {
+			detail.getAny().add(error);
+		}
 		fault.setDetail(detail);
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();

@@ -1,7 +1,6 @@
 package com.healthmedia.ws.service.userdata.v1;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -10,8 +9,8 @@ import java.util.Locale;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import com.healthmedia.ws.common.error.v1.BadArgumentsException;
 import com.healthmedia.ws.common.error.v1.GenericErrorException;
-import com.healthmedia.ws.common.error.v1.InvalidQueryException;
 import com.healthmedia.ws.common.error.v1.GenericErrorException.ErrorMessage;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
@@ -94,7 +93,7 @@ public class UserDataServiceImpl implements UserDataService {
 	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
 		if(query == null || query.equals("bad_query")) {
-			throw new InvalidQueryException(query);
+			throw new BadArgumentsException("query", query);
 		}
 		if(query == null || query.equals("error_code")) {
 			

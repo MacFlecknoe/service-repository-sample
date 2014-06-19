@@ -14,12 +14,12 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
-			<ref bean="invalidQueryExceptionMapper"/>
 			<ref bean="genericErrorExceptionMapper"/>
 			<ref bean="throwableExceptionMapper"/>
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
 			<ref bean="sampleFilter" />
+			<ref bean="badArgumentsExceptionMapper" />
 		</jaxrs:providers>
 	</jaxrs:server>
 	
@@ -64,11 +64,11 @@
 	
 	<!-- include extra classes in jaxb context -->
 	<util:list id="extraClasses">
-		<value>com.healthmedia.ws.common.error.v1.BadArgumentType</value>
+		<value>com.healthmedia.ws.common.error.v1.BadArgumentsException$BadArgumentError</value>
 	</util:list>
 	
 	<!-- example exception mapping -->
-	<bean id="invalidQueryExceptionMapper" class="com.healthmedia.ws.common.error.v1.InvalidQueryExceptionMapper" />
+	<bean id="badArgumentsExceptionMapper" class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
 	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
 	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
 	
