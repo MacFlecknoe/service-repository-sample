@@ -1,10 +1,8 @@
 package com.healthmedia.ws.service.userdata.v1;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -12,8 +10,10 @@ import javax.xml.datatype.DatatypeFactory;
 import org.apache.log4j.Logger;
 
 import com.healthmedia.ws.common.error.BadArgumentsException;
+import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
+import com.healthmedia.ws.common.error.DataValidationException;
+import com.healthmedia.ws.common.error.DataValidationException.DataValidationError;
 import com.healthmedia.ws.common.error.GenericErrorException;
-import com.healthmedia.ws.common.error.GenericErrorException.ErrorMessage;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
 import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
@@ -95,16 +95,25 @@ public class UserDataServiceImpl implements UserDataService {
 	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
 		
 		if(query == null || query.equals("bad_query")) {
-			throw new BadArgumentsException("query", query);
+			
+			BadArgumentsException badArgumentException = new BadArgumentsException();
+			
+			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("query", query));
+			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("updateDate_end", updateDate_end.toString()));
+			
+			throw badArgumentException;
+		}
+		if(query == null || query.equals("data_def")) {
+			
+			DataValidationException validationException = new DataValidationException("123", "validation issue");
+			
+			validationException.getDataValidationErrors().add(new DataValidationError("ABC", "Foo", "This is foo"));
+			validationException.getDataValidationErrors().add(new DataValidationError("DEF", "Bar", "This is bar"));
+			
+			throw validationException;
 		}
 		if(query == null || query.equals("error_code")) {
-			
-			ArrayList<ErrorMessage> errors = new ArrayList<ErrorMessage>();
-			
-			errors.add(new ErrorMessage(Locale.US, "in U.S. english"));
-			errors.add(new ErrorMessage(Locale.FRANCE, "En francais"));
-			
-			throw new GenericErrorException("1234CODE", errors);
+			throw new GenericErrorException("1234CODE", "Generic error message");
 		}
 		if(query == null || query.equals("throwable")) {
 			throw new RuntimeException("this should be logged");

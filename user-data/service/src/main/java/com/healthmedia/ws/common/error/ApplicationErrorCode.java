@@ -3,6 +3,7 @@ package com.healthmedia.ws.common.error;
 public enum ApplicationErrorCode {
 
 	BAD_ARGUMENT("BadArgument"), 
+	VALIDATION_ERROR("ValidationError"), 
 	SERVER_ERROR("ServerError");
 
 	private String code;

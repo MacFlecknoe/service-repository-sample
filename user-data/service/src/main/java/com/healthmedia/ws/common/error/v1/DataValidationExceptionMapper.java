@@ -6,8 +6,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
-import com.healthmedia.ws.common.error.BadArgumentsException;
-import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
+import com.healthmedia.ws.common.error.DataValidationException;
 import com.healthmedia.ws.common.v1.I18NTextType;
 
 /**
@@ -15,10 +14,10 @@ import com.healthmedia.ws.common.v1.I18NTextType;
  * 
  */
 @Provider
-public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<BadArgumentsException> {
+public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMapper<DataValidationException> {
 
 	@Override
-	public Response toResponse(BadArgumentsException exception) {
+	public Response toResponse(DataValidationException exception) {
 
 		FaultType fault = new FaultType();
 		
@@ -31,7 +30,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// general category of the error
 		//
 		SubCodeType subCode = new SubCodeType();
-		subCode.setValue(ApplicationErrorCode.BAD_ARGUMENT.getCode()); // this should be an approved enum
+		subCode.setValue(ApplicationErrorCode.VALIDATION_ERROR.getCode()); // this should be an approved enum
 		
 		faultCode.setSubCode(subCode);
 		fault.setCode(faultCode);
@@ -42,7 +41,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
-		text.setValue("invalid arguments passed to service");
+		text.setValue(exception.getDescription());
 		reason.getText().add(text);
 		
 		fault.setReason(reason);
@@ -50,7 +49,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// application specific error message
 		//
 		DetailType detail = new DetailType();
-		for(BadArgumentError error : exception.getBadArgumentErrors()) {
+		for(DataValidationException.DataValidationError error : exception.getDataValidationErrors()) {
 			detail.getAny().add(error);
 		}
 		fault.setDetail(detail);

@@ -1,12 +1,11 @@
 package com.healthmedia.ws.common.error;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class BadArgumentsException extends RuntimeException {
 
@@ -18,6 +17,10 @@ public class BadArgumentsException extends RuntimeException {
 		this.errors = errors;
 	}
 	
+	public BadArgumentsException() {
+		this(new ArrayList<BadArgumentError>());
+	}
+	
 	public BadArgumentsException(BadArgumentError error) {
 		this(Arrays.asList(error));
 	}
@@ -26,20 +29,8 @@ public class BadArgumentsException extends RuntimeException {
 		this(new BadArgumentError(name, value));
 	}
 	
-	public Collection<BadArgumentError> getErrorMessages() {
+	public Collection<BadArgumentError> getBadArgumentErrors() {
 		return errors;
-	}
-	
-	@Override
-	public String getMessage() {
-		return toString();
-	}
-	
-	@Override
-	public String toString() {
-		ToStringBuilder sb = new ToStringBuilder(this);
-		sb.append("errors", getErrorMessages());
-		return sb.toString();
 	}
 	
 	@XmlRootElement(name="badArgument")
@@ -65,14 +56,6 @@ public class BadArgumentsException extends RuntimeException {
 
 		public String getValue() {
 			return value;
-		}
-		
-		@Override
-		public String toString() {
-			ToStringBuilder sb = new ToStringBuilder(this);
-			sb.append("name", getName());
-			sb.append("value", getValue());
-			return sb.toString();
 		}
 	}
 }

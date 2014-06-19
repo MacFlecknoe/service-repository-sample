@@ -1,5 +1,7 @@
 package com.healthmedia.ws.common.error.v1;
 
+import java.util.Locale;
+
 import javax.ws.rs.core.Response;
 
 import com.healthmedia.ws.common.error.GenericErrorException;
@@ -30,12 +32,11 @@ public class GenericErrorExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		//
 		// description of the error in multiple languages
 		//
-		for(GenericErrorException.ErrorMessage error : exception.getErrorMessages()) {
-			I18NTextType text = new I18NTextType();
-			text.setLanguage(error.getLocale().toLanguageTag());
-			text.setValue(error.getMessage());
-			reason.getText().add(text);
-		}
+		I18NTextType text = new I18NTextType();
+		text.setLanguage(Locale.US.getLanguage());
+		text.setValue(exception.getMessage());
+		reason.getText().add(text);
+		
 		fault.setReason(reason);
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();

@@ -14,6 +14,7 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+			<ref bean="dataDefinitionExceptionMapper"/>
 			<ref bean="genericErrorExceptionMapper"/>
 			<ref bean="throwableExceptionMapper"/>
 			<ref bean="jaxbProvider"/>
@@ -76,9 +77,11 @@
 	<!-- include extra classes in jaxb context -->
 	<util:list id="extraClasses">
 		<value>com.healthmedia.ws.common.error.BadArgumentsException$BadArgumentError</value>
+		<value>com.healthmedia.ws.common.error.DataValidationException$DataValidationError</value>
 	</util:list>
 	
 	<!-- example exception mapping -->
+	<bean id="dataDefinitionExceptionMapper" class="com.healthmedia.ws.common.error.v1.DataValidationExceptionMapper" />
 	<bean id="badArgumentsExceptionMapper" class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
 	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
 	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
