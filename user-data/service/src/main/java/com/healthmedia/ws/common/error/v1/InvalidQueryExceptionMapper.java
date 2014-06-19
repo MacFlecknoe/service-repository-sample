@@ -37,10 +37,12 @@ public class InvalidQueryExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// description of the error in multiple languages
 		//
 		FaultReasonType reason = new FaultReasonType();
+		
 		I18NTextType text = new I18NTextType();
 		text.setLanguage(Locale.US.getLanguage());
 		text.setValue("Invalid Query Parameter");
 		reason.getText().add(text);
+		
 		fault.setReason(reason);
 		//
 		// application specific error message

@@ -12,6 +12,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.7</java.version>
+		<jaxb-impl.version>2.2.7</jaxb-impl.version>
 		<cxf.version>2.7.11</cxf.version>
 		<jettison.version>1.3.5</jettison.version>
 		<asm.version>3.3.1</asm.version>
@@ -23,6 +24,12 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>com.sun.xml.bind</groupId>
+				<artifactId>jaxb-impl</artifactId>
+				<version>${jaxb-impl.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
 				<groupId>asm</groupId>
 				<artifactId>asm-commons</artifactId>
 				<version>${asm.version}</version>
@@ -31,18 +38,6 @@
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-frontend-jaxrs</artifactId>
 				<version>${cxf.version}</version>
-				<exclusions>
-					<!-- 
-					<exclusion>
-						<groupId>com.sun.xml.bind</groupId>
-						<artifactId>jaxb-impl</artifactId>
-					</exclusion>
-					<exclusion>
-						<groupId>org.codehaus.woodstox</groupId>
-						<artifactId>stax2-api</artifactId>
-					</exclusion>
-					-->
-				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.cxf</groupId>

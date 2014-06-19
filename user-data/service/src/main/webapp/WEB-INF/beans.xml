@@ -15,8 +15,11 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<ref bean="invalidQueryExceptionMapper"/>
+			<ref bean="genericErrorExceptionMapper"/>
+			<ref bean="throwableExceptionMapper"/>
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
+			<ref bean="sampleFilter" />
 		</jaxrs:providers>
 	</jaxrs:server>
 	
@@ -66,4 +69,9 @@
 	
 	<!-- example exception mapping -->
 	<bean id="invalidQueryExceptionMapper" class="com.healthmedia.ws.common.error.v1.InvalidQueryExceptionMapper" />
+	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
+	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
+	
+	<!-- example filter -->
+	<bean id="sampleFilter" class="com.healthmedia.ws.filter.SampleFilter" />
 </beans>

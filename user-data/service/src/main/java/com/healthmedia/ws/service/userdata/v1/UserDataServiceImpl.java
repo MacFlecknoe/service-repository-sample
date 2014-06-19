@@ -1,13 +1,18 @@
 package com.healthmedia.ws.service.userdata.v1;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 
+import com.healthmedia.ws.common.error.v1.GenericErrorException;
 import com.healthmedia.ws.common.error.v1.InvalidQueryException;
+import com.healthmedia.ws.common.error.v1.GenericErrorException.ErrorMessage;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
 import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
@@ -90,6 +95,18 @@ public class UserDataServiceImpl implements UserDataService {
 		
 		if(query == null || query.equals("bad_query")) {
 			throw new InvalidQueryException(query);
+		}
+		if(query == null || query.equals("error_code")) {
+			
+			ArrayList<ErrorMessage> errors = new ArrayList<ErrorMessage>();
+			
+			errors.add(new ErrorMessage(Locale.US, "in U.S. english"));
+			errors.add(new ErrorMessage(Locale.FRANCE, "En francais"));
+			
+			throw new GenericErrorException("1234CODE", errors);
+		}
+		if(query == null || query.equals("throwable")) {
+			throw new RuntimeException("this should be logged");
 		}
 		UserDataCollectionType collection = new UserDataCollectionType();
 		
