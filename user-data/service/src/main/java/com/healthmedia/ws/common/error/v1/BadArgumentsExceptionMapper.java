@@ -29,9 +29,9 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		// general category of the error
 		//
 		SubCodeType subCode = new SubCodeType();
-		subCode.setValue("BadArguments"); // this should be an approved enum
-		faultCode.setSubCode(subCode);
+		subCode.setValue(ApplicationErrorCode.BAD_ARGUMENT.getCode()); // this should be an approved enum
 		
+		faultCode.setSubCode(subCode);
 		fault.setCode(faultCode);
 		//
 		// description of the error in multiple languages

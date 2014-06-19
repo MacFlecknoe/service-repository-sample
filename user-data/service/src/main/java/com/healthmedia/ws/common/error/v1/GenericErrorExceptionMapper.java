@@ -21,8 +21,8 @@ public class GenericErrorExceptionMapper extends AbstractErrorV1ExceptionMapper<
 		//
 		SubCodeType subCode = new SubCodeType();
 		subCode.setValue(exception.getCode());
-		faultCode.setSubCode(subCode);
 		
+		faultCode.setSubCode(subCode);
 		fault.setCode(faultCode);
 
 		FaultReasonType reason = new FaultReasonType();

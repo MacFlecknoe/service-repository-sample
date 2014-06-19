@@ -30,9 +30,9 @@ public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Thr
 		// general category of the error
 		//
 		SubCodeType subCode = new SubCodeType();
-		subCode.setValue("ServerError");
-		faultCode.setSubCode(subCode);
+		subCode.setValue(ApplicationErrorCode.SERVER_ERROR.getCode());
 		
+		faultCode.setSubCode(subCode);
 		fault.setCode(faultCode);
 		//
 		// description of the error in multiple languages
