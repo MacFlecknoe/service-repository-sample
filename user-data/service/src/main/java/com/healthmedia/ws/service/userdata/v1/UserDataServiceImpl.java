@@ -33,6 +33,9 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	@Override
 	public UserDataType create(UserDataType userdatatype) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing create");
+		}
 		try {
 			Date current = new Date();
 			
@@ -55,6 +58,9 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	@Override
 	public UserDataType findById(String id) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing find by id");
+		}
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
 			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
@@ -93,7 +99,9 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
-		
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing find by query");
+		}
 		if(query == null || query.equals("bad_query")) {
 			
 			BadArgumentsException badArgumentException = new BadArgumentsException();
@@ -128,7 +136,9 @@ public class UserDataServiceImpl implements UserDataService {
 
 	@Override
 	public UserDataCollectionType createCollection(UserDataCollectionType userdatacollectiontype) {
-		
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing create collection");
+		}
 		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
 		
 		for(UserDataType userData : userDataTypes) {
