@@ -87,10 +87,10 @@
 	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
 	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
 	
-	<util:map id="jsonNamespaceMap" map-class="java.util.Hashtable">
+	<util:map id="jsonNamespaceMap">
 		<entry key="urn:healthmedia:schema:common:v1" value="c1"/>
 		<entry key="urn:healthmedia:schema:user:v1" value="u1"/>
-		<entry key="urn:healthmedia:schema:data-source:v1" value="d1"/>
+		<entry key="urn:healthmedia:schema:data-source:v1" value="ds1"/>
 	</util:map>	
 	
 	<!-- example filter -->
