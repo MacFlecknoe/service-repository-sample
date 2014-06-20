@@ -44,7 +44,7 @@
 		<property name="extraClass" ref="extraClasses" />
 		<!-- list of classes that should be treated as root elements within the service -->
 		<property name="jaxbElementClassMap" ref="rootElementClassMap"/>
-		<!-- <property name="ignoreNamespaces" value="true"/> -->
+		<!-- map namespaces to more concise abbreviations for use in json payloads -->
 		<property name="namespaceMap" ref="jsonNamespaceMap"/>
 		<!-- don't require a root element when consuming messages (e.g. { "userData": { ... } } -->
 		<property name="supportUnwrapped" value="true"/>
