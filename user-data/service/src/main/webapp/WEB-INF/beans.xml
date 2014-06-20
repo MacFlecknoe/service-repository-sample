@@ -44,7 +44,8 @@
 		<property name="extraClass" ref="extraClasses" />
 		<!-- list of classes that should be treated as root elements within the service -->
 		<property name="jaxbElementClassMap" ref="rootElementClassMap"/>
-		<property name="ignoreNamespaces" value="true"/>
+		<!-- <property name="ignoreNamespaces" value="true"/> -->
+		<property name="namespaceMap" ref="jsonNamespaceMap"/>
 		<!-- don't require a root element when consuming messages (e.g. { "userData": { ... } } -->
 		<property name="supportUnwrapped" value="true"/>
 		<!-- drop the wrapper element when marshaling object to client -->
@@ -85,6 +86,12 @@
 	<bean id="badArgumentsExceptionMapper" class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
 	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
 	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
+	
+	<util:map id="jsonNamespaceMap" map-class="java.util.Hashtable">
+		<entry key="urn:healthmedia:schema:common:v1" value="c1"/>
+		<entry key="urn:healthmedia:schema:user:v1" value="u1"/>
+		<entry key="urn:healthmedia:schema:data-source:v1" value="d1"/>
+	</util:map>	
 	
 	<!-- example filter -->
 	<bean id="sampleFilter" class="com.healthmedia.ws.filter.SampleFilter" />
