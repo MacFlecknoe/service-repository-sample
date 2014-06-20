@@ -99,7 +99,7 @@ public class UserDataServiceImpl implements UserDataService {
 			BadArgumentsException badArgumentException = new BadArgumentsException();
 			
 			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("query", query));
-			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("updateDate_end", updateDate_end.toString()));
+			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("updateDate_end", "blah"));
 			
 			throw badArgumentException;
 		}

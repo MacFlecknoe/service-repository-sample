@@ -14,13 +14,13 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+			<ref bean="badArgumentsExceptionMapper" />
 			<ref bean="dataDefinitionExceptionMapper"/>
 			<ref bean="genericErrorExceptionMapper"/>
 			<ref bean="throwableExceptionMapper"/>
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
 			<ref bean="sampleFilter" />
-			<ref bean="badArgumentsExceptionMapper" />
 		</jaxrs:providers>
 	</jaxrs:server>
 	
@@ -89,6 +89,7 @@
 	
 	<util:map id="jsonNamespaceMap">
 		<entry key="urn:healthmedia:schema:common:v1" value="c1"/>
+		<entry key="urn:healthmedia:schema:common-error:v1" value="ce1"/>
 		<entry key="urn:healthmedia:schema:user:v1" value="u1"/>
 		<entry key="urn:healthmedia:schema:data-source:v1" value="ds1"/>
 	</util:map>	
