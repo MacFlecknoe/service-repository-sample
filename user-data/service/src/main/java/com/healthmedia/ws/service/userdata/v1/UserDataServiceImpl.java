@@ -107,11 +107,11 @@ public class UserDataServiceImpl implements UserDataService {
 			BadArgumentsException badArgumentException = new BadArgumentsException();
 			
 			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("query", query));
-			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("updateDate_end", "blah"));
+			badArgumentException.getBadArgumentErrors().add(new BadArgumentError("updateDate_end", updateDate_start)); 
 			
 			throw badArgumentException;
 		}
-		if(query == null || query.equals("data_def")) {
+		if(query.equals("data_def")) {
 			
 			DataValidationException validationException = new DataValidationException("123", "validation issue");
 			
@@ -120,10 +120,10 @@ public class UserDataServiceImpl implements UserDataService {
 			
 			throw validationException;
 		}
-		if(query == null || query.equals("error_code")) {
+		if(query.equals("error_code")) {
 			throw new GenericErrorException("1234CODE", "Generic error message");
 		}
-		if(query == null || query.equals("throwable")) {
+		if(query.equals("throwable")) {
 			throw new RuntimeException("this should be logged");
 		}
 		UserDataCollectionType collection = new UserDataCollectionType();

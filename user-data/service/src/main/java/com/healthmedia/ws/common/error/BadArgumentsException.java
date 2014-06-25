@@ -50,6 +50,10 @@ public class BadArgumentsException extends RuntimeException {
 			this.value = value;
 		}
 		
+		public BadArgumentError(String name, Object value) {
+			this(name, (value == null) ? null : value.toString());
+		}
+		
 		public String getName() {
 			return name;
 		}

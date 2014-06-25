@@ -14,6 +14,7 @@
 			<ref bean="userDataServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+			<bean class="com.healthmedia.ws.common.ISO8601DateParamHandler" />
 			<ref bean="badArgumentsExceptionMapper" />
 			<ref bean="dataDefinitionExceptionMapper"/>
 			<ref bean="genericErrorExceptionMapper"/>
