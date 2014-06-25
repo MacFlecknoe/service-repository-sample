@@ -98,7 +98,7 @@ public class UserDataServiceImpl implements UserDataService {
 	}
 
 	@Override
-	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, String data_name, String user_id) {
+	public UserDataCollectionType findByQuery(String query, Date updateDate_start, Date updateDate_end, List<String> data_name, String user_id) {
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug("executing find by query");
 		}
