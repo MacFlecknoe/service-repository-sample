@@ -23,6 +23,7 @@
 		<log4j.version>1.2.17</log4j.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<servlet-api.version>2.5</servlet-api.version>
+		<joda-time.version>2.3</joda-time.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -93,6 +94,11 @@
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
 				<version>${springframework.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
