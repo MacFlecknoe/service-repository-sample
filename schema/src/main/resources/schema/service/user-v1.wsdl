@@ -47,7 +47,7 @@
 		</operation>
 	</portType>
 
-	<!-- see 441 add partner link-->
+	<!-- see p.441 -->
 	
 	<!-- expose entity id to bpel processes -->
 	<bpws:property name="userId" type="xsd:string" />
