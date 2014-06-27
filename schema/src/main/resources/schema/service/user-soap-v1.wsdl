@@ -28,9 +28,9 @@
 	
 	<!-- part of concrete wsdl. defines ports/endpoints that expose a binding -->
 	<!--  naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts -->
-	<service name="UserServicePorts">
+	<service name="UserSoapServicePorts">
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->
-		<port binding="tns:UserSoapServiceBinding" name="UserServiceHttpPort">
+		<port binding="tns:UserSoapServiceBinding" name="UserSoapServicePort">
 			<soap:address location="http://www.example.org/" />
 		</port>
 	</service>
