@@ -3,10 +3,10 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="urn:healthmedia:wsdl:user:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	name="UserService"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:v1"
-	xmlns="http://schemas.xmlsoap.org/wsdl/">
-	
+	name="UserService">
+	<documentation>Version 1.0</documentation>
 	<types>
 		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1">
 			<xsd:element name="AddUser">
@@ -26,34 +26,23 @@
 		</xsd:schema>
 	</types>
 	
+	<!-- part of abstract wsdl. defines the messages that make up part of the service interface -->
 	<message name="AddUserRequest">
 		<part element="tns:AddUser" name="parameters" />
 	</message>
 	<message name="AddUserResponse">
 		<part element="tns:AddUserResponse" name="parameters" />
 	</message>
+	
+	<!--  part of abstract wsdl. defines the service's methods/operations. this along with the messages define the service's interface -->
+	<!--  naming convention: portType should reflect the interface name (e.g. UserService.java) -->
 	<portType name="UserService">
 		<operation name="AddUser">
 			<input message="tns:AddUserRequest" />
 			<output message="tns:AddUserResponse" />
 		</operation>
 	</portType>
-	<!-- concrete wsdl -->
-	<binding name="UserServiceSOAP" type="tns:UserService">
-		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
-		<operation name="AddUser">
-			<soap:operation soapAction="urn:healthmedia:wsdl:user:v1/AddUser" />
-			<input>
-				<soap:body use="literal" />
-			</input>
-			<output>
-				<soap:body use="literal" />
-			</output>
-		</operation>
-	</binding>
-	<service name="UserService">
-		<port binding="tns:UserServiceSOAP" name="UserServiceSOAP">
-			<soap:address location="http://www.example.org/" />
-		</port>
-	</service>
+
+
+<!-- see 441 add partner link-->
 </definitions>

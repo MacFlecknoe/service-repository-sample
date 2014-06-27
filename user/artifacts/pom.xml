@@ -31,8 +31,9 @@
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 							<wsdlOptions>
 								<wsdlOption>
-									<wsdl>classpath:/schema/service/user-v1.wsdl</wsdl>
-									<serviceName>UserService</serviceName>
+									<wsdl>classpath:/schema/service/user-http-v1.wsdl</wsdl>
+									<!-- name of the service in the wsdl to generate artifacts for -->
+									<serviceName>UserServicePorts</serviceName>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
