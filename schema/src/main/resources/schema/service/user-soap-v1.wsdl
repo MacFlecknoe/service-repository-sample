@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <definitions 
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-	xmlns:tns="urn:healthmedia:wsdl:user:http:v1" 
+	xmlns:tns="urn:healthmedia:wsdl:user:soap:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:abs="urn:healthmedia:wsdl:user:v1"
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
-	targetNamespace="urn:healthmedia:wsdl:user:http:v1"
+	targetNamespace="urn:healthmedia:wsdl:user:soap:v1"
 	name="UserServiceHttp">
 	
 	<documentation>Version 1.0</documentation>
@@ -16,7 +16,7 @@
 	<binding name="UserServiceHttpBinding" type="abs:UserService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="AddUser">
-			<soap:operation soapAction="urn:healthmedia:wsdl:user:http:v1/AddUser" />
+			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUser" />
 			<input>
 				<soap:body use="literal" />
 			</input>
