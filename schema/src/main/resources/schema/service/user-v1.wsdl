@@ -6,7 +6,9 @@
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:v1"
 	name="UserService">
+	
 	<documentation>Version 1.0</documentation>
+	
 	<types>
 		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1">
 			<xsd:element name="AddUser">

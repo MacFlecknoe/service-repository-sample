@@ -7,7 +7,9 @@
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:http:v1"
 	name="UserServiceHttp">
+	
 	<documentation>Version 1.0</documentation>
+	
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
 	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
