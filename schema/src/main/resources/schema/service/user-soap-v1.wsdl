@@ -6,7 +6,7 @@
 	xmlns:abs="urn:healthmedia:wsdl:user:v1"
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:soap:v1"
-	name="UserServiceHttp">
+	name="UserServiceSoap">
 	
 	<documentation>Version 1.0</documentation>
 	
