@@ -33,7 +33,7 @@
 								<wsdlOption>
 									<wsdl>classpath:/schema/service/user-soap-v1.wsdl</wsdl>
 									<!-- name of the service in the wsdl to generate artifacts for -->
-									<serviceName>UserServicePorts</serviceName>
+									<serviceName>UserSoapServicePorts</serviceName>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
