@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<definitions 
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="urn:healthmedia:wsdl:user:v1" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	name="UserService"
+	targetNamespace="urn:healthmedia:wsdl:user:v1"
+	xmlns="http://schemas.xmlsoap.org/wsdl/">
+	
+	<types>
+		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1">
+			<xsd:element name="AddUser">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="in" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AddUserResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="out" type="xsd:string" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</types>
+	
+	<message name="AddUserRequest">
+		<part element="tns:AddUser" name="parameters" />
+	</message>
+	<message name="AddUserResponse">
+		<part element="tns:AddUserResponse" name="parameters" />
+	</message>
+	<portType name="UserService">
+		<operation name="AddUser">
+			<input message="tns:AddUserRequest" />
+			<output message="tns:AddUserResponse" />
+		</operation>
+	</portType>
+	<!-- concrete wsdl -->
+	<binding name="UserServiceSOAP" type="tns:UserService">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="AddUser">
+			<soap:operation soapAction="urn:healthmedia:wsdl:user:v1/AddUser" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
+	</binding>
+	<service name="UserService">
+		<port binding="tns:UserServiceSOAP" name="UserServiceSOAP">
+			<soap:address location="http://www.example.org/" />
+		</port>
+	</service>
+</definitions>

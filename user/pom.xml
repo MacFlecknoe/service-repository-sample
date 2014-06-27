@@ -6,12 +6,14 @@
 		<artifactId>service-repository</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>user-data</artifactId>
+	<artifactId>user</artifactId>
 	<packaging>pom</packaging>
 	<modules>
 		<module>artifacts</module>
+		<!-- 
 		<module>service</module>
 		<module>integration</module>
+		-->
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
