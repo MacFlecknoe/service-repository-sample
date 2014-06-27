@@ -52,6 +52,7 @@
 	<!-- expose entity id to bpel processes -->
 	<bpws:property name="userId" type="xsd:string" />
 	
+	<!-- tell bpel process how to map value to property based on message type -->
 	<bpws:propertyAlias 
 		messageType="tns:AddUserRequest" 
 		part="user" 
