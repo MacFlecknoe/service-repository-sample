@@ -1,4 +1,4 @@
-package com.healthmedia.ws.service.userdata.v1;
+package com.healthmedia.ws.service.rest.userdata.v1;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -19,7 +19,6 @@ import com.healthmedia.ws.entity.user.v1.DataType;
 import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
 import com.healthmedia.ws.entity.user.v1.UserDataType;
 import com.healthmedia.ws.entity.user.v1.UserType;
-import com.healthmedia.ws.service.userdata.v1.UserDataService;
 
 /**
  * Mock service created to demonstrate setup of future REST based web services.

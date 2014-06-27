@@ -34,6 +34,18 @@
 									<wsdl>classpath:/schema/service/user-soap-v1.wsdl</wsdl>
 									<!-- name of the service in the wsdl to generate artifacts for -->
 									<serviceName>UserSoapServicePorts</serviceName>
+									<extraargs>
+										<extraarg>-p</extraarg>
+										<extraarg>http://www.w3.org/2003/05/soap-envelope=org.w3.soap.envelop.v1</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:schema:data-source:v1=com.healthmedia.ws.entity.dataSouce.v1</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:schema:user:v1=com.healthmedia.ws.entity.user.v1</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error.v1</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:wsdl:user:soap:v1=com.healthmedia.ws.service.soap.user.v1</extraarg>
+									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>
 						</configuration>
