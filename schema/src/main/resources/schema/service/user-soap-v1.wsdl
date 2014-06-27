@@ -6,14 +6,14 @@
 	xmlns:abs="urn:healthmedia:wsdl:user:v1"
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:soap:v1"
-	name="UserServiceSoap">
+	name="UserSoapService">
 	
 	<documentation>Version 1.0</documentation>
 	
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
 	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
-	<binding name="UserServiceHttpBinding" type="abs:UserService">
+	<binding name="UserSoapServiceBinding" type="abs:UserService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="AddUser">
 			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUser" />
@@ -30,7 +30,7 @@
 	<!--  naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts -->
 	<service name="UserServicePorts">
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->
-		<port binding="tns:UserServiceHttpBinding" name="UserServiceHttpPort">
+		<port binding="tns:UserSoapServiceBinding" name="UserServiceHttpPort">
 			<soap:address location="http://www.example.org/" />
 		</port>
 	</service>
