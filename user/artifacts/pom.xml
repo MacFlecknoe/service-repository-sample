@@ -44,7 +44,9 @@
 										<extraarg>-p</extraarg>
 										<extraarg>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error.v1</extraarg>
 										<extraarg>-p</extraarg>
-										<extraarg>urn:healthmedia:wsdl:user:soap:v1=com.healthmedia.ws.service.soap.user.v1</extraarg>
+										<extraarg>urn:healthmedia:wsdl:user:soap:v1=com.healthmedia.ws.wsdl.soap.user.v1</extraarg>
+										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:wsdl:user:v1=com.healthmedia.ws.wsdl.user.v1</extraarg>
 									</extraargs>
 								</wsdlOption>
 							</wsdlOptions>

@@ -25,7 +25,7 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 	
-	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.userdata.v1.UserDataServiceImpl" />
+	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.rest.userdata.v1.UserDataServiceImpl" />
 	
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
 		<property name="singleJaxbContext" value="true"/>
