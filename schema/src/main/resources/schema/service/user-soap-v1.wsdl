@@ -24,6 +24,15 @@
 				<soap:body use="literal" />
 			</output>
 		</operation>
+		<operation name="AddUserData">
+			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUserData" />
+			<input>
+				<soap:body use="literal" />
+			</input>
+			<output>
+				<soap:body use="literal" />
+			</output>
+		</operation>
 	</binding>
 	
 	<!-- part of concrete wsdl. defines ports/endpoints that expose a binding -->
