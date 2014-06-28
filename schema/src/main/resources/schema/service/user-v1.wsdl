@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions 
-	xmlns:tns="urn:healthmedia:wsdl:user:v1" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:user="urn:healthmedia:schema:user:v1"
-	xmlns:common="urn:healthmedia:schema:common:v1"
-	xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+<definitions xmlns:tns="urn:healthmedia:wsdl:user:v1"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:user="urn:healthmedia:schema:user:v1"
+	xmlns:common="urn:healthmedia:schema:common:v1" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
 	xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
-	xmlns="http://schemas.xmlsoap.org/wsdl/"
-	targetNamespace="urn:healthmedia:wsdl:user:v1"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:healthmedia:wsdl:user:v1"
 	name="UserService">
-	
+
 	<documentation>Version 1.0</documentation>
-	
+
 	<types>
 		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1">
-			<xsd:import schemaLocation="../entity/user-v1.xsd" namespace="urn:healthmedia:schema:user:v1"/>
+			<xsd:import schemaLocation="../entity/user-v1.xsd"
+				namespace="urn:healthmedia:schema:user:v1" />
 			<xsd:element name="AddUser">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -29,42 +26,73 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+			<xsd:element name="AddUserData">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userData" type="user:userDataType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="AddUserDataResponse">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userData" type="user:userDataType" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
 		</xsd:schema>
 	</types>
-	
-	<!-- part of abstract wsdl. defines the messages that make up part of the service interface -->
+
+	<!-- part of abstract wsdl. defines the messages that make up part of the 
+		service interface -->
 	<message name="AddUserRequest">
 		<part element="tns:AddUser" name="parameters" />
 	</message>
 	<message name="AddUserResponse">
+		<part element="tns:AddUserDataResponse" name="parameters" />
+	</message>
+	<message name="AddUserDataRequest">
+		<part element="tns:AddUserData" name="parameters" />
+	</message>
+	<message name="AddUserDataResponse">
 		<part element="tns:AddUserResponse" name="parameters" />
 	</message>
-	
-	<!--  part of abstract wsdl. defines the service's methods/operations. this along with the messages define the service's interface -->
-	<!--  naming convention: portType should reflect the interface name (e.g. UserService.java) -->
+
+	<!-- part of abstract wsdl. defines the service's methods/operations. this 
+		along with the messages define the service's interface -->
+	<!-- naming convention: portType should reflect the interface name (e.g. 
+		UserService.java) -->
 	<portType name="UserService">
 		<operation name="AddUser">
 			<input message="tns:AddUserRequest" />
 			<output message="tns:AddUserResponse" />
 		</operation>
+		<operation name="AddUserData">
+			<input message="tns:AddUserDataRequest" />
+			<output message="tns:AddUserDataResponse" />
+		</operation>
 	</portType>
 
 	<!-- see p.441 -->
-	
+
 	<!-- expose entity id to bpel processes -->
 	<bpws:property name="userId" type="xsd:string" />
-	
+
 	<!-- tell bpel process how to map value to property based on message type -->
-	<bpws:propertyAlias 
-		messageType="tns:AddUserRequest" 
-		part="user" 
-		propertyName="tns:userId" 
-		query="/tns:user/tns:id" />
-	
+	<bpws:propertyAlias messageType="tns:AddUserRequest"
+		part="user" propertyName="tns:userId" query="/tns:user/tns:id" />
+
+	<!-- expose entity id to bpel processes -->
+	<bpws:property name="userDataId" type="xsd:string" />
+
+	<!-- tell bpel process how to map value to property based on message type -->
+	<bpws:propertyAlias messageType="tns:AddUserDataRequest"
+		part="userData" propertyName="tns:userDataId" query="/tns:userData/tns:id" />
+
 	<plnk:partnerLinkType name="VendorPartnerLinkType">
 		<plnk:role name="serviceProvider">
 			<plnk:portType name="tns:UserService" />
 		</plnk:role>
 	</plnk:partnerLinkType>
-	
+
 </definitions>
