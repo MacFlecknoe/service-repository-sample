@@ -16,13 +16,12 @@ public class UserServiceImpl implements UserService {
 		user.setId("1");
 		user.setFirstName("Michael");
 		user.setLastName("Lambert");
-		UserDataCollectionType userDataCollection = user.getUserDataCollection();
-		userDataCollection.getUserData().add(null);
 		
 		UserType userReference = new UserType();
 		userReference.setId("1");
 		
 		DataSourceType sourceReference = new DataSourceType();
+		sourceReference.setId("1a");
 		
 		DataType data = new DataType();
 		data.setName("WeightPounds");
@@ -33,6 +32,11 @@ public class UserServiceImpl implements UserService {
 		userData.setUser(userReference);
 		userData.setDataSource(sourceReference);
 		userData.setData(data);
+		
+		UserDataCollectionType userDataCollection = new UserDataCollectionType();
+		userDataCollection.getUserData().add(userData);
+		
+		user.setUserDataCollection(userDataCollection);
 		
 		AddUserResponse response = new AddUserResponse();
 		response.setUser(user);
