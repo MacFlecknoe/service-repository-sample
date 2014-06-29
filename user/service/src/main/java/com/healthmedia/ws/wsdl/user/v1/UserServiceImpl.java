@@ -11,31 +11,41 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public AddUserResponse addUser(AddUserRequest parameters) {
 		
-		UserType user = new UserType();
-		
-		user.setId("1");
-		user.setFirstName("Michael");
-		user.setLastName("Lambert");
-		
 		UserType userReference = new UserType();
 		userReference.setId("1");
 		
 		DataSourceType sourceReference = new DataSourceType();
 		sourceReference.setId("1a");
 		
-		DataType data = new DataType();
-		data.setName("WeightPounds");
-		data.setValue("145");
+		DataType dataA = new DataType();
+		dataA.setName("WeightPounds");
+		dataA.setValue("145");
 		
-		UserDataType userData = new UserDataType();
-		userData.setId("a");
-		userData.setUser(userReference);
-		userData.setDataSource(sourceReference);
-		userData.setData(data);
+		UserDataType userDataA = new UserDataType();
+		userDataA.setId("a");
+		userDataA.setUser(userReference);
+		userDataA.setDataSource(sourceReference);
+		userDataA.setData(dataA);
+		
+		DataType dataB = new DataType();
+		dataB.setName("HeightInches");
+		dataB.setValue("145");
+		
+		UserDataType userDataB = new UserDataType();
+		userDataB.setId("b");
+		userDataB.setUser(userReference);
+		userDataB.setDataSource(sourceReference);
+		userDataB.setData(dataB);
 		
 		UserDataCollectionType userDataCollection = new UserDataCollectionType();
-		userDataCollection.getUserData().add(userData);
+		userDataCollection.getUserData().add(userDataA);
+		userDataCollection.getUserData().add(userDataB);
 		
+		UserType user = new UserType();
+		
+		user.setId("1");
+		user.setFirstName("Michael");
+		user.setLastName("Lambert");
 		user.setUserDataCollection(userDataCollection);
 		
 		AddUserResponse response = new AddUserResponse();
