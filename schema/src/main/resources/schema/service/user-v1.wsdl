@@ -37,10 +37,8 @@
 		<part element="tns:importUserResponse" name="parameters" />
 	</message>
 
-	<!-- part of abstract wsdl. defines the service's methods/operations. this 
-		along with the messages define the service's interface -->
-	<!-- naming convention: portType should reflect the interface name (e.g. 
-		UserService.java) -->
+	<!-- part of abstract wsdl. defines the service's methods/operations. -->
+	<!-- naming convention: portType should reflect the interface name of the implementation class (e.g. UserService.java) -->
 	<portType name="userService">
 		<operation name="importUser">
 			<input message="tns:importUserRequest" />
@@ -48,19 +46,19 @@
 		</operation>
 	</portType>
 
-	<!-- see p.441 -->
-
-	<!-- expose entity id to bpel processes -->
-	<bpws:property name="userId" type="xsd:string" />
-
-	<!-- tell bpel process how to map value to property based on message type -->
-	<bpws:propertyAlias messageType="tns:importUserRequest"
-		part="parameters" propertyName="tns:userId" query="![CDATA[/tns:importUserRequest/tns:user/tns:id]]" />
-
+	<!-- expose partner link for bpel process -->
 	<plnk:partnerLinkType name="vendorPartnerLinkType">
 		<plnk:role name="serviceProvider">
 			<plnk:portType name="tns:userService" />
 		</plnk:role>
 	</plnk:partnerLinkType>
+	
+	<!-- expose entity id to bpel processes to correlate users -->
+	<bpws:property name="userId" type="xsd:string" />
+
+	<!-- tell bpel process how to map value to property based on message type -->
+	<bpws:propertyAlias messageType="tns:importUserRequest" part="parameters" propertyName="tns:userId">
+		<bpws:query><![CDATA[/tns:user/tns:id]]></bpws:query>
+	</bpws:propertyAlias>
 
 </definitions>
