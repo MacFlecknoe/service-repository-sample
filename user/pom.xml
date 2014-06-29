@@ -10,8 +10,8 @@
 	<packaging>pom</packaging>
 	<modules>
 		<module>artifacts</module>
-		<!-- 
 		<module>service</module>
+		<!-- 
 		<module>integration</module>
 		-->
 	</modules>

@@ -3,7 +3,7 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="urn:healthmedia:wsdl:user:soap:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:abs="urn:healthmedia:wsdl:user:v1"
+	xmlns:abstract="urn:healthmedia:wsdl:user:v1"
 	xmlns="http://schemas.xmlsoap.org/wsdl/"
 	targetNamespace="urn:healthmedia:wsdl:user:soap:v1"
 	name="UserSoapService">
@@ -13,7 +13,7 @@
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
 	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
-	<binding name="UserSoapServiceBinding" type="abs:UserService">
+	<binding name="UserSoapServiceBinding" type="abstract:UserService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="AddUser">
 			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUser" />

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<definitions xmlns:tns="urn:healthmedia:wsdl:user:v1"
+<definitions 
+	xmlns:tns="urn:healthmedia:wsdl:user:v1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:user="urn:healthmedia:schema:user:v1"
 	xmlns:common="urn:healthmedia:schema:common:v1" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
 	xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
@@ -10,9 +11,8 @@
 
 	<types>
 		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1">
-			<xsd:import schemaLocation="../entity/user-v1.xsd"
-				namespace="urn:healthmedia:schema:user:v1" />
-			<xsd:element name="AddUser">
+			<xsd:import schemaLocation="../entity/user-v1.xsd" namespace="urn:healthmedia:schema:user:v1" />
+			<xsd:element name="AddUserRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="user" type="user:userType" />
@@ -26,7 +26,7 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<xsd:element name="AddUserData">
+			<xsd:element name="AddUserDataRequest">
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element name="userData" type="user:userDataType" />
@@ -43,19 +43,18 @@
 		</xsd:schema>
 	</types>
 
-	<!-- part of abstract wsdl. defines the messages that make up part of the 
-		service interface -->
+	<!-- part of abstract wsdl. defines the messages that make up part of the  service interface -->
 	<message name="AddUserRequest">
-		<part element="tns:AddUser" name="parameters" />
+		<part element="tns:AddUserRequest" name="parameters" />
 	</message>
 	<message name="AddUserResponse">
-		<part element="tns:AddUserDataResponse" name="parameters" />
+		<part element="tns:AddUserResponse" name="parameters" />
 	</message>
 	<message name="AddUserDataRequest">
-		<part element="tns:AddUserData" name="parameters" />
+		<part element="tns:AddUserDataRequest" name="parameters" />
 	</message>
 	<message name="AddUserDataResponse">
-		<part element="tns:AddUserResponse" name="parameters" />
+		<part element="tns:AddUserDataResponse" name="parameters" />
 	</message>
 
 	<!-- part of abstract wsdl. defines the service's methods/operations. this 
