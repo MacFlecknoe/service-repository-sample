@@ -35,7 +35,7 @@
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 							<wadlOptions>
 								<wadlOption>
-									<wadl>classpath:/schema/service/user-data-v1.wadl</wadl>
+									<wadl>classpath:/service/user-data-v1.wadl</wadl>
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.rest.userdata.v1</packagename>
 									<schemaPackagenames>
@@ -47,7 +47,7 @@
 									</schemaPackagenames>
 								</wadlOption>
 								<wadlOption>
-									<wadl>classpath:/schema/service/user-v1.wadl</wadl>
+									<wadl>classpath:/service/user-v1.wadl</wadl>
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.rest.user.v1</packagename>
 									<schemaPackagenames>

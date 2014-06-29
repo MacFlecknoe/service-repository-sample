@@ -9,8 +9,8 @@
 	xsi:schemaLocation="http://wadl.dev.java.net/2009/02 wadl.xsd">
 	
 	<grammars>
-		<include href="../entity/user-v1.xsd" />
-		<include href="../common/common-error-v1.xsd" />
+		<include href="../schema/entity/user-v1.xsd" />
+		<include href="../schema/common/common-error-v1.xsd" />
 	</grammars>
 	
 	<resources base="http://localhost:8080">
