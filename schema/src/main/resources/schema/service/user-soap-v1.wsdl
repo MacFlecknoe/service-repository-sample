@@ -13,19 +13,10 @@
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
 	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
-	<binding name="UserSoapServiceBinding" type="abstract:UserService">
+	<binding name="userSoapServiceBinding" type="abstract:userService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
-		<operation name="AddUser">
-			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUser" />
-			<input>
-				<soap:body use="literal" />
-			</input>
-			<output>
-				<soap:body use="literal" />
-			</output>
-		</operation>
-		<operation name="AddUserData">
-			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:addUserData" />
+		<operation name="importUser">
+			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:importUser" />
 			<input>
 				<soap:body use="literal" />
 			</input>
@@ -37,9 +28,9 @@
 	
 	<!-- part of concrete wsdl. defines ports/endpoints that expose a binding -->
 	<!--  naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts -->
-	<service name="UserSoapServicePorts">
+	<service name="userSoapServicePorts">
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->
-		<port binding="tns:UserSoapServiceBinding" name="UserSoapServicePort">
+		<port binding="tns:userSoapServiceBinding" name="userSoapServicePort">
 			<soap:address location="http://www.example.org/" />
 		</port>
 	</service>

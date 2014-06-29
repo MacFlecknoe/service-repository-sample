@@ -9,7 +9,7 @@ import com.healthmedia.ws.entity.user.v1.UserType;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public AddUserResponse addUser(AddUserRequest parameters) {
+	public ImportUserResponse importUser(ImportUserRequest parameters) {
 		
 		UserType userReference = new UserType();
 		userReference.setId("1");
@@ -48,15 +48,10 @@ public class UserServiceImpl implements UserService {
 		user.setLastName("Lambert");
 		user.setUserDataCollection(userDataCollection);
 		
-		AddUserResponse response = new AddUserResponse();
+		ImportUserResponse response = new ImportUserResponse();
+		
 		response.setUser(user);
 		
 		return response;
-	}
-
-	@Override
-	public AddUserDataResponse addUserData(AddUserDataRequest parameters) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
