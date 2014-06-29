@@ -15,6 +15,6 @@
 	<import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
-	<jaxws:endpoint id="sampleService"
-		implementor="com.sample.service.impl.SampleWebServiceImpl" address="/SampleService" />
+	<jaxws:endpoint id="userService"
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/UserService" />
 </beans>
