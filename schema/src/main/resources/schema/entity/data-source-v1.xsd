@@ -14,7 +14,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType"> 
 				<xsd:sequence>
-					<xsd:element name="name" type="xsd:string" nillable="true" />
+					<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
