@@ -1,44 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema targetNamespace="urn:healthmedia:schema:common:v1"
+<xsd:schema 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom"
 	xmlns:tns="urn:healthmedia:schema:common:v1" elementFormDefault="qualified"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	targetNamespace="urn:healthmedia:schema:common:v1"
 	jaxb:extensionBindingPrefixes="xjc"
 	jaxb:version="2.0"
 	attributeFormDefault="unqualified" version="1.0">
 
-	<xsd:import namespace="http://www.w3.org/XML/1998/namespace"
-		schemaLocation="../external/xml.xsd" />
-
-	<xsd:import namespace="http://www.w3.org/2005/Atom"
-		schemaLocation="../external/atom-v1.xsd" />
-
-	<xsd:simpleType name="textType">
-		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="|([A-Za-z0-9\s._%'-/:#]*)" />
-			<xsd:maxLength value="200" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:simpleType name="alphaNumericType">
-		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="|([A-Za-z0-9]*)" />
-			<xsd:maxLength value="200" />
-		</xsd:restriction>
-	</xsd:simpleType>
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../external/xml.xsd" />
+	<xsd:import namespace="http://www.w3.org/2005/Atom" schemaLocation="../external/atom-v1.xsd" />
 
 	<xsd:simpleType name="positiveIntegerType">
 		<xsd:restriction base="xsd:integer">
 			<xsd:minInclusive value="0" />
 		</xsd:restriction>
 	</xsd:simpleType>
-	<!-- 
-	consider <xsd:attribute name="dirty" type="xsd:boolean" use="optional" /> for dirty attributes
-	-->
+	
 	<xsd:complexType name="entityType" abstract="true">
 		<xsd:sequence>
-			<xsd:element name="id" type="tns:textType"  minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="id" type="xsd:string"  minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="createDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="updateDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
