@@ -36,17 +36,17 @@ public class UserDataServiceImpl implements UserDataService {
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug("executing create");
 		}
+		com.healthmedia.ws.entity.user.v1.ObjectFactory userFactory = new com.healthmedia.ws.entity.user.v1.ObjectFactory();
+		com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
 		try {
 			Date current = new Date();
 			
-			UserDataType userData = new UserDataType();
+			UserDataType userData = userFactory.createUserDataType();
 			
 			GregorianCalendar currentDate = new GregorianCalendar();
 			currentDate.setTime(current);
 			
 			XMLGregorianCalendar today = DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate);
-			
-			com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
 			
 			userData.setUpdateDate(commonFactory.createEntityTypeUpdateDate(today));
 			userData.setCreateDate(commonFactory.createEntityTypeCreateDate(today));
