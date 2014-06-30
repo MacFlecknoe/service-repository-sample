@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans 
-	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:util="http://www.springframework.org/schema/util" 
-	xmlns:jaxws="http://cxf.apache.org/jaxws"
-	xmlns:cxf="http://cxf.apache.org/core" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jaxws="http://cxf.apache.org/jaxws" 
+	xmlns:cxf="http://cxf.apache.org/core"
+	xmlns:p="http://cxf.apache.org/policy"
+	xmlns:concrete="urn:healthmedia:wsdl:user:soap:v1"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
 	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
-	
+	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd">
+
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-http.xml" />
-	<import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
 
+	<cxf:bus>
+		<cxf:features>
+			<p:policies ignoreUnknownAssertions="true" />
+		</cxf:features>
+	</cxf:bus>
+	
 	<jaxws:endpoint id="userService"
+		wsdlLocation="classpath:/service/user-soap-v1.wsdl"
+		serviceName="concrete:userSoapServicePorts"
+		endpointName="concrete:userSoapServicePort"
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/UserService" />
+		
 </beans>
