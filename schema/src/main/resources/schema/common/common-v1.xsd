@@ -33,21 +33,23 @@
 			<xsd:minInclusive value="0" />
 		</xsd:restriction>
 	</xsd:simpleType>
-
+	<!-- 
+	consider <xsd:attribute name="dirty" type="xsd:boolean" use="optional" /> for dirty attributes
+	-->
 	<xsd:complexType name="entityType" abstract="true">
 		<xsd:sequence>
-			<xsd:element name="id" type="tns:textType" minOccurs="0"
-				maxOccurs="1" />
-			<xsd:element name="link" type="atom:linkType" minOccurs="0"
-				maxOccurs="1" />
+			<xsd:element name="id" type="tns:textType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="link" type="atom:linkType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="createDate" type="xsd:dateTime"
-				minOccurs="0" maxOccurs="1" />
+				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="updateDate" type="xsd:dateTime"
-				minOccurs="0" maxOccurs="1" />
+				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="version" type="tns:positiveIntegerType"
-				minOccurs="0" maxOccurs="1" />
+				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="extension" type="tns:extensionType"
-				minOccurs="0" maxOccurs="1" />
+				minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>

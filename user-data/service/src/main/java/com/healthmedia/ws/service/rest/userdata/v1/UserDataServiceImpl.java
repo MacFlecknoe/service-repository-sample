@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.apache.log4j.Logger;
 
@@ -43,10 +44,14 @@ public class UserDataServiceImpl implements UserDataService {
 			GregorianCalendar currentDate = new GregorianCalendar();
 			currentDate.setTime(current);
 			
-			userData.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
-			userData.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate));
+			XMLGregorianCalendar today = DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate);
+			
+			com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
+			
+			userData.setUpdateDate(commonFactory.createEntityTypeUpdateDate(today));
+			userData.setCreateDate(commonFactory.createEntityTypeCreateDate(today));
 			userData.setDataSource(userdatatype.getDataSource());
-			userData.setId("12");
+			userData.setId(commonFactory.createEntityTypeId("23"));
 			
 			return userData;
 		
@@ -59,7 +64,11 @@ public class UserDataServiceImpl implements UserDataService {
 	public UserDataType findById(String id) {
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug("executing find by id");
-		}
+		}			
+		com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
+		com.healthmedia.ws.entity.user.v1.ObjectFactory userFactory = new com.healthmedia.ws.entity.user.v1.ObjectFactory();
+		com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory dataSourceFactory = new com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory();
+		
 		try {
 			GregorianCalendar collectionDate = new GregorianCalendar();
 			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
@@ -70,24 +79,25 @@ public class UserDataServiceImpl implements UserDataService {
 			GregorianCalendar createDate = new GregorianCalendar();
 			createDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
 			
-			DataSourceType dataSource = new DataSourceType();
-			dataSource.setId("453ba2");
+			DataSourceType dataSource = dataSourceFactory.createDataSourceType();
+			dataSource.setId(commonFactory.createEntityTypeId("453ba2"));
 			
 			UserType user = new UserType();
-			user.setId("0d8a7c33");
+			user.setId(commonFactory.createEntityTypeId("0d8a7c33"));
 			
-			DataType data = new DataType();
-			data.setName("WeightPounds");
-			data.setValue("134");
+			DataType data = userFactory.createDataType();
+			data.setName(userFactory.createDataTypeName("WeightPounds"));
+			data.setValue(userFactory.createDataTypeValue("135"));
 			
-			UserDataType userData = new UserDataType();
-			userData.setId(id);
-			userData.setCollectionDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(collectionDate));
-			userData.setDataSource(dataSource);
-			userData.setUser(user);
-			userData.setData(data);
-			userData.setUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate));
-			userData.setCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate));
+			UserDataType userData = userFactory.createUserDataType();
+			userData.setId(commonFactory.createEntityTypeId("0d8a7c33"));
+			
+			userData.setCollectionDate(userFactory.createUserDataTypeCollectionDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(collectionDate)));
+			userData.setDataSource(userFactory.createUserDataTypeDataSource(dataSource));
+			userData.setUser(userFactory.createUserDataTypeUser(user));
+			userData.setData(userFactory.createUserDataTypeData(data));
+			userData.setUpdateDate(commonFactory.createEntityTypeUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate)));
+			userData.setCreateDate(commonFactory.createEntityTypeCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate)));
 			
 			return userData;
 			

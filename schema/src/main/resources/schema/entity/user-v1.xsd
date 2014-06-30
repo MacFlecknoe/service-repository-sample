@@ -23,12 +23,12 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
-					<xsd:element name="firstName" type="xsd:string" minOccurs="0"  maxOccurs="1" />
-					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" />
-					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" />
-					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" />
+					<xsd:element name="firstName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" nillable="true" />
 					<!-- define collection wrappers -->
-					<xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" />
+					<xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -59,10 +59,10 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
-					<xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" />
-					<xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1" />
-					<xsd:element name="dataSource" type="dataSource:dataSourceType" minOccurs="0" maxOccurs="1" />
-					<xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1" />
+					<xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="dataSource" type="dataSource:dataSourceType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -71,10 +71,10 @@
 	<xsd:complexType name="dataType">
 		<xsd:sequence>
 			<xsd:choice>
-				<xsd:element name="name" type="common:textType" minOccurs="0" maxOccurs="1" />
-				<xsd:element name="dataDefinition" type="tns:dataDefinitionType" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="name" type="common:textType" minOccurs="0" maxOccurs="1" nillable="true" />
+				<xsd:element name="dataDefinition" type="tns:dataDefinitionType" minOccurs="0" maxOccurs="1" nillable="true" />
 			</xsd:choice>
-		 	<xsd:element name="value" type="common:textType" minOccurs="0" maxOccurs="1" />
+		 	<xsd:element name="value" type="common:textType" minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
