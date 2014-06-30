@@ -6,7 +6,7 @@
 	xmlns:jaxws="http://cxf.apache.org/jaxws" 
 	xmlns:cxf="http://cxf.apache.org/core"
 	xmlns:p="http://cxf.apache.org/policy"
-	xmlns:concrete="urn:healthmedia:wsdl:user:soap:v1"
+	xmlns:userService="urn:healthmedia:wsdl:user:soap:v1"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
 	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
@@ -24,8 +24,8 @@
 	
 	<jaxws:endpoint id="userService"
 		wsdlLocation="classpath:/service/user-soap-v1.wsdl"
-		serviceName="concrete:userSoapServicePorts"
-		endpointName="concrete:userSoapServicePort"
+		serviceName="userService:userSoapServicePorts"
+		endpointName="userService:userSoapServicePort"
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/UserService" />
 		
 </beans>
