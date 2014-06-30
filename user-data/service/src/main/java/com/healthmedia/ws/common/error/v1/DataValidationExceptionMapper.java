@@ -7,7 +7,6 @@ import javax.ws.rs.ext.Provider;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
 import com.healthmedia.ws.common.error.DataValidationException;
-import com.healthmedia.ws.common.v1.I18NTextType;
 
 /**
  * Example exception mapper. Maps to a SOAP fault object defined in our xsd.
@@ -19,41 +18,26 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 	@Override
 	public Response toResponse(DataValidationException exception) {
 
-		FaultType fault = new FaultType();
+		ErrorType fault = new ErrorType();
+		fault.setCode(ApplicationErrorCode.VALIDATION_ERROR.getCode());
 		
-		FaultCodeType faultCode = new FaultCodeType();
-		//
-		// responsible party or root cause
-		//
-		faultCode.setValue(FaultCodeEnum.SENDER);
-		//
-		// general category of the error
-		//
-		SubCodeType subCode = new SubCodeType();
-		subCode.setValue(ApplicationErrorCode.VALIDATION_ERROR.getCode()); // this should be an approved enum
+		ReasonType reason = new ReasonType();
+		reason.setLang(Locale.US.getLanguage());
+		reason.setValue("Data validation error");
 		
-		faultCode.setSubCode(subCode);
-		fault.setCode(faultCode);
-		//
-		// description of the error in multiple languages
-		//
-		FaultReasonType reason = new FaultReasonType();
+		fault.getReason().add(reason);
 		
-		I18NTextType text = new I18NTextType();
-		text.setLanguage(Locale.US.getLanguage());
-		text.setValue(exception.getDescription());
-		reason.getText().add(text);
-		
-		fault.setReason(reason);
-		//
-		// application specific error message
-		//
-		DetailType detail = new DetailType();
 		for(DataValidationException.DataValidationError error : exception.getDataValidationErrors()) {
-			detail.getAny().add(error);
+			
+			ErrorType innerFault = new ErrorType();
+			innerFault.setCode(error.getCode());
+			
+			ReasonType innerReason = new ReasonType();
+			innerReason.setLang(Locale.US.getLanguage());
+			innerReason.setValue(error.getDescription());
+			
+			fault.getSubError().add(innerFault);
 		}
-		fault.setDetail(detail);
-
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}
 }

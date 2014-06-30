@@ -8,7 +8,6 @@ import javax.ws.rs.ext.Provider;
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
 import com.healthmedia.ws.common.error.BadArgumentsException;
 import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
-import com.healthmedia.ws.common.v1.I18NTextType;
 
 /**
  * Example exception mapper. Maps to a SOAP fault object defined in our xsd.
@@ -20,41 +19,26 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 	@Override
 	public Response toResponse(BadArgumentsException exception) {
 
-		FaultType fault = new FaultType();
+		ErrorType fault = new ErrorType();
+		fault.setCode(ApplicationErrorCode.BAD_ARGUMENT.getCode());
 		
-		FaultCodeType faultCode = new FaultCodeType();
-		//
-		// responsible party or root cause
-		//
-		faultCode.setValue(FaultCodeEnum.SENDER);
-		//
-		// general category of the error
-		//
-		SubCodeType subCode = new SubCodeType();
-		subCode.setValue(ApplicationErrorCode.BAD_ARGUMENT.getCode()); // this should be an approved enum
+		ReasonType reason = new ReasonType();
+		reason.setLang(Locale.US.getLanguage());
+		reason.setValue("Bad argument error");
 		
-		faultCode.setSubCode(subCode);
-		fault.setCode(faultCode);
-		//
-		// description of the error in multiple languages
-		//
-		FaultReasonType reason = new FaultReasonType();
+		fault.getReason().add(reason);
 		
-		I18NTextType text = new I18NTextType();
-		text.setLanguage(Locale.US.getLanguage());
-		text.setValue("invalid arguments passed to service");
-		reason.getText().add(text);
-		
-		fault.setReason(reason);
-		//
-		// application specific error message
-		//
-		DetailType detail = new DetailType();
 		for(BadArgumentError error : exception.getBadArgumentErrors()) {
-			detail.getAny().add(error);
+			
+			ErrorType innerFault = new ErrorType();
+			innerFault.setCode(error.getName());
+			
+			ReasonType innerReason = new ReasonType();
+			innerReason.setLang(Locale.US.getLanguage());
+			innerReason.setValue(new StringBuffer((error.getValue() == null) ? "null" : error.getValue()).append(" is not valid.").toString());
+			
+			fault.getSubError().add(innerFault);
 		}
-		fault.setDetail(detail);
-
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}
 }

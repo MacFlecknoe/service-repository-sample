@@ -3,7 +3,7 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="urn:healthmedia:wsdl:user:soap:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-	xmlns:abstract="urn:healthmedia:wsdl:user:v1"
+	xmlns:user-v1="urn:healthmedia:wsdl:user:v1"
 	xmlns:wsp="http://www.w3.org/ns/ws-policy"
 	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
 	xmlns:wsam="http://www.w3.org/2007/02/addressing/metadata"
@@ -16,7 +16,7 @@
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
 	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
-	<binding name="userSoapServiceBinding" type="abstract:userService">
+	<binding name="userSoapServiceBinding" type="user-v1:userService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="importUser">
 			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:importUser" />
@@ -26,6 +26,9 @@
 			<output>
 				<soap:body use="literal" />
 			</output>
+			<fault name="fault">
+				<soap:fault use="literal" name="fault"/>
+			</fault>
 		</operation>
 	</binding>
 	

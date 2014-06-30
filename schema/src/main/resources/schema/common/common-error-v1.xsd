@@ -1,70 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema 
-	targetNamespace="urn:healthmedia:schema:common-error:v1"
 	xmlns:common="urn:healthmedia:schema:common:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" 
 	xmlns:tns="urn:healthmedia:schema:common-error:v1" 
-	elementFormDefault="qualified" attributeFormDefault="unqualified" 
-	version="1.0">
+	targetNamespace="urn:healthmedia:schema:common-error:v1"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified" version="1.0">
 
-	<xsd:import namespace="urn:healthmedia:schema:common:v1"
-		schemaLocation="common-v1.xsd" />
+	<xsd:import namespace="urn:healthmedia:schema:common:v1" schemaLocation="common-v1.xsd" />
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../external/xml.xsd"/>
 	
-	<xsd:element name="fault" type="tns:faultType" />
+	<xsd:element name="error" type="tns:errorType" />
 	
-	<xsd:complexType name="faultType" final="extension">
-		<xsd:annotation>
-			<xsd:documentation>
-				Fault reporting structure for REST services. The logical structure of this 
-				type exactly matches the SOAP v1.2 soap fault but is realized in a way that is easier for JSON parsers 
-				to consistently serialize.
-		</xsd:documentation>
-		</xsd:annotation>
+	<xsd:complexType name="errorType">
 		<xsd:sequence>
-			<xsd:element name="code" type="tns:faultCodeType" />
-			<xsd:element name="reason" type="tns:faultReasonType" />
-			<xsd:element name="node" type="xsd:anyURI" minOccurs="0" />
-			<xsd:element name="role" type="xsd:anyURI" minOccurs="0" />
-			<xsd:element name="detail" type="tns:detailType" minOccurs="0" />
+			<xsd:element name="code" type="xsd:string" minOccurs="0" />
+			<xsd:element name="reason" type="tns:reasonType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="subError" type="tns:errorType" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
-
-	<xsd:complexType name="faultReasonType">
-		<xsd:sequence>
-			<xsd:element name="text" type="common:i18nTextType" minOccurs="1" maxOccurs="unbounded" />
-		</xsd:sequence>
+	
+	<xsd:complexType name="reasonType">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<!-- see http://www.ietf.org/rfc/rfc3066.txt for valid values -->
+				<xsd:attribute ref="xml:lang" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
 	</xsd:complexType>
-
-	<xsd:complexType name="faultCodeType">
-		<xsd:sequence>
-			<xsd:element name="value" type="tns:faultCodeEnum" />
-			<xsd:element name="subCode" type="tns:subCodeType" minOccurs="0" />
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:simpleType name="faultCodeEnum">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="DataEncodingUnknown" />
-			<xsd:enumeration value="MustUnderstand" />
-			<xsd:enumeration value="Receiver" />
-			<xsd:enumeration value="Sender" />
-			<xsd:enumeration value="VersionMismatch" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:complexType name="subCodeType">
-		<xsd:sequence>
-			<xsd:element name="value" type="xsd:string" />
-			<xsd:element name="subCode" type="tns:subCodeType" minOccurs="0" />
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="detailType">
-		<xsd:sequence>
-			<xsd:any namespace="##any" processContents="lax" minOccurs="0"
-				maxOccurs="unbounded" />
-		</xsd:sequence>
-		<xsd:anyAttribute namespace="##other" processContents="lax" />
-	</xsd:complexType>
-
+	
 </xsd:schema>

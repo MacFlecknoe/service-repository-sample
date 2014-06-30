@@ -71,9 +71,9 @@
 		see http://hirenscafe.blogspot.com/2008/04/jaxbxmlrootelement.html
 	-->
 	<util:map id="rootElementClassMap">
+		<entry key="com.healthmedia.ws.common.error.v1.ErrorType" value="error"/>
 		<entry key="com.healthmedia.ws.entity.user.v1.UserDataType" value="userData"/>
 		<entry key="com.healthmedia.ws.entity.user.v1.UserDataCollectionType" value="userDataCollection"/>
-		<entry key="com.healthmedia.ws.common.error.v1.FaultType" value="fault"/>
 	</util:map>
 	
 	<!-- include extra classes in jaxb context -->

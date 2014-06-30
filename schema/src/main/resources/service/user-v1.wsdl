@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <definitions 
 	xmlns:tns="urn:healthmedia:wsdl:user:v1"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:user="urn:healthmedia:schema:user:v1"
-	xmlns:common="urn:healthmedia:schema:common:v1" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:user="urn:healthmedia:schema:user:v1"
+	xmlns:common="urn:healthmedia:schema:common:v1" 
+	xmlns:common-error="urn:healthmedia:schema:common-error:v1" 
+	xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
 	xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
-	xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:healthmedia:wsdl:user:v1"
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	targetNamespace="urn:healthmedia:wsdl:user:v1"
 	name="UserService">
 
 	<documentation>Version 1.0</documentation>
-
 	<types>
 		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1" elementFormDefault="qualified">
 			<xsd:import schemaLocation="../schema/entity/user-v1.xsd" namespace="urn:healthmedia:schema:user:v1" />
+			<xsd:import schemaLocation="../schema/common/common-error-v1.xsd" namespace="urn:healthmedia:schema:common-error:v1" />
 			<xsd:element name="importUserRequest">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -30,6 +34,9 @@
 	</types>
 
 	<!-- part of abstract wsdl. defines the messages that make up part of the  service interface -->
+	<message name="fault">
+		<part name="fault" element="common-error:error"/>
+	</message>
 	<message name="importUserRequest">
 		<part element="tns:importUserRequest" name="parameters" />
 	</message>
@@ -43,6 +50,7 @@
 		<operation name="importUser">
 			<input message="tns:importUserRequest" />
 			<output message="tns:importUserResponse" />
+			<fault name="fault" message="tns:fault"/>
 		</operation>
 	</portType>
 

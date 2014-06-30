@@ -62,10 +62,8 @@
 
 	<xsd:complexType name="i18nTextType">
 		<xsd:sequence>
-			<xsd:element name="language" type="xsd:language"
-				minOccurs="1" maxOccurs="1" />
-			<xsd:element name="value" type="xsd:string" minOccurs="1"
-				maxOccurs="1" />
+			<xsd:element name="language" type="xsd:language" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
 

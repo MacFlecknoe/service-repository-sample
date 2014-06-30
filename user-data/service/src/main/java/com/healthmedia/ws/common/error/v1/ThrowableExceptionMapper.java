@@ -1,13 +1,10 @@
 package com.healthmedia.ws.common.error.v1;
 
 import java.util.Locale;
-
 import javax.ws.rs.core.Response;
-
 import org.apache.log4j.Logger;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
-import com.healthmedia.ws.common.v1.I18NTextType;
 
 public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Throwable> {
 
@@ -20,32 +17,14 @@ public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Thr
 		//
 		LOGGER.error(exception);
 		
-		FaultType fault = new FaultType();
+		ErrorType fault = new ErrorType();
+		fault.setCode(ApplicationErrorCode.SERVER_ERROR.getCode());
 		
-		FaultCodeType faultCode = new FaultCodeType();
-		//
-		// responsible party or root cause
-		//
-		faultCode.setValue(FaultCodeEnum.RECEIVER);
-		//
-		// general category of the error
-		//
-		SubCodeType subCode = new SubCodeType();
-		subCode.setValue(ApplicationErrorCode.SERVER_ERROR.getCode());
+		ReasonType reason = new ReasonType();
+		reason.setLang(Locale.US.getLanguage());
+		reason.setValue("The server has experienced an error.");
 		
-		faultCode.setSubCode(subCode);
-		fault.setCode(faultCode);
-		//
-		// description of the error in multiple languages
-		//
-		FaultReasonType reason = new FaultReasonType();
-		
-		I18NTextType text = new I18NTextType();
-		text.setLanguage(Locale.US.getLanguage());
-		text.setValue("The server has experienced an error.");
-		reason.getText().add(text);
-		
-		fault.setReason(reason);
+		fault.getReason().add(reason);
 
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}
