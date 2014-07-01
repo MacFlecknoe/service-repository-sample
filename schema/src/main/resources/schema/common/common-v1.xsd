@@ -16,12 +16,6 @@
 	<xsd:import 
 		namespace="http://www.w3.org/2005/Atom" 
 		schemaLocation="../external/atom-v1.xsd" />
-
-	<xsd:simpleType name="positiveIntegerType">
-		<xsd:restriction base="xsd:integer">
-			<xsd:minInclusive value="0" />
-		</xsd:restriction>
-	</xsd:simpleType>
 	
 	<xsd:complexType name="entityType" abstract="true">
 		<xsd:sequence>
@@ -33,13 +27,20 @@
 				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="updateDate" type="xsd:dateTime" 
 				minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="version" type="tns:positiveIntegerType" 
-				minOccurs="0" maxOccurs="1" nillable="true" />
 			<xsd:element name="extension" type="tns:extensionType" 
 				minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
+		<xsd:attribute ref="tns:version" />
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
+
+	<xsd:attribute name="version">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:integer">
+				<xsd:minInclusive value="0" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
 
 	<xsd:attributeGroup name="commonAttributes">
 		<xsd:anyAttribute namespace="##other" />
@@ -51,16 +52,6 @@
 				minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attributeGroup ref="tns:commonAttributes" />
-	</xsd:complexType>
-
-	<xsd:complexType name="i18nType">
-		<xsd:sequence>
-			<!-- see http://www.ietf.org/rfc/rfc3066.txt for valid values -->
-			<xsd:element name="language" type="xsd:language" 
-				minOccurs="1" maxOccurs="1" />
-			<xsd:element name="value" type="xsd:string" 
-				minOccurs="1" maxOccurs="1" />
-		</xsd:sequence>
 	</xsd:complexType>
 
 </xsd:schema>
