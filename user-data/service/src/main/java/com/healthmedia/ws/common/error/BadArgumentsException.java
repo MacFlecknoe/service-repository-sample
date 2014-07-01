@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class BadArgumentsException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -33,17 +30,10 @@ public class BadArgumentsException extends RuntimeException {
 		return errors;
 	}
 	
-	@XmlRootElement(name="badArgument")
 	public static class BadArgumentError {
 		
-		@XmlAttribute
 		private String name;
-		@XmlAttribute
 		private String value;
-		
-		BadArgumentError() {
-			// blank for jaxb marshaller
-		}
 		
 		public BadArgumentError(String name, String value) {
 			this.name = name;

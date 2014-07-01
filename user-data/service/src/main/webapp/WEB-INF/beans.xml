@@ -62,7 +62,10 @@
 
 	<!-- convert all elements with the following names to an array (used in conjunction with serializeAsArray)-->
 	<util:list id="jsonKeys">
-		<value>text</value>
+		<value>userDataCollection</value>
+		<value>subErrors</value>
+		<value>reasons</value>
+		<value>userCollection</value>
 	</util:list>
 	
 	<!-- 
@@ -77,10 +80,7 @@
 	</util:map>
 	
 	<!-- include extra classes in jaxb context -->
-	<util:list id="extraClasses">
-		<value>com.healthmedia.ws.common.error.BadArgumentsException$BadArgumentError</value>
-		<value>com.healthmedia.ws.common.error.DataValidationException$DataValidationError</value>
-	</util:list>
+	<util:list id="extraClasses" />
 	
 	<!-- example exception mapping -->
 	<bean id="dataDefinitionExceptionMapper" class="com.healthmedia.ws.common.error.v1.DataValidationExceptionMapper" />

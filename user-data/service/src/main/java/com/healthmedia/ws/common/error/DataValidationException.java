@@ -3,9 +3,6 @@ package com.healthmedia.ws.common.error;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
-
 public class DataValidationException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
@@ -37,19 +34,11 @@ public class DataValidationException extends RuntimeException {
 		return errors;
 	}
 	
-	@XmlRootElement(name="dataValidationError")
 	public static class DataValidationError {
 		
-		@XmlAttribute
 		private String code;
-		@XmlAttribute
 		private String name;
-		@XmlAttribute
 		private String description;
-		
-		DataValidationError() {
-			// blank for jaxb marshaller
-		}
 		
 		public DataValidationError(String code, String name, String description) {
 			this.code = code;
