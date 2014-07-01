@@ -12,21 +12,27 @@
 	name="UserService">
 
 	<documentation>Version 1.0</documentation>
+	
+	<import namespace="urn:healthmedia:schema:common-error:v1" location="../schema/common/common-error-v1.xsd" />
+	
 	<types>
-		<xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1" elementFormDefault="qualified">
-			<xsd:import schemaLocation="../schema/entity/user-v1.xsd" namespace="urn:healthmedia:schema:user:v1" />
-			<xsd:import schemaLocation="../schema/common/common-error-v1.xsd" namespace="urn:healthmedia:schema:common-error:v1" />
+		<xsd:schema 
+			targetNamespace="urn:healthmedia:wsdl:user:v1" 
+			elementFormDefault="qualified">
+			<xsd:import 
+				schemaLocation="../schema/entity/user-v1.xsd" 
+				namespace="urn:healthmedia:schema:user:v1" />
 			<xsd:element name="importUserRequest">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="user" type="user:userType" />
+						<xsd:element ref="user:user" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="importUserResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="user" type="user:userType" />
+						<xsd:element ref="user:user" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
@@ -35,7 +41,7 @@
 
 	<!-- part of abstract wsdl. defines the messages that make up part of the  service interface -->
 	<message name="fault">
-		<part name="fault" element="common-error:error"/>
+		<part element="common-error:error" name="fault" />
 	</message>
 	<message name="importUserRequest">
 		<part element="tns:importUserRequest" name="parameters" />
@@ -64,7 +70,7 @@
 
 	<!-- tell bpel process how to map value to property based on message type -->
 	<bpws:propertyAlias messageType="tns:importUserRequest" part="parameters" propertyName="tns:userId">
-		<bpws:query><![CDATA[/tns:user/tns:id]]></bpws:query>
+		<bpws:query><![CDATA[/user:user/common:id]]></bpws:query>
 	</bpws:propertyAlias>
 
 </definitions>
