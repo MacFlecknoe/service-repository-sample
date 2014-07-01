@@ -15,7 +15,6 @@
 	
 	<import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
 	
-	<!-- part of concrete wsdl. binds portType to a particular protocol. (e.g. soap over http)-->
 	<binding name="userSoapServiceBinding" type="user-v1:userService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="importUser">
@@ -26,13 +25,12 @@
 			<output>
 				<soap:body use="literal" />
 			</output>
-			<fault name="fault">
-				<soap:fault use="literal" name="fault"/>
+			<fault name="error">
+				<soap:fault use="literal" name="error"/>
 			</fault>
 		</operation>
 	</binding>
 	
-	<!-- part of concrete wsdl. defines ports/endpoints that expose a binding -->
 	<!--  naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts -->
 	<service name="userSoapServicePorts">
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->

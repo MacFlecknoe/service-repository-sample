@@ -39,16 +39,13 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			
 			<!-- will not work in ode unless fault is declared within wsdl -->
-			<xsd:element name="fault" type="common-error:errorType" />
-			
+			<xsd:element name="error" type="common-error:errorType" />
 		</xsd:schema>
 	</types>
 
-	<!-- part of abstract wsdl. defines the messages that make up part of the  service interface -->
-	<message name="fault">
-		<part element="tns:fault" name="fault" />
+	<message name="error">
+		<part element="tns:error" name="error" />
 	</message>
 	<message name="importUserRequest">
 		<part element="tns:importUserRequest" name="parameters" />
@@ -57,13 +54,12 @@
 		<part element="tns:importUserResponse" name="parameters" />
 	</message>
 
-	<!-- part of abstract wsdl. defines the service's methods/operations. -->
 	<!-- naming convention: portType should reflect the interface name of the implementation class (e.g. UserService.java) -->
 	<portType name="userService">
 		<operation name="importUser">
 			<input message="tns:importUserRequest" />
 			<output message="tns:importUserResponse" />
-			<fault name="fault" message="tns:fault"/>
+			<fault name="error" message="tns:error"/>
 		</operation>
 	</portType>
 

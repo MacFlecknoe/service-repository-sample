@@ -18,14 +18,18 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 	@Override
 	public Response toResponse(DataValidationException exception) {
 
-		CompoundErrorType fault = new CompoundErrorType();
+		ErrorType fault = new ErrorType();
 		fault.setCode(ApplicationErrorCode.VALIDATION_ERROR.getCode());
 		
 		ReasonType reason = new ReasonType();
 		reason.setLang(Locale.US.getLanguage());
 		reason.setValue("Data validation error");
 		
-		fault.getReason().add(reason);
+		ReasonCollectionType reasons = new ReasonCollectionType();
+		reasons.getReason().add(reason);
+		fault.setReasons(reasons);
+		
+		fault.setSubErrors(new ErrorCollectionType());
 		
 		for(DataValidationException.DataValidationError error : exception.getDataValidationErrors()) {
 			
@@ -36,9 +40,15 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 			innerReason.setLang(Locale.US.getLanguage());
 			innerReason.setValue(error.getDescription());
 			
-			ErrorCollectionType errorCollection = new ErrorCollectionType();
-			errorCollection.getError().add(innerFault);
-			fault.setErrors(errorCollection);
+			ReasonCollectionType subReasons = new ReasonCollectionType();
+			subReasons.getReason().add(innerReason);
+			innerFault.setReasons(subReasons);
+			
+			ErrorCollectionType subErrors = new ErrorCollectionType();
+			subErrors.getError().add(innerFault);
+			innerFault.setSubErrors(subErrors);
+			
+			fault.getSubErrors().getError().add(innerFault);
 		}
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}

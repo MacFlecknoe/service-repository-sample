@@ -2,9 +2,9 @@ package com.healthmedia.ws.wsdl.user.v1;
 
 import java.util.Locale;
 
-import com.healthmedia.ws.common.error.v1.CompoundErrorType;
 import com.healthmedia.ws.common.error.v1.ErrorCollectionType;
 import com.healthmedia.ws.common.error.v1.ErrorType;
+import com.healthmedia.ws.common.error.v1.ReasonCollectionType;
 import com.healthmedia.ws.common.error.v1.ReasonType;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 	private com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory dataSourceFactory = new com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory();
 	
 	@Override
-	public ImportUserResponse importUser(ImportUserRequest parameters) throws Fault {
+	public ImportUserResponse importUser(ImportUserRequest parameters) throws Error {
 		
 		try {
 			
@@ -72,29 +72,29 @@ public class UserServiceImpl implements UserService {
 			
 		} catch(Throwable t) {
 			
-			CompoundErrorType error = new CompoundErrorType();
+			ErrorType error = new ErrorType();
 			error.setCode("FooCode");
+			error.setReasons(new ReasonCollectionType());
+			error.setSubErrors(new ErrorCollectionType());
 			
 			ReasonType reason = new ReasonType();
 			reason.setLang(Locale.US.getLanguage());
 			reason.setValue("No real reason");
 			
-			error.getReason().add(reason);
+			error.getReasons().getReason().add(reason);
 			
 			ErrorType subError = new ErrorType();
 			subError.setCode("BadSomething");
+			subError.setReasons(new ReasonCollectionType());
 			
 			ReasonType subReason = new ReasonType();
 			subReason.setLang(Locale.US.getLanguage());
 			subReason.setValue("This is no big deal... really.");
-			subError.getReason().add(subReason);
+			subError.getReasons().getReason().add(subReason);
 			
-			ErrorCollectionType errorCollection = new ErrorCollectionType();
-			errorCollection.getError().add(subError);
-			error.setErrors(errorCollection);
+			error.getSubErrors().getError().add(subError);
 			
-			Fault fault = new Fault("This is a message", error, t);
-			throw fault;
+			throw new com.healthmedia.ws.wsdl.user.v1.Error("This is a message", error, t);
 		}
 	}
 }
