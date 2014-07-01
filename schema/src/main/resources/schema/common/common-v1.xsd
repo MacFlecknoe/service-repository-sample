@@ -9,8 +9,13 @@
 	jaxb:version="2.0"
 	attributeFormDefault="unqualified" version="1.0">
 
-	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../external/xml.xsd" />
-	<xsd:import namespace="http://www.w3.org/2005/Atom" schemaLocation="../external/atom-v1.xsd" />
+	<xsd:import 
+		namespace="http://www.w3.org/XML/1998/namespace" 
+		schemaLocation="../external/xml.xsd" />
+		
+	<xsd:import 
+		namespace="http://www.w3.org/2005/Atom" 
+		schemaLocation="../external/atom-v1.xsd" />
 
 	<xsd:simpleType name="positiveIntegerType">
 		<xsd:restriction base="xsd:integer">
