@@ -24,7 +24,8 @@
 			<xsd:import 
 				schemaLocation="../schema/common/common-error-v1.xsd" 
 				namespace="urn:healthmedia:schema:common-error:v1" />
-				
+			
+			<!-- generated WSDL doesn't function properly in ode unless all messages are declared within the source WSDL -->
 			<xsd:element name="importUserRequest">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -39,7 +40,6 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
-			<!-- will not work in ode unless fault is declared within wsdl -->
 			<xsd:element name="error" type="common-error:errorType" />
 		</xsd:schema>
 	</types>
@@ -54,7 +54,7 @@
 		<part element="tns:importUserResponse" name="parameters" />
 	</message>
 
-	<!-- naming convention: portType should reflect the interface name of the implementation class (e.g. UserService.java) -->
+	<!-- interface of generated java service is named after the portType name (e.g. UserService.java) -->
 	<portType name="userService">
 		<operation name="importUser">
 			<documentation>
@@ -68,15 +68,15 @@
 		</operation>
 	</portType>
 
-	<!-- expose partner link for bpel 2.0 process -->
+	<!-- expose partner link to BPEL process -->
 	<plnk:partnerLinkType name="userServicePartnerLinkType">
 		<plnk:role name="userServiceProvider" portType="tns:userService" />
 	</plnk:partnerLinkType>
 	
-	<!-- expose entity id to bpel processes to correlate users -->
+	<!-- expose entity id to BPEL processes for correlation -->
 	<bpws:property name="userId" type="xsd:string" />
 
-	<!-- tell bpel process how to map value to property based on message type -->
+	<!-- map correlation id to message -->
 	<bpws:propertyAlias messageType="tns:importUserRequest" part="parameters" propertyName="tns:userId">
 		<bpws:query><![CDATA[/user:user/common:id]]></bpws:query>
 	</bpws:propertyAlias>
