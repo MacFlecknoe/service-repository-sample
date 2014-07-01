@@ -15,10 +15,10 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="com.healthmedia.ws.common.ISO8601DateParamHandler" />
-			<ref bean="badArgumentsExceptionMapper" />
-			<ref bean="dataDefinitionExceptionMapper"/>
-			<ref bean="genericErrorExceptionMapper"/>
-			<ref bean="throwableExceptionMapper"/>
+			<bean class="com.healthmedia.ws.common.error.v1.DataValidationExceptionMapper" />
+			<bean class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
+			<bean class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
+			<bean class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
 			<ref bean="jaxbProvider"/>
 			<ref bean="jsonProvider"/>
 			<ref bean="sampleFilter" />
@@ -81,12 +81,6 @@
 	
 	<!-- include extra classes in jaxb context -->
 	<util:list id="extraClasses" />
-	
-	<!-- example exception mapping -->
-	<bean id="dataDefinitionExceptionMapper" class="com.healthmedia.ws.common.error.v1.DataValidationExceptionMapper" />
-	<bean id="badArgumentsExceptionMapper" class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
-	<bean id="genericErrorExceptionMapper" class="com.healthmedia.ws.common.error.v1.GenericErrorExceptionMapper" />
-	<bean id="throwableExceptionMapper" class="com.healthmedia.ws.common.error.v1.ThrowableExceptionMapper" />
 	
 	<util:map id="jsonNamespaceMap">
 		<entry key="urn:healthmedia:schema:common:v1" value="c1"/>
