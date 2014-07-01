@@ -57,6 +57,11 @@
 	<!-- naming convention: portType should reflect the interface name of the implementation class (e.g. UserService.java) -->
 	<portType name="userService">
 		<operation name="importUser">
+			<documentation>
+				This service allows for the import of complete AND partial user profile information. As such it is not considered a core
+				capability of the entity service but rather merely a supporting capability. Data quality is not strictly enforced here as
+				completeness of data is not a requirement.
+			</documentation>
 			<input message="tns:importUserRequest" />
 			<output message="tns:importUserResponse" />
 			<fault name="error" message="tns:error"/>

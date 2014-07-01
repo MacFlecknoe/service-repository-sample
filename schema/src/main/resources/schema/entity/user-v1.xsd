@@ -50,7 +50,8 @@
 			<xsd:documentation>Collection of Users</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="userData" type="tns:userType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="userData" type="tns:userType" 
+				minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -61,10 +62,14 @@
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
-					<xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="dataSource" type="dataSource:dataSourceType" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="collectionDate" type="xsd:dateTime" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="data" type="tns:dataType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="dataSource" type="dataSource:dataSourceType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="user" type="tns:userType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -73,10 +78,13 @@
 	<xsd:complexType name="dataType">
 		<xsd:sequence>
 			<xsd:choice>
-				<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
-				<xsd:element name="dataDefinition" type="tns:dataDefinitionType" minOccurs="0" maxOccurs="1" nillable="true" />
+				<xsd:element name="name" type="xsd:string" minOccurs="0" 
+					maxOccurs="1" nillable="true" />
+				<xsd:element name="dataDefinition" type="tns:dataDefinitionType" 
+					minOccurs="0" maxOccurs="1" nillable="true" />
 			</xsd:choice>
-		 	<xsd:element name="value" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
+		 	<xsd:element name="value" type="xsd:string" 
+		 		minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -94,7 +102,8 @@
 			<xsd:documentation>Collection of User Metrics</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded" />
+			<xsd:element name="userData" type="tns:userDataType" 
+				minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
