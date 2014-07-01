@@ -15,7 +15,9 @@
 	<xsd:import 
 		namespace="urn:healthmedia:schema:data-source:v1" 
 		schemaLocation="../entity/data-source-v1.xsd" />
-		
+	
+	<!-- TODO add 'any' elements for future compatibility -->
+	
 	<xsd:complexType name="userType">
 		<xsd:annotation>
 			<xsd:documentation>Represents End User</xsd:documentation>
