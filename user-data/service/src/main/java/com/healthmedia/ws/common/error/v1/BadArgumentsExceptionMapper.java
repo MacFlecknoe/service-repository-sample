@@ -19,7 +19,7 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 	@Override
 	public Response toResponse(BadArgumentsException exception) {
 
-		ErrorType fault = new ErrorType();
+		CompoundErrorType fault = new CompoundErrorType();
 		fault.setCode(ApplicationErrorCode.BAD_ARGUMENT.getCode());
 		
 		ReasonType reason = new ReasonType();
@@ -37,7 +37,9 @@ public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<
 			innerReason.setLang(Locale.US.getLanguage());
 			innerReason.setValue(new StringBuffer((error.getValue() == null) ? "null" : error.getValue()).append(" is not valid.").toString());
 			
-			fault.getSubError().add(innerFault);
+			ErrorCollectionType errorCollection = new ErrorCollectionType();
+			errorCollection.getError().add(innerFault);
+			fault.setErrors(errorCollection);
 		}
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}

@@ -2,6 +2,8 @@ package com.healthmedia.ws.wsdl.user.v1;
 
 import java.util.Locale;
 
+import com.healthmedia.ws.common.error.v1.CompoundErrorType;
+import com.healthmedia.ws.common.error.v1.ErrorCollectionType;
 import com.healthmedia.ws.common.error.v1.ErrorType;
 import com.healthmedia.ws.common.error.v1.ReasonType;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
@@ -70,7 +72,7 @@ public class UserServiceImpl implements UserService {
 			
 		} catch(Throwable t) {
 			
-			ErrorType error = new ErrorType();
+			CompoundErrorType error = new CompoundErrorType();
 			error.setCode("FooCode");
 			
 			ReasonType reason = new ReasonType();
@@ -87,7 +89,9 @@ public class UserServiceImpl implements UserService {
 			subReason.setValue("This is no big deal... really.");
 			subError.getReason().add(subReason);
 			
-			error.getSubError().add(subError);
+			ErrorCollectionType errorCollection = new ErrorCollectionType();
+			errorCollection.getError().add(subError);
+			error.setErrors(errorCollection);
 			
 			Fault fault = new Fault("This is a message", error, t);
 			throw fault;

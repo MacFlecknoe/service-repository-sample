@@ -18,7 +18,7 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 	@Override
 	public Response toResponse(DataValidationException exception) {
 
-		ErrorType fault = new ErrorType();
+		CompoundErrorType fault = new CompoundErrorType();
 		fault.setCode(ApplicationErrorCode.VALIDATION_ERROR.getCode());
 		
 		ReasonType reason = new ReasonType();
@@ -36,7 +36,9 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 			innerReason.setLang(Locale.US.getLanguage());
 			innerReason.setValue(error.getDescription());
 			
-			fault.getSubError().add(innerFault);
+			ErrorCollectionType errorCollection = new ErrorCollectionType();
+			errorCollection.getError().add(innerFault);
+			fault.setErrors(errorCollection);
 		}
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
 	}

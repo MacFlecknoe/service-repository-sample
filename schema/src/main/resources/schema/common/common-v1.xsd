@@ -25,12 +25,18 @@
 	
 	<xsd:complexType name="entityType" abstract="true">
 		<xsd:sequence>
-			<xsd:element name="id" type="xsd:string"  minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="createDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="updateDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="version" type="tns:positiveIntegerType" minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="extension" type="tns:extensionType" minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="id" type="xsd:string"  
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="link" type="atom:linkType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="createDate" type="xsd:dateTime" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="updateDate" type="xsd:dateTime" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="version" type="tns:positiveIntegerType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="extension" type="tns:extensionType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
@@ -41,8 +47,8 @@
 
 	<xsd:complexType name="extensionType">
 		<xsd:sequence>
-			<xsd:any namespace="##other" processContents="lax" minOccurs="0"
-				maxOccurs="unbounded" />
+			<xsd:any namespace="##other" processContents="lax" 
+				minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
@@ -50,8 +56,10 @@
 	<xsd:complexType name="i18nType">
 		<xsd:sequence>
 			<!-- see http://www.ietf.org/rfc/rfc3066.txt for valid values -->
-			<xsd:element name="language" type="xsd:language" minOccurs="1" maxOccurs="1" />
-			<xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" />
+			<xsd:element name="language" type="xsd:language" 
+				minOccurs="1" maxOccurs="1" />
+			<xsd:element name="value" type="xsd:string" 
+				minOccurs="1" maxOccurs="1" />
 		</xsd:sequence>
 	</xsd:complexType>
 
