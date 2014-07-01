@@ -47,8 +47,9 @@
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
 
-	<xsd:complexType name="i18nTextType">
+	<xsd:complexType name="i18nType">
 		<xsd:sequence>
+			<!-- see http://www.ietf.org/rfc/rfc3066.txt for valid values -->
 			<xsd:element name="language" type="xsd:language" minOccurs="1" maxOccurs="1" />
 			<xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1" />
 		</xsd:sequence>
