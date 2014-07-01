@@ -33,8 +33,11 @@
 		<xsd:attribute ref="tns:version" />
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
-
+	
 	<xsd:attribute name="version">
+		<xsd:annotation>
+			<xsd:documentation>Used to enable optimistic locking of entity objects</xsd:documentation>
+		</xsd:annotation>
 		<xsd:simpleType>
 			<xsd:restriction base="xsd:integer">
 				<xsd:minInclusive value="0" />
@@ -47,6 +50,9 @@
 	</xsd:attributeGroup>
 
 	<xsd:complexType name="extensionType">
+		<xsd:annotation>
+			<xsd:documentation>Bucket that can be used by partners to pass custom elements to a service</xsd:documentation>
+		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:any namespace="##other" processContents="lax" 
 				minOccurs="0" maxOccurs="unbounded" />
