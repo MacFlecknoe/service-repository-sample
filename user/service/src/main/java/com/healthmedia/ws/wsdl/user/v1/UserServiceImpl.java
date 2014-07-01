@@ -89,7 +89,8 @@ public class UserServiceImpl implements UserService {
 			
 			error.getSubError().add(subError);
 			
-			throw new Fault("This is a message", error, t);
+			Fault fault = new Fault("This is a message", error, t);
+			throw fault;
 		}
 	}
 }
