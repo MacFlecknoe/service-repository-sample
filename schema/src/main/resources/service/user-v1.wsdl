@@ -3,7 +3,7 @@
 	xmlns:tns="urn:healthmedia:wsdl:user:v1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:user="urn:healthmedia:schema:user:v1"
-	xmlns:common="urn:healthmedia:schema:common:v1" 
+	xmlns:common="urn:healthmedia:schema:common:v1"
 	xmlns:common-error="urn:healthmedia:schema:common-error:v1" 
 	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
 	xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
@@ -13,15 +13,18 @@
 
 	<documentation>Version 1.0</documentation>
 	
-	<import namespace="urn:healthmedia:schema:common-error:v1" location="../schema/common/common-error-v1.xsd" />
-	
 	<types>
 		<xsd:schema 
 			targetNamespace="urn:healthmedia:wsdl:user:v1" 
 			elementFormDefault="qualified">
+			
 			<xsd:import 
 				schemaLocation="../schema/entity/user-v1.xsd" 
 				namespace="urn:healthmedia:schema:user:v1" />
+			<xsd:import 
+				schemaLocation="../schema/common/common-error-v1.xsd" 
+				namespace="urn:healthmedia:schema:common-error:v1" />
+				
 			<xsd:element name="importUserRequest">
 				<xsd:complexType>
 					<xsd:sequence>
@@ -36,12 +39,16 @@
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
+			
+			<!-- will not work in ode unless fault is declared within wsdl -->
+			<xsd:element name="fault" type="common-error:errorType" />
+			
 		</xsd:schema>
 	</types>
 
 	<!-- part of abstract wsdl. defines the messages that make up part of the  service interface -->
 	<message name="fault">
-		<part element="common-error:error" name="fault" />
+		<part element="tns:fault" name="fault" />
 	</message>
 	<message name="importUserRequest">
 		<part element="tns:importUserRequest" name="parameters" />
