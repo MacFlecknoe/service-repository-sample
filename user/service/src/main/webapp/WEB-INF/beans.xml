@@ -15,13 +15,6 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-
-	<cxf:bus>
-		<cxf:features>
-			<cxf:logging/>
-			<p:policies ignoreUnknownAssertions="true" />
-		</cxf:features>
-	</cxf:bus>
 	
 	<jaxws:endpoint id="userService"
 		wsdlLocation="classpath:/service/user-soap-v1.wsdl"
@@ -35,6 +28,13 @@
 	</jaxws:endpoint>
 	
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	
+	<cxf:bus>
+		<cxf:features>
+			<cxf:logging/>
+			<p:policies ignoreUnknownAssertions="true" />
+		</cxf:features>
+	</cxf:bus>
 	
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	
