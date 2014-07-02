@@ -15,12 +15,12 @@ public class MockPasswordCallbackHandler implements CallbackHandler {
 
 		WSPasswordCallback pc = (WSPasswordCallback) callbacks[0];
 		
-		if (pc.getIdentifier().equals("mlamber7")) {
+		if (pc.getIdentifier().equals("username")) {
 			//
 			// set the password on the callback. This will later be compared to
 			// the password which was sent from the client.
 			//
-			pc.setPassword("mypass");
+			pc.setPassword("password");
 		}
 	}
 }
