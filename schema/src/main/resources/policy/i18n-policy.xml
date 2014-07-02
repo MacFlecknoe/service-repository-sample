@@ -3,19 +3,13 @@
 	xmlns="http://www.w3.org/ns/ws-policy"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
-	xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy"
+	xmlns:i18np="http://www.w3.org/2008/04/ws-i18np"
 	xsi:schemaLocation="http://www.w3.org/ns/ws-policy http://www.w3.org/2007/02/ws-policy.xsd">
 	<ExactlyOne>
 		<All>
 			<Policy>
-				<sp:UsernameToken
-					sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
-					<Policy>
-						<sp:WssUsernameToken10 />
-					</Policy>
-				</sp:UsernameToken>
+				<i18np:i18n Optional="false" />
 			</Policy>
 		</All>
 	</ExactlyOne>
 </Policy>
-	

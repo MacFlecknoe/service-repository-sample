@@ -17,7 +17,6 @@
 		<xsd:schema 
 			targetNamespace="urn:healthmedia:wsdl:user:v1" 
 			elementFormDefault="qualified">
-			
 			<xsd:import 
 				schemaLocation="../schema/entity/user-v1.xsd" 
 				namespace="urn:healthmedia:schema:user:v1" />

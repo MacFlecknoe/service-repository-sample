@@ -7,26 +7,51 @@
 	xmlns:cxf="http://cxf.apache.org/core"
 	xmlns:p="http://cxf.apache.org/policy"
 	xmlns:userService="urn:healthmedia:wsdl:user:soap:v1"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
-	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
-	http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
-	http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
-	http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd">
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+		http://www.w3.org/ns/ws-policy http://www.w3.org/2007/02/ws-policy.xsd">
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 	
 	<jaxws:endpoint id="userService"
-		wsdlLocation="classpath:/service/user-soap-v1.wsdl"
-		serviceName="userService:userSoapServicePorts"
-		endpointName="userService:userSoapServicePort"
-		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService">
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/secure/userService">
+		<jaxws:features>
+			<bean class="org.apache.cxf.feature.LoggingFeature"/>
+			<p:policies>
+				<!-- we attach policies via spring as there are issues leveraging external policy attachments when using PolicyAttachement with cxf 2.*-->
+				<wsp:PolicyReference URI="classpath:policy/authentication-policy.xml" />
+				<wsp:PolicyReference URI="classpath:policy/i18n-policy.xml" />
+			</p:policies>
+		</jaxws:features>
 		<jaxws:properties>
 			<entry key="ws-security.ut.validator" value-ref="validator" />
-			<!-- <entry key="ws-security.callback-handler" value="com.healthmedia.ws.security.MockPasswordCallbackHandler"/> -->
+			<entry key="jaxb.additionalContextClasses">
+				<bean class="com.healthmedia.ws.util.ClassArrayFactoryBean">
+					<property name="classNames">
+						<list>
+							<value>org.w3._2005._09.ws_i18n.International</value>
+						</list>
+					</property>
+				</bean>
+			</entry>
 		</jaxws:properties>
 	</jaxws:endpoint>
 	
+	<jaxws:endpoint id="openUserService" 
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService" />
+
+	
+	<util:list id="extraClasses" />
+	
+	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
 	
 	<cxf:bus>
@@ -35,7 +60,5 @@
 			<p:policies ignoreUnknownAssertions="true" />
 		</cxf:features>
 	</cxf:bus>
-	
-	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	
 </beans>
