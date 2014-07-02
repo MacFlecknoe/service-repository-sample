@@ -1,1 +1,1 @@
-com.healthmedia.ws.assertion.CustomPolicyInterceptorProvider::true
+com.healthmedia.ws.assertion.I18nPolicyInterceptorProvider::true
