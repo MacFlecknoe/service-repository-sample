@@ -5,10 +5,9 @@
 	xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
-			<wsp:URI>
-				urn:healthmedia:wsdl:user:soap:v1
-				#wsdl.endpoint(userSoapServicePort/EndPoint)
-			</wsp:URI>
+			<wsa:EndpointReference>
+ 				<wsa:Address>http://localhost:8080/user-service/userService</wsa:Address>
+ 			</wsa:EndpointReference>
 		</wsp:AppliesTo>
 		<wsp:Policy>
 			<wsp:ExactlyOne>
