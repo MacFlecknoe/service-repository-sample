@@ -18,6 +18,7 @@
 
 	<cxf:bus>
 		<cxf:features>
+			<cxf:logging/>
 			<p:policies ignoreUnknownAssertions="true" />
 		</cxf:features>
 	</cxf:bus>

@@ -34,6 +34,8 @@
 									<wsdl>classpath:/service/user-soap-v1.wsdl</wsdl>
 									<!-- name of the service in the wsdl to generate artifacts for -->
 									<serviceName>UserSoapServicePorts</serviceName>
+									<frontEnd>jaxws21</frontEnd>
+									<faultSerialVersionUID>1</faultSerialVersionUID>
 									<extraargs>
 										<extraarg>-p</extraarg>
 										<extraarg>http://www.w3.org/2003/05/soap-envelope=org.w3.soap.envelop.v1</extraarg>

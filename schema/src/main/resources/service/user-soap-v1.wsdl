@@ -49,7 +49,7 @@
 		</wsp:Policy>
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->
 		<port binding="tns:userSoapServiceBinding" name="userSoapServicePort">
-			<soap:address location="http://www.example.org/" />
+			<soap:address location="http://localhost:8080/user-service/userService" />
 		</port>
 	</service>
 </definitions>
