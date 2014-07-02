@@ -37,7 +37,7 @@ public abstract class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 
 	private static final QName HEADER_TYPE = new QName("http://www.w3.org/2005/09/ws-i18n", "international");
 	private static final Set<QName> UNDERSTOOD_HEADERS = new HashSet<QName>(Arrays.asList(HEADER_TYPE));
-	private static final QName ASSERTION = new QName("http://www.w3.org/2008/04/ws-i18np", "i18n");
+	static final QName ASSERTION = new QName("http://www.w3.org/2008/04/ws-i18np", "i18n");
 	
 	public I18nHeaderInterceptor() {
 		super(Phase.PRE_INVOKE);
