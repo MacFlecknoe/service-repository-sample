@@ -26,6 +26,13 @@
 		wsdlLocation="classpath:/service/user-soap-v1.wsdl"
 		serviceName="userService:userSoapServicePorts"
 		endpointName="userService:userSoapServicePort"
-		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/UserService" />
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService">
+		<jaxws:properties>
+			<entry key="ws-security.callback-handler"
+				value="com.healthmedia.ws.security.MockPasswordCallbackHandler"/>
+		</jaxws:properties>
+	</jaxws:endpoint>
 		
+	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
+	
 </beans>

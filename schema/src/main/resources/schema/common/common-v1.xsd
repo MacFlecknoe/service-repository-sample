@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom"
-	xmlns:tns="urn:healthmedia:schema:common:v1" elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:tns="urn:healthmedia:schema:common:v1"
 	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
 	targetNamespace="urn:healthmedia:schema:common:v1"
 	jaxb:extensionBindingPrefixes="xjc"
 	jaxb:version="2.0"
-	attributeFormDefault="unqualified" version="1.0">
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified" 
+	version="1.0">
 
 	<xsd:import 
 		namespace="http://www.w3.org/XML/1998/namespace" 

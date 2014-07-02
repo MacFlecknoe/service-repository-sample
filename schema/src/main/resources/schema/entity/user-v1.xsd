@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsd:schema 
-		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-		xmlns:common="urn:healthmedia:schema:common:v1"
-		xmlns:dataSource="urn:healthmedia:schema:data-source:v1"
-		xmlns:tns="urn:healthmedia:schema:user:v1" 
-		targetNamespace="urn:healthmedia:schema:user:v1"
-		elementFormDefault="qualified" attributeFormDefault="unqualified"
-		version="1.0">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:common="urn:healthmedia:schema:common:v1"
+	xmlns:dataSource="urn:healthmedia:schema:data-source:v1"
+	xmlns:tns="urn:healthmedia:schema:user:v1"
+	targetNamespace="urn:healthmedia:schema:user:v1"
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	version="1.0">
 		
 	<xsd:import 
 		namespace="urn:healthmedia:schema:common:v1" 
@@ -14,9 +15,7 @@
 		
 	<xsd:import 
 		namespace="urn:healthmedia:schema:data-source:v1" 
-		schemaLocation="../entity/data-source-v1.xsd" />
-	
-	<!-- TODO add 'any' elements for future compatibility -->
+		schemaLocation="./data-source-v1.xsd" />
 	
 	<xsd:complexType name="userType">
 		<xsd:annotation>
@@ -29,7 +28,6 @@
 					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" nillable="true" />
-					<!-- define collection wrappers -->
 					<xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>

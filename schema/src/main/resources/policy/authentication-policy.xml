@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<attachments 
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:wsa="http://www.w3.org/2005/08/addressing"
+	xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+	
+	<wsp:PolicyAttachment>
+		<wsp:AppliesTo>
+			<wsa:EndpointReference>
+				<wsa:Address>http://localhost:8080/user-service/userService</wsa:Address>
+			</wsa:EndpointReference>
+		</wsp:AppliesTo>
+		<wsp:Policy>
+			<wsp:ExactlyOne>
+				<wsp:All>
+					<wsp:Policy>
+						<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+							<wsp:Policy>
+								<sp:WssUsernameToken10 />
+							</wsp:Policy>
+						</sp:UsernameToken>
+					</wsp:Policy>
+				</wsp:All>
+			</wsp:ExactlyOne>
+		</wsp:Policy>
+	</wsp:PolicyAttachment>
+</attachments>
