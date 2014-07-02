@@ -34,22 +34,22 @@
 	
 	<!--  naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts -->
 	<service name="userSoapServicePorts">
-		<wsp:Policy>
-			<wsp:ExactlyOne>
-				<wsp:All>
-					<wsp:Policy>
-						<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
-							<wsp:Policy>
-								<sp:WssUsernameToken10 />
-							</wsp:Policy>
-						</sp:UsernameToken>
-					</wsp:Policy>
-				</wsp:All>
-			</wsp:ExactlyOne>
-		</wsp:Policy>
 		<!-- naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort -->
 		<port binding="tns:userSoapServiceBinding" name="userSoapServicePort">
 			<soap:address location="http://localhost:8080/user-service/userService" />
+			<wsp:Policy>
+				<wsp:ExactlyOne>
+					<wsp:All>
+						<wsp:Policy>
+							<sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient">
+								<wsp:Policy>
+									<sp:WssUsernameToken10 />
+								</wsp:Policy>
+							</sp:UsernameToken>
+						</wsp:Policy>
+					</wsp:All>
+				</wsp:ExactlyOne>
+			</wsp:Policy>
 		</port>
 	</service>
 </definitions>

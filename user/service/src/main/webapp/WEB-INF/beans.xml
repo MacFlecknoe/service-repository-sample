@@ -29,11 +29,13 @@
 		endpointName="userService:userSoapServicePort"
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService">
 		<jaxws:properties>
-			<entry key="ws-security.callback-handler"
-				value="com.healthmedia.ws.security.MockPasswordCallbackHandler"/>
+			<entry key="ws-security.ut.validator" value-ref="validator" />
+			<!-- <entry key="ws-security.callback-handler" value="com.healthmedia.ws.security.MockPasswordCallbackHandler"/> -->
 		</jaxws:properties>
 	</jaxws:endpoint>
-		
+	
+	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	
 </beans>
