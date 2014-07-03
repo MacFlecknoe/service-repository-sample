@@ -38,9 +38,6 @@
 	
 	<jaxws:endpoint id="openUserService" 
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService" />
-
-	
-	<util:list id="extraClasses" />
 	
 	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
