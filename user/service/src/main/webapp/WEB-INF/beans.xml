@@ -31,6 +31,9 @@
 				<wsp:PolicyReference URI="classpath:policy/i18n-policy.xml" />
 			</p:policies>
 		</jaxws:features>
+		<jaxws:properties>
+			<entry key="ws-security.ut.validator" value-ref="validator" />
+		</jaxws:properties>
 	</jaxws:endpoint>
 	
 	<jaxws:endpoint id="openUserService" 
