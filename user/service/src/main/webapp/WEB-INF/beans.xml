@@ -18,23 +18,15 @@
 
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-
-	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"/>
 	
 	<jaxws:endpoint id="userService"
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/secure/userService">
-		<jaxws:features>
-			<bean class="org.apache.cxf.feature.LoggingFeature"/>
-			<p:policies>
-				<!-- we attach policies via spring as there are issues leveraging external policy attachments when using PolicyAttachement with cxf 2.*-->
-				<wsp:PolicyReference URI="classpath:policy/authentication-policy.xml" />
-				<wsp:PolicyReference URI="classpath:policy/i18n-policy.xml" />
-			</p:policies>
-		</jaxws:features>
 		<jaxws:properties>
 			<entry key="ws-security.ut.validator" value-ref="validator" />
 		</jaxws:properties>
 	</jaxws:endpoint>
+	
+	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	
 	<jaxws:endpoint id="openUserService" 
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService" />
