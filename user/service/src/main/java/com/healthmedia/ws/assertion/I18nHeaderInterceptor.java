@@ -81,7 +81,7 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 			}
 			
 		} catch (XPathExpressionException e) {
-			throw new RuntimeException(e);
+			throw new Fault(e);
 		}
 	}
 	
