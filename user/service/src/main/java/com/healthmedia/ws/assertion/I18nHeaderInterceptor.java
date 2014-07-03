@@ -93,6 +93,7 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 			for (AssertionInfo ai : ais) {
 				Assertion assertion = ai.getAssertion();
 				
+				// if action is ignorable we should use default locale if a user preferred locale isnt passed
 				if(assertion.isIgnorable() || assertion.isOptional() || headerExists) {
 					ai.setAsserted(true);
 				} else {
