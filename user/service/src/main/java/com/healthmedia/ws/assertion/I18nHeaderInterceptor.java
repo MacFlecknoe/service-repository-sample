@@ -8,10 +8,10 @@ import java.util.Set;
 import javax.xml.namespace.QName;
 
 import org.apache.cxf.binding.soap.SoapMessage;
-import org.apache.cxf.binding.soap.interceptor.AbstractSoapInterceptor;
 import org.apache.cxf.databinding.DataReader;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.interceptor.Fault;
+import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.service.Service;
 import org.apache.cxf.service.model.ServiceModelUtil;
@@ -33,11 +33,10 @@ import org.w3c.dom.Node;
  * @author mlamber7
  *
  */
-public class I18nHeaderInterceptor extends AbstractSoapInterceptor {
+public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
 
-	private static final QName HEADER_TYPE = new QName("http://www.w3.org/2005/09/ws-i18n", "international");
-	private static final Set<QName> UNDERSTOOD_HEADERS = new HashSet<QName>(Arrays.asList(HEADER_TYPE));
-	static final QName ASSERTION = new QName("http://www.w3.org/2008/04/ws-i18np", "i18n");
+	public static final QName WS_I18N_POLICY = new QName("http://www.w3.org/2008/04/ws-i18np", "i18n");
+	private static final QName WS_I18N_HEADER = new QName("http://www.w3.org/2005/09/ws-i18n", "international");
 	
 	private final ILocaleHandler handler;
 	
@@ -49,14 +48,14 @@ public class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 	@Override
 	public void handleMessage(SoapMessage message) throws Fault {
 		
-		Header header = message.getHeader(HEADER_TYPE);
+		Header header = message.getHeader(WS_I18N_HEADER);
 		
 		if(header != null) {
 			
 			Service service = ServiceModelUtil.getService(message.getExchange());
 			DataReader<Node> dataReader = service.getDataBinding().createReader(Node.class);
 			
-			International i18nHeader = (International)dataReader.read(HEADER_TYPE, (Node)header.getObject(), International.class);
+			International i18nHeader = (International)dataReader.read(WS_I18N_HEADER, (Node)header.getObject(), International.class);
 			message.setContextualProperty(International.class.getName(), i18nHeader);
 
 			handler.setLocale(i18nHeader);
@@ -70,7 +69,7 @@ public class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 	private void handleAssertion(SoapMessage message, boolean headerExists) {
 		
 		AssertionInfoMap aim =  message.get(org.apache.cxf.ws.policy.AssertionInfoMap.class);
-		Collection<AssertionInfo> ais = aim.get(ASSERTION);
+		Collection<AssertionInfo> ais = aim.get(WS_I18N_POLICY);
 		
 		if(ais != null) {
 			for (AssertionInfo ai : ais) {
@@ -84,12 +83,6 @@ public class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 			}
 		}
 	}
-	
-	@Override
-	public Set<QName> getUnderstoodHeaders() {
-		return UNDERSTOOD_HEADERS;
-	}
-	
 	
 	public static interface ILocaleHandler {
 		public void setLocale(International i18nLocale);

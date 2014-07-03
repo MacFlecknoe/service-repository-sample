@@ -11,7 +11,7 @@ public class I18nPolicyInterceptorProvider extends AbstractPolicyInterceptorProv
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final Collection<QName> ASSERTION_TYPES = Arrays.asList(I18nHeaderInterceptor.ASSERTION);
+	private static final Collection<QName> ASSERTION_TYPES = Arrays.asList(I18nHeaderInterceptor.WS_I18N_POLICY);
 	
 	public I18nPolicyInterceptorProvider() {
 		super(ASSERTION_TYPES);
