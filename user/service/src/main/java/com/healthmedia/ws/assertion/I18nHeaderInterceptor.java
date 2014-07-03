@@ -35,12 +35,14 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 	private final XPathExpression localeExpression;
 	private final XPathExpression timeZoneExpression;
 	
-	private final ILocaleHandler handler;
+	private final ILocaleHandler localeHandler;
+	private final ITimeZoneHandler timeZoneHandler;
 	
-	public I18nHeaderInterceptor(ILocaleHandler handler) {
+	public I18nHeaderInterceptor(ILocaleHandler localeHandler, ITimeZoneHandler timeZoneHandler) {
 		super(Phase.PRE_INVOKE);
 		try {
-			this.handler = handler;
+			this.localeHandler = localeHandler;
+			this.timeZoneHandler = timeZoneHandler;
 			
 			XPathFactory factory = XPathFactory.newInstance();
 			
@@ -52,9 +54,12 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		}
 	}
 	
+	public I18nHeaderInterceptor(ILocaleHandler localeHandler) {
+		this(localeHandler, new MockTimeZoneHandler());
+	}
+	
 	@Override
 	public void handleMessage(SoapMessage message) throws Fault {
-
 		try {
 			Header header = message.getHeader(WS_I18N_HEADER);
 			
@@ -65,12 +70,15 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 				String locale = (String) localeExpression.evaluate(node,  XPathConstants.STRING);
 				String timeZone = (String) (String) timeZoneExpression.evaluate(node,  XPathConstants.STRING);
 				
-				handler.setLocale(locale);
+				localeHandler.setLocale(locale);
+				timeZoneHandler.setTimeZone(timeZone);
+				
 				handleAssertion(message, true);
 				
 			} else {
 				handleAssertion(message, false);
 			}
+			
 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(e);
 		}
@@ -96,5 +104,27 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 	
 	public static interface ILocaleHandler {
 		public void setLocale(String i18nLocale);
+	}
+	
+	public static interface ITimeZoneHandler {
+		public void setTimeZone(String timeZone);
+	}
+	
+	public static class MockTimeZoneHandler implements ITimeZoneHandler {
+
+		@Override
+		public void setTimeZone(String timeZone) {
+			// do nothing
+		}
+		
+	}
+	
+	public static class MockLocaleHandler implements ILocaleHandler {
+
+		@Override
+		public void setLocale(String i18nLocale) {
+			// do nothing
+		}
+		
 	}
 }
