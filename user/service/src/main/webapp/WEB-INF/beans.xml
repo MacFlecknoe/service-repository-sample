@@ -31,18 +31,6 @@
 				<wsp:PolicyReference URI="classpath:policy/i18n-policy.xml" />
 			</p:policies>
 		</jaxws:features>
-		<jaxws:properties>
-			<entry key="ws-security.ut.validator" value-ref="validator" />
-			<entry key="jaxb.additionalContextClasses">
-				<bean class="com.healthmedia.ws.util.ClassArrayFactoryBean">
-					<property name="classNames">
-						<list>
-							<value>org.w3._2005._09.ws_i18n.International</value>
-						</list>
-					</property>
-				</bean>
-			</entry>
-		</jaxws:properties>
 	</jaxws:endpoint>
 	
 	<jaxws:endpoint id="openUserService" 
