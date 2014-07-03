@@ -87,7 +87,7 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 	
 	private void handleAssertion(SoapMessage message, boolean headerExists) {
 		
-		AssertionInfoMap aim =  message.get(org.apache.cxf.ws.policy.AssertionInfoMap.class);
+		AssertionInfoMap aim =  message.get(AssertionInfoMap.class);
 		Collection<AssertionInfo> ais = aim.get(WS_I18N_POLICY);
 		
 		if(ais != null) {
@@ -117,7 +117,6 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		public void setTimeZone(String timeZone) {
 			// do nothing
 		}
-		
 	}
 	
 	public static class MockLocaleHandler implements ILocaleHandler {
@@ -126,6 +125,5 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		public void setLocale(String i18nLocale) {
 			// do nothing
 		}
-		
 	}
 }
