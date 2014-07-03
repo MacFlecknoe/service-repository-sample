@@ -6,7 +6,7 @@
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
 			<wsa:EndpointReference>
-				<wsa:Address>http://localhost:8080/user-service/userService</wsa:Address>
+				<wsa:Address>/userService</wsa:Address>
 			</wsa:EndpointReference>
 		</wsp:AppliesTo>
 		<wsp:Policy>

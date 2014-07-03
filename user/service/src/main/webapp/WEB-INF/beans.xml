@@ -27,6 +27,7 @@
 	</jaxws:endpoint>
 	
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
+	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	
 	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
@@ -34,7 +35,7 @@
 	<cxf:bus>
 		<cxf:features>
 			<cxf:logging/>
-			<p:policies ignoreUnknownAssertions="true" />
+			<p:policies />
 		</cxf:features>
 	</cxf:bus>
 	
