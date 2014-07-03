@@ -15,6 +15,6 @@ public class I18nPolicyInterceptorProvider extends AbstractPolicyInterceptorProv
 	
 	public I18nPolicyInterceptorProvider() {
 		super(ASSERTION_TYPES);
-		getInInterceptors().add(new SpringI18nHeaderInterceptor());
+		getInInterceptors().add(new I18nHeaderInterceptor(new SpringLocaleHandler()));
 	}
 }

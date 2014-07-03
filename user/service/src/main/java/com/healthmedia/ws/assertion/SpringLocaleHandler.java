@@ -6,10 +6,10 @@ import org.apache.cxf.common.util.StringUtils;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.w3._2005._09.ws_i18n.International;
 
-public class SpringI18nHeaderInterceptor extends I18nHeaderInterceptor {
+public class SpringLocaleHandler implements I18nHeaderInterceptor.ILocaleHandler {
 
 	@Override
-	protected void setLocale(International international) {
+	public void setLocale(International international) {
 		
 		String i18nLocale = international.getLocale();
 		

@@ -33,14 +33,17 @@ import org.w3c.dom.Node;
  * @author mlamber7
  *
  */
-public abstract class I18nHeaderInterceptor extends AbstractSoapInterceptor {
+public class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 
 	private static final QName HEADER_TYPE = new QName("http://www.w3.org/2005/09/ws-i18n", "international");
 	private static final Set<QName> UNDERSTOOD_HEADERS = new HashSet<QName>(Arrays.asList(HEADER_TYPE));
 	static final QName ASSERTION = new QName("http://www.w3.org/2008/04/ws-i18np", "i18n");
 	
-	public I18nHeaderInterceptor() {
+	private final ILocaleHandler handler;
+	
+	public I18nHeaderInterceptor(ILocaleHandler handler) {
 		super(Phase.PRE_INVOKE);
+		this.handler = handler;
 	}
 	
 	@Override
@@ -56,7 +59,7 @@ public abstract class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 			International i18nHeader = (International)dataReader.read(HEADER_TYPE, (Node)header.getObject(), International.class);
 			message.setContextualProperty(International.class.getName(), i18nHeader);
 
-			setLocale(i18nHeader);
+			handler.setLocale(i18nHeader);
 			
 			handleAssertion(message, true);
 		} else {
@@ -87,5 +90,8 @@ public abstract class I18nHeaderInterceptor extends AbstractSoapInterceptor {
 		return UNDERSTOOD_HEADERS;
 	}
 	
-	protected abstract void setLocale(International i18nLocale);
+	
+	public static interface ILocaleHandler {
+		public void setLocale(International i18nLocale);
+	}
 }
