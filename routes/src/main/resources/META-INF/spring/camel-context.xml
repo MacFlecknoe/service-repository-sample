@@ -2,29 +2,40 @@
 <!-- Configures the Camel Context -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
-	xsi:schemaLocation="
-       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:camel="http://camel.apache.org/schema/spring"
+		xmlns:cxf="http://camel.apache.org/schema/cxf"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
 
-	<camel:camelContext xmlns="http://camel.apache.org/schema/spring">
-		<!-- here is a sample which processes the input files (leaving them in 
-			place - see the 'noop' flag) then performs content based routing on the message 
-			using XPath -->
-		<camel:route>
-			<camel:from uri="file:src/data?noop=true" />
-			<camel:choice>
-				<camel:when>
-					<camel:xpath>/person/city = 'London'</camel:xpath>
-					<camel:log message="UK message" />
-					<camel:to uri="file:target/messages/uk" />
-				</camel:when>
-				<camel:otherwise>
-					<camel:log message="Other message" />
-					<camel:to uri="file:target/messages/others" />
-				</camel:otherwise>
-			</camel:choice>
-		</camel:route>
-	</camel:camelContext>
+	<!-- spring property placeholder, ignore resource not found as the file resource is for unit testing -->
+	<context:property-placeholder location="classpath:user-service.properties"
+			ignore-resource-not-found="true"/>
+	
+	<cxf:cxfEndpoint id="proxyUserService"
+		address="/proxy/userService"
+		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
+		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
+		
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
+		<endpoint id="realUserService" uri="${user-service.url}?throwExceptionOnFailure=false"/>
+		<route>
+			<!-- CXF consumer using MESSAGE format -->
+			<from uri="cxf:bean:proxyUserService=MESSAGE" />
+			<!-- log input received -->
+			<to uri="log:input" />
+			<!-- Need to remove the http headers which could confuse the http endpoint -->
+			<removeHeaders pattern="CamelHttp*" />
+			<!-- send proxied request to real web service -->
+			<to ref="realUserService" />
+			<!-- log answer from real web service -->
+			<to uri="log:output" />
+		</route>
+	</camelContext>
 
 </beans>
