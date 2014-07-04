@@ -3,6 +3,7 @@ package com.healthmedia.ws.assertion;
 import java.util.Collection;
 
 import javax.xml.namespace.QName;
+import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -10,6 +11,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.headers.Header;
+import org.apache.cxf.helpers.MapNamespaceContext;
 import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
@@ -45,10 +47,15 @@ public class I18nHeaderInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 			this.localeHandler = localeHandler;
 			this.timeZoneHandler = timeZoneHandler;
 			
-			XPathFactory factory = XPathFactory.newInstance();
+			MapNamespaceContext context = new MapNamespaceContext();
+			context.addNamespace("i18n", "http://www.w3.org/2005/09/ws-i18n");
 			
-			this.localeExpression = factory.newXPath().compile("//*[local-name()='international']/*[local-name()='locale']/text()");
-			this.timeZoneExpression = factory.newXPath().compile("//*[local-name()='international']/*[local-name()='tz']/text()");
+			XPathFactory factory = XPathFactory.newInstance();
+			XPath xpath = factory.newXPath();
+			xpath.setNamespaceContext(context);
+			
+			this.localeExpression = xpath.compile("//i18n:international/i18n:locale/text()");
+			this.timeZoneExpression = xpath.compile("//i18n:international/i18n:tz/text()");
 			
 		} catch (XPathExpressionException e) {
 			throw new RuntimeException(e);
