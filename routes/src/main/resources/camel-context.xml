@@ -15,8 +15,8 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	
-	<!-- spring property placeholder, ignore resource not found as the file resource is for unit testing -->
-	<context:property-placeholder location="classpath:user-service.properties"
+	<!-- spring property placeholder, ignore resource not found as the file resource is for environment configuration -->
+	<context:property-placeholder location="classpath:user-service.properties,file:/etc/config/custom.properties"
 			ignore-resource-not-found="true"/>
 	
 	<cxf:cxfEndpoint id="proxyUserService"
