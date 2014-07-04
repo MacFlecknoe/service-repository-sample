@@ -4,13 +4,22 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:camel="http://camel.apache.org/schema/spring"
-		xmlns:cxf="http://camel.apache.org/schema/cxf"
+		xmlns:camel-cxf="http://camel.apache.org/schema/cxf"
+		xmlns:cxf="http://cxf.apache.org/core"
+		xmlns:p="http://cxf.apache.org/policy"
+		xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+		xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+		xmlns:jaxws="http://cxf.apache.org/jaxws" 
 		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
-		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd
+		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
+		http://www.w3.org/ns/ws-policy http://www.w3.org/2007/02/ws-policy.xsd">
 	
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
@@ -18,18 +27,35 @@
 	<!-- spring property placeholder, ignore resource not found as the file resource is for environment configuration -->
 	<context:property-placeholder location="classpath:user-service.properties,file:/etc/config/custom.properties"
 			ignore-resource-not-found="true"/>
+
+	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
+	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	
-	<cxf:cxfEndpoint id="proxyUserService"
+	<!-- looks up user from data store and validates the passed credentials -->
+	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	
+	<cxf:bus>
+		<cxf:features>
+			<cxf:logging/>
+			<p:policies />
+		</cxf:features>
+	</cxf:bus>
+	
+	<camel-cxf:cxfEndpoint id="proxyUserService"
 		address="/proxy/userService"
 		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
-		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
-		
+		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1">
+		<camel-cxf:properties>
+			<entry key="ws-security.ut.validator" value-ref="validator" />
+	 	</camel-cxf:properties>
+	</camel-cxf:cxfEndpoint>
+	
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:endpoint id="realUserService" uri="${user-service.url}?throwExceptionOnFailure=false"/>
 		<camel:route>
-			<!-- CXF consumer using MESSAGE format -->
-			<camel:from uri="cxf:bean:proxyUserService?dataFormat=MESSAGE" />
+			<!-- CXF consumer using PAYLOAD format -->
+			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
 			<!-- Need to remove the http headers which could confuse the http endpoint -->

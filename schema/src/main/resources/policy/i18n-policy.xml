@@ -7,7 +7,7 @@
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
 			<wsa:EndpointReference>
-				<wsa:Address>/userService</wsa:Address>
+				<wsa:Address>/proxy/userService</wsa:Address>
 			</wsa:EndpointReference>
 		</wsp:AppliesTo>
 		<wsp:Policy>
