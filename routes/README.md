@@ -41,7 +41,7 @@ Where policy files are feed into the engine as selected according to embedded Ap
 </wsp:AppliesTo>
 ```
 
-The policy files are stored centrally in the schema project and imported into all service projects. This allows us to 
+The policy files are stored centrally in the schema project and imported into all service and service routing projects. This allows us to 
 centrally govern which policies get exectued without having to checkout the actual code (we simply modify the rules in the policy 
 files).
 
