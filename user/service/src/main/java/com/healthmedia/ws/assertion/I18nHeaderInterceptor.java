@@ -22,9 +22,10 @@ import org.w3c.dom.Node;
 
 /**
  * <p>Adds support for Web Services Internationalization (WS-I18N). This implementation is meant to accept the specific locale and language preference(s) of the 
- * requester and act upon it. In this specific case the default locale of the requester is set to that of the international language node in the passed 
+ * requester and act upon it. The default locale of the requester should be set to that of the international language node in the passed 
  * ws-i18n header.</p>
- * <p>Setting the preferred locale is done via a configurable {@link ILocaleHandler}. Time zone can also be managed via a {@link ITimeZoneHandler}.</p>
+ * <p>As thread local locales are handled differently by different frameworks, setting the preferred locale is done via a configurable {@link ILocaleHandler}. 
+ * Similarly. time zone preferences can also be managed via a {@link ITimeZoneHandler}.</p>
  * 
  * @see http://www.w3.org/TR/2012/NOTE-ws-i18n-20120522/
  * @author mlamber7
