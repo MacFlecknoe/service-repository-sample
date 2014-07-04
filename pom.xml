@@ -28,6 +28,7 @@
 		<commons-lang3.version>3.3.2</commons-lang3.version>
 		<servlet-api.version>2.5</servlet-api.version>
 		<joda-time.version>2.3</joda-time.version>
+		<slf4j.version>1.7.7</slf4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -41,22 +42,32 @@
 				<artifactId>camel-spring</artifactId>
 				<version>${camel.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-cxf</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
 			<!-- logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
-				<version>1.7.7</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-log4j12</artifactId>
-				<version>1.7.7</version>
+				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-test-spring</artifactId>
 				<version>${camel.version}</version>
 				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-servlet</artifactId>
+				<version>${camel.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -231,6 +242,11 @@
 						<target>${java.version}</target>
 					</configuration>
 				</plugin>
+				<plugin>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-maven-plugin</artifactId>
+				<version>${camel.version}</version>
+			</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>

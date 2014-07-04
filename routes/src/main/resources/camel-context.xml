@@ -11,7 +11,10 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
 		http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd">
-
+	
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	
 	<!-- spring property placeholder, ignore resource not found as the file resource is for unit testing -->
 	<context:property-placeholder location="classpath:user-service.properties"
 			ignore-resource-not-found="true"/>
@@ -21,21 +24,21 @@
 		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
 		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
 		
-	<camelContext xmlns="http://camel.apache.org/schema/spring">
-		<propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
-		<endpoint id="realUserService" uri="${user-service.url}?throwExceptionOnFailure=false"/>
-		<route>
+	<camel:camelContext>
+		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
+		<camel:endpoint id="realUserService" uri="${user-service.url}?throwExceptionOnFailure=false"/>
+		<camel:route>
 			<!-- CXF consumer using MESSAGE format -->
-			<from uri="cxf:bean:proxyUserService=MESSAGE" />
+			<camel:from uri="cxf:bean:proxyUserService?dataFormat=MESSAGE" />
 			<!-- log input received -->
-			<to uri="log:input" />
+			<camel:to uri="log:input" />
 			<!-- Need to remove the http headers which could confuse the http endpoint -->
-			<removeHeaders pattern="CamelHttp*" />
+			<camel:removeHeaders pattern="CamelHttp*" />
 			<!-- send proxied request to real web service -->
-			<to ref="realUserService" />
+			<camel:to ref="realUserService" />
 			<!-- log answer from real web service -->
-			<to uri="log:output" />
-		</route>
-	</camelContext>
+			<camel:to uri="log:output" />
+		</camel:route>
+	</camel:camelContext>
 
 </beans>
