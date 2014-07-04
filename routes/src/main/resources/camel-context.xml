@@ -50,9 +50,13 @@
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
+	<camel-cxf:cxfEndpoint id="realUserService"
+		address="${user-service.url}"
+		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
+		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
+	
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
-		<camel:endpoint id="realUserService" uri="${user-service.url}?throwExceptionOnFailure=false"/>
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
@@ -61,7 +65,7 @@
 			<!-- Need to remove the http headers which could confuse the http endpoint -->
 			<camel:removeHeaders pattern="CamelHttp*" />
 			<!-- send proxied request to real web service -->
-			<camel:to ref="realUserService" />
+			<camel:to uri="cxf:bean:realUserService?dataFormat=PAYLOAD" />
 			<!-- log answer from real web service -->
 			<camel:to uri="log:output" />
 		</camel:route>
