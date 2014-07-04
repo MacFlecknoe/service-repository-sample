@@ -55,6 +55,7 @@
 		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
 		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
 	
+	<!-- http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html -->
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:route>
