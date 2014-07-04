@@ -28,7 +28,7 @@ Processing of the WS-Policy docs is done via the cxf bus:
 	</cxf:features>
 </cxf:bus>
 <p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
-
+<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 ```
 
 Where policy files are feed into the engine as selected according to embedded AppliesTo rules:
