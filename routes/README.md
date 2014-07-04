@@ -45,5 +45,6 @@ files).
 
 See:
 http://camel.apache.org/cxf.html 
+
 http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html
 
