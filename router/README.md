@@ -42,8 +42,8 @@ Policies are attached to endpoints/SOAP messages according to `AppliesTo` rules 
 ```
 
 Policy files should be stored in the schema project and imported into all service and service routing projects. This allows us to 
-centrally govern how policies are exectued and enforced without having to modify service code (we simply change the rules in the policy 
-files; these policies will then be imported into services via shared storage or as library dependencies). This also allows us to reuse policies across ervices in accordance with the <a href="http://soapatterns.org/design_patterns/policy_centralization">Policy Centralization</a> design pattern.
+centrally govern how policies are executed and enforced without having to modify service code (we simply change the rules in the policy 
+files; these policies will then be imported into services via shared storage or as library dependencies). This also enables us to reuse policies across services in accordance with the <a href="http://soapatterns.org/design_patterns/policy_centralization">Policy Centralization</a> design pattern.
 
 #####Additional Information
 
