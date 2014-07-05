@@ -14,11 +14,11 @@ If you want to access the content of web services messages that pass through a r
 When in PAYLOAD format, the body of the exchange is accessible as an XML document (essentially, an org.w3c.dom.Node object). 
 The key advantage of using PAYLOAD format is that you can easily process the contents of a message, by accessing the message body as an XML document.
 
-SOAP headers are not available in MESSAGE mode and SOAP processing (and therefore WS-Policy enforcement) is skipped when using MESSAGE format. Do NOT use MESSAGE format in your routes.
+SOAP headers are not available when MESSAGE format is used and SOAP processing (and therefore WS-Policy enforcement) is skipped if a route is configured to use it. Do NOT use the MESSAGE data format in your routes.
 
 ####Policy Configuration
 
-Processing of WS-Policy files is done by configuring the cxf bus and by importing `PolicyAttachment` files into the policy engine:
+Processing of WS-Policy files is done by configuring the cxf bus and by importing external `PolicyAttachment` files:
 
 ```
 <cxf:bus>
