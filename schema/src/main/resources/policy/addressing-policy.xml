@@ -3,7 +3,6 @@
 	xmlns:wsa="http://www.w3.org/2005/08/addressing">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
-			<!-- <wsp:URI>http://cxf.apache.org/greeter_control/types#wsdl11.service(ReliableGreeterService)</wsp:URI> -->
 			<wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI>
 		</wsp:AppliesTo>
 		<wsp:Policy>
