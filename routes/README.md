@@ -14,8 +14,7 @@ If you want to access the content of the Web services messages that pass through
 When in PAYLOAD format, the body of the exchange is accessible as an XML document (essentially, an org.w3c.dom.Node object). 
 The key advantage of using PAYLOAD format is that you can easily process the contents of a message, by accessing the message body as an XML document.
 
-SOAP headers are not available in MESSAGE mode and SOAP processing (and therefore WS-Policy enforcement) is skipped. This caused me some confusion at 
-first but makes sense: only the MESSAGE body is passed forward in a route in MESSAGE mode; the envelope is ignored.
+SOAP headers are not available in MESSAGE mode and SOAP processing (and therefore WS-Policy enforcement) is skipped when using MESSAGE format. This caused me some confusion at first but makes sense: only the MESSAGE body is passed forward in a route in MESSAGE mode; the envelope is ignored.
 
 Processing of the WS-Policy docs is done via the cxf bus:
 
