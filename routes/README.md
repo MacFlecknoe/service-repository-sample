@@ -5,8 +5,7 @@ Example shows how WS-Policy should be processed in the integration layer of the 
 
 Of note:
 
-If you want to access the content of the Web services messages that pass through a route, including its header information, you need to process the them 
-in the normal PAYLOAD format: 
+If you want to access the content of the Web services messages that pass through a route, including its header information, you need to process the message in PAYLOAD format: 
 
 ```
 <camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
