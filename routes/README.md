@@ -1,4 +1,4 @@
-Router Spring Project
+Router Project
 ===========
 
 Example shows how WS-Policy should be processed in the integration layer of the SOA architecture represented by the camel libraries.
