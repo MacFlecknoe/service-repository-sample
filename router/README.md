@@ -5,7 +5,7 @@ Example shows how cross cutting logic should be enforced in part via WS-Policy u
 
 Of note:
 
-If you want to access the content of web services messages that pass through a route, including its header information, you need to process messages using the PAYLOAD data format: 
+If you want to access the content of web services messages that pass through a route, including its header information, you need to configure your endpoints to use the PAYLOAD data format: 
 
 ```
 <camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
