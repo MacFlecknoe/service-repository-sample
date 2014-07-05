@@ -9,7 +9,7 @@
 		<module>schema</module>
 		<module>user-data</module>
 		<module>user</module>
-		<module>routes</module>
+		<module>router</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
