@@ -31,7 +31,7 @@ Processing of WS-Policy files is done by configuring the cxf bus and by importin
 <p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 ```
 
-Policies are attached to endpoints/SOAP messages according to `AppliesTo` rules that exist within each `PolicyAttachment`:
+Policies are attached to endpoints/SOAP messages according to `AppliesTo` rules that exist within each `PolicyAttachment` file:
 
 ```
 <wsp:AppliesTo>
