@@ -41,7 +41,7 @@ Where policy files are feed into the engine as selected according to embedded Ap
 
 The policy files are stored centrally in the schema project and imported into all service and service routing projects. This allows us to 
 centrally govern which policies get exectued without having to modify any code (we simply change the rules in the policy 
-files they will automatically be applied to the correct URLs/service contracts).
+files and they will automatically be applied to the correct URLs/service contracts when the service is republished).
 
 See:
 
