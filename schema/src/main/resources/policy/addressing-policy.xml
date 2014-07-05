@@ -1,0 +1,19 @@
+<attachments 
+	xmlns:wsp="http://www.w3.org/ns/ws-policy"
+	xmlns:wsa="http://www.w3.org/2005/08/addressing">
+	<wsp:PolicyAttachment>
+		<wsp:AppliesTo>
+			<!-- <wsp:URI>http://cxf.apache.org/greeter_control/types#wsdl11.service(ReliableGreeterService)</wsp:URI> -->
+			<wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI>
+		</wsp:AppliesTo>
+		<wsp:Policy>
+			<wsp:ExactlyOne>
+				<wsp:All>
+					<wsam:Addressing xmlns:wsam="http://www.w3.org/2007/02/addressing/metadata">
+						<wsp:Policy />
+					</wsam:Addressing>
+				</wsp:All>
+			</wsp:ExactlyOne>
+		</wsp:Policy>
+	</wsp:PolicyAttachment>
+</attachments>

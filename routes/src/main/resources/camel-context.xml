@@ -9,6 +9,7 @@
 		xmlns:p="http://cxf.apache.org/policy"
 		xmlns:wsp="http://www.w3.org/ns/ws-policy" 
 		xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+		xmlns:wsa="http://cxf.apache.org/ws/addressing"
 		xmlns:jaxws="http://cxf.apache.org/jaxws" 
 		xmlns:context="http://www.springframework.org/schema/context"
 		xsi:schemaLocation="
@@ -30,6 +31,7 @@
 
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
+	<p:externalAttachment location="classpath:policy/addressing-policy.xml"/>
 	
 	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
@@ -37,6 +39,7 @@
 	<cxf:bus>
 		<cxf:features>
 			<cxf:logging/>
+			<wsa:addressing />
 			<p:policies />
 		</cxf:features>
 	</cxf:bus>
@@ -71,5 +74,7 @@
 			<camel:to uri="log:output" />
 		</camel:route>
 	</camel:camelContext>
+	
+	<bean id="uriDomainExpressionBuilder" class="org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder"/>
 
 </beans>

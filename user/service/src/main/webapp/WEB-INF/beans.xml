@@ -20,17 +20,10 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	
 	<jaxws:endpoint id="userService"
-		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService">
-		<jaxws:properties>
-			<entry key="ws-security.ut.validator" value-ref="validator" />
-		</jaxws:properties>
-	</jaxws:endpoint>
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService"/>
 	
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
-	
-	<!-- looks up user from data store and validates the passed credentials -->
-	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
 	
 	<cxf:bus>
 		<cxf:features>
