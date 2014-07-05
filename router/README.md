@@ -16,7 +16,7 @@ The key advantage of using PAYLOAD format is that you can easily process the con
 
 SOAP headers are not available in MESSAGE mode and SOAP processing (and therefore WS-Policy enforcement) is skipped when using MESSAGE format. Do NOT use MESSAGE format in your routes.
 
-Processing of WS-Policy files is done by configuring the cxf bus and by importing the process files into the policy engine:
+Processing of WS-Policy files is done by configuring the cxf bus and by importing `PolicyAttachment` files into the policy engine:
 
 ```
 <cxf:bus>
@@ -29,7 +29,7 @@ Processing of WS-Policy files is done by configuring the cxf bus and by importin
 <p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 ```
 
-Policies are attached to endpoints/SOAP messages according to embedded AppliesTo rules:
+Policies are attached to endpoints/SOAP messages according to `AppliesTo` rules that exist within each `PolicyAttachment`:
 
 ```
 <wsp:AppliesTo>
@@ -39,9 +39,9 @@ Policies are attached to endpoints/SOAP messages according to embedded AppliesTo
 </wsp:AppliesTo>
 ```
 
-The policy files are stored centrally in the schema project and imported into all service and service routing projects. This allows us to 
-centrally govern which policies get exectued without having to modify any code (we simply change the rules in the policy 
-files and they will automatically be applied to the correct URLs/service contracts when the service is republished).
+Policy files should be stored centrally in the schema project and imported into all service and service routing projects. This allows us to 
+centrally govern which policies get exectued without having to modify service code (we simply change the rules in the policy 
+files and they will automatically be applied to when the service is republished).
 
 See:
 
