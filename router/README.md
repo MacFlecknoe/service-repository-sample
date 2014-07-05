@@ -1,7 +1,7 @@
 Router
 ===========
 
-Example shows how WS-Policy should be processed in the integration layer of the SOA architecture represented by the camel libraries.
+Example shows how cross cutting logic should be enforced in part via WS-Policy using camel. Camel routing logic exists in a seperate logical tier from our services; its mediation capabilties realize a major piece of the integration layer of the SOA reference architecture. 
 
 Of note:
 
