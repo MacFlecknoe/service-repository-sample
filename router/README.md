@@ -45,7 +45,7 @@ Policy files should be stored centrally in the schema project and imported into 
 centrally govern how policies are exectued without having to modify service code (we simply change the rules in the policy 
 files; these policies will then be imported into services via shared storage or as library dependencies).
 
-See:
+#####Additional Information
 
 http://camel.apache.org/cxf.html <br/>
 http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html
