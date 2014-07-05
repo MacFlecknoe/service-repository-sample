@@ -1,7 +1,7 @@
 Router
 ===========
 
-Example shows how cross cutting logic should be enforced in part via WS-Policy using camel. Camel routing logic exists in a seperate logical tier from our services; its mediation capabilties realize a major piece of the integration layer of the SOA reference architecture. 
+Example shows how cross cutting logic should be enforced in part via WS-Policy using camel. Camel is the core technology used to realize the integration layer capabilities defined within the SOA reference architecture. As a part of the integation layer it needs to be maintained and managed seperately from the services and service contracts themeselves.
 
 Of note:
 
