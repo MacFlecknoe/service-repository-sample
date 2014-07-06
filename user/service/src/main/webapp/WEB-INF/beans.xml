@@ -22,7 +22,7 @@
 	<jaxws:endpoint id="userService"
 		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService"/>
 	
-	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
+	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	
 	<cxf:bus>
