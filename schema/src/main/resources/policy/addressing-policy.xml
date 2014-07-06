@@ -1,6 +1,8 @@
 <attachments 
-	xmlns:wsp="http://www.w3.org/ns/ws-policy"
-	xmlns:wsa="http://www.w3.org/2005/08/addressing">
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
+	xmlns:wsa="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
 			<wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI>

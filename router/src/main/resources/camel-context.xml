@@ -29,9 +29,10 @@
 	<context:property-placeholder location="classpath:user-service.properties,file:/etc/config/custom.properties"
 			ignore-resource-not-found="true"/>
 
-	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
+	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
-	<p:externalAttachment location="classpath:policy/addressing-policy.xml"/>
+	<!-- <p:externalAttachment location="classpath:policy/addressing-policy.xml"/> -->
+	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
 	
 	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
@@ -50,6 +51,9 @@
 		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1">
 		<camel-cxf:properties>
 			<entry key="ws-security.ut.validator" value-ref="validator" />
+			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
+			<entry key="ws-security.encryption.username" value="serverAlias" />
+			<entry key="ws-security.signature.username" value="serverAlias" />
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
