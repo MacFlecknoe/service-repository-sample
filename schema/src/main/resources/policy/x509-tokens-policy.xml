@@ -50,9 +50,6 @@
 					<sp:SignedParts>
 						<sp:Body />
 					</sp:SignedParts>
-					<sp:EncryptedParts>
-						<sp:Body />
-					</sp:EncryptedParts>
 				</wsp:All>
 			</wsp:ExactlyOne>
 		</wsp:Policy>
