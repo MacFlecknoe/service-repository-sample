@@ -37,6 +37,7 @@
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk16</artifactId>
 				<version>${bcprov-jdk16.version}</version>
+				<scope>runtime</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.camel</groupId>
