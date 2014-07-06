@@ -35,7 +35,10 @@
 	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
 	
 	<!-- looks up user from data store and validates the passed credentials -->
-	<bean id="validator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	<bean id="usernameValidator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	
+	<!-- x509 keystore lookup -->
+	<bean id="keyStoreCallback" class="com.healthmedia.ws.security.KeystorePasswordCallback" />
 	
 	<cxf:bus>
 		<cxf:features>
@@ -50,7 +53,8 @@
 		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
 		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1">
 		<camel-cxf:properties>
-			<entry key="ws-security.ut.validator" value-ref="validator" />
+			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
+			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
 			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
 			<entry key="ws-security.encryption.username" value="serverAlias" />
 			<entry key="ws-security.signature.username" value="serverAlias" />

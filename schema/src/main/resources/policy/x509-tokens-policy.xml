@@ -35,17 +35,16 @@
 							</sp:RecipientToken>
 							<sp:AlgorithmSuite>
 								<wsp:Policy>
-									<sp:TripleDes />
+									<sp:TripleDesRsa15/>
 								</wsp:Policy>
 							</sp:AlgorithmSuite>
 							<sp:Layout>
 								<wsp:Policy>
-									<sp:Lax />
+									<sp:Strict/>
 								</wsp:Policy>
 							</sp:Layout>
 							<sp:IncludeTimestamp />
-							<sp:OnlySignEntireHeadersAndBody />
-							<sp:SignBeforeEncrypting />
+							<sp:OnlySignEntireHeadersAndBody/>
 						</wsp:Policy>
 					</sp:AsymmetricBinding>
 					<sp:SignedParts>
