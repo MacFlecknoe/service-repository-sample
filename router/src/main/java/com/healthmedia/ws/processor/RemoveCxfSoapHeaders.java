@@ -38,6 +38,7 @@ public class RemoveCxfSoapHeaders implements Processor {
 		List<SoapHeader> currentSoapHeaders = CastUtils.cast((List<?>) exchange.getIn().getHeader(Header.HEADER_LIST)); 
 		
 		for(SoapHeader header : currentSoapHeaders) {
+			// reinsert all headers except those that match our configured qnames
 			if(!qnames.contains(header.getName())) {
 				soapHeaders.add(header);
 			}
