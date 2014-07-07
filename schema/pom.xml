@@ -3,16 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>schema</artifactId>
 	<packaging>jar</packaging>
-	
 	<parent>
 		<groupId>com.healthmedia</groupId>
 		<artifactId>service-repository</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<!-- dependency versions -->
 	</properties>
 	<build>
 		<plugins>
