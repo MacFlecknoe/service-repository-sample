@@ -81,17 +81,6 @@
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
-			<!-- log input received -->
-			<camel:to uri="log:input" />
-			<!-- Need to remove the headers that we processed and dont want to propagate -->
-			<camel:process ref="removeWsSecurityHeaders" />
-			<!-- send proxied request to real web service -->
-			<camel:to uri="cxf:bean:realUserService?dataFormat=PAYLOAD" />
-			<!-- log answer from real web service -->
-			<camel:to uri="log:output" />
-		</camel:route>
-		<camel:route>
-			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:altProxyUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
