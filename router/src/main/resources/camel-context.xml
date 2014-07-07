@@ -28,11 +28,11 @@
 	
 	<!-- spring property placeholder, ignore resource not found as the file resource is for environment configuration -->
 	<context:property-placeholder location="classpath:user-service.properties,file:/etc/config/custom.properties"
-			ignore-resource-not-found="true"/>
+		ignore-resource-not-found="true"/>
 
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
-	<!-- <p:externalAttachment location="classpath:policy/addressing-policy.xml"/> -->
+	<p:externalAttachment location="classpath:policy/addressing-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
 	
 	<cxf:bus>
@@ -98,5 +98,4 @@
 	<bean id="usernameValidator" class="com.healthmedia.ws.security.callback.MockTokenValidator" />
 	<!-- x509 keystore lookup -->
 	<bean id="keyStoreCallback" class="com.healthmedia.ws.security.callback.KeystorePasswordCallback" />
-	
 </beans>
