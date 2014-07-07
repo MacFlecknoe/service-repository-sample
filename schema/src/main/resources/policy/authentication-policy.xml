@@ -6,6 +6,7 @@
 	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
+			<!-- may be many domain expressions applied. here there is a single EndpointReference -->
 			<wsa:EndpointReference>
 				<wsa:Address>/proxy/alt/userService</wsa:Address>
 			</wsa:EndpointReference>
