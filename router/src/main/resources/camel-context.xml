@@ -31,15 +31,15 @@
 			ignore-resource-not-found="true"/>
 
 	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->
-	<!-- <p:externalAttachment location="classpath:policy/i18n-policy.xml"/> -->
+	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	<!-- <p:externalAttachment location="classpath:policy/addressing-policy.xml"/> -->
 	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
 	
 	<!-- looks up user from data store and validates the passed credentials -->
-	<bean id="usernameValidator" class="com.healthmedia.ws.security.MockTokenValidator" />
+	<bean id="usernameValidator" class="com.healthmedia.ws.security.callback.MockTokenValidator" />
 	
 	<!-- x509 keystore lookup -->
-	<bean id="keyStoreCallback" class="com.healthmedia.ws.security.KeystorePasswordCallback" />
+	<bean id="keyStoreCallback" class="com.healthmedia.ws.security.callback.KeystorePasswordCallback" />
 	
 	<cxf:bus>
 		<cxf:features>
@@ -67,7 +67,6 @@
 		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
 		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
 	
-	<!-- http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html -->
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:route>
@@ -85,6 +84,5 @@
 	</camel:camelContext>
 	
 	<bean id="removeWsSecurityHeaders" class="com.healthmedia.ws.processor.RemoveWsSecurityHeaders" />
-	<bean id="uriDomainExpressionBuilder" class="org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder"/>
 	
 </beans>

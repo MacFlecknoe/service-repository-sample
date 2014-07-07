@@ -1,4 +1,4 @@
 # supports WS-I18N
-com.healthmedia.ws.assertion.I18nPolicyInterceptorProvider::true
+com.healthmedia.ws.i18n.policy.I18nPolicyInterceptorProvider::true
 # supports URI expressions in AppliesTo nodes (WS-Policy)
-# org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder::true
+org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder::true

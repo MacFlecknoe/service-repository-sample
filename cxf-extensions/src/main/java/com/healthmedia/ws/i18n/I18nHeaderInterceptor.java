@@ -1,4 +1,4 @@
-package com.healthmedia.ws.assertion;
+package com.healthmedia.ws.i18n;
 
 import java.util.Collection;
 

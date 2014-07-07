@@ -1,4 +1,4 @@
-package com.healthmedia.ws.security;
+package com.healthmedia.ws.security.callback;
 
 import java.io.IOException;
 

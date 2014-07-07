@@ -1,3 +1,0 @@
-com.healthmedia.ws.assertion.I18nPolicyInterceptorProvider::true
-# supports URI expressions in AppliesTo nodes (WS-Policy)
-org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder::true

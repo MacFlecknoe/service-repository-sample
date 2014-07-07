@@ -31,5 +31,4 @@
 				<p:policies />
 		</cxf:features>
 	</cxf:bus>
-	
 </beans>
