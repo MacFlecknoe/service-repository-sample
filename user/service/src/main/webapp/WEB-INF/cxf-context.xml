@@ -9,10 +9,12 @@
 	xmlns:userService="urn:healthmedia:wsdl:user:soap:v1"
 	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
 	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:soap="http://cxf.apache.org/bindings/soap"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
 		http://cxf.apache.org/core http://cxf.apache.org/schemas/core.xsd
 		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://cxf.apache.org/bindings/soap http://cxf.apache.org/schemas/configuration/soap.xsd
 		http://cxf.apache.org/policy http://cxf.apache.org/schemas/policy.xsd
 		http://www.w3.org/ns/ws-policy http://www.w3.org/2007/02/ws-policy.xsd">
 
@@ -20,7 +22,11 @@
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 	
 	<jaxws:endpoint id="userService"
-		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService"/>
+		implementor="com.healthmedia.ws.wsdl.user.v1.UserServiceImpl" address="/userService">
+		<jaxws:binding>
+			<soap:soapBinding mtomEnabled="true" version="1.2"/>
+		</jaxws:binding>
+	</jaxws:endpoint>
 	
 	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>

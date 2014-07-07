@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <definitions 
-	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap12/"
 	xmlns:tns="urn:healthmedia:wsdl:user:soap:v1" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:user-v1="urn:healthmedia:wsdl:user:v1"
@@ -19,7 +19,7 @@
 	<binding name="userSoapServiceBinding" type="user-v1:userService">
 		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
 		<operation name="importUser">
-			<soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:importUser" />
+			<soap:operation style="document" soapAction="urn:healthmedia:wsdl:user:soap:v1:importUser" />
 			<input>
 				<soap:body use="literal" />
 			</input>

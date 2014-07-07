@@ -13,6 +13,7 @@
 		xmlns:wsa="http://cxf.apache.org/ws/addressing"
 		xmlns:jaxws="http://cxf.apache.org/jaxws" 
 		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:soap="http://cxf.apache.org/bindings/soap"
 		xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
@@ -48,6 +49,9 @@
 		address="/proxy/userService"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
 		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
+		<camel-cxf:binding>
+			<soap:soapBinding version="1.2" />
+		</camel-cxf:binding> 
 		<camel-cxf:properties>
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
@@ -62,6 +66,9 @@
 		address="/proxy/alt/userService"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
 		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
+		<camel-cxf:binding>
+			<soap:soapBinding version="1.2" />
+		</camel-cxf:binding> 
 		<camel-cxf:properties>
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
@@ -74,7 +81,11 @@
 	<camel-cxf:cxfEndpoint id="realUserService"
 		address="${user-service.url}"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
-		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1" />
+		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1" >
+		<camel-cxf:binding>
+			<soap:soapBinding version="1.2" />
+		</camel-cxf:binding> 		
+	</camel-cxf:cxfEndpoint>
 	
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
@@ -84,8 +95,6 @@
 			<camel:from uri="cxf:bean:altProxyUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
-			<!-- Need to remove the headers that we processed and dont want to propagate -->
-			<camel:process ref="removeWsSecurityHeaders" />
 			<!-- send proxied request to real web service -->
 			<camel:to uri="cxf:bean:realUserService?dataFormat=PAYLOAD" />
 			<!-- log answer from real web service -->
@@ -93,7 +102,6 @@
 		</camel:route>
 	</camel:camelContext>
 	
-	<bean id="removeWsSecurityHeaders" class="com.healthmedia.ws.processor.RemoveWsSecurityHeaders" />
 	<!-- looks up user from data store and validates the passed credentials -->
 	<bean id="usernameValidator" class="com.healthmedia.ws.security.callback.MockTokenValidator" />
 	<!-- x509 keystore lookup -->
