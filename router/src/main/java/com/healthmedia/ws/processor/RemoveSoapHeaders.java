@@ -1,4 +1,4 @@
-package com.healthmedia.ws.proxy.service;
+package com.healthmedia.ws.processor;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -18,15 +18,15 @@ import org.apache.cxf.headers.Header;
  * @author mlamber7
  *
  */
-public class RemoveSoapHeaderProcessor implements Processor {
+public class RemoveSoapHeaders implements Processor {
 	
 	private final Collection<QName> qnames;
 	
-	public RemoveSoapHeaderProcessor(QName qname) {
+	public RemoveSoapHeaders(QName qname) {
 		this(Collections.singletonList(qname));
 	}
 	
-	public RemoveSoapHeaderProcessor(Collection<QName> qnames) {
+	public RemoveSoapHeaders(Collection<QName> qnames) {
 		this.qnames = qnames;
 	}
 	
