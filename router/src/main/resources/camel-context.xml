@@ -45,8 +45,8 @@
 	
 	<camel-cxf:cxfEndpoint id="proxyUserService"
 		address="/proxy/userService"
-		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
-		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1">
+		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
+		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
 		<camel-cxf:properties>
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
@@ -58,8 +58,8 @@
 	
 	<camel-cxf:cxfEndpoint id="realUserService"
 		address="${user-service.url}"
-		endpointName="us:userSoapServicePort" serviceName="us:userSoapServicePorts"
-		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:us="urn:healthmedia:wsdl:user:soap:v1" />
+		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
+		wsdlURL="classpath:service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1" />
 	
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
