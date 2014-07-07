@@ -50,3 +50,8 @@ files; these policies will then be imported into services via shared storage or 
 http://camel.apache.org/cxf.html <br/>
 http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html
 http://soapatterns.org/design_patterns/policy_centralization
+
+
+#####Notes
+
+Due to a bug in CXF any whitespace introduced after the end of the Body tag in a SOAP message will creep into the payload. This causes a problem when signing the Body on the server as the generated hash will no longer equate to what was sent by the client. In SOAPUI be sure to set the "Strip Whitespace" setting on your messages to true when using encryption to circumvent this problem when running your tests.
