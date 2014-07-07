@@ -57,8 +57,8 @@
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
 			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
-			<entry key="ws-security.encryption.username" value="serverAlias" />
-			<entry key="ws-security.signature.username" value="serverAlias" />
+			<entry key="ws-security.encryption.username" value="server-alias" />
+			<entry key="ws-security.signature.username" value="server-alias" />
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	

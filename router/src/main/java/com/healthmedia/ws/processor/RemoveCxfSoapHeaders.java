@@ -1,5 +1,6 @@
 package com.healthmedia.ws.processor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -18,26 +19,29 @@ import org.apache.cxf.headers.Header;
  * @author mlamber7
  *
  */
-public class RemoveSoapHeaders implements Processor {
+public class RemoveCxfSoapHeaders implements Processor {
 	
 	private final Collection<QName> qnames;
 	
-	public RemoveSoapHeaders(QName qname) {
+	public RemoveCxfSoapHeaders(QName qname) {
 		this(Collections.singletonList(qname));
 	}
 	
-	public RemoveSoapHeaders(Collection<QName> qnames) {
+	public RemoveCxfSoapHeaders(Collection<QName> qnames) {
 		this.qnames = qnames;
 	}
 	
 	public void process(Exchange exchange) throws Exception {
 		
-		List<SoapHeader> soapHeaders = CastUtils.cast((List<?>) exchange.getIn().getHeader(Header.HEADER_LIST)); // org.apache.cxf.headers.header.list
+		List<SoapHeader> soapHeaders = new ArrayList<SoapHeader>();
+		// retrieve all cxf headers: org.apache.cxf.headers.header.list
+		List<SoapHeader> currentSoapHeaders = CastUtils.cast((List<?>) exchange.getIn().getHeader(Header.HEADER_LIST)); 
 		
-		for(SoapHeader header : soapHeaders) {
-			if(qnames.contains(header.getName())){
-				soapHeaders.remove(header);
+		for(SoapHeader header : currentSoapHeaders) {
+			if(!qnames.contains(header.getName())) {
+				soapHeaders.add(header);
 			}
 		}
+		exchange.getIn().setHeader(Header.HEADER_LIST, soapHeaders);
 	}
 }
