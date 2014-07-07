@@ -30,7 +30,7 @@
 	<context:property-placeholder location="classpath:user-service.properties,file:/etc/config/custom.properties"
 			ignore-resource-not-found="true"/>
 
-	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->
+	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	<!-- <p:externalAttachment location="classpath:policy/addressing-policy.xml"/> -->
 	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
@@ -43,8 +43,23 @@
 		</cxf:features>
 	</cxf:bus>
 	
+	<!-- decorate with x509 token security -->
 	<camel-cxf:cxfEndpoint id="proxyUserService"
 		address="/proxy/userService"
+		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
+		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
+		<camel-cxf:properties>
+			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
+			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
+			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
+			<entry key="ws-security.encryption.username" value="server-alias" />
+			<entry key="ws-security.signature.username" value="server-alias" />
+	 	</camel-cxf:properties>
+	</camel-cxf:cxfEndpoint>
+	
+	<!-- decorate with username token security -->
+	<camel-cxf:cxfEndpoint id="altProxyUserService"
+		address="/proxy/alt/userService"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
 		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
 		<camel-cxf:properties>
@@ -66,6 +81,18 @@
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
+			<!-- log input received -->
+			<camel:to uri="log:input" />
+			<!-- Need to remove the headers that we processed and dont want to propagate -->
+			<camel:process ref="removeWsSecurityHeaders" />
+			<!-- send proxied request to real web service -->
+			<camel:to uri="cxf:bean:realUserService?dataFormat=PAYLOAD" />
+			<!-- log answer from real web service -->
+			<camel:to uri="log:output" />
+		</camel:route>
+		<camel:route>
+			<!-- CXF consumer using PAYLOAD format -->
+			<camel:from uri="cxf:bean:altProxyUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
 			<!-- Need to remove the headers that we processed and dont want to propagate -->
