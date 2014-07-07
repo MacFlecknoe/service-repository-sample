@@ -2,6 +2,7 @@
 <!-- Configures the Camel Context -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:util="http://www.springframework.org/schema/util" 
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xmlns:camel="http://camel.apache.org/schema/spring"
 		xmlns:camel-cxf="http://camel.apache.org/schema/cxf"
@@ -74,8 +75,10 @@
 			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
-			<!-- Need to remove the http headers which could confuse the http endpoint -->
-			<camel:removeHeaders pattern="CamelHttp*" />
+			<!-- Need to remove the headers from our soap call that we have processed -->
+			<!-- <camel:removeHeaders pattern="*" /> -->
+			<!-- Need to remove the headers from our soap call that we process in our integration layer -->
+			<camel:process ref="removeProcessedSoapHeaders" />
 			<!-- send proxied request to real web service -->
 			<camel:to uri="cxf:bean:realUserService?dataFormat=PAYLOAD" />
 			<!-- log answer from real web service -->
@@ -84,5 +87,13 @@
 	</camel:camelContext>
 	
 	<bean id="uriDomainExpressionBuilder" class="org.apache.cxf.ws.policy.attachment.external.URIDomainExpressionBuilder"/>
-
+	
+	<bean id="removeProcessedSoapHeaders" class="com.healthmedia.ws.proxy.service.RemoveSoapHeaderProcessor">
+		<constructor-arg ref="qName" />
+	</bean>
+	<bean id="qName" class="javax.xml.namespace.QName">
+		<constructor-arg index="0" value="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"/>
+		<constructor-arg index="1" value="Security"/>
+	</bean>
+	
 </beans>
