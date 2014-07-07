@@ -54,4 +54,4 @@ http://soapatterns.org/design_patterns/policy_centralization
 
 #####Notes
 
-Due to a bug in cxf any whitespace introduced after the end of the Body tag in a SOAP message will creep into the payload. This causes a problem when signing the the Body as the hash will no longer equate to the hash that was initially generaged by the client. In SOAPUI be sure to set the "Strip Whitespace" setting on your messages to true when using encryption.
+Due to a bug in cxf any whitespace introduced after the end of the Body tag in a SOAP message will creep into the payload. This causes a problem when signing the the Body as the hash will no longer equate to the hash that was initially generaged by the client. In SOAPUI be sure to set the "Strip Whitespace" setting on your messages to true when using encryption to circumvent this problem when running your tests.
