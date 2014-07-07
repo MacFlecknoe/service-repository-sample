@@ -10,9 +10,11 @@
 		<module>user-data</module>
 		<module>user</module>
 		<module>router</module>
+		<module>cxf-extensions</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<camel.version>2.13.1</camel.version>
 		<java.version>1.7</java.version>
 		<jaxb-impl.version>2.2.7</jaxb-impl.version>

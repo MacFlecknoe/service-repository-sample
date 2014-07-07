@@ -43,7 +43,6 @@
 									<sp:Strict/>
 								</wsp:Policy>
 							</sp:Layout>
-							
 							<sp:OnlySignEntireHeadersAndBody/>
 						</wsp:Policy>
 					</sp:AsymmetricBinding>

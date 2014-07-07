@@ -19,6 +19,11 @@
 			<artifactId>user-artifacts</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.healthmedia</groupId>
+			<artifactId>cxf-extensions</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		<!-- crypto -->
 		<dependency>
 			<groupId>org.bouncycastle</groupId>
