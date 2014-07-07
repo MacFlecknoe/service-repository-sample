@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="user-soap-v1-routes" resourceRoot="" soapui-version="5.0.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="userSoapServiceBinding" type="wsdl" bindingName="{urn:healthmedia:wsdl:user:soap:v1}userSoapServiceBinding" soapVersion="1_1" anonymous="optional" definition="file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/service/user-soap-v1.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/service/user-soap-v1.wsdl"><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/service/user-soap-v1.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:healthmedia:wsdl:user:soap:v1" name="userSoapService" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:healthmedia:wsdl:user:soap:v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:user-v1="urn:healthmedia:wsdl:user:v1" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsa="http://www.w3.org/2007/05/addressing/metadata" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>Version 1.0</documentation>
+  <import location="./user-v1.wsdl" namespace="urn:healthmedia:wsdl:user:v1"/>
+  <binding name="userSoapServiceBinding" type="user-v1:userService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="importUser">
+      <soap:operation soapAction="urn:healthmedia:wsdl:user:soap:v1:importUser"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="error">
+        <soap:fault use="literal" name="error"/>
+      </fault>
+    </operation>
+  </binding>
+  <!--naming convention: this represents a factory class when generated. should be named according to its interface + function: UserServicePorts-->
+  <service name="userSoapServicePorts">
+    <!--naming convention: represents a getter method on the factory class defined above. should be names after interface + function: UserServiceHttpPort-->
+    <port binding="tns:userSoapServiceBinding" name="userSoapServicePort">
+      <soap:address location="http://localhost:8080/user-service/userService"/>
+    </port>
+  </service>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/service/user-v1.wsdl</con:url><con:content><![CDATA[<definitions targetNamespace="urn:healthmedia:wsdl:user:v1" name="userService" xmlns:tns="urn:healthmedia:wsdl:user:v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:user="urn:healthmedia:schema:user:v1" xmlns:common="urn:healthmedia:schema:common:v1" xmlns:common-error="urn:healthmedia:schema:common-error:v1" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>Version 1.0</documentation>
+  <types>
+    <xsd:schema targetNamespace="urn:healthmedia:wsdl:user:v1" elementFormDefault="qualified">
+      <xsd:import schemaLocation="../schema/entity/user-v1.xsd" namespace="urn:healthmedia:schema:user:v1"/>
+      <xsd:import schemaLocation="../schema/common/common-error-v1.xsd" namespace="urn:healthmedia:schema:common-error:v1"/>
+      <!--generated WSDL doesn't function properly in ode unless all messages are declared within the source WSDL-->
+      <xsd:element name="importUserRequest">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="user:user"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="importUserResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element ref="user:user"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="error" type="common-error:errorType"/>
+    </xsd:schema>
+  </types>
+  <message name="error">
+    <part element="tns:error" name="error"/>
+  </message>
+  <message name="importUserRequest">
+    <part element="tns:importUserRequest" name="parameters"/>
+  </message>
+  <message name="importUserResponse">
+    <part element="tns:importUserResponse" name="parameters"/>
+  </message>
+  <!--interface of generated java service is named after the portType name (e.g. UserService.java)-->
+  <portType name="userService">
+    <operation name="importUser">
+      <documentation>This service allows for the import of complete AND partial user profile information. As such it is not considered a core
+				capability of the entity service but rather merely a supporting capability. Data quality is not strictly enforced here as
+				completeness of data is not a requirement.</documentation>
+      <input message="tns:importUserRequest"/>
+      <output message="tns:importUserResponse"/>
+      <fault name="error" message="tns:error"/>
+    </operation>
+  </portType>
+  <!--expose partner link to BPEL process-->
+  <plnk:partnerLinkType name="userServicePartnerLinkType">
+    <plnk:role name="userServiceProvider" portType="tns:userService"/>
+  </plnk:partnerLinkType>
+  <!--expose entity id to BPEL processes for correlation-->
+  <bpws:property name="userId" type="xsd:string"/>
+  <!--map correlation id to message-->
+  <bpws:propertyAlias messageType="tns:importUserRequest" part="parameters" propertyName="tns:userId">
+    <bpws:query>/user:user/common:id</bpws:query>
+  </bpws:propertyAlias>
+</definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/entity/user-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:user:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:common="urn:healthmedia:schema:common:v1" xmlns:dataSource="urn:healthmedia:schema:data-source:v1" xmlns:tns="urn:healthmedia:schema:user:v1">
+  <xsd:import namespace="urn:healthmedia:schema:common:v1" schemaLocation="../common/common-v1.xsd"/>
+  <xsd:import namespace="urn:healthmedia:schema:data-source:v1" schemaLocation="./data-source-v1.xsd"/>
+  <xsd:complexType name="userType">
+    <xsd:annotation>
+      <xsd:documentation>Represents End User</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType">
+        <xsd:sequence>
+          <xsd:element name="firstName" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="lastName" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="gender" type="tns:genderEnum" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:simpleType name="genderEnum">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="Male"/>
+      <xsd:enumeration value="Female"/>
+      <xsd:enumeration value="Transgender"/>
+      <xsd:enumeration value="Other"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:complexType name="userCollectionType">
+    <xsd:annotation>
+      <xsd:documentation>Collection of Users</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="userData" type="tns:userType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="userDataType">
+    <xsd:annotation>
+      <xsd:documentation>Represents Key/Value Attribute assigned to a User</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType">
+        <xsd:sequence>
+          <xsd:element name="collectionDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="data" type="tns:dataType" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="dataSource" type="dataSource:dataSourceType" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="user" type="tns:userType" minOccurs="0" maxOccurs="1" nillable="true"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dataType">
+    <xsd:sequence>
+      <xsd:choice>
+        <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+        <xsd:element name="dataDefinition" type="tns:dataDefinitionType" minOccurs="0" maxOccurs="1" nillable="true"/>
+      </xsd:choice>
+      <xsd:element name="value" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="dataDefinitionType">
+    <xsd:annotation>
+      <xsd:documentation>Represents a User Data Attribute Name</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType"/>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="userDataCollectionType">
+    <xsd:annotation>
+      <xsd:documentation>Collection of User Metrics</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="userData" type="tns:userDataType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="userData" type="tns:userDataType"/>
+  <xsd:element name="userDataCollection" type="tns:userDataCollectionType"/>
+  <xsd:element name="user" type="tns:userType"/>
+  <xsd:element name="userCollection" type="tns:userCollectionType"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/common/common-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:common:v1" jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:tns="urn:healthmedia:schema:common:v1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../external/xml.xsd"/>
+  <xsd:import namespace="http://www.w3.org/2005/Atom" schemaLocation="../external/atom-v1.xsd"/>
+  <xsd:complexType name="entityType" abstract="true">
+    <xsd:sequence>
+      <xsd:element name="id" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+      <xsd:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="1" nillable="true"/>
+      <xsd:element name="createDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true"/>
+      <xsd:element name="updateDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true"/>
+      <xsd:element name="extension" type="tns:extensionType" minOccurs="0" maxOccurs="1" nillable="true"/>
+    </xsd:sequence>
+    <xsd:attribute ref="tns:version"/>
+    <xsd:attributeGroup ref="tns:commonAttributes"/>
+  </xsd:complexType>
+  <xsd:attribute name="version">
+    <xsd:annotation>
+      <xsd:documentation>Used to enable optimistic locking of entity objects</xsd:documentation>
+    </xsd:annotation>
+    <xsd:simpleType>
+      <xsd:restriction base="xsd:integer">
+        <xsd:minInclusive value="0"/>
+      </xsd:restriction>
+    </xsd:simpleType>
+  </xsd:attribute>
+  <xsd:attributeGroup name="commonAttributes">
+    <xsd:anyAttribute namespace="##other"/>
+  </xsd:attributeGroup>
+  <xsd:complexType name="extensionType">
+    <xsd:annotation>
+      <xsd:documentation>Bucket that can be used by partners to pass custom elements to a service</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+    <xsd:attributeGroup ref="tns:commonAttributes"/>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/external/xml.xsd</con:url><con:content><![CDATA[<?xml-stylesheet href="../2008/09/xsd.xsl" type="text/xsl"?>
+<xs:schema targetNamespace="http://www.w3.org/XML/1998/namespace" xml:lang="en" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.w3.org/1999/xhtml">
+  <xs:annotation>
+    <xs:documentation>
+      <div>
+        <h1>About the XML namespace</h1>
+        <div class="bodytext">
+          <p>This schema document describes the XML namespace, in a form
+						suitable for import by other schema documents.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/XML/1998/namespace.html">http://www.w3.org/XML/1998/namespace.html</a>
+            and
+            <a href="http://www.w3.org/TR/REC-xml">http://www.w3.org/TR/REC-xml</a>
+            for information
+						about this namespace.
+          </p>
+          <p>Note that local names in this namespace are intended to be
+						defined only by the World Wide Web Consortium or its subgroups.
+						The names currently defined in this namespace are listed below.
+						They should not be used with conflicting semantics by any Working
+						Group, specification, or document instance.</p>
+          <p>
+            See further below in this document for more information about
+            <a href="#usage">how to refer to this schema document from your own
+							XSD schema documents</a>
+            and about
+            <a href="#nsversioning">the
+							namespace-versioning policy governing this schema document</a>
+            .
+          </p>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:attribute name="lang">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>lang (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+						is a language code for the natural language of the content of
+						any element; its value is inherited. This name is reserved
+						by virtue of its definition in the XML specification.</p>
+        </div>
+        <div>
+          <h4>Notes</h4>
+          <p>Attempting to install the relevant ISO 2- and 3-letter
+						codes as the enumerated possible values is probably never
+						going to be a realistic possibility.</p>
+          <p>
+            See BCP 47 at
+            <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">http://www.rfc-editor.org/rfc/bcp/bcp47.txt</a>
+            and the IANA language subtag registry at
+            <a href="http://www.iana.org/assignments/language-subtag-registry">http://www.iana.org/assignments/language-subtag-registry</a>
+            for further information.
+          </p>
+          <p>The union allows for the 'un-declaration' of xml:lang with
+						the empty string.</p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:union memberTypes="xs:language">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value=""/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:union>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="space">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>space (as an attribute name)</h3>
+          <p>denotes an attribute whose
+						value is a keyword indicating what whitespace processing
+						discipline is intended for the content of the element; its
+						value is inherited. This name is reserved by virtue of its
+						definition in the XML specification.</p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:NCName">
+        <xs:enumeration value="default"/>
+        <xs:enumeration value="preserve"/>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:attribute>
+  <xs:attribute name="base" type="xs:anyURI">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>base (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+						provides a URI to be used as the base for interpreting any
+						relative URIs in the scope of the element on which it
+						appears; its value is inherited. This name is reserved
+						by virtue of its definition in the XML Base specification.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/TR/xmlbase/">http://www.w3.org/TR/xmlbase/</a>
+            for information about this attribute.
+          </p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attribute name="id" type="xs:ID">
+    <xs:annotation>
+      <xs:documentation>
+        <div>
+          <h3>id (as an attribute name)</h3>
+          <p>denotes an attribute whose value
+						should be interpreted as if declared to be of type ID.
+						This name is reserved by virtue of its definition in the
+						xml:id specification.</p>
+          <p>
+            See
+            <a href="http://www.w3.org/TR/xml-id/">http://www.w3.org/TR/xml-id/</a>
+            for information about this attribute.
+          </p>
+        </div>
+      </xs:documentation>
+    </xs:annotation>
+  </xs:attribute>
+  <xs:attributeGroup name="specialAttrs">
+    <xs:attribute ref="xml:base"/>
+    <xs:attribute ref="xml:lang"/>
+    <xs:attribute ref="xml:space"/>
+    <xs:attribute ref="xml:id"/>
+  </xs:attributeGroup>
+  <xs:annotation>
+    <xs:documentation>
+      <div>
+        <h3>Father (in any context at all)</h3>
+        <div class="bodytext">
+          <p>denotes Jon Bosak, the chair of
+						the original XML Working Group. This name is reserved by
+						the following decision of the W3C XML Plenary and
+						XML Coordination groups:</p>
+          <blockquote>
+            <p>In appreciation for his vision, leadership and
+							dedication the W3C XML Plenary on this 10th day of
+							February, 2000, reserves for Jon Bosak in perpetuity
+							the XML name "xml:Father".</p>
+          </blockquote>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>
+      <div xml:id="usage" id="usage">
+        <h2>
+          <a name="usage">About this schema document</a>
+        </h2>
+        <div class="bodytext">
+          <p>
+            This schema defines attributes and an attribute group suitable
+						for use by schemas wishing to allow
+            <code>xml:base</code>
+            ,
+            <code>xml:lang</code>
+            ,
+            <code>xml:space</code>
+            or
+            <code>xml:id</code>
+            attributes on elements they define.
+          </p>
+          <p>To enable this, such a schema must import this schema for
+						the XML namespace, e.g. as follows:</p>
+          <pre>&lt;schema . . .>
+						. . .
+						&lt;import namespace="http://www.w3.org/XML/1998/namespace"
+						schemaLocation="http://www.w3.org/2001/xml.xsd"/></pre>
+          <p>or</p>
+          <pre>&lt;import namespace="http://www.w3.org/XML/1998/namespace"
+						schemaLocation="http://www.w3.org/2009/01/xml.xsd"/></pre>
+          <p>Subsequently, qualified reference to any of the attributes or the
+						group defined below will have the desired effect, e.g.</p>
+          <pre>&lt;type . . .>
+						. . .
+						&lt;attributeGroup ref="xml:specialAttrs"/></pre>
+          <p>will define a type which will schema-validate an instance element
+						with any of those attributes.</p>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>
+      <div id="nsversioning" xml:id="nsversioning">
+        <h2>
+          <a name="nsversioning">Versioning policy for this schema document</a>
+        </h2>
+        <div class="bodytext">
+          <p>
+            In keeping with the XML Schema WG's standard versioning
+						policy, this schema document will persist at
+            <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            .
+          </p>
+          <p>
+            At the date of issue it can also be found at
+            <a href="http://www.w3.org/2001/xml.xsd">http://www.w3.org/2001/xml.xsd</a>
+            .
+          </p>
+          <p>
+            The schema document at that URI may however change in the future,
+						in order to remain compatible with the latest version of XML
+						Schema itself, or with the XML namespace itself. In other words,
+						if the XML Schema or XML namespaces change, the version of this
+						document at
+            <a href="http://www.w3.org/2001/xml.xsd">http://www.w3.org/2001/xml.xsd</a>
+            will change accordingly; the version at
+            <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            will not change.
+          </p>
+          <p>Previous dated (and unchanging) versions of this schema
+						document are at:</p>
+          <ul>
+            <li>
+              <a href="http://www.w3.org/2009/01/xml.xsd">http://www.w3.org/2009/01/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2007/08/xml.xsd">http://www.w3.org/2007/08/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2004/10/xml.xsd">http://www.w3.org/2004/10/xml.xsd</a>
+            </li>
+            <li>
+              <a href="http://www.w3.org/2001/03/xml.xsd">http://www.w3.org/2001/03/xml.xsd</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </xs:documentation>
+  </xs:annotation>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/external/atom-v1.xsd</con:url><con:content><![CDATA[<xs:schema targetNamespace="http://www.w3.org/2005/Atom" elementFormDefault="qualified" attributeFormDefault="unqualified" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>This version of the Atom schema is based on version 1.0 of the format specifications,
+			found here http://www.atomenabled.org/developers/syndication/atom-format-spec.php.</xs:documentation>
+  </xs:annotation>
+  <xs:annotation>
+    <xs:documentation>An Atom document may have two root elements, feed and entry, as defined in section 2.</xs:documentation>
+  </xs:annotation>
+  <xs:element name="feed" type="atom:feedType"/>
+  <xs:element name="entry" type="atom:entryType"/>
+  <xs:complexType name="textType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom text construct is defined in section 3.1 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any namespace="http://www.w3.org/1999/xhtml" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute name="type">
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="text"/>
+          <xs:enumeration value="html"/>
+          <xs:enumeration value="xhtml"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="personType">
+    <xs:annotation>
+      <xs:documentation>The Atom person construct is defined in section 3.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="uri" type="atom:uriType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="email" type="atom:emailType" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:simpleType name="emailType">
+    <xs:annotation>
+      <xs:documentation>Schema definition for an email address.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+      <xs:pattern value="\w+@(\w+\.)+\w+"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="feedType">
+    <xs:annotation>
+      <xs:documentation>The Atom feed construct is defined in section 4.1.1 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="3" maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="generator" type="atom:generatorType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="icon" type="atom:iconType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="id" type="atom:idType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="logo" type="atom:logoType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="subtitle" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="entry" type="atom:entryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="entryType">
+    <xs:annotation>
+      <xs:documentation>The Atom entry construct is defined in section 4.1.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="content" type="atom:contentType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="id" type="atom:idType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="published" type="atom:dateTimeType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="source" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="summary" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="1" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="1" maxOccurs="1"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="contentType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom content construct is defined in section 4.1.3 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string"/>
+    <xs:attribute name="src" type="xs:anyURI"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="categoryType">
+    <xs:annotation>
+      <xs:documentation>The Atom cagegory construct is defined in section 4.2.2 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="term" type="xs:string" use="required"/>
+    <xs:attribute name="scheme" type="xs:anyURI" use="optional"/>
+    <xs:attribute name="label" type="xs:string" use="optional"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="generatorType">
+    <xs:annotation>
+      <xs:documentation>The Atom generator element is defined in section 4.2.4 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="uri" use="optional" type="xs:anyURI"/>
+        <xs:attribute name="version" use="optional" type="xs:string"/>
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="iconType">
+    <xs:annotation>
+      <xs:documentation>The Atom icon construct is defined in section 4.2.5 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="idType">
+    <xs:annotation>
+      <xs:documentation>The Atom id construct is defined in section 4.2.6 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="linkType" mixed="true">
+    <xs:annotation>
+      <xs:documentation>The Atom link construct is defined in section 3.4 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:attribute name="href" use="required" type="xs:anyURI"/>
+    <xs:attribute name="rel" type="xs:string" use="optional"/>
+    <xs:attribute name="type" use="optional" type="xs:string"/>
+    <xs:attribute name="hreflang" use="optional" type="xs:NMTOKEN"/>
+    <xs:attribute name="title" use="optional" type="xs:string"/>
+    <xs:attribute name="length" use="optional" type="xs:positiveInteger"/>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="logoType">
+    <xs:annotation>
+      <xs:documentation>The Atom logo construct is defined in section 4.2.8 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="sourceType">
+    <xs:annotation>
+      <xs:documentation>The Atom source construct is defined in section 4.2.11 of the format spec.</xs:documentation>
+    </xs:annotation>
+    <xs:choice maxOccurs="unbounded">
+      <xs:element name="author" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="category" type="atom:categoryType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="contributor" type="atom:personType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="generator" type="atom:generatorType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="icon" type="atom:iconType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="id" type="atom:idType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="link" type="atom:linkType" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="logo" type="atom:logoType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="rights" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="subtitle" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="title" type="atom:textType" minOccurs="0" maxOccurs="1"/>
+      <xs:element name="updated" type="atom:dateTimeType" minOccurs="0" maxOccurs="1"/>
+      <xs:any namespace="##other" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:choice>
+    <xs:attributeGroup ref="atom:commonAttributes"/>
+  </xs:complexType>
+  <xs:complexType name="uriType">
+    <xs:simpleContent>
+      <xs:extension base="xs:anyURI">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="dateTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime">
+        <xs:attributeGroup ref="atom:commonAttributes"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:attributeGroup name="commonAttributes">
+    <xs:anyAttribute namespace="##other"/>
+  </xs:attributeGroup>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/entity/data-source-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:data-source:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:healthmedia:schema:data-source:v1" xmlns:common="urn:healthmedia:schema:common:v1">
+  <xsd:import namespace="urn:healthmedia:schema:common:v1" schemaLocation="../common/common-v1.xsd"/>
+  <xsd:complexType name="dataSourceType">
+    <xsd:complexContent>
+      <xsd:extension base="common:entityType">
+        <xsd:sequence>
+          <xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
+        </xsd:sequence>
+      </xsd:extension>
+    </xsd:complexContent>
+  </xsd:complexType>
+  <xsd:complexType name="dataSourceCollectionType">
+    <xsd:annotation>
+      <xsd:documentation>Collection of Data Sources</xsd:documentation>
+    </xsd:annotation>
+    <xsd:sequence>
+      <xsd:element name="dataSource" type="tns:dataSourceType" minOccurs="1" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="dataSource" type="tns:dataSourceType"/>
+  <xsd:element name="dataSourceCollection" type="tns:dataSourceCollectionType"/>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/common/common-error-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:common-error:v1" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:common="urn:healthmedia:schema:common:v1" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:healthmedia:schema:common-error:v1">
+  <xsd:import namespace="urn:healthmedia:schema:common:v1" schemaLocation="common-v1.xsd"/>
+  <xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="../external/xml.xsd"/>
+  <xsd:element name="error" type="tns:errorType"/>
+  <xsd:complexType name="errorType">
+    <xsd:sequence>
+      <xsd:element name="code" type="xsd:string" minOccurs="0"/>
+      <xsd:element name="reasons" type="tns:reasonCollectionType" minOccurs="0" maxOccurs="1"/>
+      <xsd:element name="subErrors" type="tns:errorCollectionType" minOccurs="0" maxOccurs="1"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="reasonType">
+    <xsd:simpleContent>
+      <xsd:extension base="xsd:string">
+        <!--see http://www.ietf.org/rfc/rfc3066.txt for valid values-->
+        <xsd:attribute ref="xml:lang" use="required"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+  <xsd:complexType name="reasonCollectionType">
+    <xsd:sequence>
+      <xsd:element name="reason" type="tns:reasonType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="errorCollectionType">
+    <xsd:sequence>
+      <xsd:element name="error" type="tns:errorType" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:healthmedia:wsdl:user:soap:v1:importUser" name="importUser" bindingOperationName="importUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="x509 Route Request" outgoingWss="x509"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@strip-whitespaces">true</con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/router/proxy/userService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
+   <soapenv:Header>
+	<i18n:international>
+		<i18n:locale>en-US</i18n:locale>  
+	</i18n:international>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:importUserRequest>
+         <urn1:user urn2:version="1">
+         	<urn2:id>4a</urn2:id>
+         </urn1:user>
+      </urn:importUserRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1:importUser"/><con:wsrmConfig version="1.2"/></con:call><con:call name="UsernameToken Route Request" outgoingWss="username"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/router/proxy/alt/userService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
+   <soapenv:Header>
+	<i18n:international>
+		<i18n:locale>en-US</i18n:locale>  
+	</i18n:international>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:importUserRequest>
+         <urn1:user urn2:version="1">
+         	<urn2:id>4a</urn2:id>
+         </urn1:user>
+      </urn:importUserRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1:importUser"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>/home/mlamber7/Programming/service-repository-sample/router/src/main/resources/keystore/client_store.jks</con:source><con:password>password</con:password><con:type>KEYSTORE</con:type></con:crypto><con:outgoing mustUnderstand="true"><con:name>x509</con:name><con:entry type="Signature" username="client-alias" password="password"><con:configuration><crypto>client_store.jks</crypto><keyIdentifierType>1</keyIdentifierType><signatureAlgorithm/><signatureCanonicalization/><useSingleCert>true</useSingleCert><digestAlgorithm/><signaturePart><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="id" value=""/>
+  <con:entry key="name" value="Body"/>
+  <con:entry key="namespace" value="http://schemas.xmlsoap.org/soap/envelope/"/>
+  <con:entry key="enc" value="Content"/>
+</xml-fragment>]]></signaturePart></con:configuration></con:entry></con:outgoing><con:outgoing mustUnderstand="true"><con:name>username</con:name><con:entry type="Username" username="username" password="password"><con:configuration><addCreated>true</addCreated><addNonce>true</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
