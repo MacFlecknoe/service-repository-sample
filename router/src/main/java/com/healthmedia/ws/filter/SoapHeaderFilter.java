@@ -22,6 +22,7 @@ public class SoapHeaderFilter implements MessageHeaderFilter {
 			SoapBindingFactory.SOAP_11_BINDING,
 			SoapBindingFactory.SOAP_12_BINDING);
 
+	/** qualified names of the soap headers to filter */
 	private final Collection<QName> qnames;
 	
 	/** direction of the header to filer. null indicates both Direction.IN and Direction.OUT */
