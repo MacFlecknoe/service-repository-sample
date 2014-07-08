@@ -23,13 +23,19 @@ public class SoapHeaderFilter implements MessageHeaderFilter {
 			SoapBindingFactory.SOAP_12_BINDING);
 
 	private final Collection<QName> qnames;
+	private final Direction direction;
 	
 	public SoapHeaderFilter(QName qname) {
-		this(Collections.singletonList(qname));
+		this(Collections.singletonList(qname), Direction.OUT);
 	}
 	
-	public SoapHeaderFilter(Collection<QName> qnames) {
+	public SoapHeaderFilter(QName qname, Direction direction) {
+		this(Collections.singletonList(qname), direction);
+	}
+	
+	public SoapHeaderFilter(Collection<QName> qnames, Direction direction) {
 		this.qnames = qnames;
+		this.direction = direction;
 	}
 	
 	@Override
@@ -37,10 +43,15 @@ public class SoapHeaderFilter implements MessageHeaderFilter {
 		return ACTIVATION_NS;
 	}
 
+	private boolean isDirection(Direction direction) {
+		return (direction.equals(this.direction) || this.direction == null);
+	}
+	
 	@Override
 	public void filter(Direction direction, List<Header> headers) {
 		
-		if(headers != null) {
+		if(headers != null && isDirection(direction)) {
+			
 			Iterator<Header> iterator = headers.iterator();
 			
 			while (iterator.hasNext()) {

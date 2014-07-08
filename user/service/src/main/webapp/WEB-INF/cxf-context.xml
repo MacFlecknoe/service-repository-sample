@@ -9,6 +9,7 @@
 	xmlns:userService="urn:healthmedia:wsdl:user:soap:v1"
 	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
 	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:wsa="http://cxf.apache.org/ws/addressing"
 	xmlns:soap="http://cxf.apache.org/bindings/soap"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
@@ -35,6 +36,7 @@
 		<cxf:features>
 			<cxf:logging/>
 				<p:policies />
+				<wsa:addressing />
 		</cxf:features>
 	</cxf:bus>
 </beans>
