@@ -96,7 +96,7 @@
 			<!-- log input received -->
 			<camel:to uri="log:input" />
 			<!-- send proxied request to real web service -->
-			<camel:to uri="cxf:bean:realUserService?headerFilterStrategy=#customMessageFilterStrategy&amp;dataFormat=PAYLOAD" />
+			<camel:to uri="cxf:bean:realUserService?headerFilterStrategy=#removeSecurityHeadersFilterStrategy&amp;dataFormat=PAYLOAD" />
 			<!-- log answer from real web service -->
 			<camel:to uri="log:output" />
 		</camel:route>
@@ -107,21 +107,11 @@
 	<!-- x509 keystore lookup -->
 	<bean id="keyStoreCallback" class="com.healthmedia.ws.security.callback.KeystorePasswordCallback" />
 
-	<bean id="customMessageFilterStrategy"
-		class="org.apache.camel.component.cxf.common.header.CxfHeaderFilterStrategy">
+	<bean id="removeSecurityHeadersFilterStrategy" class="org.apache.camel.component.cxf.common.header.CxfHeaderFilterStrategy">
 		<property name="messageHeaderFilters">
 			<list>
-				<!-- SoapMessageHeaderFilter is the built in filter. It can be removed 
-					by omitting it. -->
 				<bean class="com.healthmedia.ws.filter.WsSecurityHeaderFilter" />
 			</list>
 		</property>
-	</bean>
-	<bean id="customMessageFilterStrategy2"
-		class="org.apache.camel.component.cxf.common.header.CxfHeaderFilterStrategy">
-
-		<!-- Set relayHeaders to false to drop all SOAP headers -->
-		<property name="relayHeaders" value="true" />
-
 	</bean>
 </beans>
