@@ -10,6 +10,13 @@
 			<wsa:EndpointReference>
 				<wsa:Address>/userService</wsa:Address>
 			</wsa:EndpointReference>
+			<wsa:EndpointReference>
+				<wsa:Address>/proxy/alt/userService</wsa:Address>
+			</wsa:EndpointReference>
+			<wsa:EndpointReference>
+				<wsa:Address>/proxy/userService</wsa:Address>
+			</wsa:EndpointReference>
+			<!-- <wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI>-->
 		</wsp:AppliesTo>
 		<wsp:Policy>
 			<wsp:ExactlyOne>
