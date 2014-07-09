@@ -35,7 +35,7 @@
 			<xsd:element name="importUserResponse">
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element ref="user:user" />
+						<xsd:element ref="user:user" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>
 			</xsd:element>
