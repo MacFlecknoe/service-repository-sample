@@ -44,10 +44,6 @@ public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMappe
 			subReasons.getReason().add(innerReason);
 			innerFault.setReasons(subReasons);
 			
-			ErrorCollectionType subErrors = new ErrorCollectionType();
-			subErrors.getError().add(innerFault);
-			innerFault.setSubErrors(subErrors);
-			
 			fault.getSubErrors().getError().add(innerFault);
 		}
 		return Response.status(Response.Status.BAD_REQUEST).entity(fault).type(this.getMediaType()).build();
