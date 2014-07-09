@@ -63,4 +63,26 @@
 		<xsd:attributeGroup ref="tns:commonAttributes" />
 	</xsd:complexType>
 
+	
+	<xsd:complexType name="identifierType">
+		<xsd:annotation>
+			<xsd:documentation>Represents an unique ID and its associated type (e.g. ISBN, Drupal ID, UPC, etc.)</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="type" type="xsd:string" use="required" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+		
+	<xsd:complexType name="identifierCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Unique Identifiers</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="identifier" type="tns:identifierType" 
+				minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+
 </xsd:schema>

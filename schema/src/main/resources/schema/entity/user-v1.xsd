@@ -28,7 +28,8 @@
 					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="userDatas" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="externalIds" type="common:identifierCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

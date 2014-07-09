@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
 			user.setId(commonFactory.createEntityTypeId("1"));
 			user.setFirstName(userFactory.createUserTypeFirstName("Michael"));
 			user.setLastName(userFactory.createUserTypeLastName("Lambert"));
-			user.setUserDataCollection(userFactory.createUserTypeUserDataCollection(userDataCollection));
+			user.setUserDatas(userFactory.createUserTypeUserDatas(userDataCollection));
 			
 			ImportUserResponse response = new ImportUserResponse();
 			

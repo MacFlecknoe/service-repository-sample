@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:common="urn:healthmedia:schema:common:v1" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+	xmlns:tns="urn:healthmedia:schema:common-header:v1" 
+	targetNamespace="urn:healthmedia:schema:common-header:v1"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified" version="1.0">
+	
+	<xsd:element name="traceType">
+		<xsd:annotation>
+			<xsd:documentation>Used to correlate messages within log files</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType mixed="false">
+			<xsd:sequence>
+				<xsd:element name="id" type="xsd:int" />
+				<xsd:element name="code" type="xsd:string" />
+			</xsd:sequence>
+			<xsd:attribute name="timeStamp" type="xsd:dateTime" />
+			<xsd:anyAttribute namespace="##other" processContents="lax" />
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>
