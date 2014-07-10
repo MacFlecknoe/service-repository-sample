@@ -92,7 +92,7 @@
           <xsd:element name="lastName" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true"/>
           <xsd:element name="gender" type="tns:genderEnum" minOccurs="0" maxOccurs="1" nillable="true"/>
           <xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1" nillable="true"/>
-          <xsd:element name="userDataCollection" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true"/>
+          <xsd:element name="userDatas" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true"/>
         </xsd:sequence>
       </xsd:extension>
     </xsd:complexContent>
@@ -154,7 +154,7 @@
     </xsd:sequence>
   </xsd:complexType>
   <xsd:element name="userData" type="tns:userDataType"/>
-  <xsd:element name="userDataCollection" type="tns:userDataCollectionType"/>
+  <xsd:element name="userDatas" type="tns:userDataCollectionType"/>
   <xsd:element name="user" type="tns:userType"/>
   <xsd:element name="userCollection" type="tns:userCollectionType"/>
 </xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>file:/home/mlamber7/Programming/service-repository-sample/schema/src/main/resources/schema/common/common-v1.xsd</con:url><con:content><![CDATA[<xsd:schema targetNamespace="urn:healthmedia:schema:common:v1" jaxb:extensionBindingPrefixes="xjc" jaxb:version="2.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:tns="urn:healthmedia:schema:common:v1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc">
@@ -688,7 +688,7 @@
       <xsd:element name="error" type="tns:errorType" minOccurs="0" maxOccurs="unbounded"/>
     </xsd:sequence>
   </xsd:complexType>
-</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:healthmedia:wsdl:user:soap:v1:importUser" name="importUser" bindingOperationName="importUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="UsernameToken Route Request" outgoingWss="username"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
+</xsd:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:healthmedia:wsdl:user:soap:v1:importUser" name="importUser" bindingOperationName="importUser" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="UsernameToken Route Request" outgoingWss="username"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/router/proxy/alt/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
    <soap:Header>
    	<i18n:international>
 		<i18n:locale>en-US</i18n:locale>  
@@ -714,7 +714,7 @@
          </urn1:user>
       </urn:importUserRequest>
    </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Raw"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="User Service (direct call)"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
    <soap:Header>
    	<i18n:international>
 		<i18n:locale>en-US</i18n:locale>  
