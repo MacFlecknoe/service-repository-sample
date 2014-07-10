@@ -2,7 +2,7 @@ cxf-extensions
 ===========
 
 <ul>
-<li>Contains "yet to be released" code from the apache CXF project which supports use of WS-Policy URI</li>
+<li>Contains "yet to be released" code from the apache CXF project which supports use of URIs within PolicyAttachement AppliesTo rules</li>
 <li>Implementations of WSS4J security interfaces</li>
 <li>Reusable interceptor code</li>
 <li>Custom policy support</li>
