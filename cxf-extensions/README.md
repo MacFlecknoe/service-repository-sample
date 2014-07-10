@@ -3,9 +3,10 @@ cxf-extensions
 
 <ul>
 <li>Contains "yet to be released" code from the apache CXF project which supports use of WS-Policy URI</li>
-<li>Implementations of WSS4J security interfaces for use within W&P</li>
-<li>Internally developed, reusable interceptor code</li>
-<li>Internally developed ws-policy support (such as support for WS-Intenationalization) and custom policy support</li>
+<li>Implementations of WSS4J security interfaces</li>
+<li>Reusable interceptor code</li>
+<li>Custom policy support</li>
+<li>Standard WS-Policy support where CXF has no implementation (such as support for WS-Intenationalization)</li>
 </ul>
 
 See Also
