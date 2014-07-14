@@ -48,7 +48,7 @@ files; these policies will then be imported into services via shared storage or 
 #####Additional Information
 
 http://camel.apache.org/cxf.html <br/>
-http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html
+http://fusesource.com/docs/esbent/7.1/camel_cxf/Proxying-Payload.html <br />
 http://soapatterns.org/design_patterns/policy_centralization
 
 
