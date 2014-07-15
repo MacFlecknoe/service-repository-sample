@@ -2,6 +2,8 @@ package com.healthmedia.ws.wsdl.user.v1;
 
 import java.util.Locale;
 
+import javax.transaction.Transactional;
+
 import com.healthmedia.ws.common.error.v1.ErrorCollectionType;
 import com.healthmedia.ws.common.error.v1.ErrorType;
 import com.healthmedia.ws.common.error.v1.ReasonCollectionType;
@@ -12,6 +14,11 @@ import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
 import com.healthmedia.ws.entity.user.v1.UserDataType;
 import com.healthmedia.ws.entity.user.v1.UserType;
 
+/**
+ * Services or methods annotated with {@link javax.transaction.Transactional} will automatically have their WS-AT context 
+ * translated into a JTA transaction.
+ */
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	private com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
@@ -20,9 +27,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public ImportUserResponse importUser(ImportUserRequest parameters) throws Error {
-		
 		try {
-			
 			UserType input = parameters.getUser();
 			if(input.getId() == null) {
 				throw new IllegalArgumentException("id cannot be null");

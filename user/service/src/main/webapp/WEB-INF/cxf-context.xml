@@ -27,6 +27,10 @@
 		<jaxws:binding>
 			<soap:soapBinding mtomEnabled="true" version="1.2"/>
 		</jaxws:binding>
+		<jaxws:handlers>
+			<!-- WS-Transaction support -->
+			<bean class="com.arjuna.mw.wst11.service.JaxWSHeaderContextProcessor" />
+		</jaxws:handlers>
 	</jaxws:endpoint>
 	
 	<!-- <p:externalAttachment location="classpath:policy/authentication-policy.xml"/> -->

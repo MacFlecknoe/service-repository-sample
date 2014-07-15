@@ -77,7 +77,20 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
+			</dependency>
+			
+		<!-- The XTS api needed to use WS-AT -->
+		<dependency>
+			<groupId>org.jboss.narayana.xts</groupId>
+			<artifactId>jbossxts</artifactId>
+			<version>5.0.2.Final</version>
 		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.3.5.Final</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>
