@@ -110,13 +110,13 @@
 	
 	<xsd:complexType name="phoneNumberType">
 		<xsd:sequence>
-			<xsd:element name="AreaCode" type="xsd:string"
+			<xsd:element name="areaCode" type="xsd:string"
 				minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="Number" type="xsd:string" 
+			<xsd:element name="number" type="xsd:string" 
 				minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="CountryCode" type="xsd:string"
+			<xsd:element name="countryCode" type="xsd:string"
 				minOccurs="0" maxOccurs="1" nillable="true" />
-			<xsd:element name="Extension" type="xsd:string"
+			<xsd:element name="extension" type="xsd:string"
 				minOccurs="0" maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 		<xsd:attributeGroup ref="tns:contactAttributes" />
