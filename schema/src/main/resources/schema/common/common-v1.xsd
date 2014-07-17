@@ -83,11 +83,19 @@
 				minOccurs="1" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
-
-	<xsd:simpleType name="emailType">
+	
+	<xsd:complexType name="emailAddressType">
 		<xsd:annotation>
 			<xsd:documentation>Represents email contact</xsd:documentation>
 		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="tns:emailAddressValueType">
+				<xsd:attribute name="type" type="xsd:string" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="emailAddressValueType">
 		<xsd:restriction base="xsd:token">
 			<xsd:pattern value="|([A-Za-z0-9._%'-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,4})" />
 		</xsd:restriction>
@@ -96,7 +104,7 @@
 	<xsd:complexType name="contactCollectionType">
 		<xsd:sequence>
 			<xsd:choice maxOccurs="unbounded">
-				<xsd:element name="email" nillable="true" type="tns:emailType" />
+				<xsd:element name="email" nillable="true" type="tns:emailAddressType" />
 			</xsd:choice>
 		</xsd:sequence>
 	</xsd:complexType>
