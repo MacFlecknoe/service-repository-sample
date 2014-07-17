@@ -34,22 +34,22 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="relationshipType">
+	<xsd:complexType name="companyRelationshipType">
 		<xsd:annotation>
 			<xsd:documentation>Collection of Users</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="company" type="tns:companyType" minOccurs="0"  maxOccurs="1" nillable="true" />
-			<xsd:element name="gender" type="tns:relationshipTypeEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
+			<xsd:element name="relationship" type="tns:relationshipTypeEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="relationshipCollectionType">
+	<xsd:complexType name="companyRelationshipCollectionType">
 		<xsd:annotation>
 			<xsd:documentation>Collection of Company Relationships</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="relationship" type="tns:relationshipType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="relationship" type="tns:companyRelationshipType" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -58,6 +58,9 @@
 			<xsd:enumeration value="PARENT" />
 			<xsd:enumeration value="SIBLING" />
 			<xsd:enumeration value="CHILD" />
+			<xsd:enumeration value="REPORTING" />
+			<xsd:enumeration value="UNIQUENESS" />
+			<xsd:enumeration value="CONFIGURATION" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	
