@@ -84,13 +84,20 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
+	<xsd:attributeGroup name="contactAttributes">
+		<xsd:annotation>
+			<xsd:documentation>Home, Office, Mobile etc. Does NOT indicate preference (e.g. Primary); preference has not yet been modeled</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="type" type="xsd:string" />
+	</xsd:attributeGroup>
+	
 	<xsd:complexType name="emailAddressType">
 		<xsd:annotation>
 			<xsd:documentation>Represents email contact</xsd:documentation>
 		</xsd:annotation>
 		<xsd:simpleContent>
 			<xsd:extension base="tns:emailAddressValueType">
-				<xsd:attribute name="type" type="xsd:string" />
+				<xsd:attributeGroup ref="tns:contactAttributes" />
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
@@ -101,10 +108,25 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 	
+	<xsd:complexType name="phoneNumberType">
+		<xsd:sequence>
+			<xsd:element name="AreaCode" type="xsd:string"
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="Number" type="xsd:string" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="CountryCode" type="xsd:string"
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="Extension" type="xsd:string"
+				minOccurs="0" maxOccurs="1" nillable="true" />
+		</xsd:sequence>
+		<xsd:attributeGroup ref="tns:contactAttributes" />
+	</xsd:complexType>
+	
 	<xsd:complexType name="contactCollectionType">
 		<xsd:sequence>
 			<xsd:choice maxOccurs="unbounded">
-				<xsd:element name="email" nillable="true" type="tns:emailAddressType" />
+				<xsd:element name="emailAddress" nillable="true" type="tns:emailAddressType" />
+				<xsd:element name="phoneNumber" nillable="true" type="tns:phoneNumberType" />
 			</xsd:choice>
 		</xsd:sequence>
 	</xsd:complexType>
