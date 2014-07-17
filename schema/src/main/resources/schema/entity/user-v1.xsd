@@ -18,7 +18,6 @@
 		namespace="urn:healthmedia:schema:data-source:v1" 
 		schemaLocation="./data-source-v1.xsd" />
 		
-		
 	<xsd:import 
 		namespace="urn:healthmedia:schema:company:v1" 
 		schemaLocation="./company-v1.xsd" />
