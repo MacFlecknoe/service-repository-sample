@@ -38,6 +38,7 @@
 					<xsd:element name="externalIds" type="common:identifierCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
 					<xsd:element name="contacts" type="common:contactCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
 					<xsd:element name="companyRelationships" type="company:companyRelationshipCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="accessCode" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
