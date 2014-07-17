@@ -41,7 +41,7 @@
 		<xsd:sequence>
 			<xsd:element name="company" type="tns:companyType" minOccurs="0"  maxOccurs="1" nillable="true" />
 		</xsd:sequence>
-		<xsd:attribute name="relationship" type="tns:relationshipTypeEnum" />
+		<xsd:attribute name="type" type="tns:relationshipTypeEnum" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="companyRelationshipCollectionType">
