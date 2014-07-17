@@ -84,4 +84,21 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
+	<xsd:simpleType name="emailType">
+		<xsd:annotation>
+			<xsd:documentation>Represents email contact</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:token">
+			<xsd:pattern value="|([A-Za-z0-9._%'-]+@[A-Za-z0-9.-]+\.[a-zA-Z]{2,4})" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:complexType name="contactCollectionType">
+		<xsd:sequence>
+			<xsd:choice maxOccurs="unbounded">
+				<xsd:element name="email" nillable="true" type="tns:emailType" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+
 </xsd:schema>

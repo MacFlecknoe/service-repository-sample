@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:common="urn:healthmedia:schema:common:v1"
+	xmlns:tns="urn:healthmedia:schema:company:v1"
+	targetNamespace="urn:healthmedia:schema:company:v1"
+	elementFormDefault="qualified" 
+	attributeFormDefault="unqualified"
+	version="1.0">
+		
+	<xsd:import 
+		namespace="urn:healthmedia:schema:common:v1" 
+		schemaLocation="../common/common-v1.xsd" />
+	
+	<xsd:complexType name="companyType">
+		<xsd:annotation>
+			<xsd:documentation>Represents a Company</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="common:entityType">
+				<xsd:sequence>
+					<xsd:element name="externalIds" type="common:identifierCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+	
+	<xsd:complexType name="companyCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Users</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="company" type="tns:companyType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="relationshipType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Users</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="company" type="tns:companyType" minOccurs="0"  maxOccurs="1" nillable="true" />
+			<xsd:element name="gender" type="tns:relationshipTypeEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="relationshipCollectionType">
+		<xsd:annotation>
+			<xsd:documentation>Collection of Company Relationships</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="relationship" type="tns:relationshipType" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:simpleType name="relationshipTypeEnum">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="PARENT" />
+			<xsd:enumeration value="SIBLING" />
+			<xsd:enumeration value="CHILD" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	
+	<xsd:element name="company" type="tns:companyType" />
+	<xsd:element name="companyCollection" type="tns:companyCollectionType" />
+	
+</xsd:schema>
