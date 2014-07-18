@@ -4,7 +4,7 @@
 	xmlns:wsp="http://www.w3.org/ns/ws-policy" 
 	xmlns:wsa="http://www.w3.org/2005/08/addressing"
 	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702"
-	xmlns:p="urn:healthmedia:schema:policy:v1">
+	xmlns:acp="urn:healthmedia:schema:policy:access-code:v1">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
 			<wsa:EndpointReference>
@@ -21,7 +21,7 @@
 			<wsp:ExactlyOne>
 				<wsp:All>
 					<wsp:Policy>
-						<p:accessCodePolicy Optional="false" />
+						<acp:accessCodePolicy Optional="false" />
 					</wsp:Policy>
 				</wsp:All>
 			</wsp:ExactlyOne>

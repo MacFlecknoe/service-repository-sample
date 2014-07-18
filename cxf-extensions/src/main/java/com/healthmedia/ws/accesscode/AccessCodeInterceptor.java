@@ -22,8 +22,8 @@ import org.w3c.dom.Node;
 
 public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
 
-	public static final QName ACCESS_CODE_POLICY = new QName("urn:healthmedia:schema:policy:v1", "accessCodePolicy");
-	private static final QName ACCESS_CODE_HEADER = new QName("urn:healthmedia:schema:header:v1", "accessCode");
+	public static final QName ACCESS_CODE_POLICY = new QName("urn:healthmedia:schema:policy:access-code:v1", "accessCodePolicy");
+	private static final QName ACCESS_CODE_HEADER = new QName("urn:healthmedia:schema:header:access-code:v1", "accessCode");
 	
 	private final IAccessCodeValidator validator;
 	private final XPathExpression accessCodeExpression;
@@ -32,13 +32,13 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		super(Phase.PRE_INVOKE);
 		try {
 			MapNamespaceContext context = new MapNamespaceContext();
-			context.addNamespace("h", "urn:healthmedia:schema:header:v1");
+			context.addNamespace("ach", "urn:healthmedia:schema:header:access-code:v1");
 			
 			XPathFactory factory = XPathFactory.newInstance();
 			XPath xpath = factory.newXPath();
 			xpath.setNamespaceContext(context);
 			
-			this.accessCodeExpression = xpath.compile("//h:accessCode/text()");
+			this.accessCodeExpression = xpath.compile("//ach:accessCode/text()");
 			this.validator = validator;
 			
 		} catch (XPathExpressionException e) {
