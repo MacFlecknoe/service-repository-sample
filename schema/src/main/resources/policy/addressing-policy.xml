@@ -5,7 +5,7 @@
 	xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
 	<wsp:PolicyAttachment>
 		<wsp:AppliesTo>
-			<wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI>
+			<!-- <wsp:URI>urn:healthmedia:wsdl:user:soap:v1#wsdl11.service(userSoapServicePorts)</wsp:URI> -->
 		</wsp:AppliesTo>
 		<wsp:Policy>
 			<wsp:ExactlyOne>
