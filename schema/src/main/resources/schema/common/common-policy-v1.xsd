@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:common="urn:healthmedia:schema:common:v1" 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+	xmlns:tns="urn:healthmedia:schema:common-policy:v1" 
+	targetNamespace="urn:healthmedia:schema:common-policy:v1"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified" version="1.0">
+
+	<xsd:complexType name="simplePolicyType">
+		<xsd:choice>
+			<xsd:any processContents="lax" namespace="##other" 
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:choice>
+		<xsd:anyAttribute namespace="##other" processContents="lax" />
+	</xsd:complexType>
+	
+	<xsd:element name="accessCodePolicy" type="tns:simplePolicyType" />
+	
+</xsd:schema>

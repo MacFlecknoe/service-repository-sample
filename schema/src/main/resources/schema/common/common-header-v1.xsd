@@ -21,4 +21,7 @@
 			<xsd:anyAttribute namespace="##other" processContents="lax" />
 		</xsd:complexType>
 	</xsd:element>
+	
+	<xsd:element name="accessCode" type="xsd:string" />
+	
 </xsd:schema>

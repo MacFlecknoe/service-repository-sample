@@ -35,6 +35,7 @@
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/addressing-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/x509-tokens-policy.xml"/>
+	<p:externalAttachment location="classpath:policy/access-code-policy.xml"/>
 	
 	<cxf:bus>
 		<cxf:features>
