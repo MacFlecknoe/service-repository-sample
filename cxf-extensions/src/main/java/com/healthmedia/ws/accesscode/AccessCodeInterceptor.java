@@ -103,7 +103,7 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		@Override
 		public void validate(String accessCode) throws SecurityException {
 			if(!"accessCode".equals(accessCode)) {
-				throw new SecurityException("mock fault");
+				throw new SecurityException(new StringBuilder("Invalid access code: ").append(accessCode).toString());
 			}
 		}
 	}
