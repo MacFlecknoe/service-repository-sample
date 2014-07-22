@@ -18,7 +18,7 @@
 		namespace="urn:healthmedia:schema:data-source:v1" 
 		schemaLocation="./data-source-v1.xsd" />
 
-	<xsd:complexType name="partyType">
+	<xsd:complexType name="partyType" abstract="true">
 		<xsd:annotation>
 			<xsd:documentation>Represents a Legal Entity (Person/Organization)</xsd:documentation>
 		</xsd:annotation>
