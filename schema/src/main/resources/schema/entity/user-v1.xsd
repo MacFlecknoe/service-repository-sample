@@ -20,14 +20,17 @@
 
 	<xsd:complexType name="partyType">
 		<xsd:annotation>
-			<xsd:documentation>Represents End User</xsd:documentation>
+			<xsd:documentation>Represents a Legal Entity (Person/Organization)</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
 			<xsd:extension base="common:entityType">
 				<xsd:sequence>
-					<xsd:element name="externalIds" type="common:identifierCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="contacts" type="common:contactCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="relationships" type="tns:partyRelationshipType" minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="externalIds" type="common:identifierCollectionType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="contacts" type="common:contactCollectionType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="relationships" type="tns:partyRelationshipType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
@@ -35,20 +38,25 @@
 	
 	<xsd:complexType name="partyRelationshipType">
 		<xsd:annotation>
-			<xsd:documentation>Defines type of relationship between entities</xsd:documentation>
+			<xsd:documentation>
+				Defines type of relationship between entities. This is a primitive representation of a party relationship but suits our immediate needs.
+			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="relatedTo" type="tns:partyType" minOccurs="0"  maxOccurs="1" nillable="true" />
+			<xsd:element name="relatedTo" type="tns:partyType" 
+				minOccurs="0"  maxOccurs="1" nillable="true" />
+			<xsd:element name="type" type="xsd:string" 
+				minOccurs="0"  maxOccurs="1" nillable="true" />
 		</xsd:sequence>
-		<xsd:attribute name="type" type="xsd:string" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="partyRelationshipCollectionType">
 		<xsd:annotation>
-			<xsd:documentation>Collection of Company Relationships</xsd:documentation>
+			<xsd:documentation>Collection of Party Relationships</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="relationship" type="tns:partyRelationshipType" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="relationship" type="tns:partyRelationshipType" 
+				minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
@@ -69,29 +77,19 @@
 		<xsd:complexContent>
 			<xsd:extension base="tns:partyType">
 				<xsd:sequence>
-					<xsd:element name="firstName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="lastName" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="gender" type="tns:genderEnum" minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="birthDate" type="xsd:dateTime" minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="firstName" type="xsd:string" 
+						minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="lastName" type="xsd:string" 
+						minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="gender" type="tns:genderEnum" 
+						minOccurs="0"  maxOccurs="1" nillable="true" />
+					<xsd:element name="birthDate" type="xsd:dateTime" 
+						minOccurs="0"  maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	
-	<xsd:complexType name="userType">
-		<xsd:annotation>
-			<xsd:documentation>Represents an End User. This abstraction is used to make current systems backward compatible with Person entity</xsd:documentation>
-		</xsd:annotation>
-		<xsd:complexContent>
-			<xsd:extension base="tns:personType">
-				<xsd:sequence>
-					<xsd:element name="userDatas" type="tns:userDataCollectionType" minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="accessCode" type="xsd:string" minOccurs="0"  maxOccurs="1" nillable="true" />
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
 	<xsd:simpleType name="genderEnum">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="Male" />
@@ -100,6 +98,25 @@
 			<xsd:enumeration value="Other" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	
+	<xsd:complexType name="userType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Represents an End User. This abstraction is used in place of a party role. As party role is the preferred means to represent different 
+				aspects of person, it should be introduced as our data architecture matures
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexContent>
+			<xsd:extension base="tns:personType">
+				<xsd:sequence>
+					<xsd:element name="userDatas" type="tns:userDataCollectionType" 
+						minOccurs="0" maxOccurs="1" nillable="true" />
+					<xsd:element name="accessCode" type="xsd:string" 
+						minOccurs="0"  maxOccurs="1" nillable="true" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
 	
 	<xsd:complexType name="userCollectionType">
 		<xsd:annotation>
