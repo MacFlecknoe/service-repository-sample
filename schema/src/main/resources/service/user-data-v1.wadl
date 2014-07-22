@@ -37,7 +37,7 @@
 					<param name="updateDate.start" type="xsd:dateTime" style="query" required="false" />
 					<param name="updateDate.end" type="xsd:dateTime" style="query" required="false" />
 					<param name="data.name" type="xsd:string" style="query" required="false" repeating="true" />
-					<param name="user.id" type="xsd:string" style="query" required="false" />
+					<param name="user.id" type="xsd:string" style="query" required="false" repeating="true" />
 				</request>
 				<response status="200">
 					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
