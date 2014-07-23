@@ -2,6 +2,7 @@
 <xsd:schema 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:common="urn:healthmedia:schema:common:v1"
+	xmlns:common-entity="urn:healthmedia:schema:common:entity:v1"
 	xmlns:dataSource="urn:healthmedia:schema:data-source:v1"
 	xmlns:company="urn:healthmedia:schema:company:v1"
 	xmlns:tns="urn:healthmedia:schema:user:v1"
@@ -13,7 +14,11 @@
 	<xsd:import 
 		namespace="urn:healthmedia:schema:common:v1" 
 		schemaLocation="../common/common-v1.xsd" />
-		
+
+	<xsd:import 
+		namespace="urn:healthmedia:schema:common:entity:v1" 
+		schemaLocation="../common/common-entity-v1.xsd" />
+				
 	<xsd:import 
 		namespace="urn:healthmedia:schema:data-source:v1" 
 		schemaLocation="./data-source-v1.xsd" />
@@ -23,7 +28,7 @@
 			<xsd:documentation>Represents a Legal Entity (Person/Organization)</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType">
+			<xsd:extension base="common-entity:entityType">
 				<xsd:sequence>
 					<xsd:element name="externalIds" type="common:identifierCollectionType" 
 						minOccurs="0" maxOccurs="1" nillable="true" />
@@ -136,7 +141,7 @@
 			<xsd:documentation>Represents Key/Value Attribute assigned to a User</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType">
+			<xsd:extension base="common-entity:entityType">
 				<xsd:sequence>
 					<xsd:element name="collectionDate" type="xsd:dateTime" 
 						minOccurs="0" maxOccurs="1" nillable="true" />
@@ -171,7 +176,7 @@
 			<xsd:documentation>Represents a User Data Attribute Name</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType"/> 
+			<xsd:extension base="common-entity:entityType"/> 
 		</xsd:complexContent>
 	</xsd:complexType>
 	

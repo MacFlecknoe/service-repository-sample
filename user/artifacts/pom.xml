@@ -42,11 +42,13 @@
 										<extraarg>-p</extraarg>
 										<extraarg>urn:healthmedia:schema:data-source:v1=com.healthmedia.ws.entity.dataSouce.v1</extraarg>
 										<extraarg>-p</extraarg>
+										<extraarg>urn:healthmedia:schema:common:entity:v1=com.healthmedia.ws.entity.v1</extraarg>
+										<extraarg>-p</extraarg>
 										<extraarg>urn:healthmedia:schema:user:v1=com.healthmedia.ws.entity.user.v1</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>urn:healthmedia:schema:common:v1=com.healthmedia.ws.common.v1</extraarg>
 										<extraarg>-p</extraarg>
-										<extraarg>urn:healthmedia:schema:common-error:v1=com.healthmedia.ws.common.error.v1</extraarg>
+										<extraarg>urn:healthmedia:schema:common:error:v1=com.healthmedia.ws.common.error.v1</extraarg>
 										<extraarg>-p</extraarg>
 										<extraarg>urn:healthmedia:wsdl:user:soap:v1=com.healthmedia.ws.wsdl.soap.user.v1</extraarg>
 										<extraarg>-p</extraarg>

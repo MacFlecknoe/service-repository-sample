@@ -3,16 +3,17 @@
 		xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 		xmlns:tns="urn:healthmedia:schema:data-source:v1" 
 		xmlns:common="urn:healthmedia:schema:common:v1"
+		xmlns:common-entity="urn:healthmedia:schema:common:entity:v1"
 		elementFormDefault="qualified" attributeFormDefault="unqualified"
 		version="1.0">
 		
 	<xsd:import 
-		namespace="urn:healthmedia:schema:common:v1" 
-		schemaLocation="../common/common-v1.xsd" />
+		namespace="urn:healthmedia:schema:common:entity:v1" 
+		schemaLocation="../common/common-entity-v1.xsd" />
 	
 	<xsd:complexType name="dataSourceType">
 		<xsd:complexContent>
-			<xsd:extension base="common:entityType"> 
+			<xsd:extension base="common-entity:entityType"> 
 				<xsd:sequence>
 					<xsd:element name="name" type="xsd:string" minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>

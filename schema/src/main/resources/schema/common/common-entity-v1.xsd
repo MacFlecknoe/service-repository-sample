@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:tns="urn:healthmedia:schema:common:entity:v1"
+	xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	targetNamespace="urn:healthmedia:schema:common:entity:v1"
+	jaxb:extensionBindingPrefixes="xjc"
+	jaxb:version="2.0"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified" 
+	version="1.0">
+
+	<xsd:import 
+		namespace="http://www.w3.org/XML/1998/namespace" 
+		schemaLocation="../external/xml.xsd" />
+		
+	<xsd:import 
+		namespace="http://www.w3.org/2005/Atom" 
+		schemaLocation="../external/atom-v1.xsd" />
+	
+	<xsd:complexType name="entityType" abstract="true">
+		<xsd:sequence>
+			<xsd:element name="id" type="xsd:string"  
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="link" type="atom:linkType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="createDate" type="xsd:dateTime" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="updateDate" type="xsd:dateTime" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+			<xsd:element name="extension" type="tns:extensionType" 
+				minOccurs="0" maxOccurs="1" nillable="true" />
+		</xsd:sequence>
+		<xsd:attribute ref="tns:version" />
+		<xsd:attributeGroup ref="tns:commonAttributes" />
+	</xsd:complexType>
+	
+	<xsd:attribute name="version">
+		<xsd:annotation>
+			<xsd:documentation>Used to enable optimistic locking of entity objects</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:integer">
+				<xsd:minInclusive value="0" />
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+
+	<xsd:attributeGroup name="commonAttributes">
+		<xsd:anyAttribute namespace="##other" />
+	</xsd:attributeGroup>
+
+	<xsd:complexType name="extensionType">
+		<xsd:annotation>
+			<xsd:documentation>Bucket that can be used by partners to pass custom elements to a service</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:any namespace="##other" processContents="lax" 
+				minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attributeGroup ref="tns:commonAttributes" />
+	</xsd:complexType>
+	
+</xsd:schema>

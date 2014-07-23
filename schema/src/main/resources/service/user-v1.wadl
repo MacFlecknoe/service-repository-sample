@@ -5,7 +5,7 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:user="urn:healthmedia:schema:user:v1"
-	xmlns:error="urn:healthmedia:schema:common-error:v1"
+	xmlns:error="urn:healthmedia:schema:common:error:v1"
 	xsi:schemaLocation="http://wadl.dev.java.net/2009/02 wadl.xsd">
 	
 	<grammars>

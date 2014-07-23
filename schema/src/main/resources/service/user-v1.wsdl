@@ -4,7 +4,7 @@
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:user="urn:healthmedia:schema:user:v1"
 	xmlns:common="urn:healthmedia:schema:common:v1"
-	xmlns:common-error="urn:healthmedia:schema:common-error:v1" 
+	xmlns:common-error="urn:healthmedia:schema:common:error:v1" 
 	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
 	xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
 	xmlns="http://schemas.xmlsoap.org/wsdl/" 
@@ -22,7 +22,7 @@
 				namespace="urn:healthmedia:schema:user:v1" />
 			<xsd:import 
 				schemaLocation="../schema/common/common-error-v1.xsd" 
-				namespace="urn:healthmedia:schema:common-error:v1" />
+				namespace="urn:healthmedia:schema:common:error:v1" />
 			
 			<!-- generated WSDL doesn't function properly in ode unless all messages are declared within the source WSDL -->
 			<xsd:element name="importUserRequest">

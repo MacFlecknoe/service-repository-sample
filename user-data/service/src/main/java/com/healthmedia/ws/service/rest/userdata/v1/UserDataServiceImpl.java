@@ -15,6 +15,7 @@ import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
 import com.healthmedia.ws.common.error.DataValidationException;
 import com.healthmedia.ws.common.error.DataValidationException.DataValidationError;
 import com.healthmedia.ws.common.error.GenericErrorException;
+import com.healthmedia.ws.common.v1.ModalityType;
 import com.healthmedia.ws.entity.dataSouce.v1.DataSourceType;
 import com.healthmedia.ws.entity.user.v1.DataType;
 import com.healthmedia.ws.entity.user.v1.UserDataCollectionType;
@@ -31,7 +32,7 @@ public class UserDataServiceImpl implements UserDataService {
 	
 	private static Logger LOGGER = Logger.getLogger(UserDataServiceImpl.class);
 	
-	private com.healthmedia.ws.common.v1.ObjectFactory commonFactory = new com.healthmedia.ws.common.v1.ObjectFactory();
+	private com.healthmedia.ws.entity.v1.ObjectFactory entityFactory = new com.healthmedia.ws.entity.v1.ObjectFactory();
 	private com.healthmedia.ws.entity.user.v1.ObjectFactory userFactory = new com.healthmedia.ws.entity.user.v1.ObjectFactory();
 	private com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory dataSourceFactory = new com.healthmedia.ws.entity.dataSouce.v1.ObjectFactory();
 	
@@ -50,10 +51,11 @@ public class UserDataServiceImpl implements UserDataService {
 			
 			XMLGregorianCalendar today = DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate);
 			
-			userData.setUpdateDate(commonFactory.createEntityTypeUpdateDate(today));
-			userData.setCreateDate(commonFactory.createEntityTypeCreateDate(today));
+			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(today));
+			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(today));
 			userData.setDataSource(userdatatype.getDataSource());
-			userData.setId(commonFactory.createEntityTypeId("23"));
+			userData.setId(entityFactory.createEntityTypeId("23"));
+			userData.setModality(userFactory.createUserDataTypeModality(ModalityType.WEB));
 			
 			return userData;
 		
@@ -78,24 +80,25 @@ public class UserDataServiceImpl implements UserDataService {
 			createDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
 			
 			DataSourceType dataSource = dataSourceFactory.createDataSourceType();
-			dataSource.setId(commonFactory.createEntityTypeId("453ba2"));
+			dataSource.setId(entityFactory.createEntityTypeId("453ba2"));
 			
 			UserType user = new UserType();
-			user.setId(commonFactory.createEntityTypeId("0d8a7c33"));
+			user.setId(entityFactory.createEntityTypeId("0d8a7c33"));
 			
 			DataType data = userFactory.createDataType();
 			data.setName(userFactory.createDataTypeName("WeightPounds"));
 			data.setValue(userFactory.createDataTypeValue("135"));
 			
 			UserDataType userData = userFactory.createUserDataType();
-			userData.setId(commonFactory.createEntityTypeId("0d8a7c33"));
+			userData.setId(entityFactory.createEntityTypeId("0d8a7c33"));
 			
 			userData.setCollectionDate(userFactory.createUserDataTypeCollectionDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(collectionDate)));
 			userData.setDataSource(userFactory.createUserDataTypeDataSource(dataSource));
 			userData.setUser(userFactory.createUserDataTypeUser(user));
 			userData.setData(userFactory.createUserDataTypeData(data));
-			userData.setUpdateDate(commonFactory.createEntityTypeUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate)));
-			userData.setCreateDate(commonFactory.createEntityTypeCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate)));
+			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate)));
+			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate)));
+			userData.setModality(userFactory.createUserDataTypeModality(ModalityType.WEB));
 			
 			return userData;
 			
