@@ -32,6 +32,7 @@
 		<joda-time.version>2.3</joda-time.version>
 		<slf4j.version>1.7.7</slf4j.version>
 		<bcprov.version>1.50</bcprov.version>
+		<maven-surefire.version>2.17</maven-surefire.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -261,7 +262,12 @@
 					<groupId>org.apache.camel</groupId>
 					<artifactId>camel-maven-plugin</artifactId>
 				<version>${camel.version}</version>
-			</plugin>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
@@ -271,4 +277,17 @@
 			<url>http://www.soapui.org/repository/maven2/</url>
 		</pluginRepository>
 	</pluginRepositories>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+				<version>${maven-surefire.version}</version>
+				<inherited>true</inherited> 
+				<configuration>
+					<aggregate>true</aggregate>
+				</configuration> 
+			</plugin>
+		</plugins>
+	</reporting>
 </project>

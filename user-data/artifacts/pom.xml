@@ -35,7 +35,7 @@
 							<sourceRoot>${basedir}/target/generated/src/main/java</sourceRoot>
 							<wadlOptions>
 								<wadlOption>
-									<wadl>classpath:/service/user-data-v1.wadl</wadl>
+									<wadl>classpath:/service/user-v1.wadl</wadl>
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.rest.userdata.v1</packagename>
 									<schemaPackagenames>
@@ -74,6 +74,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId> 
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
