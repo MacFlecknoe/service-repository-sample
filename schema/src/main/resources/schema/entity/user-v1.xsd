@@ -49,7 +49,7 @@
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:choice>
-				<xsd:element name="organization" type="tns:organizationType" 
+				<xsd:element name="company" type="tns:companyType" 
 					minOccurs="0" maxOccurs="1" nillable="true" />
 				<xsd:element name="user" type="tns:userType" 
 					minOccurs="0" maxOccurs="1" nillable="true" />
@@ -68,7 +68,7 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="organizationType">
+	<xsd:complexType name="companyType">
 		<xsd:annotation>
 			<xsd:documentation>Represents a Company</xsd:documentation>
 		</xsd:annotation>
