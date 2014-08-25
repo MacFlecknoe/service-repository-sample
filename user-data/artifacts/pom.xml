@@ -48,7 +48,7 @@
 									</schemaPackagenames>
 								</wadlOption>
 								<wadlOption>
-									<wadl>classpath:/service/user-v1.wadl</wadl>
+									<wadl>classpath:/service/user-data-v1.wadl</wadl>
 									<impl>false</impl>
 									<packagename>com.healthmedia.ws.service.rest.user.v1</packagename>
 									<schemaPackagenames>
