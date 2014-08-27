@@ -14,7 +14,7 @@
 	
 	<jaxrs:server id="services" address="/">
 		<jaxrs:serviceBeans>
-			<ref bean="userDataServiceImpl" />
+			<ref bean="userServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 			<bean class="com.healthmedia.ws.common.ISO8601DateParamHandler" />
@@ -28,7 +28,7 @@
 		</jaxrs:providers>
 	</jaxrs:server>
 	
-	<bean id="userDataServiceImpl" class="com.healthmedia.ws.service.rest.userdata.v1.UserDataServiceImpl" />
+	<bean id="userServiceImpl" class="com.healthmedia.ws.service.rest.user.v1.UserServiceImpl" />
 	
 	<bean id="jaxbProvider" class="org.apache.cxf.jaxrs.provider.JAXBElementProvider">
 		<property name="singleJaxbContext" value="true"/>
@@ -79,7 +79,7 @@
 	<util:map id="rootElementClassMap">
 		<entry key="com.healthmedia.ws.common.error.v1.ErrorType" value="error"/>
 		<entry key="com.healthmedia.ws.entity.user.v1.UserDataType" value="userData"/>
-		<entry key="com.healthmedia.ws.entity.user.v1.UserDataCollectionType" value="userDataCollection"/>
+		<entry key="com.healthmedia.ws.entity.user.v1.UserDataCollectionType" value="userDatas"/>
 	</util:map>
 	
 	<!-- include extra classes in jaxb context -->

@@ -1,4 +1,4 @@
-package com.healthmedia.ws.service.rest.userdata.v1;
+package com.healthmedia.ws.service.rest.user.v1;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -28,9 +28,9 @@ import com.healthmedia.ws.entity.user.v1.UserType;
  * @author mlamber7
  *
  */
-public class UserDataServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {
 	
-	private static Logger LOGGER = Logger.getLogger(UserDataServiceImpl.class);
+	private static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 	
 	private com.healthmedia.ws.entity.v1.ObjectFactory entityFactory = new com.healthmedia.ws.entity.v1.ObjectFactory();
 	private com.healthmedia.ws.entity.user.v1.ObjectFactory userFactory = new com.healthmedia.ws.entity.user.v1.ObjectFactory();
@@ -131,8 +131,6 @@ public class UserDataServiceImpl implements UserService {
 		for(UserDataType userData : userDataTypes) {
 			createUserData(userId, userData);
 		}
-		//return userdatacollectiontype;
-		
 	}
 
 	@Override
