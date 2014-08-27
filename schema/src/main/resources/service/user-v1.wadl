@@ -54,9 +54,7 @@
 							<param name="updateDate.start" type="xsd:dateTime" style="query" required="false" />
 							<param name="updateDate.end" type="xsd:dateTime" style="query" required="false" />
 							<param name="data.name" type="xsd:string" style="query" required="false" repeating="true" />
-							<param name="user.id" type="xsd:string" style="query" required="false" repeating="true" />\
-							<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
-							<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
+							<param name="user.id" type="xsd:string" style="query" required="false" repeating="true" />
 						</request>
 						<response status="200">
 							<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
@@ -74,12 +72,12 @@
 							<representation mediaType="application/vnd.healthmedia.user-data+json;version=1.0" element="user:userData" />
 							<representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData" />
 						</request>
-						<!-- 
 						<response status="200">
+							<!--  
 							<representation mediaType="application/vnd.healthmedia.user-data+json;version=1.0" element="user:userData" />
 							<representation mediaType="application/vnd.healthmedia.user-data+xml;version=1.0" element="user:userData" />
+							-->
 						</response>
-						-->
 						<response status="400">
 							<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
 						</response>
@@ -91,12 +89,13 @@
 							<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
 							<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
 						</request>
-						<!-- 
+						
 						<response status="200">
+							<!--  
 							<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
 							<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
+							-->
 						</response>
-						-->
 						<response status="400">
 							<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
 							<representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error" />

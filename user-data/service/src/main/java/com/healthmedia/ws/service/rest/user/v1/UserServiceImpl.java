@@ -56,9 +56,105 @@ public class UserServiceImpl implements UserService {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
+	public void createUserData(String userId, UserDataType userdatatype) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing create");
+		}
+		_createUserData(userId, userdatatype);
+	}
+	
+	private UserDataType _createUserData(String userId, UserDataType userdatatype) {
+		try {
+			Date current = new Date();
+			
+			UserDataType userData = userFactory.createUserDataType();
+			
+			GregorianCalendar currentDate = new GregorianCalendar();
+			currentDate.setTime(current);
+			
+			XMLGregorianCalendar today = DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate);
+			
+			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(today));
+			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(today));
+			userData.setDataSource(userdatatype.getDataSource());
+			userData.setId(entityFactory.createEntityTypeId("23"));
+			
+			return userData;
+		
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	@Override
-	public UserDataCollectionType findUserDatasByQuery(String userId, String query, Date updateDate_start, Date updateDate_end, List<String> data_name, List<String> user_id, UserDataCollectionType userdatacollectiontype) {
+	public void createUserDatas(String userId, UserDataCollectionType userdatacollectiontype) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing create collection");
+		}
+		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
+		
+		for(UserDataType userData : userDataTypes) {
+			createUserData(userId, userData);
+		}
+	}
+
+	private UserDataCollectionType _createUserDatas(String userId, UserDataCollectionType userdatacollectiontype) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing create collection");
+		}
+		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
+		
+		for(UserDataType userData : userDataTypes) {
+			_createUserData(userId, userData);
+		}
+		return userdatacollectiontype; 
+	}	
+	
+	@Override
+	public UserDataType findUserDataById(String userId, String userDataId) {
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug("executing find by id");
+		}			
+		try {
+			GregorianCalendar collectionDate = new GregorianCalendar();
+			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
+			
+			GregorianCalendar updateDate = new GregorianCalendar();
+			updateDate.set(2008, GregorianCalendar.NOVEMBER, 20);
+			
+			GregorianCalendar createDate = new GregorianCalendar();
+			createDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
+			
+			DataSourceType dataSource = dataSourceFactory.createDataSourceType();
+			dataSource.setId(entityFactory.createEntityTypeId("453ba2"));
+			
+			UserType user = new UserType();
+			user.setId(entityFactory.createEntityTypeId(userId));
+			
+			DataType data = userFactory.createDataType();
+			data.setName(userFactory.createDataTypeName("WeightPounds"));
+			data.setValue(userFactory.createDataTypeValue("135"));
+			
+			UserDataType userData = userFactory.createUserDataType();
+			userData.setId(entityFactory.createEntityTypeId("0d8a7c33"));
+			
+			userData.setCollectionDate(userFactory.createUserDataTypeCollectionDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(collectionDate)));
+			userData.setDataSource(userFactory.createUserDataTypeDataSource(dataSource));
+			userData.setUser(userFactory.createUserDataTypeUser(user));
+			userData.setData(userFactory.createUserDataTypeData(data));
+			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate)));
+			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate)));
+			
+			return userData;
+			
+		} catch (DatatypeConfigurationException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public UserDataCollectionType findUserDatasByQuery(String userId, String query, Date updateDate_start, Date updateDate_end, List<String> data_name, List<String> user_id) {
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug("executing find by query");
 		}
@@ -92,86 +188,5 @@ public class UserServiceImpl implements UserService {
 		collection.getUserData().add(this.findUserDataById(userId, "34234a"));
 		
 		return collection;
-	}
-
-	@Override
-	public void createUserData(String userId, UserDataType userdatatype) {
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug("executing create");
-		}
-		try {
-			Date current = new Date();
-			
-			UserDataType userData = userFactory.createUserDataType();
-			
-			GregorianCalendar currentDate = new GregorianCalendar();
-			currentDate.setTime(current);
-			
-			XMLGregorianCalendar today = DatatypeFactory.newInstance().newXMLGregorianCalendar(currentDate);
-			
-			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(today));
-			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(today));
-			userData.setDataSource(userdatatype.getDataSource());
-			userData.setId(entityFactory.createEntityTypeId("23"));
-			
-			//return userData;
-		
-		} catch (DatatypeConfigurationException e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	@Override
-	public void createUserDatas(String userId, UserDataCollectionType userdatacollectiontype) {
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug("executing create collection");
-		}
-		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
-		
-		for(UserDataType userData : userDataTypes) {
-			createUserData(userId, userData);
-		}
-	}
-
-	@Override
-	public UserDataType findUserDataById(String userId, String userDataId) {
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug("executing find by id");
-		}			
-		try {
-			GregorianCalendar collectionDate = new GregorianCalendar();
-			collectionDate.set(2010, GregorianCalendar.JANUARY, 20);
-			
-			GregorianCalendar updateDate = new GregorianCalendar();
-			updateDate.set(2008, GregorianCalendar.NOVEMBER, 20);
-			
-			GregorianCalendar createDate = new GregorianCalendar();
-			createDate.set(2008, GregorianCalendar.SEPTEMBER, 20);
-			
-			DataSourceType dataSource = dataSourceFactory.createDataSourceType();
-			dataSource.setId(entityFactory.createEntityTypeId("453ba2"));
-			
-			UserType user = new UserType();
-			user.setId(entityFactory.createEntityTypeId("0d8a7c33"));
-			
-			DataType data = userFactory.createDataType();
-			data.setName(userFactory.createDataTypeName("WeightPounds"));
-			data.setValue(userFactory.createDataTypeValue("135"));
-			
-			UserDataType userData = userFactory.createUserDataType();
-			userData.setId(entityFactory.createEntityTypeId("0d8a7c33"));
-			
-			userData.setCollectionDate(userFactory.createUserDataTypeCollectionDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(collectionDate)));
-			userData.setDataSource(userFactory.createUserDataTypeDataSource(dataSource));
-			userData.setUser(userFactory.createUserDataTypeUser(user));
-			userData.setData(userFactory.createUserDataTypeData(data));
-			userData.setUpdateDate(entityFactory.createEntityTypeUpdateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(updateDate)));
-			userData.setCreateDate(entityFactory.createEntityTypeCreateDate(DatatypeFactory.newInstance().newXMLGregorianCalendar(createDate)));
-			
-			return userData;
-			
-		} catch (DatatypeConfigurationException e) {
-			throw new RuntimeException(e);
-		}
 	}
 }
