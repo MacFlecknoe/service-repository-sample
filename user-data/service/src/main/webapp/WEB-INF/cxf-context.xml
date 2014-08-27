@@ -90,6 +90,7 @@
 		<entry key="urn:healthmedia:schema:common-error:v1" value="ce1"/>
 		<entry key="urn:healthmedia:schema:user:v1" value="u1"/>
 		<entry key="urn:healthmedia:schema:data-source:v1" value="ds1"/>
+		<entry key="urn:healthmedia:schema:common:entity:v1" value="e1"/>
 	</util:map>	
 	
 	<!-- example filter -->
