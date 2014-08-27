@@ -92,11 +92,7 @@ public class UserServiceImpl implements UserService {
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug("executing create collection");
 		}
-		List<UserDataType> userDataTypes = userdatacollectiontype.getUserData();
-		
-		for(UserDataType userData : userDataTypes) {
-			createUserData(userId, userData);
-		}
+		_createUserDatas(userId, userdatacollectiontype);
 	}
 
 	private UserDataCollectionType _createUserDatas(String userId, UserDataCollectionType userdatacollectiontype) {
