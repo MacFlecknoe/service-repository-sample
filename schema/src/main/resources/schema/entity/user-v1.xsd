@@ -95,7 +95,7 @@
 						minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="gender" type="tns:genderEnum" 
 						minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="birthDate" type="xsd:dateTime" 
+					<xsd:element name="birthDate" type="xsd:date" 
 						minOccurs="0"  maxOccurs="1" nillable="true" />
 				</xsd:sequence>
 			</xsd:extension>
@@ -153,8 +153,6 @@
 						minOccurs="0" maxOccurs="1" nillable="true" />
 					<xsd:element name="dataSource" type="dataSource:dataSourceType" 
 						minOccurs="0" maxOccurs="1" nillable="true" />
-					<xsd:element name="modality" type="common:modalityType" 
-						minOccurs="0" maxOccurs="1" nillable="true" />
 					<xsd:element name="user" type="tns:userType" 
 						minOccurs="0" maxOccurs="1" nillable="true" />
 				</xsd:sequence>
@@ -195,9 +193,9 @@
 	</xsd:complexType>
 	
 	<xsd:element name="userData" type="tns:userDataType" />
-	<xsd:element name="userDataCollection" type="tns:userDataCollectionType" />
+	<xsd:element name="userDatas" type="tns:userDataCollectionType" />
 	
 	<xsd:element name="user" type="tns:userType" />
-	<xsd:element name="userCollection" type="tns:userCollectionType" />
+	<xsd:element name="users" type="tns:userCollectionType" />
 	
 </xsd:schema>

@@ -40,8 +40,8 @@
 					<param name="user.id" type="xsd:string" style="query" required="false" repeating="true" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
@@ -65,12 +65,12 @@
 			<method name="POST" id="createCollection">
 				<request>
 					<!--  can create one or many entity objects at once -->
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
 				</request>
 				<response status="200">
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDataCollection" />
-					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDataCollection" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+json;version=1.0" element="user:userDatas" />
+					<representation mediaType="application/vnd.healthmedia.user-data-collection+xml;version=1.0" element="user:userDatas" />
 				</response>
 				<response status="400">
 					<representation mediaType="application/vnd.healthmedia.error+json;version=1.0" element="error:error" />
