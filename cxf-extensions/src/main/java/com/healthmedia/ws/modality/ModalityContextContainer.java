@@ -7,12 +7,13 @@ package com.healthmedia.ws.modality;
  *
  */
 public class ModalityContextContainer {
-	
+	// singleton instance
 	private static ModalityContextContainer instance;
-	private static final ThreadLocal<String> modalityContainer = new ThreadLocal<String>();
+	// modality is scoped to the current thread
+	private final ThreadLocal<String> modalityContainer;
 	
 	public ModalityContextContainer() {
-		// intentionally empty
+		this.modalityContainer = new ThreadLocal<String>();
 	}
 	
 	public String getModality() {
