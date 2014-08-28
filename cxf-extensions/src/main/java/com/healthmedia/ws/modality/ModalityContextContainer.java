@@ -12,7 +12,7 @@ public class ModalityContextContainer {
 	// modality is scoped to the current thread
 	private final ThreadLocal<String> modalityContainer;
 	
-	public ModalityContextContainer() {
+	private ModalityContextContainer() {
 		this.modalityContainer = new ThreadLocal<String>();
 	}
 	
