@@ -33,7 +33,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element ref="user:user" />
-						<xsd:element ref="ds:dataSource" />
+						<xsd:element name="processType" type="ds:dataSourceType" minOccurs="0" />
 						<xsd:element name="modality" type="xsd:string" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>
