@@ -3,6 +3,7 @@
 	xmlns:tns="urn:healthmedia:wsdl:user:v1"
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
 	xmlns:user="urn:healthmedia:schema:user:v1"
+	xmlns:ds="urn:healthmedia:schema:data-source:v1"
 	xmlns:common="urn:healthmedia:schema:common:v1"
 	xmlns:common-error="urn:healthmedia:schema:common:error:v1" 
 	xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype"
@@ -21,6 +22,9 @@
 				schemaLocation="../schema/entity/user-v1.xsd" 
 				namespace="urn:healthmedia:schema:user:v1" />
 			<xsd:import 
+				schemaLocation="../schema/entity/data-source-v1.xsd" 
+				namespace="urn:healthmedia:schema:data-source:v1" />
+			<xsd:import 
 				schemaLocation="../schema/common/common-error-v1.xsd" 
 				namespace="urn:healthmedia:schema:common:error:v1" />
 			
@@ -29,6 +33,7 @@
 				<xsd:complexType>
 					<xsd:sequence>
 						<xsd:element ref="user:user" />
+						<xsd:element ref="ds:dataSource" />
 						<xsd:element name="modality" type="xsd:string" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>
