@@ -14,13 +14,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 	<dependencies>
-		<!-- 
 		<dependency>
 			<groupId>com.healthmedia</groupId>
-			<artifactId>user-artifacts</artifactId>
+			<artifactId>xacml</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		-->
 		<dependency>
 			<groupId>com.healthmedia</groupId>
 			<artifactId>schema</artifactId>

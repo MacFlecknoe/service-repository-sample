@@ -62,6 +62,8 @@
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
+	<bean class="com.healthmedia.ws.xaml.SunXacmlInterceptor" id="XACMLInterceptor" />
+	
 	<!-- decorate with username token security -->
 	<camel-cxf:cxfEndpoint id="altProxyUserService"
 		address="/proxy/alt/userService"
@@ -77,6 +79,9 @@
 			<entry key="ws-security.encryption.username" value="server-alias" />
 			<entry key="ws-security.signature.username" value="server-alias" />
 	 	</camel-cxf:properties>
+		<camel-cxf:inInterceptors>
+			<ref bean="XACMLInterceptor"/>
+		</camel-cxf:inInterceptors>
 	</camel-cxf:cxfEndpoint>
 	
 	<camel-cxf:cxfEndpoint id="realUserService"

@@ -27,7 +27,14 @@
 		<jaxws:binding>
 			<soap:soapBinding mtomEnabled="true" version="1.2"/>
 		</jaxws:binding>
+		<!-- 
+		<jaxws:inInterceptors>
+			<ref bean="XACMLInterceptor"/>
+		</jaxws:inInterceptors>
+		-->
 	</jaxws:endpoint>
+	
+	<!-- <bean class="xaml.SunXacmlInterceptor" id="XACMLInterceptor" /> -->
 	
 	<p:externalAttachment location="classpath:policy/authentication-policy.xml"/>
 	<p:externalAttachment location="classpath:policy/i18n-policy.xml"/>
