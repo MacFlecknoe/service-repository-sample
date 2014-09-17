@@ -30,9 +30,11 @@ import org.w3c.dom.Document;
 public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 
 	private final PolicyDecisionPoint pdp;
+	private final XacmlResponseTransformer transformer; 
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
 		this.pdp = pdp;
+		this.transformer = new XacmlResponseTransformer();
 	}
 	
 	public PicketBoxXacmlInterceptor(String configName) {
@@ -50,8 +52,7 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		jbossXacmlRequest.readRequest(xacmlRequest.getDOM());
 		
 		ResponseContext jbossXacmlResponse = pdp.evaluate(jbossXacmlRequest);
-		
-		ResponseType responseType = new XacmlResponseTransformer().transform(jbossXacmlResponse);
+		ResponseType responseType = transformer.transform(jbossXacmlResponse);
 		
 		return responseType;
 	}
