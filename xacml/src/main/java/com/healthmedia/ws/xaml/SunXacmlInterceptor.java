@@ -43,7 +43,7 @@ import org.w3c.dom.NodeList;
 public class SunXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 	
 	private final PDP pdp;
-	private final ResponseTransformer transformer;
+	private final SunXacmlResponseTransformer transformer;
 	
 	public SunXacmlInterceptor(PolicyFinderModule finderModule) {
 		//
@@ -63,7 +63,7 @@ public class SunXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 		attFinder.setModules(attrModules);
 		
 		this.pdp = new PDP(new PDPConfig(attFinder, policyFinder, null));
-		this.transformer = new ResponseTransformer();
+		this.transformer = new SunXacmlResponseTransformer();
 	}
 	
 	public SunXacmlInterceptor(List<String> filePaths) {
@@ -116,19 +116,23 @@ public class SunXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 	}
 	
 	/**
-	 * Serialize to standard XML and leverage API marshallers to do the conversion for us. This is expensive but the reduction in
+	 * Serialize to standard XACML XML format and leverage API marshallers to convert to/from each frameworks native objects. This is expensive but the reduction in
 	 * complexity is worth the nominal overhead.
 	 * 
 	 * @author mlamber7
 	 *
 	 */
-	private static class ResponseTransformer {
+	private static class SunXacmlResponseTransformer {
 		
 		private final DocumentBuilderFactory factory;
 		
-		public ResponseTransformer() {
+		public SunXacmlResponseTransformer() {
+			
 			this.factory = DocumentBuilderFactory.newInstance();
-			factory.setNamespaceAware(true); // this is required. it was a hard lesson learned.
+			//
+			// opensaml marshaller requires all XACML elements be assigned a namespace
+			//
+			factory.setNamespaceAware(true); 
 		}
 		
 		public ResponseType transform(ResponseCtx responseCtx) throws Exception {
@@ -140,8 +144,7 @@ public class SunXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 			
 			Document doc = db.parse(new ByteArrayInputStream(outStream.toByteArray()));
 			//
-			// opensaml requires that the oasis namespace be attached to the document 
-			// before unmarshalling
+			// opensaml requires that the oasis namespace be attached to each XACML element
 			//
 			appendNamespace(doc.getDocumentElement(), "urn:oasis:names:tc:xacml:2.0:context:schema:os");
 			

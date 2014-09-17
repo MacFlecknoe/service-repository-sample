@@ -17,7 +17,7 @@
 	</Target>
 	<Rule RuleId="1" Effect="Permit">
 		<Condition FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-is-in">
-			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">username</AttributeValue>
+			<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">username1</AttributeValue>
 			<SubjectAttributeDesignator DataType="http://www.w3.org/2001/XMLSchema#string"
 				AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id" />
 		</Condition>
