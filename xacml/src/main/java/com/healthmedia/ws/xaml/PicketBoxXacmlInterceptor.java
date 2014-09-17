@@ -3,7 +3,9 @@ package com.healthmedia.ws.xaml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
@@ -66,12 +68,16 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 			factory.setNamespaceAware(true);
 		}
 		
+		private synchronized DocumentBuilder getDocumentBuilder() throws Exception {
+			return factory.newDocumentBuilder();
+		}
+		
 		public ResponseType transform(ResponseContext responseCtx) throws Exception {
 			
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 			responseCtx.marshall(outStream);
 			
-			Document doc = factory.newDocumentBuilder().parse(new ByteArrayInputStream(outStream.toByteArray()));
+			Document doc = getDocumentBuilder().parse(new ByteArrayInputStream(outStream.toByteArray()));
 			
 			XMLObject responseType = new ResponseTypeUnmarshaller().unmarshall(doc.getDocumentElement());
 			
