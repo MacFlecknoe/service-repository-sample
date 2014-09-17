@@ -62,7 +62,8 @@
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
-	<bean class="com.healthmedia.ws.xaml.SunXacmlInterceptor" id="XACMLInterceptor" />
+	<bean class="com.healthmedia.ws.xaml.SunXacmlInterceptor" id="SunXacmlInterceptor" />
+	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor" />
 	
 	<!-- decorate with username token security -->
 	<camel-cxf:cxfEndpoint id="altProxyUserService"
@@ -80,7 +81,7 @@
 			<entry key="ws-security.signature.username" value="server-alias" />
 	 	</camel-cxf:properties>
 		<camel-cxf:inInterceptors>
-			<ref bean="XACMLInterceptor"/>
+			<ref bean="PicketBoxXacmlInterceptor"/>
 		</camel-cxf:inInterceptors>
 	</camel-cxf:cxfEndpoint>
 	
