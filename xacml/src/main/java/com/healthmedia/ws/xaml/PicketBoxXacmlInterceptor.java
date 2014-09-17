@@ -2,7 +2,6 @@ package com.healthmedia.ws.xaml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.net.URL;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
@@ -17,10 +16,11 @@ import org.opensaml.xacml.ctx.RequestType;
 import org.opensaml.xacml.ctx.ResponseType;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
-import org.opensaml.xml.util.XMLHelper;
 import org.w3c.dom.Document;
 
 /**
+ * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point.
+ * 
  * https://developer.jboss.org/wiki/PicketBoxXACMLSimpleWalkThrough
  * http://anonsvn.jboss.org/repos/jbossas/projects/security/security-xacml/tags/2.0.6.Final/jboss-xacml/src/test/java/org/jboss/test/security/test/xacml/XACMLUnitTestCase.java
  *
@@ -46,12 +46,8 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	@Override
 	public ResponseType performRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
-		System.out.println(XMLHelper.prettyPrintXML(xacmlRequest.getDOM()));
-		
 		RequestContext jbossXacmlRequest = new JBossRequestContext();
 		jbossXacmlRequest.readRequest(xacmlRequest.getDOM());
-		
-		System.out.println(XMLHelper.prettyPrintXML(jbossXacmlRequest.getDocumentElement()));
 		
 		ResponseContext jbossXacmlResponse = pdp.evaluate(jbossXacmlRequest);
 		
