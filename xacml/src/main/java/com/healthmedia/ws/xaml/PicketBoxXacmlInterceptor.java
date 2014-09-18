@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
@@ -73,7 +72,10 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		}
 		
 		public ResponseType transform(ResponseContext responseCtx) throws Exception {
-			
+			//
+			// Serialize to standard XACML XML format and leverage API marshallers to convert to/from each frameworks native objects. 
+			// This is expensive but the reduction in complexity is worth the nominal overhead.
+			// 
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 			responseCtx.marshall(outStream);
 			
