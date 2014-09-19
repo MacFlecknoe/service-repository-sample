@@ -62,7 +62,6 @@
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
-	<bean class="com.healthmedia.ws.xaml.SunXacmlInterceptor" id="SunXacmlInterceptor" />
 	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor" />
 	
 	<!-- decorate with username token security -->

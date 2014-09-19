@@ -4,6 +4,9 @@
 		<ns:Policy>
 			<ns:Location>sample_xacml.xml</ns:Location>
 		</ns:Policy>
+		<ns:Policy>
+			<ns:Location>sample_access-code_xacml.xml</ns:Location>
+		</ns:Policy>
 	</ns:Policies>
 	<ns:Locators>
 		<ns:Locator Name="org.jboss.security.xacml.locators.JBossPolicyLocator"/>

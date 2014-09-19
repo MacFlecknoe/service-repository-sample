@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
+import org.apache.ws.security.saml.ext.OpenSAMLUtil;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
 import org.jboss.security.xacml.interfaces.RequestContext;
@@ -17,6 +18,7 @@ import org.opensaml.xacml.ctx.ResponseType;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point.
@@ -68,6 +70,8 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		for(IXacmlRequestPreprocessor preprocessor : this.getRequestProcessors()) {
 			xacmlRequest = preprocessor.process(xacmlRequest, message);
 		}
+		xacmlRequest.setDOM(OpenSAMLUtil.toDom(xacmlRequest, DOMUtils.createDocument()));
+		
 		return xacmlRequest;
 	}
 	
