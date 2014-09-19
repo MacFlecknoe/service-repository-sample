@@ -25,10 +25,10 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 	public static final QName ACCESS_CODE_POLICY = new QName("urn:healthmedia:schema:policy:access-code:v1", "accessCodePolicy");
 	private static final QName ACCESS_CODE_HEADER = new QName("urn:healthmedia:schema:header:access-code:v1", "accessCode");
 	
-	private final IAccessCodeValidator validator;
+	private final IAccessCodeProcessor validator;
 	private final XPathExpression accessCodeExpression;
 	
-	public AccessCodeInterceptor(IAccessCodeValidator validator) {
+	public AccessCodeInterceptor(IAccessCodeProcessor validator) {
 		super(Phase.PRE_INVOKE);
 		try {
 			MapNamespaceContext context = new MapNamespaceContext();
@@ -56,7 +56,7 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 				Node node = (Node)header.getObject();
 				
 				String accessCode = (String) accessCodeExpression.evaluate(node,  XPathConstants.STRING);
-				validator.validate(accessCode);
+				validator.process(accessCode);
 				handleAssertion(message, true);
 				
 			} else {
@@ -87,7 +87,7 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		}
 	}
 
-	public static interface IAccessCodeValidator {
+	public static interface IAccessCodeProcessor {
 		
 		/**
 		 * Method should lookup and validate passed access code.
@@ -95,16 +95,24 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		 * @param accessCode
 		 * @throws SecurityException when access code is invalid
 		 */
-		public void validate(String accessCode) throws SecurityException;
+		public void process(String accessCode) throws SecurityException;
 	}
 	
-	public static class MockAccessCodeValidator implements IAccessCodeValidator {
+	public static class MockAccessCodeValidator implements IAccessCodeProcessor {
 		
 		@Override
-		public void validate(String accessCode) throws SecurityException {
+		public void process(String accessCode) throws SecurityException {
 			if(!"accessCode".equals(accessCode)) {
 				throw new SecurityException(new StringBuilder("Invalid access code: ").append(accessCode).toString());
 			}
+		}
+	}
+	
+	public static class AccessCodeContextProcessor implements IAccessCodeProcessor {
+
+		@Override
+		public void process(String accessCode) throws SecurityException {
+			AccessCodeContext.setAccessCode(accessCode);
 		}
 	}
 }
