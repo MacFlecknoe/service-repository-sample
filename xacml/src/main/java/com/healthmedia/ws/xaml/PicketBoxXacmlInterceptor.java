@@ -33,29 +33,29 @@ import org.w3c.dom.Element;
 public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
 
 	private final PolicyDecisionPoint pdp;
-	private final List<IXacmlRequestProcessor> processors;
+	private final List<IXacmlRequestPreprocessor> processors;
 	
-	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IXacmlRequestProcessor> processors) {
+	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IXacmlRequestPreprocessor> processors) {
 		this.pdp = pdp;
 		this.processors = processors;
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
-		this(pdp, Arrays.asList((IXacmlRequestProcessor) new AccessCodeXacmlRequestAugmentor()));
+		this(pdp, Arrays.asList((IXacmlRequestPreprocessor) new AccessCodeXacmlRequestAugmentor()));
 	}
 	
 	public PicketBoxXacmlInterceptor() {
 		this(new ClasspathConfigurableJBossPDP());
 	}
 	
-	public List<IXacmlRequestProcessor> getXacmlRequestProcessors() {
+	public List<IXacmlRequestPreprocessor> getRequestProcessors() {
 		return processors;
 	}
 	
 	@Override
 	public ResponseType performRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
-		RequestType processedXacmlRequest = processXacmlRequest(xacmlRequest, message);
+		RequestType processedXacmlRequest = preProcessRequest(xacmlRequest, message);
 		
 		RequestContext jbossXacmlRequest = new JBossRequestContext();
 		jbossXacmlRequest.readRequest(processedXacmlRequest.getDOM());
@@ -66,9 +66,9 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return responseType;
 	}
 	
-	private RequestType processXacmlRequest(RequestType xacmlRequest, Message message) throws Exception {
+	private RequestType preProcessRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
-		for(IXacmlRequestProcessor p : this.getXacmlRequestProcessors()) {
+		for(IXacmlRequestPreprocessor p : this.getRequestProcessors()) {
 			xacmlRequest = p.process(xacmlRequest, message);
 			System.out.println(OpenSamlXacmlUtil.toString(xacmlRequest));
 		}

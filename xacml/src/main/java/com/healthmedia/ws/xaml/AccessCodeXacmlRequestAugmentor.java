@@ -7,7 +7,7 @@ import org.opensaml.xacml.ctx.RequestType;
 import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
 import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
 
-public class AccessCodeXacmlRequestAugmentor implements IXacmlRequestProcessor {
+public class AccessCodeXacmlRequestAugmentor implements IXacmlRequestPreprocessor {
 
 	@Override
 	public RequestType process(RequestType xacmlRequest, Message message) {
