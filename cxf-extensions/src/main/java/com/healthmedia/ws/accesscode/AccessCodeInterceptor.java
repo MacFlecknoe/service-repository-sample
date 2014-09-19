@@ -90,7 +90,8 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 	public static interface IAccessCodeProcessor {
 		
 		/**
-		 * Method should lookup and validate passed access code.
+		 * Method should handle access code. This can mean either validating the code here or setting it into
+		 * a context object to be validated elsewhere (e.g. via a XACML engine)
 		 * 
 		 * @param accessCode
 		 * @throws SecurityException when access code is invalid
