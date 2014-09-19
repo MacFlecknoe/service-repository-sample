@@ -18,7 +18,6 @@ import org.opensaml.xacml.ctx.ResponseType;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point.
@@ -70,8 +69,10 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		for(IXacmlRequestPreprocessor preprocessor : this.getRequestProcessors()) {
 			xacmlRequest = preprocessor.process(xacmlRequest, message);
 		}
-		xacmlRequest.setDOM(OpenSAMLUtil.toDom(xacmlRequest, DOMUtils.createDocument()));
-		
+		if(xacmlRequest.getDOM() == null) {
+			// changing the XACML request has invalidated its DOM; we need to regenerate it
+			xacmlRequest.setDOM(OpenSAMLUtil.toDom(xacmlRequest, DOMUtils.createDocument()));
+		}
 		return xacmlRequest;
 	}
 	
