@@ -8,8 +8,6 @@ import java.util.List;
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
-import org.apache.ws.security.saml.ext.OpenSAMLUtil;
-import org.apache.ws.security.util.DOM2Writer;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
 import org.jboss.security.xacml.interfaces.RequestContext;
@@ -19,7 +17,6 @@ import org.opensaml.xacml.ctx.ResponseType;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point.
@@ -55,7 +52,7 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	@Override
 	public ResponseType performRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
-		RequestType processedXacmlRequest = preProcessRequest(xacmlRequest, message);
+		RequestType processedXacmlRequest = preprocessRequest(xacmlRequest, message);
 		
 		RequestContext jbossXacmlRequest = new JBossRequestContext();
 		jbossXacmlRequest.readRequest(processedXacmlRequest.getDOM());
@@ -66,11 +63,10 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return responseType;
 	}
 	
-	private RequestType preProcessRequest(RequestType xacmlRequest, Message message) throws Exception {
+	private RequestType preprocessRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
-		for(IXacmlRequestPreprocessor p : this.getRequestProcessors()) {
-			xacmlRequest = p.process(xacmlRequest, message);
-			System.out.println(OpenSamlXacmlUtil.toString(xacmlRequest));
+		for(IXacmlRequestPreprocessor preprocessor : this.getRequestProcessors()) {
+			xacmlRequest = preprocessor.process(xacmlRequest, message);
 		}
 		return xacmlRequest;
 	}
@@ -92,17 +88,6 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 			XMLObject responseType = new ResponseTypeUnmarshaller().unmarshall(doc.getDocumentElement());
 			
 			return (ResponseType) responseType;
-		}
-	}
-	
-	private static class OpenSamlXacmlUtil {
-		
-		public static String toString(XMLObject xmlObject) throws Exception {
-			
-			Document doc = DOMUtils.createDocument();
-			Element element = OpenSAMLUtil.toDom(xmlObject, doc);
-			
-			return DOM2Writer.nodeToString(element);
 		}
 	}
 }
