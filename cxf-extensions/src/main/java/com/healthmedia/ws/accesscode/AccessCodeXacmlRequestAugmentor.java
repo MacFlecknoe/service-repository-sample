@@ -20,7 +20,7 @@ public class AccessCodeXacmlRequestAugmentor implements IXacmlRequestPreprocesso
 			attributeValueType.setValue(AccessCodeContext.getAccessCode());
 			
 			AttributeType attributeType = new AttributeTypeImplBuilder().buildObject();
-			attributeType.setAttributeID("urn:healthmedia:schema:header:access-code:v1");
+			attributeType.setAttributeID("urn:healthmedia:names:action:access-code:v1");
 			attributeType.setDataType("http://www.w3.org/2001/XMLSchema#string");
 			attributeType.getAttributeValues().add(attributeValueType);
 			

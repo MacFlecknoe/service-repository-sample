@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
+	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicyId="urn:healthmedia:xacml:example:policy:id:1"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+	<Description>
+		XACML 2.0 Example Policy 1: Only allow a customer whose access-code matches "testAccessCode"
+	</Description>
+	<Target />
+	<Rule RuleId="urn:healthmedia:xacml:example:rule:id:1" Effect="Deny">
+		<Description>
+			XACML 2.0 Example Rule 1: Only allow a customer whose access-code matches "testAccessCode"
+		</Description>
+		<Target/>
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+						<ActionAttributeDesignator
+								AttributeId="urn:healthmedia:names:action:access-code:v1"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+					</Apply>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">testAccessCode</AttributeValue>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+</Policy>

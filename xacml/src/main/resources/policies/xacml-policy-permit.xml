@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os 
+	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicyId="urn:healthmedia:xacml:example:policy:id:permit"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+	<Description>
+		XACML 2.0 Example Policy 2: Only allow a customer whose id matches "username"
+	</Description>
+	<Target />
+	<Rule RuleId="urn:healthmedia:xacml:example:rule:id:permit" Effect="Permit">
+		<Description>
+			XACML 2.0 Example Rule 2: Only allow a customer whose id matches "username"
+		</Description>
+		<Target/>
+		<Condition>
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">true</AttributeValue>
+					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">true</AttributeValue>
+				</Apply>
+		</Condition>
+	</Rule>
+</Policy>

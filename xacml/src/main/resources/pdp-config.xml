@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ns:jbosspdp xmlns:ns="urn:jboss:xacml:2.0">
 	<ns:Policies>
-		<!-- <ns:Policy> <ns:Location>sample_xacml.xml</ns:Location> </ns:Policy> -->
 		<ns:PolicySet>
 			<ns:Location>policies/xacml-policy-set.xml</ns:Location>
 			<ns:Policy>
-				<ns:Location>policies/xacml-policy3.xml</ns:Location>
+				<ns:Location>policies/xacml-policy-1.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>
-				<ns:Location>policies/xacml-policy4.xml</ns:Location>
+				<ns:Location>policies/xacml-policy-2.xml</ns:Location>
+			</ns:Policy>
+			<ns:Policy>
+				<ns:Location>policies/xacml-policy-permit.xml</ns:Location>
 			</ns:Policy>
 		</ns:PolicySet>
 	</ns:Policies>

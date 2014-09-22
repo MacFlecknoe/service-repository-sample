@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PolicySet xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os 
-      http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
-	PolicySetId="urn:xacml:2.0:interop:example:policysetid:01"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
+	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicySetId="urn:healthmedia:xacml:example:policy-set:id:1"
 	PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:permit-overrides">
 	<Description>
 		Policyset to evaluate trade-limit and credit-ext restrictions
 	</Description>
 	<Target />
-	<!-- <PolicyIdReference>urn:xacml:2.0:interop:example:policyid:02</PolicyIdReference>  -->
-	<PolicySet PolicySetId="urn:xacml:2.0:interop:example:policysetid:06"
+	<PolicySet PolicySetId="urn:healthmedia:xacml:example:policy-set:id:2"
 		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
 		<Description>
-			Policy for picking up trade-limit or credit-ext obligations
+			Policy for picking up access code and subject-id limitations
 		</Description>
 		<Target />
-		<PolicyIdReference>urn:xacml:2.0:interop:example:policyid:03</PolicyIdReference>
-		<PolicyIdReference>urn:xacml:2.0:interop:example:policyid:04</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:1</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:2</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:permit</PolicyIdReference>
 	</PolicySet>
 </PolicySet>
