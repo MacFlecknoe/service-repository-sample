@@ -2,7 +2,7 @@ package com.healthmedia.ws.xaml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.cxf.helpers.DOMUtils;
@@ -44,7 +44,7 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
-		this(pdp, Arrays.asList((IXacmlRequestPreprocessor) new AccessCodeXacmlRequestAugmentor()));
+		this(pdp, new ArrayList<IXacmlRequestPreprocessor>());
 	}
 	
 	public PicketBoxXacmlInterceptor(List<IXacmlRequestPreprocessor> processors) {
