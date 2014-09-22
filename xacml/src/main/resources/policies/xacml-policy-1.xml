@@ -6,12 +6,12 @@
 	PolicyId="urn:healthmedia:xacml:example:policy:id:1"
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
 	<Description>
-		XACML 2.0 Example Policy 1: Only allow a customer whose access-code matches "testAccessCode"
+		Deny consumers whose access-code does not match "testAccessCode"
 	</Description>
 	<Target />
 	<Rule RuleId="urn:healthmedia:xacml:example:rule:id:1" Effect="Deny">
 		<Description>
-			XACML 2.0 Example Rule 1: Only allow a customer whose access-code matches "testAccessCode"
+			Deny consumers whose access-code does not equal "testAccessCode"
 		</Description>
 		<Target/>
 		<Condition>

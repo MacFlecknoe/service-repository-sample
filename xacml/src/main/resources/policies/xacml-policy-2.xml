@@ -6,12 +6,12 @@
 	PolicyId="urn:healthmedia:xacml:example:policy:id:2"
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
 	<Description>
-		XACML 2.0 Example Policy 2: Only allow a customer whose id matches "username"
+		Deny consumers whos subjectid does not equal "username"
 	</Description>
 	<Target />
 	<Rule RuleId="urn:healthmedia:xacml:example:rule:id:2" Effect="Deny">
 		<Description>
-			XACML 2.0 Example Rule 2: Only allow a customer whose id matches "username"
+			Deny consumers whos subjectid does not equal "username"
 		</Description>
 		<Target/>
 		<Condition>

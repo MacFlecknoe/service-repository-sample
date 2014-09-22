@@ -12,11 +12,14 @@
 	<PolicySet PolicySetId="urn:healthmedia:xacml:example:policy-set:id:2"
 		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
 		<Description>
-			Policy for picking up access code and subject-id limitations
+			Policy for picking up access code and subject-id limitations. Any deny overrides all other permits.
 		</Description>
 		<Target />
+		<!-- deny if username is not a fixed string -->
 		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:1</PolicyIdReference>
+		<!-- deny if access code is not a fixed string -->
 		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:2</PolicyIdReference>
+		<!-- permit all others-->
 		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:permit</PolicyIdReference>
 	</PolicySet>
 </PolicySet>
