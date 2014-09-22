@@ -4,7 +4,7 @@
 		<ns:PolicySet>
 			<ns:Location>policies/xacml-policy-set.xml</ns:Location>
 			<ns:Policy>
-				<ns:Location>policies/xacml-policy-1.xml</ns:Location>
+				<ns:Location>policies/xacml-policy-1a.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>
 				<ns:Location>policies/xacml-policy-2.xml</ns:Location>
@@ -16,5 +16,18 @@
 	</ns:Policies>
 	<ns:Locators>
 		<ns:Locator Name="org.jboss.security.xacml.locators.JBossPolicySetLocator" />
+		<!-- can use to pull access code from database -->
+		<!-- 
+		<ns:Locator
+			Name="org.jboss.security.xacml.locators.attrib.DatabaseSubjectAttributeLocator">
+			<ns:Option Name="DATABASE_FILE_NAME">data_stores/db.properties</ns:Option>
+			<ns:Option Name="sql">SELECT subject_id FROM subject where name=?;</ns:Option>
+			<ns:Option Name="attributeSupportedId">urn:healthmedia:names:action:access-code:v1</ns:Option>
+			<ns:Option Name="preparedStatementValue">urn:xacml:2.0:interop:example:subject:user-name</ns:Option>
+			<ns:Option Name="valueDataType">http://www.w3.org/2001/XMLSchema#string/ns:Option>
+			<ns:Option Name="columnName">subject_id</ns:Option>
+		</ns:Locator>
+		-->
+		<ns:Locator Name="com.healthmedia.ws.accesscode.AccessCodeAttributeModule"/>
 	</ns:Locators>
 </ns:jbosspdp> 
