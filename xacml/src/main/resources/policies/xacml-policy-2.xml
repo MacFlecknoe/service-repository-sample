@@ -11,7 +11,7 @@
 	<Target />
 	<Rule RuleId="urn:healthmedia:xacml:example:rule:id:2" Effect="Deny">
 		<Description>
-			Deny consumers whos subjectid does not equal "username"
+			Deny consumers whos subject-id does not equal "username"
 		</Description>
 		<Target/>
 		<Condition>
