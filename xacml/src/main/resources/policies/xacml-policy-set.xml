@@ -9,6 +9,10 @@
 		Policyset to evaluate trade-limit and credit-ext restrictions
 	</Description>
 	<Target />
+	<!--  
+		use an automatic permit policy in order to simulate a permit-unless-deny combination algorithm. this algorithm is 
+		part of the xaml 3.0 spec (picketbox only supports 2.0)
+	-->
 	<PolicySet PolicySetId="urn:healthmedia:xacml:example:policy-set:id:2"
 		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
 		<Description>
