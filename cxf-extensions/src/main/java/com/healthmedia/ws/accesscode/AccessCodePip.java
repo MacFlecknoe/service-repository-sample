@@ -11,17 +11,24 @@ import org.jboss.security.xacml.sunxacml.attr.BagAttribute;
 import org.jboss.security.xacml.sunxacml.attr.StringAttribute;
 import org.jboss.security.xacml.sunxacml.cond.EvaluationResult;
 
-public class AccessCodeAttributeModule extends AttributeLocator {
+/**
+ * Looks up the list of access-codes associated with a subject. Is a PIP within the XACML reference 
+ * architecture. 
+ * 
+ * @author mlamber7
+ *
+ */
+public class AccessCodePip extends AttributeLocator {
 
 	private static final String ACCESS_CODE_IDENTIFIER= "urn:healthmedia:names:subject:access-code:v1";
 	
 	private final IAccessCodeFinder finder;
 	
-	public AccessCodeAttributeModule(IAccessCodeFinder finder) {
+	public AccessCodePip(IAccessCodeFinder finder) {
 		this.finder = finder;
 	}
 	
-	public AccessCodeAttributeModule() {
+	public AccessCodePip() {
 		this(new MockAccessCodeFinder());
 	}
 	

@@ -9,6 +9,12 @@ import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
 
 import com.healthmedia.ws.xaml.IXacmlRequestPreprocessor;
 
+/**
+ * Adds the access code associated with the present request to the XAML request context.
+ * 
+ * @author mlamber7
+ *
+ */
 public class AccessCodeXacmlRequestAugmentor implements IXacmlRequestPreprocessor {
 
 	@Override

@@ -20,6 +20,12 @@ import org.apache.cxf.ws.policy.AssertionInfoMap;
 import org.apache.neethi.Assertion;
 import org.w3c.dom.Node;
 
+/**
+ * Handles access codes passed via a soap header.
+ * 
+ * @author mlamber7
+ *
+ */
 public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage> {
 
 	public static final QName ACCESS_CODE_POLICY = new QName("urn:healthmedia:schema:policy:access-code:v1", "accessCodePolicy");
