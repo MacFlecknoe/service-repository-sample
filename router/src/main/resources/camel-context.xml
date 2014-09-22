@@ -62,7 +62,13 @@
 	 	</camel-cxf:properties>
 	</camel-cxf:cxfEndpoint>
 	
-	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor" />
+	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor">
+		<constructor-arg>
+			<list>
+				<bean class="com.healthmedia.ws.accesscode.AccessCodeXacmlRequestAugmentor" />
+			</list>
+		</constructor-arg>
+	</bean>
 	
 	<!-- decorate with username token security -->
 	<camel-cxf:cxfEndpoint id="altProxyUserService"

@@ -16,11 +16,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.healthmedia</groupId>
-			<artifactId>xacml</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.healthmedia</groupId>
 			<artifactId>schema</artifactId>
 			<version>${project.version}</version>
 		</dependency>

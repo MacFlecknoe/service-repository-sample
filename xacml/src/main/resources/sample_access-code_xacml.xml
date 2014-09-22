@@ -20,7 +20,7 @@
 					<ActionMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
 						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">testAccessCode</AttributeValue>
 						<ActionAttributeDesignator
-							AttributeId="urn:healthmedia:xacml:action:v1:access-code"
+							AttributeId="urn:healthmedia:schema:header:access-code:v1"
 							DataType="http://www.w3.org/2001/XMLSchema#string" />
 					</ActionMatch>
 				</Action>

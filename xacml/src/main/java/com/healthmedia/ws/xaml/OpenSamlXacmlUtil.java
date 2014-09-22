@@ -7,7 +7,7 @@ import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class OpenSamlXacmlUtil {
+class OpenSamlXacmlUtil {
 	
 	public static String toString(XMLObject xmlObject) throws Exception {
 		

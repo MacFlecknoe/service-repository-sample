@@ -9,36 +9,25 @@
 	</parent>
 	<dependencies>
 		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
-			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>
-			<version>1.6.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-security</artifactId>
-			<version>2.7.11</version>
 		</dependency>
 		<!--  picketbox -->
 		<dependency>
 			<groupId>org.jboss.security</groupId>
 			<artifactId>jboss-xacml</artifactId>
-			<version>2.0.9.Final</version>
-			<exclusions>
-				<exclusion>
-					<groupId>apache-xerces</groupId>
-					<artifactId>xml-apis</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.jboss.security</groupId>
-			<artifactId>jboss-sunxacml</artifactId>
-			<version>2.0.9.Final</version>
 			<exclusions>
 				<exclusion>
 					<groupId>apache-xerces</groupId>
@@ -47,14 +36,4 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>jboss-3rd-party-releases</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
-		</repository>
-		<repository>
-			<id>jboss-releases</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
-		</repository>
-	</repositories>
 </project>

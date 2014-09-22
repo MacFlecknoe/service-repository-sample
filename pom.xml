@@ -34,10 +34,23 @@
 		<slf4j.version>1.7.7</slf4j.version>
 		<bcprov.version>1.50</bcprov.version>
 		<junit.version>4.6</junit.version>
+		<xerces.version>2.11.0</xerces.version>
+		<dom4j.version>1.6.1</dom4j.version>
+		<jboss-xacml.version>2.0.9.Final</jboss-xacml.version>
 		<maven-surefire.version>2.17</maven-surefire.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>xerces</groupId>
+				<artifactId>xercesImpl</artifactId>
+				<version>${xerces.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>dom4j</groupId>
+				<artifactId>dom4j</artifactId>
+				<version>${dom4j.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>org.bouncycastle</groupId>
 				<artifactId>bcprov-jdk15on</artifactId>
@@ -58,6 +71,17 @@
 				<groupId>org.apache.camel</groupId>
 				<artifactId>camel-cxf</artifactId>
 				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.security</groupId>
+				<artifactId>jboss-xacml</artifactId>
+				<version>${jboss-xacml.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>apache-xerces</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<!-- logging -->
 			<dependency>
@@ -126,6 +150,11 @@
 			<dependency>
 				<groupId>org.apache.cxf</groupId>
 				<artifactId>cxf-rt-rs-extension-providers</artifactId>
+				<version>${cxf.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-rt-security</artifactId>
 				<version>${cxf.version}</version>
 			</dependency>
 			<dependency>
@@ -273,6 +302,16 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+	<repositories>
+		<repository>
+			<id>jboss-3rd-party-releases</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/thirdparty-releases/</url>
+		</repository>
+		<repository>
+			<id>jboss-releases</id>
+			<url>https://repository.jboss.org/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
 			<id>smartbear-sweden-plugin-repository</id>

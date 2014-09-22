@@ -693,7 +693,7 @@
    	<i18n:international>
 		<i18n:locale>en-US</i18n:locale>  
 	</i18n:international>
-	<h:accessCode>accessCode</h:accessCode>
+	<h:accessCode>testAccessCode</h:accessCode>
    </soap:Header>
    <soap:Body>
       <urn:importUserRequest>
@@ -716,12 +716,12 @@
          </urn1:user>
       </urn:importUserRequest>
    </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="User Service (direct call)"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:h="urn:healthmedia:schema:header:access-code:v1" xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:entity:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call><con:call name="User Service (direct call)" outgoingWss="username"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/user-service/userService</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:h="urn:healthmedia:schema:header:access-code:v1" xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:urn="urn:healthmedia:wsdl:user:v1" xmlns:urn1="urn:healthmedia:schema:user:v1" xmlns:urn2="urn:healthmedia:schema:common:entity:v1" xmlns:urn3="urn:healthmedia:schema:data-source:v1">
    <soap:Header>
    	<i18n:international>
 		<i18n:locale>en-US</i18n:locale>  
 	</i18n:international>
-	<h:accessCode>accessCode</h:accessCode>
+	<h:accessCode>accessCodfger</h:accessCode>
    </soap:Header>
    <soap:Body>
       <urn:importUserRequest>
@@ -730,9 +730,9 @@
          </urn1:user>
       </urn:importUserRequest>
    </soap:Body>
-</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>/home/mlamber7/Programming/service-repository-sample/router/src/main/resources/keystore/client_store.jks</con:source><con:password>password</con:password><con:type>KEYSTORE</con:type></con:crypto><con:outgoing mustUnderstand="true" actor=""><con:name>username</con:name><con:entry type="Username" username="username" password="password"><con:configuration><addCreated>true</addCreated><addNonce>true</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing><con:outgoing actor="" mustUnderstand="true"><con:name>x509</con:name><con:entry type="Signature" username="client-alias" password="password"><con:configuration><crypto>client_store.jks</crypto><keyIdentifierType>1</keyIdentifierType><signatureAlgorithm/><signatureCanonicalization/><useSingleCert>true</useSingleCert><digestAlgorithm/><signaturePart><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+</soap:Envelope>]]></con:request><con:credentials><con:selectedAuthProfile>Basic</con:selectedAuthProfile><con:addedBasicAuthenticationTypes>Basic</con:addedBasicAuthenticationTypes><con:authType>Global HTTP Settings</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:healthmedia:wsdl:user:soap:v1/userService/importUserRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer><con:crypto><con:source>/home/mlamber7/Programming/service-repository-sample/router/src/main/resources/keystore/client_store.jks</con:source><con:password>password</con:password><con:type>KEYSTORE</con:type></con:crypto><con:outgoing mustUnderstand="false" actor=""><con:name>username</con:name><con:entry type="Username" username="username" password="password"><con:configuration><addCreated>true</addCreated><addNonce>true</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing><con:outgoing actor="" mustUnderstand="true"><con:name>x509</con:name><con:entry type="Signature" username="client-alias" password="password"><con:configuration><crypto>client_store.jks</crypto><keyIdentifierType>1</keyIdentifierType><signatureAlgorithm/><signatureCanonicalization/><useSingleCert>true</useSingleCert><digestAlgorithm/><signaturePart><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
   <con:entry key="id" value=""/>
   <con:entry key="name" value="Body"/>
   <con:entry key="enc" value="Content"/>
   <con:entry key="namespace" value="http://www.w3.org/2003/05/soap-envelope"/>
-</xml-fragment>]]></signaturePart></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>
+</xml-fragment>]]></signaturePart></con:configuration></con:entry></con:outgoing><con:outgoing><con:name>username2</con:name><con:entry type="Username" username="username2" password="password"><con:configuration><addCreated>true</addCreated><addNonce>true</addNonce><passwordType>PasswordText</passwordType></con:configuration></con:entry></con:outgoing></con:wssContainer><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

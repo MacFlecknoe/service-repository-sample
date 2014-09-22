@@ -17,7 +17,7 @@ public class AccessCodePolicyInterceptorProvider extends AbstractPolicyIntercept
 	
 	public AccessCodePolicyInterceptorProvider() {
 		super(ASSERTION_TYPES);
-		// TODO swap out mock
-		getInInterceptors().add(new AccessCodeInterceptor(new AccessCodeInterceptor.MockAccessCodeValidator()));
+		// getInInterceptors().add(new AccessCodeInterceptor(new AccessCodeInterceptor.MockAccessCodeValidator()));
+		getInInterceptors().add(new AccessCodeInterceptor(new AccessCodeInterceptor.AccessCodeContextProcessor()));
 	}
 }

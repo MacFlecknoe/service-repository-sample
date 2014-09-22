@@ -8,6 +8,8 @@ import java.util.List;
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.apache.ws.security.saml.ext.OpenSAMLUtil;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
@@ -29,6 +31,8 @@ import org.w3c.dom.Document;
  *
  */
 public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingInterceptor {
+	
+	private static final Logger LOGGER = LogManager.getLogger(PicketBoxXacmlInterceptor.class);
 
 	private final PolicyDecisionPoint pdp;
 	private final List<IXacmlRequestPreprocessor> processors;
@@ -36,14 +40,15 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IXacmlRequestPreprocessor> processors) {
 		this.pdp = pdp;
 		this.processors = processors;
+		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor");
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
 		this(pdp, Arrays.asList((IXacmlRequestPreprocessor) new AccessCodeXacmlRequestAugmentor()));
 	}
 	
-	public PicketBoxXacmlInterceptor() {
-		this(new ClasspathConfigurableJBossPDP());
+	public PicketBoxXacmlInterceptor(List<IXacmlRequestPreprocessor> processors) {
+		this(new ClasspathConfigurableJBossPDP(), processors);
 	}
 	
 	public List<IXacmlRequestPreprocessor> getRequestProcessors() {
@@ -61,17 +66,26 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		ResponseContext jbossXacmlResponse = pdp.evaluate(jbossXacmlRequest);
 		ResponseType responseType = new XacmlResponseTransformer().transform(jbossXacmlResponse);
 		
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug(new StringBuilder().append("XACML response: ").append(OpenSamlXacmlUtil.toString(responseType)).toString());
+		}
 		return responseType;
 	}
 	
 	private RequestType preprocessRequest(RequestType xacmlRequest, Message message) throws Exception {
 		
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug(new StringBuilder().append("pre-processed XACML request: ").append(OpenSamlXacmlUtil.toString(xacmlRequest)).toString());
+		}
 		for(IXacmlRequestPreprocessor preprocessor : this.getRequestProcessors()) {
 			xacmlRequest = preprocessor.process(xacmlRequest, message);
 		}
 		if(xacmlRequest.getDOM() == null) {
 			// changing the XACML request has invalidated its DOM; we need to regenerate it
 			xacmlRequest.setDOM(OpenSAMLUtil.toDom(xacmlRequest, DOMUtils.createDocument()));
+		}
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug(new StringBuilder().append("post-processed XACML request: ").append(OpenSamlXacmlUtil.toString(xacmlRequest)).toString());
 		}
 		return xacmlRequest;
 	}
