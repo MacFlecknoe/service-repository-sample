@@ -22,7 +22,8 @@ import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
 
 /**
- * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point.
+ * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
+ * interface leverages by CXF) with JBoss PicketBox (which supplies the PDP interface).
  * 
  * https://developer.jboss.org/wiki/PicketBoxXACMLSimpleWalkThrough
  * http://anonsvn.jboss.org/repos/jbossas/projects/security/security-xacml/tags/2.0.6.Final/jboss-xacml/src/test/java/org/jboss/test/security/test/xacml/XACMLUnitTestCase.java
