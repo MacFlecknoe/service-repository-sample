@@ -43,5 +43,12 @@ public abstract class AbstractStaticAttributeAugmentor implements IXacmlRequestP
 		return this.process(xacmlRequest, attributes);
 	}
 	
+	/**
+	 * Add attributes to XACML Request.
+	 * 
+	 * @param xacmlRequest
+	 * @param attributes
+	 * @return
+	 */
 	public abstract RequestType process(RequestType xacmlRequest, List<AttributeType> attributes);
 }
