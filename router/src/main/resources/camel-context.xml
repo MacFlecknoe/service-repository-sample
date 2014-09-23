@@ -46,7 +46,7 @@
 	</cxf:bus>
 	
 	<!-- decorate with x509 token security -->
-	<camel-cxf:cxfEndpoint id="proxyUserService"
+	<camel-cxf:cxfEndpoint id="x509UserService"
 		address="/proxy/userService"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
 		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
@@ -60,6 +60,9 @@
 			<entry key="ws-security.encryption.username" value="server-alias" />
 			<entry key="ws-security.signature.username" value="server-alias" />
 	 	</camel-cxf:properties>
+		<camel-cxf:inInterceptors>
+			<ref bean="PicketBoxXacmlInterceptor"/>
+		</camel-cxf:inInterceptors>
 	</camel-cxf:cxfEndpoint>
 	
 	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor">
@@ -71,7 +74,7 @@
 	</bean>
 	
 	<!-- decorate with username token security -->
-	<camel-cxf:cxfEndpoint id="altProxyUserService"
+	<camel-cxf:cxfEndpoint id="usernameTokenUserService"
 		address="/proxy/alt/userService"
 		endpointName="user:userSoapServicePort" serviceName="user:userSoapServicePorts"
 		wsdlURL="classpath:/service/user-soap-v1.wsdl" xmlns:user="urn:healthmedia:wsdl:user:soap:v1">
@@ -103,8 +106,8 @@
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
-			<camel:from uri="cxf:bean:proxyUserService?dataFormat=PAYLOAD" />
-			<camel:from uri="cxf:bean:altProxyUserService?dataFormat=PAYLOAD" />
+			<camel:from uri="cxf:bean:x509UserService?dataFormat=PAYLOAD" />
+			<camel:from uri="cxf:bean:usernameTokenUserService?dataFormat=PAYLOAD" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
 			<!-- send proxied request to real web service -->
