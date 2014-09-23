@@ -7,7 +7,7 @@ import org.opensaml.xacml.ctx.RequestType;
 import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
 import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
 
-import com.healthmedia.ws.xaml.IXacmlRequestPreprocessor;
+import com.healthmedia.ws.xaml.IRequestPreprocessor;
 
 /**
  * Adds the access code associated with the present request to the XAML request context.
@@ -15,7 +15,7 @@ import com.healthmedia.ws.xaml.IXacmlRequestPreprocessor;
  * @author mlamber7
  *
  */
-public class AccessCodeXacmlRequestAugmentor implements IXacmlRequestPreprocessor {
+public class AccessCodeXacmlRequestAugmentor implements IRequestPreprocessor {
 
 	@Override
 	public RequestType process(RequestType xacmlRequest, Message message) {

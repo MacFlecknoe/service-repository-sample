@@ -35,23 +35,23 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	private static final Logger LOGGER = LogManager.getLogger(PicketBoxXacmlInterceptor.class);
 
 	private final PolicyDecisionPoint pdp;
-	private final List<IXacmlRequestPreprocessor> processors;
+	private final List<IRequestPreprocessor> processors;
 	
-	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IXacmlRequestPreprocessor> processors) {
+	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors) {
 		this.pdp = pdp;
 		this.processors = processors;
 		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor");
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
-		this(pdp, new ArrayList<IXacmlRequestPreprocessor>());
+		this(pdp, new ArrayList<IRequestPreprocessor>());
 	}
 	
-	public PicketBoxXacmlInterceptor(List<IXacmlRequestPreprocessor> processors) {
+	public PicketBoxXacmlInterceptor(List<IRequestPreprocessor> processors) {
 		this(new ClasspathConfigurableJBossPDP(), processors);
 	}
 	
-	public List<IXacmlRequestPreprocessor> getRequestProcessors() {
+	public List<IRequestPreprocessor> getRequestProcessors() {
 		return processors;
 	}
 	
@@ -77,7 +77,7 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug(new StringBuilder().append("pre-processed XACML request: ").append(OpenSamlXacmlUtil.toString(xacmlRequest)).toString());
 		}
-		for(IXacmlRequestPreprocessor preprocessor : this.getRequestProcessors()) {
+		for(IRequestPreprocessor preprocessor : this.getRequestProcessors()) {
 			xacmlRequest = preprocessor.process(xacmlRequest, message);
 		}
 		if(xacmlRequest.getDOM() == null) {
