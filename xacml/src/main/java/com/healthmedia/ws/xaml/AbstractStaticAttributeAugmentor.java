@@ -9,6 +9,12 @@ import org.opensaml.xacml.ctx.RequestType;
 import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
 import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
 
+/**
+ * Mechanism to supply static XACML attributes to all XACML requests flowing through the PicketBoxXacmlInterceptor.
+ * 
+ * @author mlamber7
+ *
+ */
 public abstract class AbstractStaticAttributeAugmentor implements IRequestPreprocessor {
 
 	private final List<AttributeType> attributes;
