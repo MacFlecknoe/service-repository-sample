@@ -1,6 +1,7 @@
 package com.healthmedia.ws.accesscode;
 
 import org.apache.cxf.message.Message;
+import org.apache.cxf.rt.security.xacml.XACMLConstants;
 import org.opensaml.xacml.ctx.AttributeType;
 import org.opensaml.xacml.ctx.AttributeValueType;
 import org.opensaml.xacml.ctx.RequestType;
@@ -27,7 +28,7 @@ public class AccessCodeXacmlRequestAugmentor implements IRequestPreprocessor {
 			
 			AttributeType attributeType = new AttributeTypeImplBuilder().buildObject();
 			attributeType.setAttributeID("urn:healthmedia:names:action:access-code:v1");
-			attributeType.setDataType("http://www.w3.org/2001/XMLSchema#string");
+			attributeType.setDataType(XACMLConstants.XS_STRING);
 			attributeType.getAttributeValues().add(attributeValueType);
 			
 			xacmlRequest.getAction().getAttributes().add(attributeType);

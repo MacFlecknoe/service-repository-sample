@@ -5,6 +5,7 @@ import java.util.List;
 import org.opensaml.xacml.ctx.AttributeType;
 import org.opensaml.xacml.ctx.AttributeValueType;
 import org.apache.cxf.message.Message;
+import org.apache.cxf.rt.security.xacml.XACMLConstants;
 import org.opensaml.xacml.ctx.RequestType;
 import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
 import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
@@ -41,7 +42,7 @@ public abstract class AbstractStaticAttributeAugmentor implements IRequestPrepro
 	}
 	
 	public void addAttribute(String attributeId, String value) {
-		this.addAttribute(attributeId, "http://www.w3.org/2001/XMLSchema#string", value);
+		this.addAttribute(attributeId, XACMLConstants.XS_STRING, value);
 	}
 	
 	@Override
