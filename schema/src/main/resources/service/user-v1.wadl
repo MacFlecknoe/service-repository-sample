@@ -29,7 +29,7 @@
 						<representation mediaType="application/vnd.healthmedia.error+xml;version=1.0" element="error:error" />
 					</response>
 				</method>
-				<resource path="/user-data/">
+				<resource path="/user-data">
 					<resource path="{userDataId}">
 						<method name="GET" id="findUserDataById">
 							<request>
