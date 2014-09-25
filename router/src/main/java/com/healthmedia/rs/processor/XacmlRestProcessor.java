@@ -81,10 +81,11 @@ public class XacmlRestProcessor implements Processor {
 		ResultType result = response.getResult();
 		
 		if(!DecisionType.PERMIT.equals(result.getDecision())) {
+			
 			LOGGER.warn(result.getDecision().name()); // potentially log request and response
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 403);
 			
-			throw new AccessControlException("XACMLAccessException");
+			throw new AccessControlException("Xacml has not permitted request");
 		}
 	}
 	
