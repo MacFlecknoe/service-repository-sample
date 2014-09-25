@@ -109,6 +109,12 @@ public class XacmlRestProcessor implements Processor {
 		}
 	}
 	
+	/**
+	 * Placed into separate class as the functionality contained here might be useful to other processors at a later time.
+	 * 
+	 * @author mlamber7
+	 *
+	 */
 	private static class PicketlinkXamlUtil {
 		
 		public static AttributeType createAttributeType(String name, String dataType, String value) {
