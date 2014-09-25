@@ -53,22 +53,22 @@ public class XacmlRestProcessor implements Processor {
 		// add user/consumer attributes
 		//
 		// collect via separate processor as it needs to be extracted from token
-		AttributeType subjectId = createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
+		AttributeType subjectId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
 		
 		SubjectType subjectType = new SubjectType();
 		subjectType.getAttribute().add(subjectId);
 		//
 		// add attributes related to the requested resource
 		//
-		AttributeType resourceId = createAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
+		AttributeType resourceId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 		
 		ResourceType resourceType = new ResourceType();
 		resourceType.getAttribute().add(resourceId);
 		//
 		// add attributes related to the type of action being performed
 		//
-		AttributeType actionId = createAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
-		AttributeType accessCode = createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
+		AttributeType actionId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
+		AttributeType accessCode = PicketlinkXamlUtil.createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
 		
 		ActionType actionType = new ActionType();
 		actionType.getAttribute().add(actionId);
@@ -76,7 +76,7 @@ public class XacmlRestProcessor implements Processor {
 		//
 		// add attributes related to the current environment (e.g. processor usage)
 		//
-		AttributeType currentDateTime = createAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
+		AttributeType currentDateTime = PicketlinkXamlUtil.createAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
 		
 		EnvironmentType environmentType = new EnvironmentType();
 		environmentType.getAttribute().add(currentDateTime);
@@ -109,19 +109,24 @@ public class XacmlRestProcessor implements Processor {
 		}
 	}
 	
-	private AttributeType createAttributeType(String name, String dataType, String value) {
+	private static class PicketlinkXamlUtil {
 		
-		if(LOGGER.isDebugEnabled()) {
-			System.out.println("creating attribute:" + name + ", " + value);
+		public static AttributeType createAttributeType(String name, String dataType, String value) {
+			
+			if(LOGGER.isDebugEnabled()) {
+				System.out.println("creating attribute:" + name + ", " + value);
+			}
+			AttributeValueType attributeValueType = new AttributeValueType();
+			attributeValueType.getContent().add(value);
+			
+			AttributeType attributeType = new AttributeType();
+			attributeType.setAttributeId(name);
+			attributeType.setDataType(dataType);
+			attributeType.getAttributeValue().add(attributeValueType);
+			
+			return attributeType;
 		}
-		AttributeValueType attributeValueType = new AttributeValueType();
-		attributeValueType.getContent().add(value);
-		
-		AttributeType attributeType = new AttributeType();
-		attributeType.setAttributeId(name);
-		attributeType.setDataType(dataType);
-		attributeType.getAttributeValue().add(attributeValueType);
-		
-		return attributeType;
 	}
+	
+
 }
