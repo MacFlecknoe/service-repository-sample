@@ -50,10 +50,12 @@ public class XacmlRestProcessor implements Processor {
 		
 		DateTime dt = new DateTime(new Date());
 		//
-		// add user/consumer attributes
+		// add user/consumer attributes 
 		//
-		// collect via separate processor as it needs to be extracted from token
-		AttributeType subjectId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
+		// (username is extracted from token and set to header via another processor). this header NEEDS to be cleared in the route prior to that 
+		// processor running to prevent consumers from providing their own X-ExternalCustomerId header and thereby short circuiting security
+		//
+		AttributeType subjectId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
 		
 		SubjectType subjectType = new SubjectType();
 		subjectType.getAttribute().add(subjectId);
