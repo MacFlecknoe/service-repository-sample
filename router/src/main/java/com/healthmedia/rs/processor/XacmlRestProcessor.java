@@ -50,15 +50,13 @@ public class XacmlRestProcessor implements Processor {
 		
 		DateTime dt = new DateTime(new Date());
 		
-		// collect via separate processor
+		// collect via separate processor as it needs to be extracted from token
 		AttributeType subjectId = createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
 		
 		AttributeType resourceId = createAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 		AttributeType actionId = createAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
 		AttributeType currentDateTime = createAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
-		
-		// collect via separate processor
-		AttributeType accessCode = createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, "testAccessCode");
+		AttributeType accessCode = createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
 		//
 		// add user/consumer attributes
 		//
