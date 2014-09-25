@@ -102,6 +102,12 @@
 		</camel-cxf:binding>
 	</camel-cxf:cxfEndpoint>
 	
+	<bean id="xacmlProcessor" class="com.healthmedia.rs.processor.XacmlRestProcessor">
+		<constructor-arg>
+			<bean id="xacmlProcessor" class="com.healthmedia.ws.xaml.ClasspathConfigurableJBossPDP" />
+		</constructor-arg>
+	</bean>
+	
 	<camel:camelContext>
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:route>
@@ -114,6 +120,17 @@
 			<camel:to uri="cxf:bean:realUserService?headerFilterStrategy=#removeSecurityHeadersFilterStrategy&amp;dataFormat=PAYLOAD" />
 			<!-- log answer from real web service -->
 			<camel:to uri="log:output" />
+		</camel:route>
+		<camel:route>
+			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
+			<camel:process ref="xacmlProcessor"/>
+			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+			<camel:onException>
+				<camel:exception>java.security.AccessControlException</camel:exception>
+				<camel:handled>
+					<camel:constant>true</camel:constant>
+				</camel:handled>
+			</camel:onException>
 		</camel:route>
 	</camel:camelContext>
 	
