@@ -25,6 +25,12 @@ import org.joda.time.DateTime;
 
 import com.healthmedia.ws.xaml.ClasspathConfigurableJBossPDP;
 
+/**
+ * Creates a XACML request based upon passed REST headers and calls a configured PDP to determine if access should be allowed.
+ * 
+ * @author mlamber7
+ *
+ */
 public class XacmlRestProcessor implements Processor {
 	
 	private static final Logger LOGGER = LogManager.getLogger(XacmlRestProcessor.class);
