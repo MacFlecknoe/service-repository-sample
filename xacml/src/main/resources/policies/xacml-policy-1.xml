@@ -16,13 +16,12 @@
 		<Target/>
 		<Condition>
 			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
-				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
-					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
-						<ActionAttributeDesignator
-								AttributeId="urn:healthmedia:names:action:access-code:v1"
-								DataType="http://www.w3.org/2001/XMLSchema#string" />
-					</Apply>
-					<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">testAccessCode</AttributeValue>
+				 <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+					<SubjectAttributeDesignator
+							AttributeId="urn:healthmedia:names:subject:access-code:v1" DataType="http://www.w3.org/2001/XMLSchema#string" />
+					<ActionAttributeDesignator
+							AttributeId="urn:healthmedia:names:action:access-code:v1"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
 				</Apply>
 			</Apply>
 		</Condition>

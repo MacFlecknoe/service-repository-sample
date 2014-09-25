@@ -4,7 +4,7 @@
 		<ns:PolicySet>
 			<ns:Location>policies/xacml-policy-set.xml</ns:Location>
 			<ns:Policy>
-				<ns:Location>policies/xacml-policy-1a.xml</ns:Location>
+				<ns:Location>policies/xacml-policy-1.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>
 				<ns:Location>policies/xacml-policy-2.xml</ns:Location>
