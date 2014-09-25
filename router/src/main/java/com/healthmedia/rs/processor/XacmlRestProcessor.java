@@ -44,29 +44,39 @@ public class XacmlRestProcessor implements Processor {
 		
 		DateTime dt = new DateTime(new Date());
 		
-		// set via separate processor
+		// collect via separate processor
 		AttributeType subjectId = createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
 		
 		AttributeType resourceId = createAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 		AttributeType actionId = createAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
 		AttributeType currentDateTime = createAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
 		
-		// set via to separate processor
+		// collect via separate processor
 		AttributeType accessCode = createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, "testAccessCode");
-		
+		//
+		// add user/consumer attributes
+		//
 		SubjectType subjectType = new SubjectType();
 		subjectType.getAttribute().add(subjectId);
-		
+		//
+		// add attributes related to the requested resource
+		//
 		ResourceType resourceType = new ResourceType();
 		resourceType.getAttribute().add(resourceId);
-		
+		//
+		// add attributes related to the type of action being performed
+		//
 		ActionType actionType = new ActionType();
 		actionType.getAttribute().add(actionId);
 		actionType.getAttribute().add(accessCode);
-		
+		//
+		// add attributes related to the current environment (e.g. processor usage)
+		//
 		EnvironmentType environmentType = new EnvironmentType();
 		environmentType.getAttribute().add(currentDateTime);
-		
+		//
+		// bundle the collected attributes together into a XACML request
+		//
 		RequestType requestType = new RequestType();
 		requestType.getSubject().add(subjectType);
 		requestType.getResource().add(resourceType);
@@ -75,13 +85,17 @@ public class XacmlRestProcessor implements Processor {
 		
 		RequestContext xacmlRequest = new JBossRequestContext();
 		xacmlRequest.setRequest(requestType);
-		
+		//
+		// hand the XACML request to the XACML decision engine
+		//
 		ResponseContext response = pdp.evaluate(xacmlRequest);
 		
 		ResultType result = response.getResult();
 		
 		if(!DecisionType.PERMIT.equals(result.getDecision())) {
-			
+			//
+			// only allow explicit permits access to our service components
+			//
 			LOGGER.warn(result.getDecision().name()); // potentially log request and response
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 403);
 			
