@@ -94,7 +94,7 @@ public class XacmlRestProcessor implements Processor {
 		
 		if(!DecisionType.PERMIT.equals(result.getDecision())) {
 			//
-			// only allow explicit permits access to our service components
+			// only allow explicit permits access
 			//
 			LOGGER.warn(result.getDecision().name()); // potentially log request and response
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 403);
