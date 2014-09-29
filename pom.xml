@@ -12,6 +12,7 @@
 		<module>router</module>
 		<module>cxf-extensions</module>
 		<module>xacml</module>
+		<module>xacml-policies</module>
 	</modules>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
