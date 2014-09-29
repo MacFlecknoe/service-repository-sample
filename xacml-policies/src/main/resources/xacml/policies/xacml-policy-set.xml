@@ -20,11 +20,10 @@
 			Policy for picking up access code and subject-id limitations. Any deny overrides all other permits.
 		</Description>
 		<Target />
+		<PolicyIdReference>urn:healthmedia:xacml:access-code:policy:id:1</PolicyIdReference>
 		<!-- deny if username is not a fixed string -->
-		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:1</PolicyIdReference>
-		<!-- deny if access code is not a fixed string -->
 		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:2</PolicyIdReference>
 		<!-- fall through policy -->
-		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:permit</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:static:policy:id:permit</PolicyIdReference>
 	</PolicySet>
 </PolicySet>
