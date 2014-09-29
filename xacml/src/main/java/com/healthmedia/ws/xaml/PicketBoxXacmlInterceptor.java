@@ -40,14 +40,12 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	private final PolicyDecisionPoint pdp;
 	private final List<IRequestPreprocessor> processors;
 	
-	private final XacmlRequestTransformer requestTransformer;
-	private final XacmlResponseTransformer responseTransformer;
+	private XacmlRequestTransformer requestTransformer;
+	private XacmlResponseTransformer responseTransformer;
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors){
 		this.pdp = pdp;
 		this.processors = processors;
-		this.requestTransformer = new XacmlRequestTransformer();
-		this.responseTransformer = new XacmlResponseTransformer();
 		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor"); // make sure this executes after access code is handled
 	}
 	
@@ -63,6 +61,24 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return processors;
 	}
 	
+	public PolicyDecisionPoint getPolicyDecisionPoint() {
+		return this.pdp;
+	}
+	
+	private XacmlRequestTransformer getXacmlRequestTransformer() {
+		if(this.requestTransformer == null) {
+			this.requestTransformer = new XacmlRequestTransformer();
+		}
+		return this.requestTransformer;
+	}
+	
+	private XacmlResponseTransformer getXacmlResponseTransformer() {
+		if(this.responseTransformer == null) {
+			this.responseTransformer = new XacmlResponseTransformer();
+		}
+		return this.responseTransformer;
+	}
+	
 	@Override
 	/**
 	 * 
@@ -71,7 +87,7 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		//
 		// Transforms an Opensaml XACML request to a PicketBox XACML request
 		//
-		RequestType requestType = requestTransformer.transform(opensamlRequest);
+		RequestType requestType = getXacmlRequestTransformer().transform(opensamlRequest);
 		//
 		// Augment the CXF configured attributes with our own custom attributes
 		//
@@ -86,11 +102,11 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		//
 		// call the PicketBox Policy Decision Point
 		//
-		ResponseContext responseContext = pdp.evaluate(requestContext);
+		ResponseContext responseContext = getPolicyDecisionPoint().evaluate(requestContext);
 		//
 		// Transforms the PicketBox response back to an Opensaml response
 		//
-		org.opensaml.xacml.ctx.ResponseType responseType = responseTransformer.transform(responseContext);
+		org.opensaml.xacml.ctx.ResponseType responseType = getXacmlResponseTransformer().transform(responseContext);
 		
 		return responseType;
 	}
