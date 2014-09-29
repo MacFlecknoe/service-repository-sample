@@ -28,6 +28,6 @@
 			<ns:Option Name="columnName">subject_id</ns:Option>
 		</ns:Locator>
 		-->
-		<ns:Locator Name="com.healthmedia.ws.accesscode.AccessCodePip"/>
+		<ns:Locator Name="com.healthmedia.ws.accesscode.AccessCodeAttributeLocator"/>
 	</ns:Locators>
 </ns:jbosspdp> 
