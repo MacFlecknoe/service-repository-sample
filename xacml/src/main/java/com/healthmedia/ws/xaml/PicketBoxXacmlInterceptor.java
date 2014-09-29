@@ -80,9 +80,6 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	}
 	
 	@Override
-	/**
-	 * 
-	 */
 	public org.opensaml.xacml.ctx.ResponseType performRequest(org.opensaml.xacml.ctx.RequestType opensamlRequest, Message message) throws Exception {
 		//
 		// Transforms an Opensaml XACML request to a PicketBox XACML request

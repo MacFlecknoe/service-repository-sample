@@ -129,7 +129,7 @@
 			<camel:process ref="xacmlProcessor"/>
 			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
 			<camel:onException>
-				<camel:exception>java.security.AccessControlException</camel:exception>
+				<camel:exception>org.apache.camel.CamelAuthorizationException</camel:exception>
 				<camel:handled>
 					<camel:constant>true</camel:constant>
 				</camel:handled>

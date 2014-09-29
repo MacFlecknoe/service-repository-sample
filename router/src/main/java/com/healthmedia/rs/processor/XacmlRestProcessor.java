@@ -1,8 +1,8 @@
 package com.healthmedia.rs.processor;
 
-import java.security.AccessControlException;
 import java.util.Date;
 
+import org.apache.camel.CamelAuthorizationException;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.cxf.rt.security.xacml.XACMLConstants;
@@ -47,7 +47,7 @@ public class XacmlRestProcessor implements Processor {
 	
 	@Override
 	public void process(Exchange exchange) throws Exception {
-		
+
 		DateTime dt = new DateTime(new Date());
 		//
 		// add user/consumer attributes 
@@ -55,6 +55,8 @@ public class XacmlRestProcessor implements Processor {
 		// (username is extracted from token and set to header via another processor). this header NEEDS to be cleared in the route prior to that 
 		// processor running to prevent consumers from providing their own X-ExternalCustomerId header and thereby short circuiting security
 		//
+		// SecurityContextHolder.getContext() <!-- get spring security context holder... put into processor to match cxf location?
+		
 		AttributeType subjectId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
 		
 		SubjectType subjectType = new SubjectType();
@@ -107,7 +109,7 @@ public class XacmlRestProcessor implements Processor {
 			LOGGER.warn(result.getDecision().name()); // potentially log request and response
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 403);
 			
-			throw new AccessControlException("Xacml has not permitted request");
+			throw new CamelAuthorizationException("Xacml has not permitted request", exchange);
 		}
 	}
 }
