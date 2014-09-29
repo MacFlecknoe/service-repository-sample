@@ -4,13 +4,13 @@
 		<ns:PolicySet>
 			<ns:Location>xacml/policies/xacml-policy-set.xml</ns:Location>
 			<ns:Policy>
-				<ns:Location>xacml/policies/xacml-access-code-policy.xml</ns:Location>
+				<ns:Location>xacml/policies/xacml-access-code-policy-1.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>
-				<ns:Location>xacml/policies/xacml-policy-2.xml</ns:Location>
+				<ns:Location>xacml/policies/xacml-example-policy-1.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>
-				<ns:Location>xacml/policies/xacml-policy-permit.xml</ns:Location>
+				<ns:Location>xacml/policies/xacml-permit-policy-1.xml</ns:Location>
 			</ns:Policy>
 		</ns:PolicySet>
 	</ns:Policies>

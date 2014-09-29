@@ -9,7 +9,7 @@
 		Deny consumers whose access-code does not match "testAccessCode"
 	</Description>
 	<Target />
-	<Rule RuleId="urn:healthmedia:xacml:access-code:rule:id:1" Effect="Deny">
+	<Rule RuleId="urn:healthmedia:xacml:access-code:policy:id:1:rule:id:1" Effect="Deny">
 		<Description>
 			Deny consumers whose assigned access-codes does not match the access code in the request
 		</Description>

@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os 
 	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
-	PolicyId="urn:healthmedia:xacml:static:policy:id:permit"
+	PolicyId="urn:healthmedia:xacml:permit:policy:id:1"
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
 	<Description>
 		Fall through policy for Permit
 	</Description>
 	<Target />
-	<Rule RuleId="FinalRule" Effect="Permit"/>
+	<Rule RuleId="urn:healthmedia:xacml:permit:policy:id:1:rule:id:1" Effect="Permit"/>
 </Policy>
