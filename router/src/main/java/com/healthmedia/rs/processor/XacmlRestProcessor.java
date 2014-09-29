@@ -1,9 +1,7 @@
 package com.healthmedia.rs.processor;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.camel.CamelAuthorizationException;
 import org.apache.camel.Exchange;
@@ -127,27 +125,29 @@ public class XacmlRestProcessor implements Processor {
 		public RequestType transform(Exchange exchange) {
 			
 			DateTime dt = new DateTime(new Date());
-			//
-			// this should be the client-id: "urn:oasis:names:tc:xacml:1.0:client:client-id"
-			//
+
 			AttributeType clientId = PicketBoxXamlUtil.createSimpleAttributeType("urn:oasis:names:tc:xacml:1.0:client:client-id", XACMLConstants.XS_STRING, "clientname");
+			AttributeType scopeIds = PicketBoxXamlUtil.createSimpleAttributeListType("urn:oasis:names:tc:xacml:1.0:scope:scope-id", XACMLConstants.XS_STRING, Arrays.asList("read", "write"));
 			//
-			// this should be the resource owner id
+			// There can be multiple subjects in a <Request> element. XACML context specifies that these subjects should be "disjunctive," which is defined in the standard as a sequence of 
+			// predicates combined using the logical ‘OR’ operation. For example, one subject may represents the human user who initiates the request, another may represent the code that is 
+			// doing the request. They are specified by subject categories.
 			//
-			AttributeType subjectId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
+			// create the client subject
 			//
-			// this should be set to scope: "urn:oasis:names:tc:xacml:1.0:scope:scope-id"
-			//
-			List<String> scopeValues = Arrays.asList("read", "write");
-			
-			AttributeType scopeIds = PicketBoxXamlUtil.createSimpleAttributeListType("urn:oasis:names:tc:xacml:1.0:scope:scope-id", XACMLConstants.XS_STRING, scopeValues);
-			
 			SubjectType clientSubjectType = new SubjectType();
-			clientSubjectType.getAttribute().add(subjectId);
+			clientSubjectType.setSubjectCategory(XACMLConstants.SUBJECT_CAT_INTERMED_SUBJECT);
+			clientSubjectType.getAttribute().add(clientId);
 			clientSubjectType.getAttribute().add(scopeIds);
 
+			AttributeType subjectId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, "username");
+			//
+			// create the resource owner subject: for one request, there must be at least one <Subject> having the “access-subject” category, 
+			// which represents the direct accessing subject. 
+			//
 			SubjectType ownerSubjectType = new SubjectType();
-			ownerSubjectType.getAttribute().add(clientId);
+			ownerSubjectType.setSubjectCategory(XACMLConstants.SUBJECT_CAT_ACCESS_SUBJECT);
+			ownerSubjectType.getAttribute().add(subjectId);
 			//
 			// add attributes related to the requested resource
 			//
