@@ -21,6 +21,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.healthmedia</groupId>
+			<artifactId>xacml-policies</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.healthmedia</groupId>
 			<artifactId>cxf-extensions</artifactId>
 			<version>${project.version}</version>
 		</dependency>
