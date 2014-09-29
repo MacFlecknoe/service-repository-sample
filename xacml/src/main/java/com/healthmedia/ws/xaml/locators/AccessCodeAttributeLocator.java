@@ -20,7 +20,7 @@ import org.jboss.security.xacml.sunxacml.cond.EvaluationResult;
  */
 public class AccessCodeAttributeLocator extends AttributeLocator {
 
-	private static final String ACCESS_CODE_IDENTIFIER= "urn:healthmedia:names:subject:access-code:v1";
+	private static final String ACCESS_CODE_IDENTIFIER = "urn:healthmedia:names:subject:access-code:v1";
 	
 	private final IAccessCodeFinder finder;
 	
