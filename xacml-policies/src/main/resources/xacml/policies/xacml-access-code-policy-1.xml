@@ -19,10 +19,10 @@
 				 <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
 				 	<!-- access code assigned to a subject (pulled from database) -->
 					<SubjectAttributeDesignator
-							AttributeId="urn:healthmedia:names:subject:access-code:v1" DataType="http://www.w3.org/2001/XMLSchema#string" />
+							AttributeId="urn:healthmedia:names:1.0:subject:access-code" DataType="http://www.w3.org/2001/XMLSchema#string" />
 					<!--  access code passed in the request -->
 					<ActionAttributeDesignator
-							AttributeId="urn:healthmedia:names:action:access-code:v1"
+							AttributeId="urn:healthmedia:names:1.0:action:access-code"
 							DataType="http://www.w3.org/2001/XMLSchema#string" />
 				</Apply>
 			</Apply>

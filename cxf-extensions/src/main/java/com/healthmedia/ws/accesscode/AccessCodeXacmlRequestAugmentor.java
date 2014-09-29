@@ -17,7 +17,7 @@ import com.healthmedia.ws.xaml.PicketBoxXamlUtil;
  */
 public class AccessCodeXacmlRequestAugmentor implements IRequestPreprocessor {
 	
-	private static final String ACCESS_CODE_ACTION_NAME = "urn:healthmedia:names:action:access-code:v1";
+	private static final String ACCESS_CODE_ACTION_NAME = "urn:healthmedia:names:1.0:action:access-code";
 	
 	@Override
 	public RequestType process(RequestType xacmlRequest, Message message) {

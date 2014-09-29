@@ -145,13 +145,13 @@ public class XacmlRestProcessor implements Processor {
 			// create the resource owner subject: for one request, there must be at least one <Subject> having the “access-subject” category, 
 			// which represents the direct accessing subject. 
 			//
-			SubjectType ownerSubjectType = new SubjectType();
-			ownerSubjectType.setSubjectCategory(XACMLConstants.SUBJECT_CAT_ACCESS_SUBJECT);
-			ownerSubjectType.getAttribute().add(subjectId);
+			SubjectType resourceOwnerSubjectType = new SubjectType();
+			resourceOwnerSubjectType.setSubjectCategory(XACMLConstants.SUBJECT_CAT_ACCESS_SUBJECT);
+			resourceOwnerSubjectType.getAttribute().add(subjectId);
 			//
 			// add attributes related to the requested resource
 			//
-			AttributeType resourceId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
+			AttributeType resourceId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_ANY_URI, exchange.getIn().getHeader("camelhttppath", String.class));
 			
 			ResourceType resourceType = new ResourceType();
 			resourceType.getAttribute().add(resourceId);
@@ -159,7 +159,7 @@ public class XacmlRestProcessor implements Processor {
 			// add attributes related to the type of action being performed
 			//
 			AttributeType actionId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
-			AttributeType accessCode = PicketBoxXamlUtil.createSimpleAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
+			AttributeType accessCode = PicketBoxXamlUtil.createSimpleAttributeType("urn:healthmedia:names:1.0:action:access-code", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
 			
 			ActionType actionType = new ActionType();
 			actionType.getAttribute().add(actionId);
@@ -177,7 +177,7 @@ public class XacmlRestProcessor implements Processor {
 			RequestType requestType = new RequestType();
 			
 			requestType.getSubject().add(clientSubjectType);
-			requestType.getSubject().add(ownerSubjectType);
+			requestType.getSubject().add(resourceOwnerSubjectType);
 			requestType.getResource().add(resourceType);
 			requestType.setEnvironment(environmentType);
 			requestType.setAction(actionType);
