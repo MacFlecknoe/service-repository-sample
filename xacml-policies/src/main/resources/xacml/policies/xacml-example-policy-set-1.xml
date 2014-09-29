@@ -14,7 +14,7 @@
 		part of the xaml 3.0 spec (picketbox only supports 2.0)
 	-->
 	<PolicySet 
-		PolicySetId="urn:healthmedia:xacml:example:policy-set:id:2"
+		PolicySetId="urn:healthmedia:xacml:example:policy-set:id:1:policy-set:id:1"
 		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
 		<Description>
 			Policy for picking up access code and subject-id limitations. Any deny overrides all other permits.

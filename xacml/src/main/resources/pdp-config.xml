@@ -2,7 +2,7 @@
 <ns:jbosspdp xmlns:ns="urn:jboss:xacml:2.0">
 	<ns:Policies>
 		<ns:PolicySet>
-			<ns:Location>xacml/policies/xacml-policy-set.xml</ns:Location>
+			<ns:Location>xacml/policies/xacml-example-policy-set-1.xml</ns:Location>
 			<ns:Policy>
 				<ns:Location>xacml/policies/xacml-access-code-policy-1.xml</ns:Location>
 			</ns:Policy>
