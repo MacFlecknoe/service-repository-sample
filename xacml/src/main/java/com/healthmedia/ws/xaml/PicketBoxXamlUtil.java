@@ -27,7 +27,7 @@ public class PicketBoxXamlUtil {
 		return attributeType;
 	}
 	
-	public static AttributeType createSimpleAttributeListType(String name, String dataType, List<String> values) {
+	public static AttributeType createSimpleAttributeType(String name, String dataType, List<String> values) {
 		
 		AttributeType attributeType = new AttributeType();
 		attributeType.setAttributeId(name);

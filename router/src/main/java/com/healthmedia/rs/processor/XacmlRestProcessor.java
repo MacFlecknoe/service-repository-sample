@@ -127,7 +127,7 @@ public class XacmlRestProcessor implements Processor {
 			DateTime dt = new DateTime(new Date());
 
 			AttributeType clientId = PicketBoxXamlUtil.createSimpleAttributeType("urn:oasis:names:tc:xacml:1.0:client:client-id", XACMLConstants.XS_STRING, "clientname");
-			AttributeType scopeIds = PicketBoxXamlUtil.createSimpleAttributeListType("urn:oasis:names:tc:xacml:1.0:scope:scope-id", XACMLConstants.XS_STRING, Arrays.asList("read", "write"));
+			AttributeType scopeIds = PicketBoxXamlUtil.createSimpleAttributeType("urn:oasis:names:tc:xacml:1.0:scope:scope-id", XACMLConstants.XS_STRING, Arrays.asList("read", "write"));
 			//
 			// There can be multiple subjects in a <Request> element. XACML context specifies that these subjects should be "disjunctive," which is defined in the standard as a sequence of 
 			// predicates combined using the logical ‘OR’ operation. For example, one subject may represents the human user who initiates the request, another may represent the code that is 
