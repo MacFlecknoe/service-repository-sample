@@ -2,11 +2,12 @@ package com.healthmedia.ws.accesscode;
 
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.XACMLConstants;
-import org.opensaml.xacml.ctx.AttributeType;
-import org.opensaml.xacml.ctx.AttributeValueType;
-import org.opensaml.xacml.ctx.RequestType;
-import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
-import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.jboss.security.xacml.core.model.context.ActionType;
+import org.jboss.security.xacml.core.model.context.AttributeType;
+import org.jboss.security.xacml.core.model.context.AttributeValueType;
+import org.jboss.security.xacml.core.model.context.RequestType;
 
 import com.healthmedia.ws.xaml.IRequestPreprocessor;
 
@@ -18,21 +19,41 @@ import com.healthmedia.ws.xaml.IRequestPreprocessor;
  */
 public class AccessCodeXacmlRequestAugmentor implements IRequestPreprocessor {
 
+	private static final Logger LOGGER = LogManager.getLogger(AccessCodeXacmlRequestAugmentor.class);
+	
+	private static final String ACCESS_CODE_ACTION_NAME = "urn:healthmedia:names:action:access-code:v1";
+	
 	@Override
 	public RequestType process(RequestType xacmlRequest, Message message) {
 		
 		if(AccessCodeContext.getAccessCode() != null) {
 			
-			AttributeValueType attributeValueType = new AttributeValueTypeImplBuilder().buildObject();
-			attributeValueType.setValue(AccessCodeContext.getAccessCode());
+			AttributeType accessCode = PicketlinkXamlUtil.createSimpleAttributeType(ACCESS_CODE_ACTION_NAME, XACMLConstants.XS_STRING, AccessCodeContext.getAccessCode());
 			
-			AttributeType attributeType = new AttributeTypeImplBuilder().buildObject();
-			attributeType.setAttributeID("urn:healthmedia:names:action:access-code:v1");
-			attributeType.setDataType(XACMLConstants.XS_STRING);
-			attributeType.getAttributeValues().add(attributeValueType);
-			
-			xacmlRequest.getAction().getAttributes().add(attributeType);
+			if(xacmlRequest.getAction() == null) {
+				xacmlRequest.setAction(new ActionType());
+			}
+			xacmlRequest.getAction().getAttribute().add(accessCode);
 		}
 		return xacmlRequest;
+	}
+	
+	private static class PicketlinkXamlUtil {
+		
+		public static AttributeType createSimpleAttributeType(String name, String dataType, String value) {
+			
+			if(LOGGER.isDebugEnabled()) {
+				System.out.println("creating attribute:" + name + ", " + value);
+			}
+			AttributeValueType attributeValueType = new AttributeValueType();
+			attributeValueType.getContent().add(value);
+			
+			AttributeType attributeType = new AttributeType();
+			attributeType.setAttributeId(name);
+			attributeType.setDataType(dataType);
+			attributeType.getAttributeValue().add(attributeValueType);
+			
+			return attributeType;
+		}
 	}
 }

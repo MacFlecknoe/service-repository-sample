@@ -5,21 +5,25 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
+
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.ws.security.saml.ext.OpenSAMLUtil;
+import org.apache.ws.security.util.DOM2Writer;
 import org.jboss.security.xacml.core.JBossRequestContext;
+import org.jboss.security.xacml.core.model.context.RequestType;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
-import org.jboss.security.xacml.interfaces.RequestContext;
 import org.jboss.security.xacml.interfaces.ResponseContext;
-import org.opensaml.xacml.ctx.RequestType;
-import org.opensaml.xacml.ctx.ResponseType;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
@@ -38,10 +42,15 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	private final PolicyDecisionPoint pdp;
 	private final List<IRequestPreprocessor> processors;
 	
-	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors) {
+	private final XacmlRequestTransformer requestTransformer;
+	private final XacmlResponseTransformer responseTransformer;
+	
+	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors){
 		this.pdp = pdp;
 		this.processors = processors;
-		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor");
+		this.requestTransformer = new XacmlRequestTransformer();
+		this.responseTransformer = new XacmlResponseTransformer();
+		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor"); // make sure this executes after access code is handled
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
@@ -57,15 +66,24 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	}
 	
 	@Override
-	public ResponseType performRequest(RequestType xacmlRequest, Message message) throws Exception {
+	/**
+	 * Transforms an Opensaml XACML request to a Picketlink XACML request, calls the configured Picketlink PDP and transforms the Picketlink 
+	 * response to an Opensaml response which is returned to the caller
+	 */
+	public org.opensaml.xacml.ctx.ResponseType performRequest(org.opensaml.xacml.ctx.RequestType opensamlRequest, Message message) throws Exception {
+
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug(new StringBuilder().append("XACML request: ").append(OpenSamlXacmlUtil.toString(opensamlRequest)).toString());
+		}
+		RequestType requestType = requestTransformer.transform(opensamlRequest);
+		requestType = preprocessRequest(requestType, message);
 		
-		RequestType processedXacmlRequest = preprocessRequest(xacmlRequest, message);
+		JBossRequestContext requestContext = new JBossRequestContext();
+		requestContext.setRequest(requestType);
 		
-		RequestContext jbossXacmlRequest = new JBossRequestContext();
-		jbossXacmlRequest.readRequest(processedXacmlRequest.getDOM());
+		ResponseContext responseContext = pdp.evaluate(requestContext);
 		
-		ResponseContext jbossXacmlResponse = pdp.evaluate(jbossXacmlRequest);
-		ResponseType responseType = new XacmlResponseTransformer().transform(jbossXacmlResponse);
+		org.opensaml.xacml.ctx.ResponseType responseType = responseTransformer.transform(responseContext);
 		
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug(new StringBuilder().append("XACML response: ").append(OpenSamlXacmlUtil.toString(responseType)).toString());
@@ -73,20 +91,10 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return responseType;
 	}
 	
-	private RequestType preprocessRequest(RequestType xacmlRequest, Message message) throws Exception {
+	private org.jboss.security.xacml.core.model.context.RequestType preprocessRequest(org.jboss.security.xacml.core.model.context.RequestType xacmlRequest, Message message) throws Exception {
 		
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug(new StringBuilder().append("pre-processed XACML request: ").append(OpenSamlXacmlUtil.toString(xacmlRequest)).toString());
-		}
 		for(IRequestPreprocessor preprocessor : this.getRequestProcessors()) {
 			xacmlRequest = preprocessor.process(xacmlRequest, message);
-		}
-		if(xacmlRequest.getDOM() == null) {
-			// changing the XACML request has invalidated its DOM; we need to regenerate it
-			xacmlRequest.setDOM(OpenSAMLUtil.toDom(xacmlRequest, DOMUtils.createDocument()));
-		}
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug(new StringBuilder().append("post-processed XACML request: ").append(OpenSamlXacmlUtil.toString(xacmlRequest)).toString());
 		}
 		return xacmlRequest;
 	}
@@ -96,18 +104,56 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		public XacmlResponseTransformer() {
 		}
 		
-		public ResponseType transform(ResponseContext responseCtx) throws Exception {
+		public org.opensaml.xacml.ctx.ResponseType transform(ResponseContext responseContext) throws Exception {
 			//
 			// Serialize to standard XACML XML format and leverage API marshallers to convert to/from each frameworks native objects. 
 			// This is expensive but the reduction in complexity is worth the nominal overhead.
 			// 
 			ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-			responseCtx.marshall(outStream);
+			responseContext.marshall(outStream);
 			Document doc = DOMUtils.readXml(new ByteArrayInputStream(outStream.toByteArray()));
 			
 			XMLObject responseType = new ResponseTypeUnmarshaller().unmarshall(doc.getDocumentElement());
 			
-			return (ResponseType) responseType;
+			return (org.opensaml.xacml.ctx.ResponseType) responseType;
+		}
+	}
+	
+	private static class XacmlRequestTransformer {
+		
+		private JAXBContext requestTypeContext;
+		
+		public XacmlRequestTransformer() {
+			try {
+				this.requestTypeContext = JAXBContext.newInstance(RequestType.class);
+			} catch(Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+		
+		public RequestType transform(org.opensaml.xacml.ctx.RequestType opensamlRequest) {
+			try {
+				Unmarshaller unmarshaller = requestTypeContext.createUnmarshaller();
+				
+				JAXBElement<RequestType> root = unmarshaller.unmarshal(opensamlRequest.getDOM(), RequestType.class);
+				RequestType request = root.getValue();
+				
+				return request;
+				
+			} catch(Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
+	}
+	
+	private static class OpenSamlXacmlUtil {
+		
+		public static String toString(XMLObject xmlObject) throws Exception {
+			
+			Document doc = DOMUtils.createDocument();
+			Element element = OpenSAMLUtil.toDom(xmlObject, doc);
+			
+			return DOM2Writer.nodeToString(element);
 		}
 	}
 }

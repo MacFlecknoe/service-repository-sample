@@ -55,22 +55,22 @@ public class XacmlRestProcessor implements Processor {
 		// (username is extracted from token and set to header via another processor). this header NEEDS to be cleared in the route prior to that 
 		// processor running to prevent consumers from providing their own X-ExternalCustomerId header and thereby short circuiting security
 		//
-		AttributeType subjectId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
+		AttributeType subjectId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
 		
 		SubjectType subjectType = new SubjectType();
 		subjectType.getAttribute().add(subjectId);
 		//
 		// add attributes related to the requested resource
 		//
-		AttributeType resourceId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
+		AttributeType resourceId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 		
 		ResourceType resourceType = new ResourceType();
 		resourceType.getAttribute().add(resourceId);
 		//
 		// add attributes related to the type of action being performed
 		//
-		AttributeType actionId = PicketlinkXamlUtil.createAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
-		AttributeType accessCode = PicketlinkXamlUtil.createAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
+		AttributeType actionId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
+		AttributeType accessCode = PicketlinkXamlUtil.createSimpleAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
 		
 		ActionType actionType = new ActionType();
 		actionType.getAttribute().add(actionId);
@@ -78,7 +78,7 @@ public class XacmlRestProcessor implements Processor {
 		//
 		// add attributes related to the current environment (e.g. processor usage)
 		//
-		AttributeType currentDateTime = PicketlinkXamlUtil.createAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
+		AttributeType currentDateTime = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
 		
 		EnvironmentType environmentType = new EnvironmentType();
 		environmentType.getAttribute().add(currentDateTime);
@@ -119,7 +119,7 @@ public class XacmlRestProcessor implements Processor {
 	 */
 	private static class PicketlinkXamlUtil {
 		
-		public static AttributeType createAttributeType(String name, String dataType, String value) {
+		public static AttributeType createSimpleAttributeType(String name, String dataType, String value) {
 			
 			if(LOGGER.isDebugEnabled()) {
 				System.out.println("creating attribute:" + name + ", " + value);
@@ -135,6 +135,4 @@ public class XacmlRestProcessor implements Processor {
 			return attributeType;
 		}
 	}
-	
-
 }
