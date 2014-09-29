@@ -91,6 +91,9 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return responseType;
 	}
 	
+	/**
+	 * Augment request with additional attributes.
+	 */
 	private org.jboss.security.xacml.core.model.context.RequestType preprocessRequest(org.jboss.security.xacml.core.model.context.RequestType xacmlRequest, Message message) throws Exception {
 		
 		for(IRequestPreprocessor preprocessor : this.getRequestProcessors()) {
