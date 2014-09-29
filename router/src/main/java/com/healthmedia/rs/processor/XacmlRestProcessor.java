@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.core.model.context.ActionType;
 import org.jboss.security.xacml.core.model.context.AttributeType;
-import org.jboss.security.xacml.core.model.context.AttributeValueType;
 import org.jboss.security.xacml.core.model.context.DecisionType;
 import org.jboss.security.xacml.core.model.context.EnvironmentType;
 import org.jboss.security.xacml.core.model.context.RequestType;
@@ -24,6 +23,7 @@ import org.jboss.security.xacml.interfaces.ResponseContext;
 import org.joda.time.DateTime;
 
 import com.healthmedia.ws.xaml.ClasspathConfigurableJBossPDP;
+import com.healthmedia.ws.xaml.PicketBoxXamlUtil;
 
 /**
  * Creates a XACML request based upon passed REST headers and calls a configured PDP to determine if access should be allowed.
@@ -55,22 +55,22 @@ public class XacmlRestProcessor implements Processor {
 		// (username is extracted from token and set to header via another processor). this header NEEDS to be cleared in the route prior to that 
 		// processor running to prevent consumers from providing their own X-ExternalCustomerId header and thereby short circuiting security
 		//
-		AttributeType subjectId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
+		AttributeType subjectId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.SUBJECT_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-ExternalCustomerId", String.class));
 		
 		SubjectType subjectType = new SubjectType();
 		subjectType.getAttribute().add(subjectId);
 		//
 		// add attributes related to the requested resource
 		//
-		AttributeType resourceId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
+		AttributeType resourceId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 		
 		ResourceType resourceType = new ResourceType();
 		resourceType.getAttribute().add(resourceId);
 		//
 		// add attributes related to the type of action being performed
 		//
-		AttributeType actionId = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
-		AttributeType accessCode = PicketlinkXamlUtil.createSimpleAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
+		AttributeType actionId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
+		AttributeType accessCode = PicketBoxXamlUtil.createSimpleAttributeType("urn:healthmedia:names:action:access-code:v1", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
 		
 		ActionType actionType = new ActionType();
 		actionType.getAttribute().add(actionId);
@@ -78,7 +78,7 @@ public class XacmlRestProcessor implements Processor {
 		//
 		// add attributes related to the current environment (e.g. processor usage)
 		//
-		AttributeType currentDateTime = PicketlinkXamlUtil.createSimpleAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
+		AttributeType currentDateTime = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.CURRENT_DATETIME, XACMLConstants.XS_DATETIME, dt.toString());
 		
 		EnvironmentType environmentType = new EnvironmentType();
 		environmentType.getAttribute().add(currentDateTime);
@@ -108,31 +108,6 @@ public class XacmlRestProcessor implements Processor {
 			exchange.getOut().setHeader(Exchange.HTTP_RESPONSE_CODE, 403);
 			
 			throw new AccessControlException("Xacml has not permitted request");
-		}
-	}
-	
-	/**
-	 * Placed into separate class as the functionality contained here might be useful to other processors at a later time.
-	 * 
-	 * @author mlamber7
-	 *
-	 */
-	private static class PicketlinkXamlUtil {
-		
-		public static AttributeType createSimpleAttributeType(String name, String dataType, String value) {
-			
-			if(LOGGER.isDebugEnabled()) {
-				System.out.println("creating attribute:" + name + ", " + value);
-			}
-			AttributeValueType attributeValueType = new AttributeValueType();
-			attributeValueType.getContent().add(value);
-			
-			AttributeType attributeType = new AttributeType();
-			attributeType.setAttributeId(name);
-			attributeType.setDataType(dataType);
-			attributeType.getAttributeValue().add(attributeValueType);
-			
-			return attributeType;
 		}
 	}
 }

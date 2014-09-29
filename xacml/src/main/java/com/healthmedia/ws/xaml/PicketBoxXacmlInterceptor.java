@@ -10,12 +10,11 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.cxf.helpers.DOMUtils;
+import org.apache.cxf.helpers.XMLUtils;
 import org.apache.cxf.message.Message;
 import org.apache.cxf.rt.security.xacml.AbstractXACMLAuthorizingInterceptor;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.ws.security.saml.ext.OpenSAMLUtil;
-import org.apache.ws.security.util.DOM2Writer;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.core.model.context.RequestType;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
@@ -23,7 +22,6 @@ import org.jboss.security.xacml.interfaces.ResponseContext;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
@@ -67,27 +65,24 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	
 	@Override
 	/**
-	 * Transforms an Opensaml XACML request to a Picketlink XACML request, calls the configured Picketlink PDP and transforms the Picketlink 
-	 * response to an Opensaml response which is returned to the caller
+	 * Transforms an Opensaml XACML request to a PicketBox XACML request, calls the configured PicketBox PDP and transforms the PicketBox 
+	 * response to an Opensaml response which is returned to the caller.
 	 */
 	public org.opensaml.xacml.ctx.ResponseType performRequest(org.opensaml.xacml.ctx.RequestType opensamlRequest, Message message) throws Exception {
 
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug(new StringBuilder().append("XACML request: ").append(OpenSamlXacmlUtil.toString(opensamlRequest)).toString());
-		}
 		RequestType requestType = requestTransformer.transform(opensamlRequest);
 		requestType = preprocessRequest(requestType, message);
 		
 		JBossRequestContext requestContext = new JBossRequestContext();
 		requestContext.setRequest(requestType);
 		
+		if(LOGGER.isDebugEnabled()) {
+			LOGGER.debug(new StringBuilder().append("XACML request: ").append(XMLUtils.toString(requestContext.getDocumentElement())).toString());
+		}
 		ResponseContext responseContext = pdp.evaluate(requestContext);
-		
+
 		org.opensaml.xacml.ctx.ResponseType responseType = responseTransformer.transform(responseContext);
 		
-		if(LOGGER.isDebugEnabled()) {
-			LOGGER.debug(new StringBuilder().append("XACML response: ").append(OpenSamlXacmlUtil.toString(responseType)).toString());
-		}
 		return responseType;
 	}
 	
@@ -146,17 +141,6 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 			} catch(Exception e) {
 				throw new RuntimeException(e);
 			}
-		}
-	}
-	
-	private static class OpenSamlXacmlUtil {
-		
-		public static String toString(XMLObject xmlObject) throws Exception {
-			
-			Document doc = DOMUtils.createDocument();
-			Element element = OpenSAMLUtil.toDom(xmlObject, doc);
-			
-			return DOM2Writer.nodeToString(element);
 		}
 	}
 }
