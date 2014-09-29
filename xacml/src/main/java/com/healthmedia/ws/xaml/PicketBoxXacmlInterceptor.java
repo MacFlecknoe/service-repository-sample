@@ -65,12 +65,16 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	
 	@Override
 	/**
-	 * Transforms an Opensaml XACML request to a PicketBox XACML request, calls the configured PicketBox PDP and transforms the PicketBox 
-	 * response to an Opensaml response which is returned to the caller.
+	 * 
 	 */
 	public org.opensaml.xacml.ctx.ResponseType performRequest(org.opensaml.xacml.ctx.RequestType opensamlRequest, Message message) throws Exception {
-
+		//
+		// Transforms an Opensaml XACML request to a PicketBox XACML request
+		//
 		RequestType requestType = requestTransformer.transform(opensamlRequest);
+		//
+		// Augment the CXF configured attributes with our own custom attributes
+		//
 		requestType = preprocessRequest(requestType, message);
 		
 		JBossRequestContext requestContext = new JBossRequestContext();
@@ -79,8 +83,13 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		if(LOGGER.isDebugEnabled()) {
 			LOGGER.debug(new StringBuilder().append("XACML request: ").append(XMLUtils.toString(requestContext.getDocumentElement())).toString());
 		}
+		//
+		// call the PicketBox Policy Decision Point
+		//
 		ResponseContext responseContext = pdp.evaluate(requestContext);
-
+		//
+		// Transforms the PicketBox response back to an Opensaml response
+		//
 		org.opensaml.xacml.ctx.ResponseType responseType = responseTransformer.transform(responseContext);
 		
 		return responseType;
@@ -97,6 +106,12 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		return xacmlRequest;
 	}
 	
+	/**
+	 * Transforms Opensaml response objects to Picketbox response objects and vice versa.
+	 * 
+	 * @author mlamber7
+	 *
+	 */
 	private static class XacmlResponseTransformer {
 		
 		public XacmlResponseTransformer() {
@@ -117,6 +132,12 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		}
 	}
 	
+	/**
+	 * Transforms Opensaml request objects to Picketbox request objects and vice versa.
+	 * 
+	 * @author mlamber7
+	 *
+	 */
 	private static class XacmlRequestTransformer {
 		
 		private JAXBContext requestTypeContext;
