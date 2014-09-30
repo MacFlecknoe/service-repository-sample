@@ -115,6 +115,13 @@ public class AccessCodeInterceptor extends AbstractPhaseInterceptor<SoapMessage>
 		}
 	}
 	
+	/**
+	 * Places access code in a thread local container to be retrieved downstream. As the use of an access code is a cross cutting concern
+	 * this allows the variable to be used where ever it is needed without cluttering or confusing method signatures.
+	 * 
+	 * @author mlamber7
+	 *
+	 */
 	public static class AccessCodeContextProcessor implements IAccessCodeProcessor {
 
 		@Override
