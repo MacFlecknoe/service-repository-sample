@@ -65,10 +65,10 @@
 
 	<!-- convert all elements with the following names to an array (used in conjunction with serializeAsArray)-->
 	<util:list id="jsonKeys">
-		<value>userDataCollection</value>
+		<value>userDatas</value>
 		<value>subErrors</value>
 		<value>reasons</value>
-		<value>userCollection</value>
+		<value>users</value>
 	</util:list>
 	
 	<!-- 
