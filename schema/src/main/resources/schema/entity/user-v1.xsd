@@ -106,8 +106,8 @@
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="Male" />
 			<xsd:enumeration value="Female" />
-			<xsd:enumeration value="Transgender" />
-			<xsd:enumeration value="Other" />
+			<!-- included for legacy purposes -->
+			<xsd:enumeration value="Invalid" />
 		</xsd:restriction>
 	</xsd:simpleType>
 	
