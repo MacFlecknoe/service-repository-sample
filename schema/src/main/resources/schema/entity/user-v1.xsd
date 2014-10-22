@@ -93,7 +93,7 @@
 						minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="lastName" type="xsd:string" 
 						minOccurs="0"  maxOccurs="1" nillable="true" />
-					<xsd:element name="gender" type="tns:genderEnum" 
+					<xsd:element name="gender" type="xsd:string" 
 						minOccurs="0"  maxOccurs="1" nillable="true" />
 					<xsd:element name="birthDate" type="xsd:date" 
 						minOccurs="0"  maxOccurs="1" nillable="true" />
@@ -101,15 +101,6 @@
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	
-	<xsd:simpleType name="genderEnum">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="Male" />
-			<xsd:enumeration value="Female" />
-			<!-- included for legacy purposes -->
-			<xsd:enumeration value="Invalid" />
-		</xsd:restriction>
-	</xsd:simpleType>
 	
 	<xsd:complexType name="userType">
 		<xsd:annotation>
