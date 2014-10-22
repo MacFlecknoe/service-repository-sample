@@ -79,16 +79,5 @@
 			</xsd:choice>
 		</xsd:sequence>
 	</xsd:complexType>
-
-	<xsd:simpleType name="modalityType">
-		<xsd:annotation>
-			<xsd:documentation>Represents a communications channel</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="WEB" />
-			<xsd:enumeration value="PRINT" />
-			<xsd:enumeration value="TELEPHONIC" />
-		</xsd:restriction>
-	</xsd:simpleType>
 	
 </xsd:schema>
