@@ -3,12 +3,13 @@ package com.healthmedia.ws.common.error.v1;
 import java.util.Locale;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 
 import org.apache.log4j.Logger;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
 
-public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Throwable> {
+public class ThrowableExceptionMapper extends AbstractErrorV1ExceptionMapper<Throwable> implements ExceptionMapper<Throwable> {
 
 	private static Logger LOGGER = Logger.getLogger(ThrowableExceptionMapper.class);
 	

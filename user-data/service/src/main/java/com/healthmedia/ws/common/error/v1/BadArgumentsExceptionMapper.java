@@ -3,6 +3,7 @@ package com.healthmedia.ws.common.error.v1;
 import java.util.Locale;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
@@ -14,7 +15,7 @@ import com.healthmedia.ws.common.error.BadArgumentsException.BadArgumentError;
  * 
  */
 @Provider
-public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<BadArgumentsException> {
+public class BadArgumentsExceptionMapper extends AbstractErrorV1ExceptionMapper<BadArgumentsException> implements ExceptionMapper<BadArgumentsException> {
 
 	@Override
 	public Response toResponse(BadArgumentsException exception) {

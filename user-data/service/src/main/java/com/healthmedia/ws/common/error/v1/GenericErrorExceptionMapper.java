@@ -3,10 +3,11 @@ package com.healthmedia.ws.common.error.v1;
 import java.util.Locale;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 
 import com.healthmedia.ws.common.error.GenericErrorException;
 
-public class GenericErrorExceptionMapper extends AbstractErrorV1ExceptionMapper<GenericErrorException> {
+public class GenericErrorExceptionMapper extends AbstractErrorV1ExceptionMapper<GenericErrorException> implements ExceptionMapper<GenericErrorException> {
 
 	@Override
 	public Response toResponse(GenericErrorException exception) {

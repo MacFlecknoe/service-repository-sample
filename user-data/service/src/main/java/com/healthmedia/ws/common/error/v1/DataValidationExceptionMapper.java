@@ -3,6 +3,7 @@ package com.healthmedia.ws.common.error.v1;
 import java.util.Locale;
 
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import com.healthmedia.ws.common.error.ApplicationErrorCode;
@@ -13,7 +14,7 @@ import com.healthmedia.ws.common.error.DataValidationException;
  * 
  */
 @Provider
-public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMapper<DataValidationException> {
+public class DataValidationExceptionMapper extends AbstractErrorV1ExceptionMapper<DataValidationException> implements ExceptionMapper<DataValidationException> {
 
 	@Override
 	public Response toResponse(DataValidationException exception) {

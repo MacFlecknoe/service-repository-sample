@@ -4,9 +4,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
-@Provider
+/**
+ * Due to a bug in CXF's {@link org.apache.cxf.jaxrs.provider.ProviderFactory}, mappers which extend this class must ALSO implement ExceptionMapper
+ *
+ * @see com.healthmedia.ws.common.error.v1.ExceptionMapperTest
+ */
 public abstract class AbstractErrorExceptionMapper<T extends Throwable> implements ExceptionMapper<T> {
 	
 	@Context
