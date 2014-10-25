@@ -67,11 +67,9 @@ public class ExceptionMapperTest {
 		
 		Object mapperResponse3 = pf.createExceptionMapper(RuntimeExceptionAA.class, new MessageImpl());
 		assertSame(exceptionMapperA, mapperResponse3);
-		//
-		// this is the bug... it SHOULD fail
-		//
+		
 		Object mapperResponse4 = pf.createExceptionMapper(RuntimeExceptionBB.class, new MessageImpl());
-		assert(!exceptionMapperB.equals(mapperResponse4));
+		assertSame(exceptionMapperB, mapperResponse4);
 	}
 
 
