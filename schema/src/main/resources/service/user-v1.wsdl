@@ -41,6 +41,7 @@
 			<xsd:element name="importUserResponse">
 				<xsd:complexType>
 					<xsd:sequence>
+						<xsd:element ref="common-error:success" minOccurs="0" />
 						<xsd:element ref="user:user" minOccurs="0" />
 					</xsd:sequence>
 				</xsd:complexType>

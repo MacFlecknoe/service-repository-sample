@@ -26,6 +26,8 @@
 	success type added after original schema was written and so was placed here. the more proper approach would be to rename this
 	namespace to urn:healthmedia:schema:common:status:v1. This should happen in v2.0 of our schema.
 	-->
+	<xsd:element name="success" type="tns:successType" />
+	
 	<xsd:complexType name="successType">
 		<xsd:sequence>
 			<xsd:element name="name" type="xsd:string" minOccurs="0" />
