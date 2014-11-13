@@ -4,6 +4,9 @@
 		<ns:PolicySet>
 			<ns:Location>xacml/policies/xacml-example-policy-set-1.xml</ns:Location>
 			<ns:Policy>
+				<ns:Location>xacml/policies/xacml-user-access-code-policy-1.xml</ns:Location>
+			</ns:Policy>
+			<ns:Policy>
 				<ns:Location>xacml/policies/xacml-access-code-policy-1.xml</ns:Location>
 			</ns:Policy>
 			<ns:Policy>

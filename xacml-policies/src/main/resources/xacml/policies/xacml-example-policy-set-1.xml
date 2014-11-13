@@ -23,6 +23,7 @@
 		<PolicyIdReference>urn:healthmedia:xacml:access-code:policy:id:1</PolicyIdReference>
 		<!-- deny if username is not a fixed string -->
 		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:1</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:user-access-code:policy:id:1</PolicyIdReference>
 		<!-- fall through policy -->
 		<PolicyIdReference>urn:healthmedia:xacml:permit:policy:id:1</PolicyIdReference>
 	</PolicySet>

@@ -699,6 +699,7 @@
       <urn:importUserRequest>
          <urn1:user urn2:version="1">
          	<urn2:id>4a</urn2:id>
+         	<urn1:accessCode>testMe</urn1:accessCode>
          </urn1:user>
       </urn:importUserRequest>
    </soap:Body>

@@ -27,6 +27,9 @@
 		<jaxws:binding>
 			<soap:soapBinding mtomEnabled="true" version="1.2"/>
 		</jaxws:binding>
+		<jaxws:properties>
+			<entry key="schema-validation-enabled" value="true" />
+		</jaxws:properties>
 		<!-- 
 		<jaxws:inInterceptors>
 			<ref bean="XACMLInterceptor"/>

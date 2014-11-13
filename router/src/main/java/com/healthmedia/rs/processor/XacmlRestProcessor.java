@@ -16,6 +16,7 @@ import org.jboss.security.xacml.core.model.context.AttributeType;
 import org.jboss.security.xacml.core.model.context.DecisionType;
 import org.jboss.security.xacml.core.model.context.EnvironmentType;
 import org.jboss.security.xacml.core.model.context.RequestType;
+import org.jboss.security.xacml.core.model.context.ResourceContentType;
 import org.jboss.security.xacml.core.model.context.ResourceType;
 import org.jboss.security.xacml.core.model.context.ResultType;
 import org.jboss.security.xacml.core.model.context.SubjectType;
@@ -155,6 +156,12 @@ public class XacmlRestProcessor implements Processor {
 			
 			ResourceType resourceType = new ResourceType();
 			resourceType.getAttribute().add(resourceId);
+			//
+			// TODO set the message
+			//
+			ResourceContentType content = new ResourceContentType();
+			content.getContent().add(exchange.getIn().getBody()); // TODO convert to XML?
+			resourceType.setResourceContent(content);
 			//
 			// add attributes related to the type of action being performed
 			//

@@ -54,6 +54,7 @@
 			<soap:soapBinding version="1.2" />
 		</camel-cxf:binding>
 		<camel-cxf:properties>
+			<entry key="schema-validation-enabled" value="true" />
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
 			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
@@ -82,6 +83,7 @@
 			<soap:soapBinding version="1.2" />
 		</camel-cxf:binding>
 		<camel-cxf:properties>
+			<entry key="schema-validation-enabled" value="true" />
 			<entry key="ws-security.ut.validator" value-ref="usernameValidator" />
 			<entry key="ws-security.callback-handler" value-ref="keyStoreCallback" />
 			<entry key="ws-security.signature.properties" value="classpath:server-keystore.properties" />
@@ -113,12 +115,12 @@
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
-			<camel:from uri="cxf:bean:x509UserService?dataFormat=PAYLOAD" />
-			<camel:from uri="cxf:bean:usernameTokenUserService?dataFormat=PAYLOAD" />
+			<camel:from uri="cxf:bean:x509UserService?dataFormat=CXF_MESSAGE" />
+			<camel:from uri="cxf:bean:usernameTokenUserService?dataFormat=CXF_MESSAGE" />
 			<!-- log input received -->
 			<camel:to uri="log:input" />
 			<!-- send proxied request to real web service -->
-			<camel:to uri="cxf:bean:realUserService?headerFilterStrategy=#removeSecurityHeadersFilterStrategy&amp;dataFormat=PAYLOAD" />
+			<camel:to uri="cxf:bean:realUserService?headerFilterStrategy=#removeSecurityHeadersFilterStrategy&amp;dataFormat=CXF_MESSAGE" />
 			<!-- log answer from real web service -->
 			<camel:to uri="log:output" />
 		</camel:route>

@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+
+	xmlns:h="urn:healthmedia:schema:header:access-code:v1" 
+	xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" 
+	xmlns:soap="http://www.w3.org/2003/05/soap-envelope" 
+	xmlns:urn="urn:healthmedia:wsdl:user:v1" 
+	xmlns:urn1="urn:healthmedia:schema:user:v1"
+	xmlns:urn2="urn:healthmedia:schema:common:entity:v1" 
+	xmlns:urn3="urn:healthmedia:schema:data-source:v1"
+	 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
 	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
-	PolicyId="urn:healthmedia:xacml:access-code:policy:id:1"
+	PolicyId="urn:healthmedia:xacml:user-access-code:policy:id:1"
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
 	<Description>
 		Deny consumers whose access-code does not match "testAccessCode"
 	</Description>
+	<PolicyDefaults>
+		<XPathVersion>http://www.w3.org/TR/1999/Rec-xpath-19991116</XPathVersion>
+	</PolicyDefaults>
 	<Target />
-	<Rule RuleId="urn:healthmedia:xacml:access-code:policy:id:1:rule:id:1" Effect="Deny">
+	<Rule RuleId="urn:healthmedia:xacml:user-access-code:policy:id:1:rule:id:1" Effect="Deny">
 		<Description>
 			Deny consumers whose assigned access-codes does not match the access code in the request
 		</Description>
@@ -21,8 +33,7 @@
 					<SubjectAttributeDesignator
 							AttributeId="urn:healthmedia:names:1.0:subject:access-code" DataType="http://www.w3.org/2001/XMLSchema#string" />
 					<!--  access code passed in the request -->
-					<ActionAttributeDesignator
-							AttributeId="urn:healthmedia:names:1.0:action:access-code"
+					<AttributeSelector RequestContextPath="//*[local-name()='user' and namespace-uri()='urn:healthmedia:schema:user:v1']/*[local-name()='accessCode' and namespace-uri()='urn:healthmedia:schema:user:v1']"
 							DataType="http://www.w3.org/2001/XMLSchema#string" />
 				</Apply>
 			</Apply>

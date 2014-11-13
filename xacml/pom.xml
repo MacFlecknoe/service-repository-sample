@@ -24,6 +24,12 @@
 			<groupId>org.apache.cxf</groupId>
 			<artifactId>cxf-rt-security</artifactId>
 		</dependency>
+<dependency>
+	<groupId>org.apache.cxf</groupId>
+	<artifactId>cxf-rt-bindings-soap</artifactId>
+	<version>2.7.13</version>
+</dependency>
+
 		<!--  picketbox -->
 		<dependency>
 			<groupId>org.jboss.security</groupId>

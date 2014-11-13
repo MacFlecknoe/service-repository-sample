@@ -3,11 +3,14 @@ package com.healthmedia.ws.xaml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.namespace.NamespaceContext;
+import javax.xml.xpath.XPathConstants;
 
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.helpers.XMLUtils;
@@ -17,11 +20,14 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.core.model.context.RequestType;
+import org.jboss.security.xacml.core.model.context.ResourceContentType;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
 import org.jboss.security.xacml.interfaces.ResponseContext;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
@@ -85,6 +91,51 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		// Transforms an Opensaml XACML request to a PicketBox XACML request
 		//
 		RequestType requestType = getXacmlRequestTransformer().transform(opensamlRequest);
+		//
+		// move to preprocessor... should just peel off the access code that is being used... use schema:user:accessCode as key
+		//
+		if(!requestType.getResource().isEmpty()) {
+			//
+			// add the SOAP message to the XACML request
+			//
+			ResourceContentType content = new ResourceContentType();
+			
+			Node soapMessage = message.getContent(Node.class);
+			
+			javax.xml.xpath.XPathFactory factory = javax.xml.xpath.XPathFactory.newInstance();
+			javax.xml.xpath.XPath xpath = factory.newXPath();
+			xpath.setNamespaceContext(new NamespaceContext() {
+
+				@Override
+				public Iterator getPrefixes(String arg0) {
+					return null;
+				}
+
+				@Override
+				public String getPrefix(String arg0) {
+					return null;
+				}
+
+				@Override
+				public String getNamespaceURI(String arg0) {
+					if("soap".equals(arg0)) {
+						return "http://www.w3.org/2003/05/soap-envelope";
+					} else if("user".equals(arg0)) {
+						return "urn:healthmedia:schema:user:v1";
+					} else if("userService".equals(arg0)) {
+						return "urn:healthmedia:wsdl:user:v1";
+					}
+					return null;
+				}
+			});
+			javax.xml.xpath.XPathExpression expression = xpath.compile("//user:user/user:accessCode/text()");
+			
+			NodeList accessCodes = (NodeList) expression.evaluate(soapMessage, XPathConstants.NODESET);
+			
+			content.getContent().add(soapMessage.getFirstChild());
+			
+			requestType.getResource().get(0).setResourceContent(content);
+		}
 		//
 		// Augment the CXF configured attributes with our own custom attributes
 		//
