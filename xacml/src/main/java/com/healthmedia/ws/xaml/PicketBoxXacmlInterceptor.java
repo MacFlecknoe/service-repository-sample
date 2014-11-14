@@ -17,13 +17,11 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jboss.security.xacml.core.JBossRequestContext;
 import org.jboss.security.xacml.core.model.context.RequestType;
-import org.jboss.security.xacml.core.model.context.ResourceContentType;
 import org.jboss.security.xacml.interfaces.PolicyDecisionPoint;
 import org.jboss.security.xacml.interfaces.ResponseContext;
 import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
