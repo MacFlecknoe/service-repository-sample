@@ -25,7 +25,8 @@ public class XacmlRequestContextAugmentor implements IRequestPreprocessor {
 			if(soapMessage != null) {
 				ResourceContentType content = new ResourceContentType();
 				content.getContent().add(soapMessage.getFirstChild());
-				xacmlRequest.getResource().get(0).setResourceContent(content);
+				// grab the first resource
+				xacmlRequest.getResource().iterator().next().setResourceContent(content);
 			}
 		}
 		return xacmlRequest;
