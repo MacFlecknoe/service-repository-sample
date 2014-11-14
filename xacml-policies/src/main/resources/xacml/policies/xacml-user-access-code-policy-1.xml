@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
-
-	xmlns:h="urn:healthmedia:schema:header:access-code:v1" 
-	xmlns:i18n="http://www.w3.org/2005/09/ws-i18n" 
-	xmlns:soap="http://www.w3.org/2003/05/soap-envelope" 
-	xmlns:urn="urn:healthmedia:wsdl:user:v1" 
-	xmlns:urn1="urn:healthmedia:schema:user:v1"
-	xmlns:urn2="urn:healthmedia:schema:common:entity:v1" 
-	xmlns:urn3="urn:healthmedia:schema:data-source:v1"
-	 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
 	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
