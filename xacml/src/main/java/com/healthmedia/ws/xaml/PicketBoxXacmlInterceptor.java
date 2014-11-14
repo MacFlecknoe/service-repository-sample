@@ -92,49 +92,19 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		//
 		RequestType requestType = getXacmlRequestTransformer().transform(opensamlRequest);
 		//
-		// move to preprocessor... should just peel off the access code that is being used... use schema:user:accessCode as key
+		// move to preprocessor... 
 		//
 		if(!requestType.getResource().isEmpty()) {
 			//
 			// add the SOAP message to the XACML request
 			//
-			ResourceContentType content = new ResourceContentType();
-			
 			Node soapMessage = message.getContent(Node.class);
 			
-			javax.xml.xpath.XPathFactory factory = javax.xml.xpath.XPathFactory.newInstance();
-			javax.xml.xpath.XPath xpath = factory.newXPath();
-			xpath.setNamespaceContext(new NamespaceContext() {
-
-				@Override
-				public Iterator getPrefixes(String arg0) {
-					return null;
-				}
-
-				@Override
-				public String getPrefix(String arg0) {
-					return null;
-				}
-
-				@Override
-				public String getNamespaceURI(String arg0) {
-					if("soap".equals(arg0)) {
-						return "http://www.w3.org/2003/05/soap-envelope";
-					} else if("user".equals(arg0)) {
-						return "urn:healthmedia:schema:user:v1";
-					} else if("userService".equals(arg0)) {
-						return "urn:healthmedia:wsdl:user:v1";
-					}
-					return null;
-				}
-			});
-			javax.xml.xpath.XPathExpression expression = xpath.compile("//user:user/user:accessCode/text()");
-			
-			NodeList accessCodes = (NodeList) expression.evaluate(soapMessage, XPathConstants.NODESET);
-			
-			content.getContent().add(soapMessage.getFirstChild());
-			
-			requestType.getResource().get(0).setResourceContent(content);
+			if(soapMessage != null) {
+				ResourceContentType content = new ResourceContentType();
+				content.getContent().add(soapMessage.getFirstChild());
+				requestType.getResource().get(0).setResourceContent(content);
+			}
 		}
 		//
 		// Augment the CXF configured attributes with our own custom attributes
