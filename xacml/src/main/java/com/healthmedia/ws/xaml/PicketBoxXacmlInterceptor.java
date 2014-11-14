@@ -3,14 +3,11 @@ package com.healthmedia.ws.xaml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.namespace.NamespaceContext;
-import javax.xml.xpath.XPathConstants;
 
 import org.apache.cxf.helpers.DOMUtils;
 import org.apache.cxf.helpers.XMLUtils;
@@ -27,7 +24,6 @@ import org.opensaml.xacml.ctx.impl.ResponseTypeUnmarshaller;
 import org.opensaml.xml.XMLObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 /**
  * The PEP in the XACML reference architecture. Forwards requests to a configured PDP point. This class marries the OpenSAML libraries (which supplies the PEP
@@ -49,10 +45,16 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 	private XacmlRequestTransformer requestTransformer;
 	private XacmlResponseTransformer responseTransformer;
 	
-	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors){
+	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp, List<IRequestPreprocessor> processors) {
 		this.pdp = pdp;
 		this.processors = processors;
-		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor"); // make sure this executes after access code is handled
+		//
+		// make sure this executes after access code is handled... 
+		//
+		// TODO move the following to a List<String> constructor argument to allow for new interceptors to be added
+		// or verify that it can be configured in a certain order when wired
+		//
+		this.addAfter("com.healthmedia.ws.accesscode.AccessCodeInterceptor");
 	}
 	
 	public PicketBoxXacmlInterceptor(PolicyDecisionPoint pdp) {
@@ -91,21 +93,6 @@ public class PicketBoxXacmlInterceptor extends AbstractXACMLAuthorizingIntercept
 		// Transforms an Opensaml XACML request to a PicketBox XACML request
 		//
 		RequestType requestType = getXacmlRequestTransformer().transform(opensamlRequest);
-		//
-		// move to preprocessor... 
-		//
-		if(!requestType.getResource().isEmpty()) {
-			//
-			// add the SOAP message to the XACML request
-			//
-			Node soapMessage = message.getContent(Node.class);
-			
-			if(soapMessage != null) {
-				ResourceContentType content = new ResourceContentType();
-				content.getContent().add(soapMessage.getFirstChild());
-				requestType.getResource().get(0).setResourceContent(content);
-			}
-		}
 		//
 		// Augment the CXF configured attributes with our own custom attributes
 		//
