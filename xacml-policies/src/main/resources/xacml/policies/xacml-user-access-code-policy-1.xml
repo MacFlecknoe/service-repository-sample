@@ -23,7 +23,7 @@
 				 	<!-- access code assigned to a subject (pulled from database) -->
 					<SubjectAttributeDesignator
 						AttributeId="urn:healthmedia:names:1.0:subject:access-code" DataType="http://www.w3.org/2001/XMLSchema#string" />
-					<!--  access code passed in the request -->
+					<!--  access code passed in the request; use xpath in RequestContextPath to pull it out -->
 					<AttributeSelector 
 						RequestContextPath="//*[local-name()='user' and namespace-uri()='urn:healthmedia:schema:user:v1']/*[local-name()='accessCode' and namespace-uri()='urn:healthmedia:schema:user:v1']"
 						DataType="http://www.w3.org/2001/XMLSchema#string" />
