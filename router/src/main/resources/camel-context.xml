@@ -152,7 +152,7 @@
 				<camel:when>
 					<camel:groovy>request.body != null</camel:groovy>
 					<camel:transform>
-						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\")[\\s]*:', '$1-$2:')</camel:groovy>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\"[\\s]*:)', '$1__$2')</camel:groovy>
 					</camel:transform>
 				</camel:when>
 			</camel:choice>
@@ -166,7 +166,7 @@
 				<camel:when>
 					<camel:groovy>request.body != null</camel:groovy>
 					<camel:transform>
-						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)-([\\w]+\")[\\s]*:', '$1.$2:')</camel:groovy>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)__([\\w]+\"[\\s]*:)', '$1.$2')</camel:groovy>
 					</camel:transform>
 				</camel:when>
 			</camel:choice>

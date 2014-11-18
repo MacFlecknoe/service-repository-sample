@@ -42,12 +42,9 @@
 		For common configuration parameters 
 		@see http://cxf.apache.org/docs/jax-rs-data-bindings.html#JAX-RSDataBindings-CommonJAXBandJSONconfiguration 
 	-->
-	<bean id="jsonProvider1" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
-		
-	</bean>
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
-		<!--  will this work for jettison? -->
-		<!-- <property name="jsonNamespaceSeparator" value=":"/>-->
+		<!--  this should work for jettison once the patch is released -->
+		<!-- <property name="jsonNamespaceSeparator" value="_"/>-->
 		<!-- the following does not work when consuming entities with inherited attributes -->
 		<!--  <property name="ignoreNamespaces" value="true"/> -->
 		<property name="singleJaxbContext" value="true"/>
@@ -56,7 +53,7 @@
 		<property name="extraClass" ref="extraClasses" />
 		<!-- list of classes that should be treated as root elements within the service -->
 		<property name="jaxbElementClassMap" ref="rootElementClassMap"/>
-		<!-- map namespaces to more concise abbreviations for use in json payloads -->
+		<!-- map namespaces to more readable abbreviations for use in json payloads -->
 		<property name="namespaceMap" ref="jsonNamespaceMap"/>
 		<!-- don't require a root element when consuming messages (e.g. { "userData": { ... } } -->
 		<property name="supportUnwrapped" value="true"/>
