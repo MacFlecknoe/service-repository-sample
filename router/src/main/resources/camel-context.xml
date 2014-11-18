@@ -113,7 +113,9 @@
 	<bean id="usernameProcessor" class="com.healthmedia.rs.processor.MockUsernameProcessor" />
 	
 	<camel:camelContext>
+	
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
+		
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:x509UserService?dataFormat=CXF_MESSAGE" />
@@ -125,11 +127,13 @@
 			<!-- log answer from real web service -->
 			<camel:to uri="log:output" />
 		</camel:route>
+		
 		<!-- REST XACML route -->
 		<camel:route>
 			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
+			<camel:to uri="direct:transformJsonRequestPackage" />
 			<camel:process ref="usernameProcessor"/>
-			<camel:process ref="xacmlProcessor"/>
+			<!-- <camel:process ref="xacmlProcessor"/> -->
 			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
 			<camel:onException>
 				<camel:exception>org.apache.camel.CamelAuthorizationException</camel:exception>
@@ -137,7 +141,37 @@
 					<camel:constant>true</camel:constant>
 				</camel:handled>
 			</camel:onException>
+			<camel:to uri="direct:transformJsonResponsePackage" />
 		</camel:route>
+		
+		<!-- change the namespace parameter on the payload until we update jettison -->
+		<camel:route>
+			<camel:from uri="direct:transformJsonResponsePackage"/>
+			<camel:convertBodyTo type="java.lang.String"/>
+			<camel:choice>
+				<camel:when>
+					<camel:groovy>request.body != null</camel:groovy>
+					<camel:transform>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\")[\\s]*:', '$1_$2:')</camel:groovy>
+					</camel:transform>
+				</camel:when>
+			</camel:choice>
+		</camel:route>
+		
+		<!-- change the namespace parameter on the payload until we update jettison -->
+		<camel:route>
+			<camel:from uri="direct:transformJsonRequestPackage"/>
+			<camel:convertBodyTo type="java.lang.String"/>
+			<camel:choice>
+				<camel:when>
+					<camel:groovy>request.body != null</camel:groovy>
+					<camel:transform>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)_([\\w]+\")[\\s]*:', '$1.$2:')</camel:groovy>
+					</camel:transform>
+				</camel:when>
+			</camel:choice>
+		</camel:route>
+		
 	</camel:camelContext>
 	
 	<!-- looks up user from data store and validates the passed credentials -->

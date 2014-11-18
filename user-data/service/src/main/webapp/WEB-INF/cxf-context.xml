@@ -17,6 +17,7 @@
 			<ref bean="userServiceImpl" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+			
 			<bean class="com.healthmedia.ws.common.ISO8601DateParamHandler" />
 			<bean class="com.healthmedia.ws.common.error.v1.DataValidationExceptionMapper" />
 			<bean class="com.healthmedia.ws.common.error.v1.BadArgumentsExceptionMapper" />
@@ -41,7 +42,14 @@
 		For common configuration parameters 
 		@see http://cxf.apache.org/docs/jax-rs-data-bindings.html#JAX-RSDataBindings-CommonJAXBandJSONconfiguration 
 	-->
+	<bean id="jsonProvider1" class="org.codehaus.jackson.jaxrs.JacksonJsonProvider">
+		
+	</bean>
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
+		<!--  will this work for jettison? -->
+		<!-- <property name="jsonNamespaceSeparator" value=":"/>-->
+		<!--  will this work for jackson? -->
+		<!-- <property name="nsSeparator" value=":"/>-->
 		<property name="singleJaxbContext" value="true"/>
 		<property name="useSingleContextForPackages" value="true"/>
 		<!-- place additional annotated classes within jaxb context -->

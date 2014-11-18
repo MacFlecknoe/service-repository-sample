@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
+	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicyId="urn:healthmedia:xacml:user-id:policy:id:1"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+	<Description>
+		Deny consumers whose access-code does not match "testAccessCode"
+	</Description>
+	<Target />
+	<Rule RuleId="urn:healthmedia:xacml:user-id:policy:id:1:rule:id:1" Effect="Deny">
+		<Description>
+			Deny consumers whose assigned access-codes does not match the access code in the request
+		</Description>
+		<Target/>
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
+				 <Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-at-least-one-member-of">
+				 	<!-- access code assigned to a subject (pulled from database) -->
+					<SubjectAttributeDesignator
+							AttributeId="urn:healthmedia:names:1.0:subject:access-code" DataType="http://www.w3.org/2001/XMLSchema#string" />
+					<!--  access code passed in the request -->
+					<ActionAttributeDesignator
+							AttributeId="urn:healthmedia:names:1.0:action:access-code"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+</Policy>
