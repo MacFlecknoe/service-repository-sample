@@ -61,7 +61,7 @@
 		<property name="dropRootElement" value="true"/>
 		<!-- drop the array name wrapper that ordinarily surrounds collections -->
 		<property name="dropCollectionWrapperElement" value="true"/>
-		<!-- do not prefix xml attributes with @ symbol -->
+		<!-- do not prefix xml attributes with @ symbol; this ONLY works for egress -->
 		<!-- <property name="attributesToElements" value="true"/> -->
 		<!--  ensure that collections with a single element are still serialized as arrays and not simply the unwrapped element -->
 		<property name="serializeAsArray" value="true"/>
