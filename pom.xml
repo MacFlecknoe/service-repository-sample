@@ -92,6 +92,11 @@
 				<version>${camel.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-groovy</artifactId>
+				<version>${camel.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.jboss.security</groupId>
 				<artifactId>jboss-xacml</artifactId>
 				<version>${jboss-xacml.version}</version>

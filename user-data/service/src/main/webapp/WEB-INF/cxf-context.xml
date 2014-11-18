@@ -48,8 +48,8 @@
 	<bean id="jsonProvider" class="org.apache.cxf.jaxrs.provider.json.JSONProvider">
 		<!--  will this work for jettison? -->
 		<!-- <property name="jsonNamespaceSeparator" value=":"/>-->
-		<!--  will this work for jackson? -->
-		<!-- <property name="nsSeparator" value=":"/>-->
+		<!-- the following does not work when consuming entities with inherited attributes -->
+		<!--  <property name="ignoreNamespaces" value="true"/> -->
 		<property name="singleJaxbContext" value="true"/>
 		<property name="useSingleContextForPackages" value="true"/>
 		<!-- place additional annotated classes within jaxb context -->
