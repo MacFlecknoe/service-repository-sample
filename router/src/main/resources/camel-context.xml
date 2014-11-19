@@ -144,7 +144,7 @@
 			<camel:to uri="direct:transformJsonResponsePackage" />
 		</camel:route>
 		
-		<!-- change the namespace parameter on the payload until we update jettison -->
+		<!-- change the namespace parameter on the payload until we update jettison (replace dot package separator with a custom string excluding the backslash escape character ('\')) -->
 		<camel:route>
 			<camel:from uri="direct:transformJsonResponsePackage"/>
 			<camel:convertBodyTo type="java.lang.String"/>
@@ -158,7 +158,7 @@
 			</camel:choice>
 		</camel:route>
 		
-		<!-- change the namespace parameter on the payload until we update jettison -->
+		<!-- change the namespace parameter on the payload until we update jettison (replace custom package separator with dots)-->
 		<camel:route>
 			<camel:from uri="direct:transformJsonRequestPackage"/>
 			<camel:convertBodyTo type="java.lang.String"/>
