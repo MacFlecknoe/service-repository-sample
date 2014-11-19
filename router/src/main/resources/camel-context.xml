@@ -150,9 +150,9 @@
 			<camel:convertBodyTo type="java.lang.String"/>
 			<camel:choice>
 				<camel:when>
-					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null &amp;&amp; !request.headers.get('Json-Namespace-Separator').contains('\\')</camel:groovy>
+					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null</camel:groovy>
 					<camel:transform>
-						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\"[\\s]*:)', '$1' + request.headers.get('Json-Namespace-Separator') + '$2')</camel:groovy>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\"[\\s]*:)', '$1' + request.headers.get('Json-Namespace-Separator').replace('\\','') + '$2')</camel:groovy>
 					</camel:transform>
 				</camel:when>
 			</camel:choice>
@@ -164,9 +164,9 @@
 			<camel:convertBodyTo type="java.lang.String"/>
 			<camel:choice>
 				<camel:when>
-					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null &amp;&amp; !request.headers.get('Json-Namespace-Separator').contains('\\')</camel:groovy>
+					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null</camel:groovy>
 					<camel:transform>
-						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\Q' + request.headers.get('Json-Namespace-Separator') + '\\E([\\w]+\"[\\s]*:)', '$1.$2')</camel:groovy>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\Q' + request.headers.get('Json-Namespace-Separator').replace('\\','') + '\\E([\\w]+\"[\\s]*:)', '$1.$2')</camel:groovy>
 					</camel:transform>
 				</camel:when>
 			</camel:choice>
