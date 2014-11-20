@@ -132,7 +132,7 @@
 		<!-- REST w/XACML route -->
 		<camel:route>
 			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
-			<camel:to uri="direct:transformJsonNamespaceSeparatorOnRequest" />
+			<camel:to uri="direct:transformJsonNamespaceSeparatorInRequest" />
 			<camel:process ref="usernameProcessor"/>
 			<!-- <camel:process ref="xacmlProcessor"/> -->
 			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
@@ -142,12 +142,12 @@
 					<camel:constant>true</camel:constant>
 				</camel:handled>
 			</camel:onException>
-			<camel:to uri="direct:transformJsonNamespaceSeparatorOnResponse" />
+			<camel:to uri="direct:transformJsonNamespaceSeparatorInResponse" />
 		</camel:route>
 		
 		<!-- change the name-space parameter on the incoming request until we update jettison (replace custom package separator with dots)-->
 		<camel:route>
-			<camel:from uri="direct:transformJsonNamespaceSeparatorOnRequest"/>
+			<camel:from uri="direct:transformJsonNamespaceSeparatorInRequest"/>
 			<camel:convertBodyTo type="java.lang.String"/>
 			<camel:choice>
 				<camel:when>
@@ -161,7 +161,7 @@
 		
 		<!-- change the name-space parameter on the outgoing response until we update jettison (replace dot package separator with a custom string excluding the backslash escape character ('\')) -->
 		<camel:route>
-			<camel:from uri="direct:transformJsonNamespaceSeparatorOnResponse"/>
+			<camel:from uri="direct:transformJsonNamespaceSeparatorInResponse"/>
 			<camel:convertBodyTo type="java.lang.String"/>
 			<camel:choice>
 				<camel:when>
