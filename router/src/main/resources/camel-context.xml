@@ -116,6 +116,7 @@
 	
 		<camel:propertyPlaceholder id="properties" location="classpath:user-service.properties"/>
 		
+		<!-- SOAP route -->
 		<camel:route>
 			<!-- CXF consumer using PAYLOAD format -->
 			<camel:from uri="cxf:bean:x509UserService?dataFormat=CXF_MESSAGE" />
