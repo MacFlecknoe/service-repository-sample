@@ -131,7 +131,7 @@
 		<!-- REST XACML route -->
 		<camel:route>
 			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
-			<camel:to uri="direct:transformJsonRequestPackage" />
+			<camel:to uri="direct:transformJsonNamespaceSeparatorOnRequest" />
 			<camel:process ref="usernameProcessor"/>
 			<!-- <camel:process ref="xacmlProcessor"/> -->
 			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
@@ -141,32 +141,32 @@
 					<camel:constant>true</camel:constant>
 				</camel:handled>
 			</camel:onException>
-			<camel:to uri="direct:transformJsonResponsePackage" />
+			<camel:to uri="direct:transformJsonNamespaceSeparatorOnResponse" />
 		</camel:route>
 		
-		<!-- change the namespace parameter on the payload until we update jettison (replace dot package separator with a custom string excluding the backslash escape character ('\')) -->
+		<!-- change the name-space parameter on the incoming request until we update jettison (replace custom package separator with dots)-->
 		<camel:route>
-			<camel:from uri="direct:transformJsonResponsePackage"/>
-			<camel:convertBodyTo type="java.lang.String"/>
-			<camel:choice>
-				<camel:when>
-					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null</camel:groovy> 
-					<camel:transform>
-						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\"[\\s]*:)', '$1' + request.headers.get('Json-Namespace-Separator').replace('\\','').replace('$','\\$') + '$2')</camel:groovy>
-					</camel:transform>
-				</camel:when>
-			</camel:choice>
-		</camel:route>
-		
-		<!-- change the namespace parameter on the payload until we update jettison (replace custom package separator with dots)-->
-		<camel:route>
-			<camel:from uri="direct:transformJsonRequestPackage"/>
+			<camel:from uri="direct:transformJsonNamespaceSeparatorOnRequest"/>
 			<camel:convertBodyTo type="java.lang.String"/>
 			<camel:choice>
 				<camel:when>
 					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null</camel:groovy>
 					<camel:transform>
 						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\Q' + request.headers.get('Json-Namespace-Separator').replace('\\','') + '\\E([\\w]+\"[\\s]*:)', '$1.$2')</camel:groovy>
+					</camel:transform>
+				</camel:when>
+			</camel:choice>
+		</camel:route>
+		
+		<!-- change the name-space parameter on the outgoing response until we update jettison (replace dot package separator with a custom string excluding the backslash escape character ('\')) -->
+		<camel:route>
+			<camel:from uri="direct:transformJsonNamespaceSeparatorOnResponse"/>
+			<camel:convertBodyTo type="java.lang.String"/>
+			<camel:choice>
+				<camel:when>
+					<camel:groovy>request.body != null &amp;&amp; request.headers.get('Json-Namespace-Separator') != null</camel:groovy> 
+					<camel:transform>
+						<camel:groovy>request.body.replaceAll('(\"[A-Za-z][\\w]+)\\.([\\w]+\"[\\s]*:)', '$1' + request.headers.get('Json-Namespace-Separator').replace('\\','').replace('$','\\$') + '$2')</camel:groovy>
 					</camel:transform>
 				</camel:when>
 			</camel:choice>
