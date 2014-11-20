@@ -129,7 +129,7 @@
 			<camel:to uri="log:output" />
 		</camel:route>
 		
-		<!-- REST XACML route -->
+		<!-- REST w/XACML route -->
 		<camel:route>
 			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
 			<camel:to uri="direct:transformJsonNamespaceSeparatorOnRequest" />
