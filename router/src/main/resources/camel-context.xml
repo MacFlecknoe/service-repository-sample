@@ -134,7 +134,7 @@
 			<camel:from uri="servlet:myapp?matchOnUriPrefix=true"/>
 			<camel:to uri="direct:transformJsonNamespaceSeparatorInRequest" />
 			<camel:process ref="usernameProcessor"/>
-			<!-- <camel:process ref="xacmlProcessor"/> -->
+			<camel:process ref="xacmlProcessor"/>
 			<camel:to uri="http://localhost:8080/?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
 			<camel:onException>
 				<camel:exception>org.apache.camel.CamelAuthorizationException</camel:exception>

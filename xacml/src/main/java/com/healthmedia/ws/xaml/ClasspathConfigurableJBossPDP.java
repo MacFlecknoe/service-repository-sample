@@ -14,7 +14,7 @@ public class ClasspathConfigurableJBossPDP implements PolicyDecisionPoint {
 	private final PolicyDecisionPoint pdp;
 	
 	public ClasspathConfigurableJBossPDP(String configName) {
-		this.pdp = new JBossPDP(Thread.currentThread().getContextClassLoader().getResourceAsStream(configName));
+		this.pdp = new JBossPDP(getClass().getClassLoader().getResourceAsStream(configName));
 	}
 	
 	public ClasspathConfigurableJBossPDP() {

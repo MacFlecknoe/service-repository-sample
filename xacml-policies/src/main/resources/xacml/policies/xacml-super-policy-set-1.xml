@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PolicySet 
+	xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
+		http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicySetId="urn:healthmedia:xacml:super:policy-set:id:1"
+	PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+	<Description>Proof of concept policies to demonstrate how REST and SOAP rules can be structured</Description>
+	<Target />
+	<!--
+		use an automatic permit policy in order to simulate a permit-unless-deny combination algorithm. this algorithm is 
+		part of the xaml 3.0 spec (picketbox only supports 2.0)
+	-->
+	<PolicySet 
+		PolicySetId="urn:healthmedia:xacml:super:policy-set:id:1:policy-set:id:1"
+		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+		<Description>Example SOAP Rules</Description>
+		<Target>
+			<Resources>
+				<Resource>
+					<ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+						<AttributeValue 
+							DataType="http://www.w3.org/2001/XMLSchema#string">{urn:healthmedia:wsdl:user:soap:v1}userSoapServicePorts#{urn:healthmedia:wsdl:user:v1}importUser</AttributeValue>
+						<ResourceAttributeDesignator 
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+					</ResourceMatch>
+				</Resource>
+			</Resources> 
+		</Target>
+		<PolicyIdReference>urn:healthmedia:xacml:access-code:policy:id:1</PolicyIdReference>
+		<!-- deny if username is not a fixed string -->
+		<PolicyIdReference>urn:healthmedia:xacml:example:policy:id:1</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:user-access-code:policy:id:1</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:permit:policy:id:1</PolicyIdReference>
+	</PolicySet>
+	<PolicySet 
+		PolicySetId="urn:healthmedia:xacml:super:policy-set:id:1:policy-set:id:2"
+		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+		<Description>Example REST rules</Description>
+		<Target>
+			<Resources>
+				<Resource>
+					<ResourceMatch MatchId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+						<AttributeValue DataType="http://www.w3.org/2001/XMLSchema#string">user-data-service/user/\w+/user-data/</AttributeValue>
+						<ResourceAttributeDesignator 
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+					</ResourceMatch>
+				</Resource>
+			</Resources> 
+		</Target>
+		<PolicyIdReference>urn:healthmedia:xacml:access-code:policy:id:1</PolicyIdReference>
+		<PolicyIdReference>urn:healthmedia:xacml:permit:policy:id:1</PolicyIdReference>
+	</PolicySet>
+	<!--  
+	<PolicySet 
+		PolicySetId="urn:healthmedia:xacml:super:policy-set:id:1:policy-set:id:fall-through-permit"
+		PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+		<Description>If the request isn't denied, permit it.</Description>
+		<Target/>
+		<PolicyIdReference>urn:healthmedia:xacml:permit:policy:id:1</PolicyIdReference>
+	</PolicySet>
+	-->
+</PolicySet>

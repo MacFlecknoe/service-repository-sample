@@ -152,7 +152,7 @@ public class XacmlRestProcessor implements Processor {
 			//
 			// add attributes related to the requested resource
 			//
-			AttributeType resourceId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_ANY_URI, exchange.getIn().getHeader("camelhttppath", String.class));
+			AttributeType resourceId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.RESOURCE_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttppath", String.class));
 			
 			ResourceType resourceType = new ResourceType();
 			resourceType.getAttribute().add(resourceId);
@@ -166,7 +166,7 @@ public class XacmlRestProcessor implements Processor {
 			// add attributes related to the type of action being performed
 			//
 			AttributeType actionId = PicketBoxXamlUtil.createSimpleAttributeType(XACMLConstants.ACTION_ID, XACMLConstants.XS_STRING, exchange.getIn().getHeader("camelhttpmethod", String.class));
-			AttributeType accessCode = PicketBoxXamlUtil.createSimpleAttributeType("urn:healthmedia:names:1.0:action:access-code", XACMLConstants.XS_STRING, exchange.getIn().getHeader("X-AccessCode", String.class));
+			AttributeType accessCode = PicketBoxXamlUtil.createSimpleAttributeType("urn:healthmedia:names:1.0:action:access-code", XACMLConstants.XS_STRING, exchange.getIn().getHeader("AccessCode", String.class));
 			
 			ActionType actionType = new ActionType();
 			actionType.getAttribute().add(actionId);
