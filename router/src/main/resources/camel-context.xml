@@ -66,15 +66,6 @@
 		</camel-cxf:inInterceptors>
 	</camel-cxf:cxfEndpoint>
 	
-	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor">
-		<constructor-arg>
-			<list>
-				<bean class="com.healthmedia.ws.accesscode.AccessCodeXacmlRequestAugmentor" />
-				<bean class="com.healthmedia.ws.xaml.XacmlRequestContextAugmentor" />
-			</list>
-		</constructor-arg>
-	</bean>
-	
 	<!-- decorate with username token security -->
 	<camel-cxf:cxfEndpoint id="usernameTokenUserService"
 		address="/proxy/alt/userService"
@@ -107,10 +98,25 @@
 	
 	<bean id="xacmlProcessor" class="com.healthmedia.rs.processor.XacmlRestProcessor">
 		<constructor-arg>
-			<bean id="xacmlProcessor" class="com.healthmedia.ws.xaml.ClasspathConfigurableJBossPDP" />
+			<ref bean="PDP" />
 		</constructor-arg>
 	</bean>
 	<bean id="usernameProcessor" class="com.healthmedia.rs.processor.MockUsernameProcessor" />
+	
+	<!-- PDP -->
+	<bean id="PDP" class="com.healthmedia.ws.xaml.ClasspathConfigurableJBossPDP" scope="singleton" />
+	
+	<bean class="com.healthmedia.ws.xaml.PicketBoxXacmlInterceptor" id="PicketBoxXacmlInterceptor">
+		<constructor-arg>
+			<ref bean="PDP" />
+		</constructor-arg>
+		<constructor-arg>
+			<list>
+				<bean class="com.healthmedia.ws.accesscode.AccessCodeXacmlRequestAugmentor" />
+				<bean class="com.healthmedia.ws.xaml.XacmlRequestContextAugmentor" />
+			</list>
+		</constructor-arg>
+	</bean>
 	
 	<camel:camelContext>
 	
