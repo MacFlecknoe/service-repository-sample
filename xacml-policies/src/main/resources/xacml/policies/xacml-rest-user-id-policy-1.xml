@@ -3,13 +3,13 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
 	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
-	PolicyId="urn:healthmedia:xacml:rest:user-id:policy:id:1"
+	PolicyId="urn:healthmedia:xacml:rest-user-id:policy:id:1"
 	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
 	<Description>
 		Match id in url to the authenticated users id
 	</Description>
 	<Target />
-	<Rule RuleId="urn:healthmedia:xacml:rest:user-id:policy:id:1:rule:id:1" Effect="Deny">
+	<Rule RuleId="urn:healthmedia:xacml:rest-user-id:policy:id:1:rule:id:1" Effect="Deny">
 		<Description>
 			Deny consumers whose user id does not match the user id in the request url
 		</Description>
