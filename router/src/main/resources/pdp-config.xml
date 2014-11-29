@@ -34,6 +34,7 @@
 			<ns:Option Name="columnName">subject_id</ns:Option>
 		</ns:Locator>
 		-->
+		<ns:Locator Name="com.healthmedia.ws.xaml.locators.GlobalUserIdAttributeLocator"/>
 		<ns:Locator Name="com.healthmedia.ws.xaml.locators.AccessCodeAttributeLocator"/>
 	</ns:Locators>
 </ns:jbosspdp> 
