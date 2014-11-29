@@ -22,7 +22,14 @@
 					<Apply FunctionId="urn:oasis:names:tc:xacml:2.0:function:string-concatenate">
 						<AttributeValue 
 							DataType="http://www.w3.org/2001/XMLSchema#string">/user/</AttributeValue>
-						<!-- replace with custom attribute for subject's global user id -->
+						<!-- replace with custom attribute for subject's global user id; will also need to add PIP-->
+						<!--
+						<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+							<ResourceAttributeDesignator
+								AttributeId="urn:healthmedia:names:1.0:subject:global-user-id"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</Apply>
+						-->
 						<AttributeValue 
 							DataType="http://www.w3.org/2001/XMLSchema#string">14</AttributeValue>
 						<AttributeValue 
