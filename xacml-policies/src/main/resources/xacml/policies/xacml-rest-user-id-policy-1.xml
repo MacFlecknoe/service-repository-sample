@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Policy xmlns="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:oasis:names:tc:xacml:2.0:policy:schema:os
+	http://docs.oasis-open.org/xacml/access_control-xacml-2.0-policy-schema-os.xsd"
+	PolicyId="urn:healthmedia:xacml:rest:user-id:policy:id:1"
+	RuleCombiningAlgId="urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides">
+	<Description>
+		Match id in url to the authenticated users id
+	</Description>
+	<Target />
+	<Rule RuleId="urn:healthmedia:xacml:rest:user-id:policy:id:1:rule:id:1" Effect="Deny">
+		<Description>
+			Deny consumers whose user id does not match the user id in the request url
+		</Description>
+		<Target/>
+		<Condition>
+			<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:not">
+				<!-- ensure the recreated url is included in the actual url -->
+				<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:regexp-string-match">
+					<!-- create url string including the subjects user id (e.g. /user/{id}/ -->
+					<Apply FunctionId="urn:oasis:names:tc:xacml:2.0:function:string-concatenate">
+						<AttributeValue 
+							DataType="http://www.w3.org/2001/XMLSchema#string">/user/</AttributeValue>
+						<!-- replace with custom attribute for subject's global user id -->
+						<AttributeValue 
+							DataType="http://www.w3.org/2001/XMLSchema#string">14</AttributeValue>
+						<AttributeValue 
+							DataType="http://www.w3.org/2001/XMLSchema#string">/</AttributeValue>
+					</Apply>
+					<Apply FunctionId="urn:oasis:names:tc:xacml:1.0:function:string-one-and-only">
+						<ResourceAttributeDesignator
+							AttributeId="urn:oasis:names:tc:xacml:1.0:resource:resource-id"
+							DataType="http://www.w3.org/2001/XMLSchema#string" />
+					</Apply>
+				</Apply>
+			</Apply>
+		</Condition>
+	</Rule>
+</Policy>

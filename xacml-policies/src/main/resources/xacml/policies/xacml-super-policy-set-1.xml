@@ -51,6 +51,7 @@
 				</Resource>
 			</Resources> 
 		</Target>
+		<PolicyIdReference>urn:healthmedia:xacml:rest:user-id:policy:id:1</PolicyIdReference>
 		<PolicyIdReference>urn:healthmedia:xacml:access-code:policy:id:1</PolicyIdReference>
 		<PolicyIdReference>urn:healthmedia:xacml:permit:policy:id:1</PolicyIdReference>
 	</PolicySet>

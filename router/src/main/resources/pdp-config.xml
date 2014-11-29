@@ -15,6 +15,9 @@
 			<ns:Policy>
 				<ns:Location>xacml/policies/xacml-permit-policy-1.xml</ns:Location>
 			</ns:Policy>
+			<ns:Policy>
+				<ns:Location>xacml/policies/xacml-rest-user-id-policy-1.xml</ns:Location>
+			</ns:Policy>
 		</ns:PolicySet>
 	</ns:Policies>
 	<ns:Locators>
