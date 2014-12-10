@@ -160,7 +160,7 @@ public class XacmlRestProcessor implements Processor {
 			// TODO set the message
 			//
 			ResourceContentType content = new ResourceContentType();
-			content.getContent().add(exchange.getIn().getBody()); // TODO convert to XML?
+			content.getContent().add(exchange.getIn().getBody(String.class)); // TODO convert to XML?
 			resourceType.setResourceContent(content);
 			//
 			// add attributes related to the type of action being performed
